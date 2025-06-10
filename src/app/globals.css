@@ -1,26 +1,153 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@theme {
+  --color-carbon-black: #0c0e11; /* Darker but softer for background */
+  --color-carbon-black-soft: #121418; /* Used for section separation */
+  --color-steel-grey: #1f242b; /* Slightly cooler and darker */
+  --color-steel-grey-alt: #272c33; /* For card contrast */
+  --color-alloy-silver: #b3bac2; /* Lightened slightly for legibility */
+  --color-electric-blue: #00aeef; /* Slightly dimmed from bright cyan */
+  --color-dyno-green: #4effb0; /* Stays punchy */
+  --color-alert-amber: #ffb347; /* Unchanged for clarity */
+  --color-fail-red: #ff5f56; /* Unchanged */
+  --color-soft-white: #f4f7fa; /* Unchanged */
+  --color-muted-text: #8a929a; /* Softer than default muted */
+  --color-gridlines-grey: #353a40; /* Darker, less contrasty gridlines */
+
+  --font-family-sans: 'Sora', sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  --font-size-app-title: 2rem;
+  --font-size-page-headline: 1.75rem;
+  --font-size-section-title: 1.25rem;
+  --font-size-body-text: 1rem;
+  --font-size-caption: 0.875rem;
+
+  --font-weight-app-title: 700;
+  --font-weight-page-headline: 700;
+  --font-weight-section-title: 600;
+  --font-weight-body-text: 400;
+  --font-weight-caption: 400;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Keep these for direct CSS usage */
+  --carbon-black: #0a0a0a;
+  --steel-grey: #1e2227;
+  --alloy-silver: #aeb4b9;
+  --electric-blue: #00b8f1;
+  --dyno-green: #4effb0;
+  --alert-amber: #ffb347;
+  --fail-red: #ff5f56;
+  --soft-white: #f4f7fa;
+  --muted-text: #7a828a;
+  --gridlines-grey: #4a4a4a;
+
+  /* Font Family */
+  --font-sans: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Typography Guidelines */
+.app-title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--soft-white); /* Top-left app branding */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.page-headline {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--soft-white); /* Section headers */
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--alloy-silver); /* Sub-sections, card titles */
+}
+
+.body-text {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--alloy-silver); /* Default paragraph and labels */
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--muted-text); /* Inline help, tooltips, muted */
+}
+
+button.primary {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--soft-white); /* Used on Electric Blue buttons */
+}
+
+button.secondary {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--electric-blue); /* Used on neutral/dark backgrounds */
+}
+
+/* Override any CSS reset that sets headings to inherit */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: revert;
+  font-weight: revert;
+}
+
+/* Ensure Tailwind utilities have proper specificity */
+h1.text-page-headline {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+}
+
+h2.text-section-title {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+/* Navigation styles */
+.nav-link {
+  letter-spacing: 0.3em;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-electric-blue);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-electric-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-container {
+  letter-spacing: 0.3em;
 }
