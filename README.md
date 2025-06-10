@@ -1,4 +1,5 @@
-# ECUdeck  
+# ECUdeck
+
 **Built by Tuners. For Tuners. No BS.**
 
 ECUdeck is a free, open-source tuning platform focused on modern UX, AI-assisted workflows, and full control over ECU remapping. Built by enthusiasts, for enthusiasts — because powerful tools shouldn't cost a fortune.
@@ -7,11 +8,11 @@ ECUdeck is a free, open-source tuning platform focused on modern UX, AI-assisted
 
 ## 🚀 Features
 
-- 🧠 AI-assisted map editing and guidance  
-- 📊 2D & 3D map visualizations  
-- 🔁 Version diff and compare tools  
-- 🔌 Plugin system for supporting more ECUs  
-- 🌐 Community-focused and open to contributions  
+- 🧠 AI-assisted map editing and guidance
+- 📊 2D & 3D map visualizations
+- 🔁 Version diff and compare tools
+- 🔌 Plugin system for supporting more ECUs
+- 🌐 Community-focused and open to contributions
 - 🧰 Fullstack architecture with scalable API and database backend
 
 ---
