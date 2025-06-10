@@ -1,103 +1,117 @@
-import Image from "next/image";
-
-export default function Home() {
+// Updated DashboardPage to match visual mock more accurately with polish pass
+export default function Dashboard() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      {/* Top Row: Title, Stats, Profile */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12 items-start">
+        <div className="col-span-3">
+          <h1 className="text-page-headline font-bold mb-6">Dashboard Overview UI</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="bg-steel-grey p-6 rounded-lg text-center border border-gridlines-grey">
+              <p className="text-5xl font-bold text-soft-white">5</p>
+              <p className="text-lg text-alloy-silver">ECUs</p>
+            </div>
+            <div className="bg-steel-grey p-6 rounded-lg text-center border border-gridlines-grey">
+              <p className="text-5xl font-bold text-soft-white">12</p>
+              <p className="text-lg text-alloy-silver">Maps</p>
+            </div>
+            <div className="bg-steel-grey p-6 rounded-lg text-center border border-gridlines-grey">
+              <p className="text-5xl font-bold text-soft-white">40k</p>
+              <p className="text-lg text-alloy-silver">Installs</p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Profile Block */}
+        <div className="col-span-1 flex justify-end">
+          <div className="flex flex-col items-center text-center gap-4">
+            <div className="w-32 h-32 rounded-full border border-gridlines-grey flex items-center justify-center shadow-[0_0_0_2px_#4EFFB0] hover:shadow-[0_0_8px_2px_#4EFFB0] transition-shadow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-20 h-20 text-alloy-silver"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0"
+                />
+              </svg>
+            </div>
+            <p className="text-soft-white text-2xl font-bold leading-tight">John Doe</p>
+            <button className="text-electric-blue text-lg font-semibold tracking-wide px-4 py-2 border border-electric-blue rounded-lg hover:bg-electric-blue hover:text-carbon-black transition font-bold">
+              Manage Profile
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Maps Section */}
+      <section className="mb-12">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-section-title font-bold">Recent Maps</h2>
+          <span className="bg-dyno-green/10 text-dyno-green font-semibold text-xs px-3 py-1 rounded-full border border-dyno-green">
+            Avg. Power +25%
+          </span>
+        </div>
+        <ul className="divide-y divide-gridlines-grey border border-gridlines-grey rounded-lg overflow-hidden">
+          {[
+            {
+              name: 'A123 Boost Targets',
+              time: '2h ago',
+              highlight: true,
+            },
+            {
+              name: 'EDC15V Fueling',
+              time: '5h ago',
+            },
+            {
+              name: 'EDC16 Injection Start',
+              time: '1 day ago',
+            },
+          ].map(({ name, time, highlight }) => (
+            <li
+              key={name}
+              className="bg-steel-grey px-4 py-3 grid grid-cols-12 items-center hover:bg-carbon-black transition-colors cursor-pointer group"
+            >
+              <span
+                className={`col-span-6 font-medium ${highlight ? 'text-alert-amber font-bold' : 'text-soft-white'}`}
+              >
+                {name}
+              </span>
+              <span className="text-alloy-silver text-right col-span-5">{time}</span>
+              <span className="text-alloy-silver text-right col-span-1 flex justify-end items-center text-xl transform transition-transform group-hover:translate-x-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 text-alloy-silver group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Action Buttons */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <button className="bg-carbon-black text-dyno-green px-6 py-3 rounded-lg font-bold border border-dyno-green hover:bg-dyno-green hover:text-carbon-black transition">
+          Upload
+        </button>
+        <button className="bg-carbon-black text-electric-blue px-6 py-3 rounded-lg font-bold border border-electric-blue hover:bg-electric-blue hover:text-carbon-black transition">
+          Browse
+        </button>
+        <button className="bg-carbon-black text-electric-blue px-6 py-3 rounded-lg font-bold border border-electric-blue hover:bg-electric-blue hover:text-carbon-black transition">
+          AI Assist
+        </button>
+      </div>
+    </>
   );
 }
