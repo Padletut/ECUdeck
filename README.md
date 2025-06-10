@@ -11,7 +11,8 @@ ECUdeck is a free, open-source tuning platform focused on modern UX, AI-assisted
 - 📊 2D & 3D map visualizations  
 - 🔁 Version diff and compare tools  
 - 🔌 Plugin system for supporting more ECUs  
-- 🌐 Community-focused and open to contributions
+- 🌐 Community-focused and open to contributions  
+- 🧰 Fullstack architecture with scalable API and database backend
 
 ---
 
@@ -25,10 +26,12 @@ Freedom from overpriced, closed tools.
 
 ## 🛠 Tech Stack
 
-- [Next.js](https://nextjs.org/) + [Tailwind CSS](https://tailwindcss.com/)
-- AI-powered guidance modules (coming soon)
-- Flexible JSON-based map modules
-- Open architecture for future expansion
+- **Frontend:** [Next.js 15.3.3](https://nextjs.org/) (App Router), [Tailwind CSS 4](https://tailwindcss.com/)
+- **Backend:** Next.js API Routes, [Prisma ORM](https://www.prisma.io/) with PostgreSQL
+- **AI & Analysis Layer:** Python microservices (planned)
+- **Testing:** Jest, Playwright, Testing Library
+- **Tooling:** ESLint, Prettier, Husky, lint-staged
+- **CI/CD:** GitHub Actions (preconfigured)
 
 ---
 
@@ -39,7 +42,7 @@ Follow the [project roadmap](./docs/roadmap.md) (coming soon) and join the build
 
 ---
 
-## 📬 Contribute
+## 🤝 Contribute
 
 We welcome tuners, devs, reverse engineers and UI/UX folks!  
 Check out [`CONTRIBUTING.md`](./CONTRIBUTING.md) to get started.
@@ -49,4 +52,3 @@ Check out [`CONTRIBUTING.md`](./CONTRIBUTING.md) to get started.
 ## 📄 License
 
 MIT — use it, fork it, make it better.
-
