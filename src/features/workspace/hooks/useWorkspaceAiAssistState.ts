@@ -10,6 +10,7 @@ import type {
   AiAssistDraft,
   AiAssistPreset,
   AiAssistPresetId,
+  PersistedAiAssistProposalReview,
   AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
   PersistedAiAssistState,
@@ -53,13 +54,11 @@ interface WorkspaceAiAssistState {
   providerConfig: AiAssistProviderConfig;
   nativePreview: PersistedAiAssistNativePreview | null;
   previewHistory: PersistedAiAssistNativePreview[];
+  proposalReviews: PersistedAiAssistProposalReview[];
   selectPreset: (presetId: AiAssistPresetId) => void;
   updateProviderConfig: (providerId: string, modelId?: string) => void;
   restorePreviewContext: (preview: PersistedAiAssistNativePreview) => void;
-  updatePreviewReviewStatus: (
-    preview: PersistedAiAssistNativePreview,
-    reviewStatus: AiAssistReviewStatus,
-  ) => void;
+  updatePreviewReviewStatus: (snapshotId: string, reviewStatus: AiAssistReviewStatus) => void;
   recordNativePreview: (
     snapshotResponse: PrepareContextSnapshotResponse,
     chatResponse: SendAiChatResponse,
@@ -140,6 +139,10 @@ export function useWorkspaceAiAssistState(
       (persistedState.lastNativePreview ? [persistedState.lastNativePreview] : []),
     [persistedState.previewHistory, persistedState.lastNativePreview],
   );
+  const proposalReviews = useMemo(
+    () => persistedState.proposalReviews ?? [],
+    [persistedState.proposalReviews],
+  );
 
   return {
     presets: aiAssistPresets,
@@ -149,6 +152,7 @@ export function useWorkspaceAiAssistState(
     providerConfig,
     nativePreview,
     previewHistory,
+    proposalReviews,
     selectPreset: (presetId: AiAssistPresetId) => {
       const nextState = aiAssistStore.selectPreset({
         ownership,
@@ -173,13 +177,10 @@ export function useWorkspaceAiAssistState(
       });
       setPersistedState(nextState);
     },
-    updatePreviewReviewStatus: (
-      preview: PersistedAiAssistNativePreview,
-      reviewStatus: AiAssistReviewStatus,
-    ) => {
+    updatePreviewReviewStatus: (snapshotId: string, reviewStatus: AiAssistReviewStatus) => {
       const nextState = aiAssistStore.updatePreviewReviewStatus({
         ownership,
-        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+        snapshotId,
         reviewStatus,
       });
       setPersistedState(nextState);

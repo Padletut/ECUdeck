@@ -2,6 +2,7 @@ import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
   type AiAssistProviderConfig,
+  type PersistedAiAssistProposalReview,
   type AiAssistReviewDecision,
   type AiAssistReviewStatus,
   type AiAssistPresetId,
@@ -12,6 +13,7 @@ import type { PluginReferenceOwnership } from '../../shared/types/plugins';
 
 const STORAGE_PREFIX = 'ecudeck.ai-assist.v1';
 const MAX_PREVIEW_HISTORY = 6;
+const MAX_PROPOSAL_REVIEW_LOG = 12;
 
 export interface StorageLike {
   getItem(key: string): string | null;
@@ -82,11 +84,16 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
     recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState {
       const currentState = loadPersistedState(storage, input.ownership);
       const normalizedPreview = normalizeNativePreview(input.preview);
+      const proposalReviews = mergeProposalReviewLogEntry(
+        currentState.proposalReviews,
+        buildProposalReviewEntry(normalizedPreview),
+      );
       const nextState: PersistedAiAssistState = {
         ...currentState,
         ownership: input.ownership,
         lastNativePreview: normalizedPreview,
         previewHistory: mergePreviewHistory(currentState.previewHistory ?? [], normalizedPreview),
+        proposalReviews,
       };
 
       persistState(storage, nextState);
@@ -139,11 +146,25 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
               reviewDecision,
             })
           : currentState.lastNativePreview;
+      const matchingPreview =
+        previewHistory?.find(
+          (preview) => preview.snapshotResponse.snapshot.snapshotId === input.snapshotId,
+        ) ??
+        (lastNativePreview?.snapshotResponse.snapshot.snapshotId === input.snapshotId
+          ? lastNativePreview
+          : undefined);
+      const proposalReviews = updateProposalReviewLogStatus(
+        currentState.proposalReviews,
+        input.snapshotId,
+        reviewDecision,
+        matchingPreview,
+      );
       const nextState: PersistedAiAssistState = {
         ...currentState,
         ownership: input.ownership,
         lastNativePreview,
         previewHistory,
+        proposalReviews,
       };
 
       persistState(storage, nextState);
@@ -172,6 +193,7 @@ function loadPersistedState(
     const parsed = JSON.parse(raw) as Partial<PersistedAiAssistState>;
     const lastNativePreview = normalizePersistedPreview(parsed.lastNativePreview);
     const previewHistory = normalizePreviewHistory(parsed.previewHistory, lastNativePreview);
+    const proposalReviews = normalizeProposalReviewLog(parsed.proposalReviews, previewHistory);
 
     return {
       ownership,
@@ -181,6 +203,7 @@ function loadPersistedState(
         : undefined,
       lastNativePreview,
       previewHistory,
+      proposalReviews,
     };
   } catch {
     return emptyState(ownership);
@@ -265,6 +288,25 @@ function isPersistedAiAssistNativePreview(
     (candidate.reviewDecision == null || isAiAssistReviewDecision(candidate.reviewDecision)) &&
     isPrepareContextSnapshotResponse(candidate.snapshotResponse) &&
     isSendAiChatResponse(candidate.chatResponse)
+  );
+}
+
+function isPersistedAiAssistProposalReview(
+  value: unknown,
+): value is PersistedAiAssistProposalReview {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.proposalId === 'string' &&
+    typeof candidate.snapshotId === 'string' &&
+    isPresetId(candidate.presetId) &&
+    isAiAssistProviderConfig(candidate.providerConfig) &&
+    typeof candidate.summaryText === 'string' &&
+    isAiAssistReviewDecision(candidate.reviewDecision) &&
+    typeof candidate.recordedAt === 'string'
   );
 }
 
@@ -404,6 +446,27 @@ function normalizePreviewHistory(
   return normalizedHistory.length > 0 ? normalizedHistory.slice(0, MAX_PREVIEW_HISTORY) : undefined;
 }
 
+function normalizeProposalReviewLog(
+  value: unknown,
+  previewHistory?: PersistedAiAssistNativePreview[],
+): PersistedAiAssistProposalReview[] | undefined {
+  const normalizedLog = Array.isArray(value)
+    ? value
+        .map((entry) => normalizePersistedProposalReview(entry))
+        .filter((entry): entry is PersistedAiAssistProposalReview => Boolean(entry))
+    : [];
+  const derivedLog = (previewHistory ?? [])
+    .map((preview) => buildProposalReviewEntry(preview))
+    .filter((entry): entry is PersistedAiAssistProposalReview => Boolean(entry));
+
+  const mergedLog = derivedLog.reduce<PersistedAiAssistProposalReview[] | undefined>(
+    (currentLog, entry) => mergeProposalReviewLogEntry(currentLog, entry),
+    normalizedLog.length > 0 ? normalizedLog : undefined,
+  );
+
+  return mergedLog && mergedLog.length > 0 ? mergedLog : undefined;
+}
+
 function mergePreviewHistory(
   previewHistory: PersistedAiAssistNativePreview[],
   nextPreview: PersistedAiAssistNativePreview,
@@ -416,6 +479,86 @@ function mergePreviewHistory(
         nextPreview.snapshotResponse.snapshot.snapshotId,
     ),
   ].slice(0, MAX_PREVIEW_HISTORY);
+}
+
+function normalizePersistedProposalReview(
+  value: unknown,
+): PersistedAiAssistProposalReview | undefined {
+  if (!isPersistedAiAssistProposalReview(value)) {
+    return undefined;
+  }
+
+  const providerConfig = normalizeProviderConfig(value.providerConfig);
+  const recordedAt = value.recordedAt.trim() || value.reviewDecision.decidedAt?.trim();
+
+  if (!providerConfig || !recordedAt) {
+    return undefined;
+  }
+
+  return {
+    ...value,
+    providerConfig,
+    recordedAt,
+    reviewDecision: normalizeReviewDecision(value.reviewDecision, recordedAt),
+  };
+}
+
+function buildProposalReviewEntry(
+  preview: PersistedAiAssistNativePreview,
+): PersistedAiAssistProposalReview | undefined {
+  const proposalId = preview.chatResponse.proposal?.proposalId;
+
+  if (!proposalId) {
+    return undefined;
+  }
+
+  return {
+    proposalId,
+    snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+    presetId: preview.presetId,
+    providerConfig: preview.providerConfig,
+    summaryText: preview.chatResponse.summaryText,
+    reviewDecision: preview.reviewDecision,
+    recordedAt: preview.recordedAt,
+  };
+}
+
+function mergeProposalReviewLogEntry(
+  proposalReviews: PersistedAiAssistProposalReview[] | undefined,
+  nextProposalReview: PersistedAiAssistProposalReview | undefined,
+): PersistedAiAssistProposalReview[] | undefined {
+  if (!nextProposalReview) {
+    return proposalReviews && proposalReviews.length > 0 ? proposalReviews : undefined;
+  }
+
+  return [
+    nextProposalReview,
+    ...(proposalReviews ?? []).filter(
+      (entry) => entry.proposalId !== nextProposalReview.proposalId,
+    ),
+  ].slice(0, MAX_PROPOSAL_REVIEW_LOG);
+}
+
+function updateProposalReviewLogStatus(
+  proposalReviews: PersistedAiAssistProposalReview[] | undefined,
+  snapshotId: string,
+  reviewDecision: AiAssistReviewDecision,
+  matchingPreview?: PersistedAiAssistNativePreview,
+): PersistedAiAssistProposalReview[] | undefined {
+  if (matchingPreview) {
+    return mergeProposalReviewLogEntry(proposalReviews, buildProposalReviewEntry(matchingPreview));
+  }
+
+  const existingEntry = proposalReviews?.find((entry) => entry.snapshotId === snapshotId);
+
+  if (!existingEntry) {
+    return proposalReviews && proposalReviews.length > 0 ? proposalReviews : undefined;
+  }
+
+  return mergeProposalReviewLogEntry(proposalReviews, {
+    ...existingEntry,
+    reviewDecision: normalizeReviewDecision(reviewDecision, existingEntry.recordedAt),
+  });
 }
 
 function updatePreviewHistoryReviewStatus(

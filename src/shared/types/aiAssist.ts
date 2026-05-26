@@ -32,12 +32,23 @@ export interface AiAssistReviewDecision {
   decidedAt?: string;
 }
 
+export interface PersistedAiAssistProposalReview {
+  proposalId: string;
+  snapshotId: string;
+  presetId: AiAssistPresetId;
+  providerConfig: AiAssistProviderConfig;
+  summaryText: string;
+  reviewDecision: AiAssistReviewDecision;
+  recordedAt: string;
+}
+
 export interface PersistedAiAssistState {
   ownership: PluginReferenceOwnership;
   selectedPresetId?: AiAssistPresetId;
   providerConfig?: AiAssistProviderConfig;
   lastNativePreview?: PersistedAiAssistNativePreview;
   previewHistory?: PersistedAiAssistNativePreview[];
+  proposalReviews?: PersistedAiAssistProposalReview[];
 }
 
 export interface AiAssistDraft {

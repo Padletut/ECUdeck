@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import type {
   AiAssistProviderConfig,
+  PersistedAiAssistProposalReview,
   AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
 } from '../../shared/types/aiAssist';
@@ -91,6 +92,7 @@ describe('createAiAssistStore', () => {
       ownership,
       lastNativePreview: preview,
       previewHistory: [preview],
+      proposalReviews: [buildProposalReview(1)],
     });
     expect(store.loadState(ownership)).toEqual(nextState);
   });
@@ -113,6 +115,7 @@ describe('createAiAssistStore', () => {
       selectedPresetId: 'first-pass-review',
       lastNativePreview: preview,
       previewHistory: [preview],
+      proposalReviews: [buildProposalReview(1)],
     });
   });
 
@@ -149,6 +152,7 @@ describe('createAiAssistStore', () => {
       providerConfig,
       lastNativePreview: preview,
       previewHistory: [preview],
+      proposalReviews: [buildProposalReview(1)],
     });
   });
 
@@ -206,6 +210,7 @@ describe('createAiAssistStore', () => {
       providerConfig,
       lastNativePreview: preview,
       previewHistory: [preview],
+      proposalReviews: [buildProposalReview(1)],
     });
   });
 
@@ -228,6 +233,7 @@ describe('createAiAssistStore', () => {
       ownership,
       lastNativePreview: buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z'),
       previewHistory: [buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z')],
+      proposalReviews: [buildProposalReview(1, 'accepted', '2026-05-26T11:00:00.000Z')],
     });
   });
 
@@ -280,6 +286,7 @@ describe('createAiAssistStore', () => {
       ownership,
       lastNativePreview: preview,
       previewHistory: [preview],
+      proposalReviews: [buildProposalReview(1)],
     });
   });
 
@@ -349,6 +356,33 @@ describe('createAiAssistStore', () => {
               : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
         },
       },
+    };
+  }
+
+  function buildProposalReview(
+    index: number,
+    reviewStatus: AiAssistReviewStatus = 'pending',
+    decidedAt?: string,
+  ): PersistedAiAssistProposalReview {
+    const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
+    const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
+
+    return {
+      proposalId,
+      snapshotId,
+      presetId: 'first-pass-review',
+      providerConfig,
+      summaryText: `preview chat ${index}`,
+      reviewDecision:
+        reviewStatus === 'pending'
+          ? {
+              status: 'pending',
+            }
+          : {
+              status: reviewStatus,
+              decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
+            },
+      recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
     };
   }
 });

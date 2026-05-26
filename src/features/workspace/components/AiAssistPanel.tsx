@@ -9,6 +9,7 @@ import type { AiProviderSummary } from '../../../shared/types/aiContext';
 import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type PersistedAiAssistProposalReview,
   type PersistedAiAssistNativePreview,
 } from '../../../shared/types/aiAssist';
 import type { AiAssistReviewStatus } from '../../../shared/types/aiAssist';
@@ -24,6 +25,7 @@ export default function AiAssistPanel() {
     providerConfig,
     nativePreview,
     previewHistory,
+    proposalReviews,
     selectPreset,
     updateProviderConfig,
     restorePreviewContext,
@@ -58,14 +60,18 @@ export default function AiAssistPanel() {
     [availableProviders, previewCatalogFallback, providerConfig.providerId],
   );
   const recentPreviewHistory = useMemo(() => previewHistory.slice(0, 5), [previewHistory]);
+  const recentProposalReviews = useMemo(() => proposalReviews.slice(0, 5), [proposalReviews]);
+  const previewHistoryBySnapshotId = useMemo(
+    () =>
+      new Map(previewHistory.map((entry) => [entry.snapshotResponse.snapshot.snapshotId, entry])),
+    [previewHistory],
+  );
   const selectedHistoryPreview = useMemo(
     () =>
       selectedHistorySnapshotId
-        ? (previewHistory.find(
-            (entry) => entry.snapshotResponse.snapshot.snapshotId === selectedHistorySnapshotId,
-          ) ?? null)
+        ? (previewHistoryBySnapshotId.get(selectedHistorySnapshotId) ?? null)
         : null,
-    [previewHistory, selectedHistorySnapshotId],
+    [previewHistoryBySnapshotId, selectedHistorySnapshotId],
   );
   const activePreviewEntry = selectedHistoryPreview ?? nativePreview;
   const previewResetKey = useMemo(() => {
@@ -225,10 +231,26 @@ export default function AiAssistPanel() {
   };
 
   const handleUpdateHistoryReviewStatus = (
-    previewEntry: (typeof recentPreviewHistory)[number],
+    snapshotId: string,
     reviewStatus: AiAssistReviewStatus,
   ) => {
-    updatePreviewReviewStatus(previewEntry, reviewStatus);
+    updatePreviewReviewStatus(snapshotId, reviewStatus);
+  };
+
+  const handleRestoreProposalReviewContext = (reviewEntry: PersistedAiAssistProposalReview) => {
+    selectPreset(reviewEntry.presetId);
+    updateProviderConfig(reviewEntry.providerConfig.providerId, reviewEntry.providerConfig.modelId);
+    setSelectedHistorySnapshotId(
+      previewHistoryBySnapshotId.has(reviewEntry.snapshotId) ? reviewEntry.snapshotId : null,
+    );
+  };
+
+  const handleInspectProposalReview = (snapshotId: string) => {
+    if (!previewHistoryBySnapshotId.has(snapshotId)) {
+      return;
+    }
+
+    handleSelectHistoryPreview(snapshotId);
   };
 
   return (
@@ -497,6 +519,146 @@ export default function AiAssistPanel() {
                   </div>
                 ) : null}
 
+                {recentProposalReviews.length > 0 ? (
+                  <div className="mt-5 rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.2em] text-muted-text">
+                          Proposal Review Log
+                        </p>
+                        <p className="mt-2 text-sm text-alloy-silver">
+                          Workspace-scoped proposals retained separately so review state survives
+                          preview rotation.
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver">
+                        {recentProposalReviews.length} items
+                      </span>
+                    </div>
+
+                    <ul className="mt-4 space-y-3">
+                      {recentProposalReviews.map((reviewEntry) => {
+                        const hasBackingPreview = previewHistoryBySnapshotId.has(
+                          reviewEntry.snapshotId,
+                        );
+
+                        return (
+                          <li
+                            key={reviewEntry.proposalId}
+                            className="rounded-lg border border-gridlines-grey bg-carbon-black/50 p-4"
+                          >
+                            <div className="flex flex-wrap items-start justify-between gap-3">
+                              <div>
+                                <p className="font-semibold text-soft-white">
+                                  {reviewEntry.summaryText}
+                                </p>
+                                <p className="mt-1 text-sm text-alloy-silver">
+                                  {resolvePresetTitle(reviewEntry.presetId, presets)}
+                                </p>
+                                <p className="mt-1 text-sm text-alloy-silver">
+                                  {resolveProviderDisplayName(
+                                    reviewEntry.providerConfig.providerId,
+                                    availableProviders,
+                                  )}
+                                </p>
+                                <p className="mt-1 text-sm text-alloy-silver">
+                                  {formatRecordedAt(reviewEntry.recordedAt)}
+                                </p>
+                                {!hasBackingPreview ? (
+                                  <p className="mt-1 text-sm text-muted-text">
+                                    Preview details are no longer in the recent preview history.
+                                  </p>
+                                ) : null}
+                              </div>
+                              <div className="flex flex-col items-end gap-2">
+                                <span
+                                  className={reviewStatusClassName(
+                                    reviewEntry.reviewDecision.status,
+                                  )}
+                                >
+                                  {formatReviewStatus(reviewEntry.reviewDecision.status)}
+                                </span>
+                                <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver">
+                                  {reviewEntry.providerConfig.modelId ?? 'provider-default'}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <button
+                                type="button"
+                                onClick={() => handleInspectProposalReview(reviewEntry.snapshotId)}
+                                disabled={!hasBackingPreview}
+                                className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue disabled:cursor-not-allowed disabled:border-gridlines-grey disabled:text-muted-text"
+                              >
+                                Inspect
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleRestoreProposalReviewContext(reviewEntry)}
+                                className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
+                              >
+                                Restore Context
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleUpdateHistoryReviewStatus(
+                                    reviewEntry.snapshotId,
+                                    'accepted',
+                                  )
+                                }
+                                className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                                  reviewEntry.reviewDecision.status === 'accepted'
+                                    ? 'border-dyno-green bg-dyno-green/10 text-dyno-green'
+                                    : 'border-gridlines-grey text-alloy-silver hover:border-dyno-green hover:text-dyno-green'
+                                }`}
+                              >
+                                Accept
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleUpdateHistoryReviewStatus(
+                                    reviewEntry.snapshotId,
+                                    'rejected',
+                                  )
+                                }
+                                className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                                  reviewEntry.reviewDecision.status === 'rejected'
+                                    ? 'border-warning-amber bg-warning-amber/10 text-warning-amber'
+                                    : 'border-gridlines-grey text-alloy-silver hover:border-warning-amber hover:text-warning-amber'
+                                }`}
+                              >
+                                Reject
+                              </button>
+                              {reviewEntry.reviewDecision.status !== 'pending' ? (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    handleUpdateHistoryReviewStatus(
+                                      reviewEntry.snapshotId,
+                                      'pending',
+                                    )
+                                  }
+                                  className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
+                                >
+                                  Reset
+                                </button>
+                              ) : null}
+                            </div>
+
+                            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                              <HistoryField label="Proposal" value={reviewEntry.proposalId} />
+                              <HistoryField label="Snapshot" value={reviewEntry.snapshotId} />
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ) : null}
+
                 {recentPreviewHistory.length > 0 ? (
                   <div className="mt-5 rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
@@ -590,7 +752,10 @@ export default function AiAssistPanel() {
                             <button
                               type="button"
                               onClick={() =>
-                                handleUpdateHistoryReviewStatus(previewEntry, 'accepted')
+                                handleUpdateHistoryReviewStatus(
+                                  previewEntry.snapshotResponse.snapshot.snapshotId,
+                                  'accepted',
+                                )
                               }
                               className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
                                 previewEntry.reviewDecision.status === 'accepted'
@@ -603,7 +768,10 @@ export default function AiAssistPanel() {
                             <button
                               type="button"
                               onClick={() =>
-                                handleUpdateHistoryReviewStatus(previewEntry, 'rejected')
+                                handleUpdateHistoryReviewStatus(
+                                  previewEntry.snapshotResponse.snapshot.snapshotId,
+                                  'rejected',
+                                )
                               }
                               className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
                                 previewEntry.reviewDecision.status === 'rejected'
@@ -617,7 +785,10 @@ export default function AiAssistPanel() {
                               <button
                                 type="button"
                                 onClick={() =>
-                                  handleUpdateHistoryReviewStatus(previewEntry, 'pending')
+                                  handleUpdateHistoryReviewStatus(
+                                    previewEntry.snapshotResponse.snapshot.snapshotId,
+                                    'pending',
+                                  )
                                 }
                                 className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
                               >
