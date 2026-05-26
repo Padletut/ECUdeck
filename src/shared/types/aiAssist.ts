@@ -1,4 +1,10 @@
-import type { AiRequestMode, AiRequestOwnership, ContextSourceKind } from './aiContext';
+import type {
+  AiRequestMode,
+  AiRequestOwnership,
+  ContextSourceKind,
+  PrepareContextSnapshotResponse,
+  SendAiChatResponse,
+} from './aiContext';
 import type { PersistedFirmwareSummary } from './ecu';
 import type { PluginReferenceOwnership } from './plugins';
 
@@ -14,6 +20,7 @@ export interface AiAssistPreset {
 export interface PersistedAiAssistState {
   ownership: PluginReferenceOwnership;
   selectedPresetId?: AiAssistPresetId;
+  lastNativePreview?: PersistedAiAssistNativePreview;
 }
 
 export interface AiAssistDraft {
@@ -21,4 +28,10 @@ export interface AiAssistDraft {
   ownership: AiRequestOwnership;
   contextKinds: ContextSourceKind[];
   firmwareSummary?: PersistedFirmwareSummary;
+}
+
+export interface PersistedAiAssistNativePreview {
+  draftKey: string;
+  snapshotResponse: PrepareContextSnapshotResponse;
+  chatResponse: SendAiChatResponse;
 }

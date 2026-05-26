@@ -5,7 +5,13 @@ import type {
   AiAssistDraft,
   AiAssistPreset,
   AiAssistPresetId,
+  PersistedAiAssistNativePreview,
+  PersistedAiAssistState,
 } from '../../../shared/types/aiAssist';
+import type {
+  PrepareContextSnapshotResponse,
+  SendAiChatResponse,
+} from '../../../shared/types/aiContext';
 import type { PersistedFirmwareSummary } from '../../../shared/types/ecu';
 import type { PluginReferenceOwnership } from '../../../shared/types/plugins';
 
@@ -38,20 +44,26 @@ interface WorkspaceAiAssistState {
   selectedPresetId: AiAssistPresetId | null;
   selectedPreset: AiAssistPreset | null;
   draft: AiAssistDraft | null;
+  nativePreview: PersistedAiAssistNativePreview | null;
   selectPreset: (presetId: AiAssistPresetId) => void;
+  recordNativePreview: (
+    snapshotResponse: PrepareContextSnapshotResponse,
+    chatResponse: SendAiChatResponse,
+  ) => void;
 }
 
 export function useWorkspaceAiAssistState(
   ownership: PluginReferenceOwnership,
   lastLoadedFirmware: PersistedFirmwareSummary | null,
 ): WorkspaceAiAssistState {
-  const [selectedPresetId, setSelectedPresetId] = useState<AiAssistPresetId | null>(
-    () => aiAssistStore.loadState(ownership).selectedPresetId ?? null,
+  const [persistedState, setPersistedState] = useState<PersistedAiAssistState>(() =>
+    aiAssistStore.loadState(ownership),
   );
 
+  const selectedPresetId = persistedState.selectedPresetId ?? null;
+
   useEffect(() => {
-    const nextState = aiAssistStore.loadState(ownership);
-    setSelectedPresetId(nextState.selectedPresetId ?? null);
+    setPersistedState(aiAssistStore.loadState(ownership));
   }, [ownership.workspaceId, ownership.projectId, ownership.sessionId]);
 
   const selectedPreset = useMemo(
@@ -88,21 +100,63 @@ export function useWorkspaceAiAssistState(
     lastLoadedFirmware,
   ]);
 
+  const currentDraftKey = useMemo(() => (draft ? buildDraftKey(draft) : null), [draft]);
+
+  const nativePreview = useMemo(() => {
+    if (!currentDraftKey || !persistedState.lastNativePreview) {
+      return null;
+    }
+
+    return persistedState.lastNativePreview.draftKey === currentDraftKey
+      ? persistedState.lastNativePreview
+      : null;
+  }, [currentDraftKey, persistedState.lastNativePreview]);
+
   return {
     presets: aiAssistPresets,
     selectedPresetId,
     selectedPreset,
     draft,
+    nativePreview,
     selectPreset: (presetId: AiAssistPresetId) => {
-      aiAssistStore.selectPreset({
+      const nextState = aiAssistStore.selectPreset({
         ownership,
         selectedPresetId: presetId,
       });
-      setSelectedPresetId(presetId);
+      setPersistedState(nextState);
+    },
+    recordNativePreview: (
+      snapshotResponse: PrepareContextSnapshotResponse,
+      chatResponse: SendAiChatResponse,
+    ) => {
+      if (!currentDraftKey) {
+        return;
+      }
+
+      const nextState = aiAssistStore.recordNativePreview({
+        ownership,
+        preview: {
+          draftKey: currentDraftKey,
+          snapshotResponse,
+          chatResponse,
+        },
+      });
+      setPersistedState(nextState);
     },
   };
 }
 
 function buildFirmwareId(summary: PersistedFirmwareSummary): string {
   return ['firmware', summary.fileName, summary.checksum ?? String(summary.size)].join('::');
+}
+
+function buildDraftKey(draft: AiAssistDraft): string {
+  return [
+    draft.preset.id,
+    draft.ownership.workspaceId,
+    draft.ownership.projectId ?? '_',
+    draft.ownership.sessionId ?? '_',
+    draft.ownership.firmwareIds?.join('|') ?? '_',
+    draft.contextKinds.join('|'),
+  ].join('::');
 }

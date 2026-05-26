@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
+import type { PersistedAiAssistNativePreview } from '../../shared/types/aiAssist';
 import type { PluginReferenceOwnership } from '../../shared/types/plugins';
 import { createAiAssistStore, type StorageLike } from './aiAssistStore';
 
@@ -26,6 +27,36 @@ describe('createAiAssistStore', () => {
     workspaceId: 'local-workspace',
     projectId: 'comparison-project',
     sessionId: 'comparison-session',
+  };
+
+  const preview: PersistedAiAssistNativePreview = {
+    draftKey:
+      'first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123',
+    snapshotResponse: {
+      snapshot: {
+        snapshotId: 'preview::snapshot::plan::local-workspace::4::1',
+        workspaceId: ownership.workspaceId,
+        projectId: ownership.projectId,
+        sessionId: ownership.sessionId,
+        mode: 'plan',
+        sourceRefs: [],
+        summaryText: 'preview snapshot',
+        unresolvedAssumptions: [],
+        safetyWarnings: [],
+        acceptedDecisionRefs: [],
+        rejectedDecisionRefs: [],
+        metadata: {
+          strategy: 'summary',
+          status: 'fresh',
+          lossy: false,
+          createdAt: 'preview-generated',
+        },
+      },
+    },
+    chatResponse: {
+      responseKind: 'plan',
+      summaryText: 'preview chat',
+    },
   };
 
   it('returns an empty state when nothing has been persisted', () => {
@@ -65,5 +96,40 @@ describe('createAiAssistStore', () => {
 
     expect(store.loadState(ownership).selectedPresetId).toBe('map-region-summary');
     expect(store.loadState(otherOwnership).selectedPresetId).toBe('bosch-pattern-compare');
+  });
+
+  it('persists the last native preview per ownership scope', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    const nextState = store.recordNativePreview({
+      ownership,
+      preview,
+    });
+
+    expect(nextState).toEqual({
+      ownership,
+      lastNativePreview: preview,
+    });
+    expect(store.loadState(ownership)).toEqual(nextState);
+  });
+
+  it('preserves the last native preview when selecting a preset', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    store.recordNativePreview({
+      ownership,
+      preview,
+    });
+
+    expect(
+      store.selectPreset({
+        ownership,
+        selectedPresetId: 'first-pass-review',
+      }),
+    ).toEqual({
+      ownership,
+      selectedPresetId: 'first-pass-review',
+      lastNativePreview: preview,
+    });
   });
 });

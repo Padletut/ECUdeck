@@ -5,21 +5,19 @@ import {
   useWorkspaceScope,
 } from '../../../app/providers/WorkspaceScopeProvider';
 import { aiService } from '../../../services/tauri/aiService';
-import type {
-  AiCommandError,
-  PrepareContextSnapshotResponse,
-  SendAiChatResponse,
-} from '../../../shared/types/aiContext';
-
-interface NativePreviewState {
-  snapshotResponse: PrepareContextSnapshotResponse;
-  chatResponse: SendAiChatResponse;
-}
+import type { AiCommandError } from '../../../shared/types/aiContext';
 
 export default function AiAssistPanel() {
   const { ownership } = useWorkspaceScope();
-  const { presets, selectedPresetId, selectedPreset, draft, selectPreset } = useWorkspaceAiAssist();
-  const [nativePreview, setNativePreview] = useState<NativePreviewState | null>(null);
+  const {
+    presets,
+    selectedPresetId,
+    selectedPreset,
+    draft,
+    nativePreview,
+    selectPreset,
+    recordNativePreview,
+  } = useWorkspaceAiAssist();
   const [previewError, setPreviewError] = useState<string | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
   const requestPreview = useMemo(
@@ -27,17 +25,30 @@ export default function AiAssistPanel() {
     [draft],
   );
   const hasNativeBridge = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+  const previewResetKey = useMemo(() => {
+    if (!draft) {
+      return 'no-draft';
+    }
 
-  useEffect(() => {
-    setNativePreview(null);
-    setPreviewError(null);
-    setPreviewLoading(false);
+    return [
+      selectedPresetId ?? '_',
+      draft.ownership.workspaceId,
+      draft.ownership.projectId ?? '_',
+      draft.ownership.sessionId ?? '_',
+      draft.ownership.firmwareIds?.join('|') ?? '_',
+    ].join('::');
   }, [
     selectedPresetId,
     draft?.ownership.workspaceId,
     draft?.ownership.projectId,
     draft?.ownership.sessionId,
+    draft?.ownership.firmwareIds,
   ]);
+
+  useEffect(() => {
+    setPreviewError(null);
+    setPreviewLoading(false);
+  }, [previewResetKey]);
 
   const handleRunNativePreview = async () => {
     if (!requestPreview) {
@@ -56,12 +67,8 @@ export default function AiAssistPanel() {
         contextSnapshotId: snapshotResponse.snapshot.snapshotId,
       });
 
-      setNativePreview({
-        snapshotResponse,
-        chatResponse,
-      });
+      recordNativePreview(snapshotResponse, chatResponse);
     } catch (error) {
-      setNativePreview(null);
       setPreviewError(getErrorMessage(error));
     } finally {
       setPreviewLoading(false);

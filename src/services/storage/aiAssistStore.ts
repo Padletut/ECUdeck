@@ -1,4 +1,8 @@
-import type { AiAssistPresetId, PersistedAiAssistState } from '../../shared/types/aiAssist';
+import type {
+  AiAssistPresetId,
+  PersistedAiAssistNativePreview,
+  PersistedAiAssistState,
+} from '../../shared/types/aiAssist';
 import type { PluginReferenceOwnership } from '../../shared/types/plugins';
 
 const STORAGE_PREFIX = 'ecudeck.ai-assist.v1';
@@ -13,9 +17,15 @@ interface SelectPresetInput {
   selectedPresetId: AiAssistPresetId;
 }
 
+interface RecordNativePreviewInput {
+  ownership: PluginReferenceOwnership;
+  preview: PersistedAiAssistNativePreview;
+}
+
 export interface AiAssistStore {
   loadState(ownership: PluginReferenceOwnership): PersistedAiAssistState;
   selectPreset(input: SelectPresetInput): PersistedAiAssistState;
+  recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState;
 }
 
 export function createAiAssistStore(storage: StorageLike | null | undefined): AiAssistStore {
@@ -25,9 +35,23 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
     },
 
     selectPreset(input: SelectPresetInput): PersistedAiAssistState {
+      const currentState = loadPersistedState(storage, input.ownership);
       const nextState: PersistedAiAssistState = {
+        ...currentState,
         ownership: input.ownership,
         selectedPresetId: input.selectedPresetId,
+      };
+
+      persistState(storage, nextState);
+      return nextState;
+    },
+
+    recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState {
+      const currentState = loadPersistedState(storage, input.ownership);
+      const nextState: PersistedAiAssistState = {
+        ...currentState,
+        ownership: input.ownership,
+        lastNativePreview: input.preview,
       };
 
       persistState(storage, nextState);
@@ -43,13 +67,13 @@ function loadPersistedState(
   ownership: PluginReferenceOwnership,
 ): PersistedAiAssistState {
   if (!storage) {
-    return { ownership };
+    return emptyState(ownership);
   }
 
   const raw = storage.getItem(storageKey(ownership));
 
   if (!raw) {
-    return { ownership };
+    return emptyState(ownership);
   }
 
   try {
@@ -58,9 +82,12 @@ function loadPersistedState(
     return {
       ownership,
       selectedPresetId: isPresetId(parsed.selectedPresetId) ? parsed.selectedPresetId : undefined,
+      lastNativePreview: isPersistedAiAssistNativePreview(parsed.lastNativePreview)
+        ? normalizeNativePreview(parsed.lastNativePreview)
+        : undefined,
     };
   } catch {
-    return { ownership };
+    return emptyState(ownership);
   }
 }
 
@@ -73,6 +100,12 @@ function persistState(
   }
 
   storage.setItem(storageKey(state.ownership), JSON.stringify(state));
+}
+
+function emptyState(ownership: PluginReferenceOwnership): PersistedAiAssistState {
+  return {
+    ownership,
+  };
 }
 
 function storageKey(ownership: PluginReferenceOwnership): string {
@@ -90,6 +123,97 @@ function isPresetId(value: unknown): value is AiAssistPresetId {
     value === 'bosch-pattern-compare' ||
     value === 'first-pass-review'
   );
+}
+
+function isPersistedAiAssistNativePreview(value: unknown): value is PersistedAiAssistNativePreview {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.draftKey === 'string' &&
+    isPrepareContextSnapshotResponse(candidate.snapshotResponse) &&
+    isSendAiChatResponse(candidate.chatResponse)
+  );
+}
+
+function isPrepareContextSnapshotResponse(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+
+  if (!candidate.snapshot || typeof candidate.snapshot !== 'object') {
+    return false;
+  }
+
+  const snapshot = candidate.snapshot as Record<string, unknown>;
+  return (
+    typeof snapshot.snapshotId === 'string' &&
+    typeof snapshot.summaryText === 'string' &&
+    isCompressionMetadata(snapshot.metadata)
+  );
+}
+
+function isCompressionMetadata(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.strategy === 'string' &&
+    typeof candidate.status === 'string' &&
+    typeof candidate.lossy === 'boolean' &&
+    typeof candidate.createdAt === 'string'
+  );
+}
+
+function isSendAiChatResponse(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    isResponseKind(candidate.responseKind) &&
+    typeof candidate.summaryText === 'string' &&
+    isProposalContextReference(candidate.proposal)
+  );
+}
+
+function isResponseKind(value: unknown): boolean {
+  return value === 'explanation' || value === 'plan' || value === 'proposal';
+}
+
+function isProposalContextReference(value: unknown): boolean {
+  if (value == null) {
+    return true;
+  }
+
+  if (typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.proposalId === 'string' &&
+    (candidate.contextSnapshotId == null || typeof candidate.contextSnapshotId === 'string')
+  );
+}
+
+function normalizeNativePreview(
+  preview: PersistedAiAssistNativePreview,
+): PersistedAiAssistNativePreview {
+  return {
+    ...preview,
+    chatResponse: {
+      ...preview.chatResponse,
+      proposal: preview.chatResponse.proposal ?? undefined,
+    },
+  };
 }
 
 function getBrowserStorage(): StorageLike | null {
