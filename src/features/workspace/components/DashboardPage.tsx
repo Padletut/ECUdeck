@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
 import { useWorkspaceFirmware } from '../../../app/providers/WorkspaceScopeProvider';
+import AiAssistPanel from './AiAssistPanel';
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
 import PluginValidationPanel from '../../plugins/components/PluginValidationPanel';
 import PluginValidationScopePanel from './PluginValidationScopePanel';
@@ -270,26 +271,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-steel-grey rounded-lg border border-gridlines-grey overflow-hidden">
-          <div className="px-6 py-4 border-b border-gridlines-grey flex items-center justify-between">
-            <h2 className="text-section-title font-bold">AI Assist</h2>
-            <span className="text-alloy-silver text-sm">Preview only</span>
-          </div>
-          <div className="p-6 space-y-4">
-            {[
-              'Summarize likely map regions',
-              'Compare this file against common Bosch patterns',
-              'Generate a first-pass review plan',
-            ].map((prompt) => (
-              <button
-                key={prompt}
-                className="w-full text-left rounded-lg border border-gridlines-grey px-4 py-3 text-soft-white hover:border-electric-blue hover:bg-carbon-black transition"
-              >
-                {prompt}
-              </button>
-            ))}
-          </div>
-        </div>
+        <AiAssistPanel />
       </section>
 
       <section className="mb-12">
