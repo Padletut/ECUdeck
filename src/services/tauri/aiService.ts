@@ -1,6 +1,10 @@
 import { invoke } from '@tauri-apps/api/core';
 
-import type { AiAssistDraft } from '../../shared/types/aiAssist';
+import {
+  DEFAULT_AI_ASSIST_MODEL_ID,
+  DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type AiAssistDraft,
+} from '../../shared/types/aiAssist';
 import type {
   AiCommandError,
   AiRequestContextEnvelope,
@@ -14,8 +18,8 @@ import type {
   SendAiChatResponse,
 } from '../../shared/types/aiContext';
 
-export const AI_ASSIST_PREVIEW_PROVIDER_ID = 'preview-provider';
-export const AI_ASSIST_PREVIEW_MODEL_ID = 'draft-preview';
+export const AI_ASSIST_PREVIEW_PROVIDER_ID = DEFAULT_AI_ASSIST_PROVIDER_ID;
+export const AI_ASSIST_PREVIEW_MODEL_ID = DEFAULT_AI_ASSIST_MODEL_ID;
 export const AI_ASSIST_PREVIEW_COMPRESSION_POLICY: CompressionPolicy = {
   strategy: 'summary',
   targetTokenBudget: 1600,
@@ -39,6 +43,12 @@ export interface AiAssistRequestPreview {
   sendAiChatRequest: SendAiChatRequest;
 }
 
+export interface BuildDraftPreviewRequestsInput {
+  draft: AiAssistDraft;
+  providerId?: string;
+  modelId?: string;
+}
+
 export type TauriInvoke = <Response>(
   command: string,
   args?: Record<string, unknown>,
@@ -50,7 +60,7 @@ export interface AiService {
     input: BuildPrepareContextSnapshotRequestInput,
   ): PrepareContextSnapshotRequest;
   buildSendAiChatRequest(input: BuildSendAiChatRequestInput): SendAiChatRequest;
-  buildDraftPreviewRequests(draft: AiAssistDraft): AiAssistRequestPreview;
+  buildDraftPreviewRequests(input: BuildDraftPreviewRequestsInput): AiAssistRequestPreview;
   prepareContextSnapshot(
     request: PrepareContextSnapshotRequest,
   ): Promise<PrepareContextSnapshotResponse>;
@@ -116,7 +126,19 @@ export function createAiService(invokeCommand?: TauriInvoke): AiService {
       };
     },
 
-    buildDraftPreviewRequests(draft: AiAssistDraft): AiAssistRequestPreview {
+    buildDraftPreviewRequests({
+      draft,
+      providerId,
+      modelId,
+    }: BuildDraftPreviewRequestsInput): AiAssistRequestPreview {
+      const resolvedProviderId = providerId?.trim() || AI_ASSIST_PREVIEW_PROVIDER_ID;
+      const resolvedModelId =
+        modelId === undefined
+          ? resolvedProviderId === AI_ASSIST_PREVIEW_PROVIDER_ID
+            ? AI_ASSIST_PREVIEW_MODEL_ID
+            : undefined
+          : modelId.trim() || undefined;
+
       return {
         prepareContextSnapshotRequest: this.buildPrepareContextSnapshotRequest({
           draft,
@@ -124,8 +146,8 @@ export function createAiService(invokeCommand?: TauriInvoke): AiService {
         }),
         sendAiChatRequest: this.buildSendAiChatRequest({
           draft,
-          providerId: AI_ASSIST_PREVIEW_PROVIDER_ID,
-          modelId: AI_ASSIST_PREVIEW_MODEL_ID,
+          providerId: resolvedProviderId,
+          modelId: resolvedModelId,
         }),
       };
     },

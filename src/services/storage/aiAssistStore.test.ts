@@ -1,6 +1,9 @@
 import { describe, expect, it } from '@jest/globals';
 
-import type { PersistedAiAssistNativePreview } from '../../shared/types/aiAssist';
+import type {
+  AiAssistProviderConfig,
+  PersistedAiAssistNativePreview,
+} from '../../shared/types/aiAssist';
 import type { PluginReferenceOwnership } from '../../shared/types/plugins';
 import { createAiAssistStore, type StorageLike } from './aiAssistStore';
 
@@ -57,6 +60,11 @@ describe('createAiAssistStore', () => {
       responseKind: 'plan',
       summaryText: 'preview chat',
     },
+  };
+
+  const providerConfig: AiAssistProviderConfig = {
+    providerId: 'ollama',
+    modelId: 'llama3.1:8b',
   };
 
   it('returns an empty state when nothing has been persisted', () => {
@@ -129,6 +137,41 @@ describe('createAiAssistStore', () => {
     ).toEqual({
       ownership,
       selectedPresetId: 'first-pass-review',
+      lastNativePreview: preview,
+    });
+  });
+
+  it('persists the provider configuration per ownership scope', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    const nextState = store.updateProviderConfig({
+      ownership,
+      providerConfig,
+    });
+
+    expect(nextState).toEqual({
+      ownership,
+      providerConfig,
+    });
+    expect(store.loadState(ownership)).toEqual(nextState);
+  });
+
+  it('preserves provider configuration when recording a native preview', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    store.updateProviderConfig({
+      ownership,
+      providerConfig,
+    });
+
+    expect(
+      store.recordNativePreview({
+        ownership,
+        preview,
+      }),
+    ).toEqual({
+      ownership,
+      providerConfig,
       lastNativePreview: preview,
     });
   });

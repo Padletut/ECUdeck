@@ -5,7 +5,18 @@ import {
   useWorkspaceScope,
 } from '../../../app/providers/WorkspaceScopeProvider';
 import { aiService } from '../../../services/tauri/aiService';
+import {
+  DEFAULT_AI_ASSIST_MODEL_ID,
+  DEFAULT_AI_ASSIST_PROVIDER_ID,
+} from '../../../shared/types/aiAssist';
 import type { AiCommandError } from '../../../shared/types/aiContext';
+
+const providerOptions = [
+  { value: DEFAULT_AI_ASSIST_PROVIDER_ID, label: 'Preview Provider' },
+  { value: 'ollama', label: 'Ollama' },
+  { value: 'llama-server', label: 'Llama Server' },
+  { value: 'openai-compatible', label: 'OpenAI-Compatible' },
+];
 
 export default function AiAssistPanel() {
   const { ownership } = useWorkspaceScope();
@@ -14,15 +25,24 @@ export default function AiAssistPanel() {
     selectedPresetId,
     selectedPreset,
     draft,
+    providerConfig,
     nativePreview,
     selectPreset,
+    updateProviderConfig,
     recordNativePreview,
   } = useWorkspaceAiAssist();
   const [previewError, setPreviewError] = useState<string | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
   const requestPreview = useMemo(
-    () => (draft ? aiService.buildDraftPreviewRequests(draft) : null),
-    [draft],
+    () =>
+      draft
+        ? aiService.buildDraftPreviewRequests({
+            draft,
+            providerId: providerConfig.providerId,
+            modelId: providerConfig.modelId,
+          })
+        : null,
+    [draft, providerConfig.providerId, providerConfig.modelId],
   );
   const hasNativeBridge = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
   const previewResetKey = useMemo(() => {
@@ -36,6 +56,8 @@ export default function AiAssistPanel() {
       draft.ownership.projectId ?? '_',
       draft.ownership.sessionId ?? '_',
       draft.ownership.firmwareIds?.join('|') ?? '_',
+      providerConfig.providerId,
+      providerConfig.modelId ?? '_',
     ].join('::');
   }, [
     selectedPresetId,
@@ -43,6 +65,8 @@ export default function AiAssistPanel() {
     draft?.ownership.projectId,
     draft?.ownership.sessionId,
     draft?.ownership.firmwareIds,
+    providerConfig.providerId,
+    providerConfig.modelId,
   ]);
 
   useEffect(() => {
@@ -73,6 +97,21 @@ export default function AiAssistPanel() {
     } finally {
       setPreviewLoading(false);
     }
+  };
+
+  const handleProviderChange = (providerId: string) => {
+    const nextModelId =
+      providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
+        ? (providerConfig.modelId ?? DEFAULT_AI_ASSIST_MODEL_ID)
+        : providerConfig.modelId === DEFAULT_AI_ASSIST_MODEL_ID
+          ? undefined
+          : providerConfig.modelId;
+
+    updateProviderConfig(providerId, nextModelId);
+  };
+
+  const handleModelChange = (modelId: string) => {
+    updateProviderConfig(providerConfig.providerId, modelId);
   };
 
   return (
@@ -135,6 +174,58 @@ export default function AiAssistPanel() {
               <InfoField label="Project" value={ownership.projectId ?? '-'} />
               <InfoField label="Session" value={ownership.sessionId ?? '-'} />
             </dl>
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="ai-provider-id"
+                  className="mb-2 block text-sm font-semibold uppercase tracking-[0.18em] text-alloy-silver"
+                >
+                  Provider Route
+                </label>
+                <select
+                  id="ai-provider-id"
+                  value={providerConfig.providerId}
+                  onChange={(event) => handleProviderChange(event.target.value)}
+                  className="w-full rounded-lg border border-gridlines-grey bg-carbon-black px-4 py-3 text-sm text-soft-white outline-none transition focus:border-electric-blue"
+                >
+                  {providerOptions.map((providerOption) => (
+                    <option key={providerOption.value} value={providerOption.value}>
+                      {providerOption.label}
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-2 text-sm text-muted-text">
+                  This provider id is written into the AI request and persisted per workspace scope.
+                </p>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="ai-model-id"
+                  className="mb-2 block text-sm font-semibold uppercase tracking-[0.18em] text-alloy-silver"
+                >
+                  Model ID
+                </label>
+                <input
+                  id="ai-model-id"
+                  value={providerConfig.modelId ?? ''}
+                  onChange={(event) => handleModelChange(event.target.value)}
+                  placeholder={
+                    providerConfig.providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
+                      ? DEFAULT_AI_ASSIST_MODEL_ID
+                      : 'Optional provider-specific model'
+                  }
+                  className="w-full rounded-lg border border-gridlines-grey bg-carbon-black px-4 py-3 font-mono text-sm text-soft-white outline-none transition focus:border-electric-blue"
+                  spellCheck={false}
+                  autoComplete="off"
+                />
+                <p className="mt-2 text-sm text-muted-text">
+                  Leave this empty for provider defaults. The preview provider keeps its draft model
+                  by default.
+                </p>
+              </div>
+            </div>
 
             <div className="mt-5">
               <p className="text-xs uppercase tracking-[0.2em] text-muted-text">Context Sources</p>
@@ -199,7 +290,7 @@ export default function AiAssistPanel() {
                   />
                   <RequestPreviewCard
                     title="Chat Request"
-                    detail={`${requestPreview.sendAiChatRequest.providerId} · ${requestPreview.sendAiChatRequest.mode}`}
+                    detail={`${requestPreview.sendAiChatRequest.providerId}${requestPreview.sendAiChatRequest.modelId ? ` / ${requestPreview.sendAiChatRequest.modelId}` : ''} · ${requestPreview.sendAiChatRequest.mode}`}
                     value={requestPreview.sendAiChatRequest}
                   />
                 </div>

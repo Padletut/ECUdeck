@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { aiAssistStore } from '../../../services/storage/aiAssistStore';
+import {
+  DEFAULT_AI_ASSIST_MODEL_ID,
+  DEFAULT_AI_ASSIST_PROVIDER_ID,
+} from '../../../shared/types/aiAssist';
 import type {
+  AiAssistProviderConfig,
   AiAssistDraft,
   AiAssistPreset,
   AiAssistPresetId,
@@ -44,8 +49,10 @@ interface WorkspaceAiAssistState {
   selectedPresetId: AiAssistPresetId | null;
   selectedPreset: AiAssistPreset | null;
   draft: AiAssistDraft | null;
+  providerConfig: AiAssistProviderConfig;
   nativePreview: PersistedAiAssistNativePreview | null;
   selectPreset: (presetId: AiAssistPresetId) => void;
+  updateProviderConfig: (providerId: string, modelId?: string) => void;
   recordNativePreview: (
     snapshotResponse: PrepareContextSnapshotResponse,
     chatResponse: SendAiChatResponse,
@@ -100,7 +107,15 @@ export function useWorkspaceAiAssistState(
     lastLoadedFirmware,
   ]);
 
-  const currentDraftKey = useMemo(() => (draft ? buildDraftKey(draft) : null), [draft]);
+  const providerConfig = useMemo(
+    () => resolveProviderConfig(persistedState.providerConfig),
+    [persistedState.providerConfig],
+  );
+
+  const currentDraftKey = useMemo(
+    () => (draft ? buildDraftKey(draft, providerConfig) : null),
+    [draft, providerConfig.providerId, providerConfig.modelId],
+  );
 
   const nativePreview = useMemo(() => {
     if (!currentDraftKey || !persistedState.lastNativePreview) {
@@ -117,11 +132,22 @@ export function useWorkspaceAiAssistState(
     selectedPresetId,
     selectedPreset,
     draft,
+    providerConfig,
     nativePreview,
     selectPreset: (presetId: AiAssistPresetId) => {
       const nextState = aiAssistStore.selectPreset({
         ownership,
         selectedPresetId: presetId,
+      });
+      setPersistedState(nextState);
+    },
+    updateProviderConfig: (providerId: string, modelId?: string) => {
+      const nextState = aiAssistStore.updateProviderConfig({
+        ownership,
+        providerConfig: {
+          providerId,
+          modelId,
+        },
       });
       setPersistedState(nextState);
     },
@@ -150,7 +176,7 @@ function buildFirmwareId(summary: PersistedFirmwareSummary): string {
   return ['firmware', summary.fileName, summary.checksum ?? String(summary.size)].join('::');
 }
 
-function buildDraftKey(draft: AiAssistDraft): string {
+function buildDraftKey(draft: AiAssistDraft, providerConfig: AiAssistProviderConfig): string {
   return [
     draft.preset.id,
     draft.ownership.workspaceId,
@@ -158,5 +184,20 @@ function buildDraftKey(draft: AiAssistDraft): string {
     draft.ownership.sessionId ?? '_',
     draft.ownership.firmwareIds?.join('|') ?? '_',
     draft.contextKinds.join('|'),
+    providerConfig.providerId,
+    providerConfig.modelId ?? '_',
   ].join('::');
+}
+
+function resolveProviderConfig(providerConfig?: AiAssistProviderConfig): AiAssistProviderConfig {
+  const providerId = providerConfig?.providerId?.trim() || DEFAULT_AI_ASSIST_PROVIDER_ID;
+  const modelId = providerConfig?.modelId?.trim();
+
+  return {
+    providerId,
+    modelId:
+      modelId || providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
+        ? modelId || DEFAULT_AI_ASSIST_MODEL_ID
+        : undefined,
+  };
 }

@@ -8,6 +8,9 @@ import type {
 import type { PersistedFirmwareSummary } from './ecu';
 import type { PluginReferenceOwnership } from './plugins';
 
+export const DEFAULT_AI_ASSIST_PROVIDER_ID = 'preview-provider';
+export const DEFAULT_AI_ASSIST_MODEL_ID = 'draft-preview';
+
 export type AiAssistPresetId = 'map-region-summary' | 'bosch-pattern-compare' | 'first-pass-review';
 
 export interface AiAssistPreset {
@@ -17,9 +20,15 @@ export interface AiAssistPreset {
   mode: AiRequestMode;
 }
 
+export interface AiAssistProviderConfig {
+  providerId: string;
+  modelId?: string;
+}
+
 export interface PersistedAiAssistState {
   ownership: PluginReferenceOwnership;
   selectedPresetId?: AiAssistPresetId;
+  providerConfig?: AiAssistProviderConfig;
   lastNativePreview?: PersistedAiAssistNativePreview;
 }
 

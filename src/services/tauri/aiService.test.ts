@@ -93,7 +93,7 @@ describe('createAiService', () => {
 
   it('builds preview requests with explicit preview provider defaults', () => {
     const service = createAiService();
-    const preview = service.buildDraftPreviewRequests(draft);
+    const preview = service.buildDraftPreviewRequests({ draft });
 
     expect(preview.prepareContextSnapshotRequest.compression).toEqual(
       AI_ASSIST_PREVIEW_COMPRESSION_POLICY,
@@ -103,6 +103,18 @@ describe('createAiService', () => {
     expect(preview.sendAiChatRequest.context).toEqual(
       preview.prepareContextSnapshotRequest.context,
     );
+  });
+
+  it('uses a custom provider and model when building preview requests', () => {
+    const service = createAiService();
+    const preview = service.buildDraftPreviewRequests({
+      draft,
+      providerId: 'ollama',
+      modelId: 'llama3.1:8b',
+    });
+
+    expect(preview.sendAiChatRequest.providerId).toBe('ollama');
+    expect(preview.sendAiChatRequest.modelId).toBe('llama3.1:8b');
   });
 
   it('rejects blank provider identifiers when building a chat request', () => {
@@ -140,7 +152,7 @@ describe('createAiService', () => {
     };
     const invokeCommand = jest.fn(async () => response);
     const service = createAiService(invokeCommand as unknown as TauriInvoke);
-    const request = service.buildDraftPreviewRequests(draft).prepareContextSnapshotRequest;
+    const request = service.buildDraftPreviewRequests({ draft }).prepareContextSnapshotRequest;
 
     await expect(service.prepareContextSnapshot(request)).resolves.toEqual(response);
     expect(invokeCommand).toHaveBeenCalledWith('prepare_context_snapshot', {
@@ -155,7 +167,7 @@ describe('createAiService', () => {
     };
     const invokeCommand = jest.fn(async () => response);
     const service = createAiService(invokeCommand as unknown as TauriInvoke);
-    const request = service.buildDraftPreviewRequests(draft).sendAiChatRequest;
+    const request = service.buildDraftPreviewRequests({ draft }).sendAiChatRequest;
 
     await expect(service.sendAiChat(request)).resolves.toEqual(response);
     expect(invokeCommand).toHaveBeenCalledWith('send_ai_chat', {

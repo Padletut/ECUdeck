@@ -1,4 +1,5 @@
 import type {
+  AiAssistProviderConfig,
   AiAssistPresetId,
   PersistedAiAssistNativePreview,
   PersistedAiAssistState,
@@ -22,10 +23,16 @@ interface RecordNativePreviewInput {
   preview: PersistedAiAssistNativePreview;
 }
 
+interface UpdateProviderConfigInput {
+  ownership: PluginReferenceOwnership;
+  providerConfig: AiAssistProviderConfig;
+}
+
 export interface AiAssistStore {
   loadState(ownership: PluginReferenceOwnership): PersistedAiAssistState;
   selectPreset(input: SelectPresetInput): PersistedAiAssistState;
   recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState;
+  updateProviderConfig(input: UpdateProviderConfigInput): PersistedAiAssistState;
 }
 
 export function createAiAssistStore(storage: StorageLike | null | undefined): AiAssistStore {
@@ -57,6 +64,18 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
       persistState(storage, nextState);
       return nextState;
     },
+
+    updateProviderConfig(input: UpdateProviderConfigInput): PersistedAiAssistState {
+      const currentState = loadPersistedState(storage, input.ownership);
+      const nextState: PersistedAiAssistState = {
+        ...currentState,
+        ownership: input.ownership,
+        providerConfig: normalizeProviderConfig(input.providerConfig),
+      };
+
+      persistState(storage, nextState);
+      return nextState;
+    },
   };
 }
 
@@ -82,6 +101,9 @@ function loadPersistedState(
     return {
       ownership,
       selectedPresetId: isPresetId(parsed.selectedPresetId) ? parsed.selectedPresetId : undefined,
+      providerConfig: isAiAssistProviderConfig(parsed.providerConfig)
+        ? normalizeProviderConfig(parsed.providerConfig)
+        : undefined,
       lastNativePreview: isPersistedAiAssistNativePreview(parsed.lastNativePreview)
         ? normalizeNativePreview(parsed.lastNativePreview)
         : undefined,
@@ -122,6 +144,18 @@ function isPresetId(value: unknown): value is AiAssistPresetId {
     value === 'map-region-summary' ||
     value === 'bosch-pattern-compare' ||
     value === 'first-pass-review'
+  );
+}
+
+function isAiAssistProviderConfig(value: unknown): value is AiAssistProviderConfig {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.providerId === 'string' &&
+    (candidate.modelId == null || typeof candidate.modelId === 'string')
   );
 }
 
@@ -213,6 +247,22 @@ function normalizeNativePreview(
       ...preview.chatResponse,
       proposal: preview.chatResponse.proposal ?? undefined,
     },
+  };
+}
+
+function normalizeProviderConfig(
+  providerConfig: AiAssistProviderConfig,
+): AiAssistProviderConfig | undefined {
+  const providerId = providerConfig.providerId.trim();
+  const modelId = providerConfig.modelId?.trim() || undefined;
+
+  if (!providerId) {
+    return undefined;
+  }
+
+  return {
+    providerId,
+    modelId,
   };
 }
 
