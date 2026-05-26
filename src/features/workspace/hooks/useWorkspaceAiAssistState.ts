@@ -11,6 +11,7 @@ import type {
   AiAssistPreset,
   AiAssistPresetId,
   PersistedAiAssistProposalReview,
+  AiAssistReviewDecisionDetails,
   AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
   PersistedAiAssistState,
@@ -58,7 +59,11 @@ interface WorkspaceAiAssistState {
   selectPreset: (presetId: AiAssistPresetId) => void;
   updateProviderConfig: (providerId: string, modelId?: string) => void;
   restorePreviewContext: (preview: PersistedAiAssistNativePreview) => void;
-  updatePreviewReviewStatus: (snapshotId: string, reviewStatus: AiAssistReviewStatus) => void;
+  updatePreviewReviewStatus: (
+    snapshotId: string,
+    reviewStatus: AiAssistReviewStatus,
+    reviewDetails?: AiAssistReviewDecisionDetails,
+  ) => void;
   recordNativePreview: (
     snapshotResponse: PrepareContextSnapshotResponse,
     chatResponse: SendAiChatResponse,
@@ -177,11 +182,16 @@ export function useWorkspaceAiAssistState(
       });
       setPersistedState(nextState);
     },
-    updatePreviewReviewStatus: (snapshotId: string, reviewStatus: AiAssistReviewStatus) => {
+    updatePreviewReviewStatus: (
+      snapshotId: string,
+      reviewStatus: AiAssistReviewStatus,
+      reviewDetails?: AiAssistReviewDecisionDetails,
+    ) => {
       const nextState = aiAssistStore.updatePreviewReviewStatus({
         ownership,
         snapshotId,
         reviewStatus,
+        reviewDetails,
       });
       setPersistedState(nextState);
     },
@@ -202,6 +212,7 @@ export function useWorkspaceAiAssistState(
           recordedAt: new Date().toISOString(),
           reviewDecision: {
             status: 'pending',
+            decisionType: 'needs-follow-up',
           },
           snapshotResponse,
           chatResponse,

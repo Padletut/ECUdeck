@@ -9,6 +9,8 @@ import type { AiProviderSummary } from '../../../shared/types/aiContext';
 import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type AiAssistReviewDecisionDetails,
+  type AiAssistReviewDecisionType,
   type PersistedAiAssistProposalReview,
   type PersistedAiAssistNativePreview,
 } from '../../../shared/types/aiAssist';
@@ -37,6 +39,9 @@ export default function AiAssistPanel() {
   const [selectedHistorySnapshotId, setSelectedHistorySnapshotId] = useState<string | null>(null);
   const [providerCatalogError, setProviderCatalogError] = useState<string | null>(null);
   const [providerCatalogLoading, setProviderCatalogLoading] = useState(false);
+  const [reviewDecisionDrafts, setReviewDecisionDrafts] = useState<
+    Record<string, AiAssistReviewDecisionDetails>
+  >({});
   const [availableProviders, setAvailableProviders] = useState<AiProviderSummary[]>(
     PREVIEW_AI_PROVIDER_CATALOG.providers,
   );
@@ -235,6 +240,46 @@ export default function AiAssistPanel() {
     reviewStatus: AiAssistReviewStatus,
   ) => {
     updatePreviewReviewStatus(snapshotId, reviewStatus);
+  };
+
+  const handleUpdateReviewDecisionDraft = (
+    proposalId: string,
+    nextDraft: AiAssistReviewDecisionDetails,
+  ) => {
+    setReviewDecisionDrafts((currentDrafts) => ({
+      ...currentDrafts,
+      [proposalId]: {
+        ...currentDrafts[proposalId],
+        ...nextDraft,
+      },
+    }));
+  };
+
+  const handlePersistProposalReviewDecision = (
+    reviewEntry: PersistedAiAssistProposalReview,
+    reviewStatus: AiAssistReviewStatus,
+  ) => {
+    const draft = reviewDecisionDrafts[reviewEntry.proposalId];
+
+    updatePreviewReviewStatus(reviewEntry.snapshotId, reviewStatus, {
+      decisionType:
+        draft?.decisionType ??
+        (reviewEntry.reviewDecision.status === reviewStatus
+          ? reviewEntry.reviewDecision.decisionType
+          : undefined),
+      reviewerId: draft?.reviewerId ?? reviewEntry.reviewDecision.reviewerId,
+      comment: draft?.comment ?? reviewEntry.reviewDecision.comment,
+    });
+
+    setReviewDecisionDrafts((currentDrafts) => {
+      if (!currentDrafts[reviewEntry.proposalId]) {
+        return currentDrafts;
+      }
+
+      const nextDrafts = { ...currentDrafts };
+      delete nextDrafts[reviewEntry.proposalId];
+      return nextDrafts;
+    });
   };
 
   const handleRestoreProposalReviewContext = (reviewEntry: PersistedAiAssistProposalReview) => {

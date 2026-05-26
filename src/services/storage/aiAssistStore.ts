@@ -3,7 +3,9 @@ import {
   DEFAULT_AI_ASSIST_PROVIDER_ID,
   type AiAssistProviderConfig,
   type PersistedAiAssistProposalReview,
+  type AiAssistReviewDecisionDetails,
   type AiAssistReviewDecision,
+  type AiAssistReviewDecisionType,
   type AiAssistReviewStatus,
   type AiAssistPresetId,
   type PersistedAiAssistNativePreview,
@@ -44,14 +46,19 @@ interface UpdatePreviewReviewStatusInput {
   ownership: PluginReferenceOwnership;
   snapshotId: string;
   reviewStatus: AiAssistReviewStatus;
+  reviewDetails?: AiAssistReviewDecisionDetails;
   decidedAt?: string;
 }
+
+type AiAssistReviewDecisionInput = Omit<AiAssistReviewDecision, 'decisionType'> & {
+  decisionType?: AiAssistReviewDecisionType;
+};
 
 type PersistedAiAssistNativePreviewInput = Omit<
   PersistedAiAssistNativePreview,
   'reviewDecision'
 > & {
-  reviewDecision?: AiAssistReviewDecision;
+  reviewDecision?: AiAssistReviewDecisionInput;
 };
 
 export interface AiAssistStore {
@@ -130,6 +137,7 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
       const reviewDecision = normalizeReviewDecision(
         {
           status: input.reviewStatus,
+          ...input.reviewDetails,
           decidedAt: input.decidedAt,
         },
         undefined,
@@ -260,7 +268,13 @@ function isAiAssistReviewStatus(value: unknown): value is AiAssistReviewStatus {
   return value === 'pending' || value === 'accepted' || value === 'rejected';
 }
 
-function isAiAssistReviewDecision(value: unknown): value is AiAssistReviewDecision {
+function isAiAssistReviewDecisionType(value: unknown): value is AiAssistReviewDecisionType {
+  return (
+    value === 'approve' || value === 'reject' || value === 'needs-follow-up' || value === 'note'
+  );
+}
+
+function isAiAssistReviewDecision(value: unknown): value is AiAssistReviewDecisionInput {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -268,6 +282,9 @@ function isAiAssistReviewDecision(value: unknown): value is AiAssistReviewDecisi
   const candidate = value as Record<string, unknown>;
   return (
     isAiAssistReviewStatus(candidate.status) &&
+    (candidate.decisionType == null || isAiAssistReviewDecisionType(candidate.decisionType)) &&
+    (candidate.reviewerId == null || typeof candidate.reviewerId === 'string') &&
+    (candidate.comment == null || typeof candidate.comment === 'string') &&
     (candidate.decidedAt == null || typeof candidate.decidedAt === 'string')
   );
 }
@@ -649,25 +666,62 @@ function resolvePreviewPresetId(value: unknown): AiAssistPresetId | undefined {
   return isPresetId(maybePresetId) ? maybePresetId : undefined;
 }
 
+function defaultReviewDecisionTypeForStatus(
+  status: AiAssistReviewStatus,
+): AiAssistReviewDecisionType {
+  switch (status) {
+    case 'accepted':
+      return 'approve';
+    case 'rejected':
+      return 'reject';
+    case 'pending':
+    default:
+      return 'needs-follow-up';
+  }
+}
+
+function normalizeOptionalText(value: string | undefined): string | undefined {
+  const normalizedValue = value?.trim();
+  return normalizedValue ? normalizedValue : undefined;
+}
+
 function normalizeReviewDecision(
-  reviewDecision: AiAssistReviewDecision | undefined,
+  reviewDecision: AiAssistReviewDecisionInput | undefined,
   recordedAt: string | undefined,
 ): AiAssistReviewDecision {
   if (!reviewDecision || !isAiAssistReviewStatus(reviewDecision.status)) {
     return {
       status: 'pending',
+      decisionType: defaultReviewDecisionTypeForStatus('pending'),
     };
   }
 
-  if (reviewDecision.status === 'pending') {
+  const decisionType = isAiAssistReviewDecisionType(reviewDecision.decisionType)
+    ? reviewDecision.decisionType
+    : defaultReviewDecisionTypeForStatus(reviewDecision.status);
+  const reviewerId = normalizeOptionalText(reviewDecision.reviewerId);
+  const comment = normalizeOptionalText(reviewDecision.comment);
+  const decidedAt = normalizeOptionalText(reviewDecision.decidedAt) ?? recordedAt;
+
+  if (
+    reviewDecision.status === 'pending' &&
+    decisionType === defaultReviewDecisionTypeForStatus('pending') &&
+    !reviewerId &&
+    !comment &&
+    !normalizeOptionalText(reviewDecision.decidedAt)
+  ) {
     return {
       status: 'pending',
+      decisionType,
     };
   }
 
   return {
     status: reviewDecision.status,
-    decidedAt: reviewDecision.decidedAt?.trim() || recordedAt,
+    decisionType,
+    reviewerId,
+    comment,
+    decidedAt,
   };
 }
 

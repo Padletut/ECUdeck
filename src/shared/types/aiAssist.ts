@@ -14,6 +14,7 @@ export const DEFAULT_AI_ASSIST_MODEL_ID = 'draft-preview';
 
 export type AiAssistPresetId = 'map-region-summary' | 'bosch-pattern-compare' | 'first-pass-review';
 export type AiAssistReviewStatus = ReviewDecisionStatus;
+export type AiAssistReviewDecisionType = 'approve' | 'reject' | 'needs-follow-up' | 'note';
 
 export interface AiAssistPreset {
   id: AiAssistPresetId;
@@ -27,8 +28,15 @@ export interface AiAssistProviderConfig {
   modelId?: string;
 }
 
-export interface AiAssistReviewDecision {
+export interface AiAssistReviewDecisionDetails {
+  decisionType?: AiAssistReviewDecisionType;
+  reviewerId?: string;
+  comment?: string;
+}
+
+export interface AiAssistReviewDecision extends AiAssistReviewDecisionDetails {
   status: AiAssistReviewStatus;
+  decisionType: AiAssistReviewDecisionType;
   decidedAt?: string;
 }
 

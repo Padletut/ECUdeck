@@ -237,6 +237,50 @@ describe('createAiAssistStore', () => {
     });
   });
 
+  it('persists review decision metadata with the proposal review log', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    store.recordNativePreview({
+      ownership,
+      preview,
+    });
+
+    expect(
+      store.updatePreviewReviewStatus({
+        ownership,
+        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+        reviewStatus: 'accepted',
+        reviewDetails: {
+          decisionType: 'approve',
+          reviewerId: 'qa.alice',
+          comment: 'Deterministic follow-up checks passed.',
+        },
+        decidedAt: '2026-05-26T11:15:00.000Z',
+      }),
+    ).toEqual({
+      ownership,
+      lastNativePreview: buildPreview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
+        decisionType: 'approve',
+        reviewerId: 'qa.alice',
+        comment: 'Deterministic follow-up checks passed.',
+      }),
+      previewHistory: [
+        buildPreview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
+          decisionType: 'approve',
+          reviewerId: 'qa.alice',
+          comment: 'Deterministic follow-up checks passed.',
+        }),
+      ],
+      proposalReviews: [
+        buildProposalReview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
+          decisionType: 'approve',
+          reviewerId: 'qa.alice',
+          comment: 'Deterministic follow-up checks passed.',
+        }),
+      ],
+    });
+  });
+
   it('defaults older persisted previews to pending review status', () => {
     const storage = new MemoryStorage();
     const store = createAiAssistStore(storage);
@@ -294,9 +338,21 @@ describe('createAiAssistStore', () => {
     index: number,
     reviewStatus: AiAssistReviewStatus = 'pending',
     decidedAt?: string,
+    overrides?: {
+      decisionType?: 'approve' | 'reject' | 'needs-follow-up' | 'note';
+      reviewerId?: string;
+      comment?: string;
+    },
   ): PersistedAiAssistNativePreview {
     const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
     const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
+    const decisionType =
+      overrides?.decisionType ??
+      (reviewStatus === 'accepted'
+        ? 'approve'
+        : reviewStatus === 'rejected'
+          ? 'reject'
+          : 'needs-follow-up');
 
     return {
       presetId: 'first-pass-review',
@@ -307,9 +363,15 @@ describe('createAiAssistStore', () => {
         reviewStatus === 'pending'
           ? {
               status: 'pending',
+              decisionType,
+              reviewerId: overrides?.reviewerId,
+              comment: overrides?.comment,
             }
           : {
               status: reviewStatus,
+              decisionType,
+              reviewerId: overrides?.reviewerId,
+              comment: overrides?.comment,
               decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
             },
       snapshotResponse: {
@@ -363,9 +425,21 @@ describe('createAiAssistStore', () => {
     index: number,
     reviewStatus: AiAssistReviewStatus = 'pending',
     decidedAt?: string,
+    overrides?: {
+      decisionType?: 'approve' | 'reject' | 'needs-follow-up' | 'note';
+      reviewerId?: string;
+      comment?: string;
+    },
   ): PersistedAiAssistProposalReview {
     const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
     const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
+    const decisionType =
+      overrides?.decisionType ??
+      (reviewStatus === 'accepted'
+        ? 'approve'
+        : reviewStatus === 'rejected'
+          ? 'reject'
+          : 'needs-follow-up');
 
     return {
       proposalId,
@@ -377,9 +451,15 @@ describe('createAiAssistStore', () => {
         reviewStatus === 'pending'
           ? {
               status: 'pending',
+              decisionType,
+              reviewerId: overrides?.reviewerId,
+              comment: overrides?.comment,
             }
           : {
               status: reviewStatus,
+              decisionType,
+              reviewerId: overrides?.reviewerId,
+              comment: overrides?.comment,
               decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
             },
       recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
