@@ -1,5 +1,7 @@
 import type {
+  DiscoverPluginManifestsResponse,
   PluginCommandError,
+  PluginManifestDiscoveryResult,
   PluginValidationReport,
   ValidatePluginManifestResponse,
 } from '../../shared/types/plugins';
@@ -10,11 +12,35 @@ export type TauriInvoke = <Response>(
 ) => Promise<Response>;
 
 export interface PluginService {
+  discoverPluginManifests(directoryPath: string): Promise<PluginManifestDiscoveryResult>;
   validatePluginManifest(manifestPath: string): Promise<PluginValidationReport>;
 }
 
 export function createPluginService(invokeCommand: TauriInvoke): PluginService {
   return {
+    async discoverPluginManifests(directoryPath: string): Promise<PluginManifestDiscoveryResult> {
+      const normalizedPath = directoryPath.trim();
+
+      if (!normalizedPath) {
+        throw invalidDirectoryPathError();
+      }
+
+      try {
+        const response = await invokeCommand<DiscoverPluginManifestsResponse>(
+          'discover_plugin_manifests',
+          {
+            request: {
+              directoryPath: normalizedPath,
+            },
+          },
+        );
+
+        return response.discovery;
+      } catch (error) {
+        throw normalizePluginCommandError(error);
+      }
+    },
+
     async validatePluginManifest(manifestPath: string): Promise<PluginValidationReport> {
       const normalizedPath = manifestPath.trim();
 
@@ -37,6 +63,13 @@ export function createPluginService(invokeCommand: TauriInvoke): PluginService {
         throw normalizePluginCommandError(error);
       }
     },
+  };
+}
+
+function invalidDirectoryPathError(): PluginCommandError {
+  return {
+    code: 'invalid-plugin-directory',
+    message: 'directoryPath must be a non-empty path string.',
   };
 }
 

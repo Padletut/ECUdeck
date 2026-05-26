@@ -7,6 +7,7 @@ mod plugin_contracts;
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
+            commands::plugins::discover_plugin_manifests,
             commands::plugins::validate_plugin_manifest,
         ])
         .run(tauri::generate_context!())

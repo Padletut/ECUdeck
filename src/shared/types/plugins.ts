@@ -51,6 +51,19 @@ export interface PluginValidationReport {
   findings: PluginValidationFinding[];
 }
 
+export interface PluginManifestDiscoveryResult {
+  directoryPath: string;
+  reports: PluginValidationReport[];
+}
+
+export interface DiscoverPluginManifestsRequest {
+  directoryPath: string;
+}
+
+export interface DiscoverPluginManifestsResponse {
+  discovery: PluginManifestDiscoveryResult;
+}
+
 export interface ValidatePluginManifestRequest {
   manifestPath: string;
 }

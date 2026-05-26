@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
+import PluginValidationPanel from '../../plugins/components/PluginValidationPanel';
 import type { LoadedFirmwareData } from '../../../shared/types/ecu';
 
 export default function DashboardPage() {
@@ -288,6 +289,10 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="mb-12">
+        <PluginValidationPanel />
       </section>
     </>
   );

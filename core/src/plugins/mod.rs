@@ -1,6 +1,12 @@
+mod discovery;
 mod manifest;
 mod validation;
 
+pub use discovery::{
+    discover_plugin_manifests,
+    PluginManifestDiscoveryError,
+    PluginManifestDiscoveryResult,
+};
 pub use manifest::{
     PluginApiVersion,
     PluginCapability,

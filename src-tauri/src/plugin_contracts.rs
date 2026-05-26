@@ -1,5 +1,17 @@
-use ecudeck_core::PluginValidationReport;
+use ecudeck_core::{PluginManifestDiscoveryResult, PluginValidationReport};
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoverPluginManifestsRequest {
+    pub directory_path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoverPluginManifestsResponse {
+    pub discovery: PluginManifestDiscoveryResult,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
