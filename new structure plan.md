@@ -11,8 +11,10 @@ ECUDeck should be a modern, modular, and semantic ECU platform built for:
 * firmware analysis
 * map discovery
 * ECU plugin systems
+* user-friendly plugin editing
 * risk analysis
 * AI-assisted remapping
+* AI-assisted ECU plugin authoring
 * deterministic parsing
 * native desktop performance
 
@@ -43,8 +45,13 @@ Responsibilities:
 * hex viewer
 * graph visualization
 * map editing
+* plugin editor
+* workspace/project navigation
+* analysis session management
 * project workflows
 * AI interaction panels
+* chat workflows
+* change review panels
 * diagnostics
 * live dependency visualization
 
@@ -82,6 +89,7 @@ Responsibilities:
 * semantic analysis
 * consistency validation
 * chunk streaming
+* background task orchestration
 * performance-critical systems
 
 ---
@@ -100,6 +108,10 @@ Responsibilities:
 * LLM-assisted reasoning
 * calibration analysis
 * AI-assisted diagnostics
+* AI-assisted plugin generation
+* local model integration via llama-server
+* local model integration via Ollama
+* external model API integration
 
 ---
 
@@ -137,6 +149,15 @@ Responsibilities:
 └────────────┬───────────────┘
              ▼
 ┌────────────────────────────┐
+│ Workspace / Project Layer  │
+│                            │
+│ - Workspaces               │
+│ - Projects                 │
+│ - Session State            │
+│ - Plugin References        │
+└────────────┬───────────────┘
+             ▼
+┌────────────────────────────┐
 │ ECUDeck Core (Rust)        │
 │                            │
 │ - Parser Engine            │
@@ -146,6 +167,7 @@ Responsibilities:
 │ - Semantic Graph           │
 │ - Risk Engine              │
 │ - Plugin Runtime           │
+│ - Job System               │
 └────────────┬───────────────┘
              ▼
 ┌────────────────────────────┐
@@ -155,6 +177,7 @@ Responsibilities:
 │ - GNN                      │
 │ - LLM Assistant            │
 │ - Consistency Analysis     │
+│ - Model Connectors         │
 └────────────────────────────┘
 ```
 
@@ -188,6 +211,61 @@ Patch Export
 
 ---
 
+# Workspace / Project Layer
+
+ECUDeck should evolve around an explicit engineering workspace model, not just a single-file workflow.
+
+```text
+Workspace
+    ->
+Projects
+    ->
+Firmware Files
+    ->
+Analysis Sessions
+    ->
+Plugin References
+```
+
+This model should make it possible to organize multiple firmware targets, retain analysis history, associate plugin knowledge with projects, and manage derived artifacts as part of a longer-running engineering workflow.
+
+ECUDeck should feel more like:
+
+```text
+engineering workspace
+```
+
+than:
+
+```text
+single file tool
+```
+
+---
+
+# Job System / Background Tasks
+
+ECUDeck will likely need a dedicated job system as analysis features become more advanced and more time-consuming.
+
+Core capabilities should include:
+
+* job queue
+* task runtime
+* background analysis
+* cancelable tasks
+* progress reporting
+
+This becomes especially important for:
+
+* AI analysis
+* graph generation
+* firmware indexing
+* large-scale scans
+
+Long-running work should not block the UI, and the user should always be able to see what is running, what completed, what failed, and what can be canceled or retried.
+
+---
+
 # AI-Assisted Calibration Philosophy
 
 ECUDeck should NOT be:
@@ -210,6 +288,7 @@ AI is used for:
 * calibration diagnostics
 * risk awareness
 * semantic explanations
+* plugin authoring assistance
 
 Not as a:
 
@@ -292,8 +371,11 @@ ecudeck/
 │
 ├── frontend/
 │   ├── components/
+│   ├── chat/
 │   ├── features/
 │   ├── pages/
+│   ├── plugin-editor/
+│   ├── workspace/
 │   ├── graph/
 │   ├── hexview/
 │   └── shared/
@@ -302,11 +384,14 @@ ecudeck/
 │   ├── parser/
 │   ├── firmware/
 │   ├── indexing/
+│   ├── projects/
 │   ├── maps/
 │   ├── graph/
+│   ├── jobs/
 │   ├── checksums/
 │   ├── plugins/
 │   ├── risk/
+│   ├── sessions/
 │   ├── export/
 │   └── utils/
 │
@@ -314,6 +399,7 @@ ecudeck/
 │   ├── ml/
 │   ├── gnn/
 │   ├── llm/
+│   ├── providers/
 │   ├── pipelines/
 │   └── datasets/
 │
@@ -366,6 +452,26 @@ Examples
 
 Each ECU plugin should implement clear contracts.
 
+ECUDeck should include a user-friendly plugin editor so users can create, inspect, and refine ECU plugins without needing to work directly in raw source files for every step.
+
+The plugin editor should include an AI/LLM assistance mode that helps the user design, scaffold, explain, and improve ECU plugins while keeping the user in control of the final result.
+
+Plugin contracts should be versioned from the beginning so the ecosystem can evolve without breaking every contributor integration.
+
+Examples:
+
+* Plugin API v1
+* Plugin Schema v2
+* Compatibility layers
+
+The goal is to avoid:
+
+```text
+plugin apocalypse civilization
+```
+
+when contributors, schemas, and runtime behavior evolve over time.
+
 Example:
 
 ```rust
@@ -377,6 +483,42 @@ trait ECUPlugin {
     fn export_patch();
 }
 ```
+
+---
+
+# AI/LLM Interaction Modes
+
+The AI/LLM assistant should support multiple working modes inside the chat and plugin editor:
+
+* Ask
+* Plan
+* Agent
+* Review
+
+These modes should support different levels of autonomy, from answering questions to proposing changes, performing guided actions, and reviewing generated or modified plugin logic.
+
+Model access should support:
+
+* local models via llama-server
+* local models via Ollama
+* external model APIs
+
+The system should treat model access as a pluggable provider layer so local and remote backends can be swapped without changing the user experience.
+
+---
+
+# Review Workflow
+
+The chat should support a review mode where proposed changes can be inspected before they are applied.
+
+The user should be able to:
+
+* accept changes
+* reject changes
+* accept all
+* reject all
+
+Review should be explicit, reversible where possible, and designed to keep the human operator as the final authority over plugin and project modifications.
 
 ---
 
@@ -469,6 +611,18 @@ than:
 
 ```text
 web SaaS dashboard
+```
+
+ECUDeck is fundamentally more of a:
+
+```text
+analysis + remapping + semantic reasoning platform
+```
+
+not a:
+
+```text
+flashing/logging suite
 ```
 
 ---
