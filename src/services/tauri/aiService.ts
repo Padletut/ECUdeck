@@ -1,12 +1,17 @@
+import { invoke } from '@tauri-apps/api/core';
+
 import type { AiAssistDraft } from '../../shared/types/aiAssist';
 import type {
+  AiCommandError,
   AiRequestContextEnvelope,
   CompressionPolicy,
   ContextSourceKind,
   ContextSourceRef,
   PrepareContextSnapshotRequest,
+  PrepareContextSnapshotResponse,
   RawContextAttachment,
   SendAiChatRequest,
+  SendAiChatResponse,
 } from '../../shared/types/aiContext';
 
 export const AI_ASSIST_PREVIEW_PROVIDER_ID = 'preview-provider';
@@ -34,6 +39,11 @@ export interface AiAssistRequestPreview {
   sendAiChatRequest: SendAiChatRequest;
 }
 
+export type TauriInvoke = <Response>(
+  command: string,
+  args?: Record<string, unknown>,
+) => Promise<Response>;
+
 export interface AiService {
   buildContextEnvelope(draft: AiAssistDraft): AiRequestContextEnvelope;
   buildPrepareContextSnapshotRequest(
@@ -41,9 +51,13 @@ export interface AiService {
   ): PrepareContextSnapshotRequest;
   buildSendAiChatRequest(input: BuildSendAiChatRequestInput): SendAiChatRequest;
   buildDraftPreviewRequests(draft: AiAssistDraft): AiAssistRequestPreview;
+  prepareContextSnapshot(
+    request: PrepareContextSnapshotRequest,
+  ): Promise<PrepareContextSnapshotResponse>;
+  sendAiChat(request: SendAiChatRequest): Promise<SendAiChatResponse>;
 }
 
-export function createAiService(): AiService {
+export function createAiService(invokeCommand?: TauriInvoke): AiService {
   return {
     buildContextEnvelope(draft: AiAssistDraft): AiRequestContextEnvelope {
       const firmwareRef = buildFirmwareSourceRef(draft);
@@ -115,10 +129,56 @@ export function createAiService(): AiService {
         }),
       };
     },
+
+    async prepareContextSnapshot(
+      request: PrepareContextSnapshotRequest,
+    ): Promise<PrepareContextSnapshotResponse> {
+      if (request.ownership.workspaceId.trim().length === 0) {
+        throw invalidWorkspaceOwnershipError();
+      }
+
+      if (!invokeCommand) {
+        throw commandUnavailableError('prepare_context_snapshot');
+      }
+
+      try {
+        return await invokeCommand<PrepareContextSnapshotResponse>('prepare_context_snapshot', {
+          request,
+        });
+      } catch (error) {
+        throw normalizeAiCommandError(error);
+      }
+    },
+
+    async sendAiChat(request: SendAiChatRequest): Promise<SendAiChatResponse> {
+      if (request.ownership.workspaceId.trim().length === 0) {
+        throw invalidWorkspaceOwnershipError();
+      }
+
+      if (request.providerId.trim().length === 0) {
+        throw invalidProviderIdError();
+      }
+
+      if (request.prompt.trim().length === 0) {
+        throw invalidPromptError();
+      }
+
+      if (!invokeCommand) {
+        throw commandUnavailableError('send_ai_chat');
+      }
+
+      try {
+        return await invokeCommand<SendAiChatResponse>('send_ai_chat', {
+          request,
+        });
+      } catch (error) {
+        throw normalizeAiCommandError(error);
+      }
+    },
   };
 }
 
-export const aiService = createAiService();
+export const aiService = createAiService(invoke);
 
 function buildContextRefsForKind(
   kind: ContextSourceKind,
@@ -198,4 +258,59 @@ function dedupeSourceRefs(sourceRefs: ContextSourceRef[]): ContextSourceRef[] {
     seen.add(key);
     return true;
   });
+}
+
+function invalidWorkspaceOwnershipError(): AiCommandError {
+  return {
+    code: 'invalid-ai-workspace',
+    message: 'ownership.workspaceId must be a non-empty string.',
+  };
+}
+
+function invalidProviderIdError(): AiCommandError {
+  return {
+    code: 'invalid-ai-provider',
+    message: 'providerId must be a non-empty string.',
+  };
+}
+
+function invalidPromptError(): AiCommandError {
+  return {
+    code: 'invalid-ai-prompt',
+    message: 'prompt must be a non-empty string.',
+  };
+}
+
+function commandUnavailableError(commandName: string): AiCommandError {
+  return {
+    code: 'ai-command-unavailable',
+    message: `${commandName} requires a Tauri invoke bridge.`,
+  };
+}
+
+function normalizeAiCommandError(error: unknown): AiCommandError {
+  if (isAiCommandError(error)) {
+    return error;
+  }
+
+  if (error instanceof Error && error.message.trim()) {
+    return {
+      code: 'ai-command-failed',
+      message: error.message,
+    };
+  }
+
+  return {
+    code: 'ai-command-failed',
+    message: 'AI command failed.',
+  };
+}
+
+function isAiCommandError(error: unknown): error is AiCommandError {
+  if (!error || typeof error !== 'object') {
+    return false;
+  }
+
+  const candidate = error as Record<string, unknown>;
+  return typeof candidate.code === 'string' && typeof candidate.message === 'string';
 }

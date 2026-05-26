@@ -1,11 +1,16 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import type { AiAssistDraft } from '../../shared/types/aiAssist';
+import type {
+  PrepareContextSnapshotResponse,
+  SendAiChatResponse,
+} from '../../shared/types/aiContext';
 import {
   AI_ASSIST_PREVIEW_COMPRESSION_POLICY,
   AI_ASSIST_PREVIEW_MODEL_ID,
   AI_ASSIST_PREVIEW_PROVIDER_ID,
   createAiService,
+  type TauriInvoke,
 } from './aiService';
 
 describe('createAiService', () => {
@@ -109,5 +114,74 @@ describe('createAiService', () => {
         providerId: '   ',
       }),
     ).toThrow('providerId must be a non-empty string.');
+  });
+
+  it('passes the snapshot request to the Tauri bridge', async () => {
+    const response: PrepareContextSnapshotResponse = {
+      snapshot: {
+        snapshotId: 'preview::snapshot::plan::local-workspace::4::1',
+        workspaceId: draft.ownership.workspaceId,
+        projectId: draft.ownership.projectId,
+        sessionId: draft.ownership.sessionId,
+        mode: 'plan',
+        sourceRefs: [],
+        summaryText: 'preview',
+        unresolvedAssumptions: [],
+        safetyWarnings: [],
+        acceptedDecisionRefs: [],
+        rejectedDecisionRefs: [],
+        metadata: {
+          strategy: 'summary',
+          status: 'fresh',
+          lossy: false,
+          createdAt: 'preview-generated',
+        },
+      },
+    };
+    const invokeCommand = jest.fn(async () => response);
+    const service = createAiService(invokeCommand as unknown as TauriInvoke);
+    const request = service.buildDraftPreviewRequests(draft).prepareContextSnapshotRequest;
+
+    await expect(service.prepareContextSnapshot(request)).resolves.toEqual(response);
+    expect(invokeCommand).toHaveBeenCalledWith('prepare_context_snapshot', {
+      request,
+    });
+  });
+
+  it('passes the chat request to the Tauri bridge', async () => {
+    const response: SendAiChatResponse = {
+      responseKind: 'plan',
+      summaryText: 'Preview only',
+    };
+    const invokeCommand = jest.fn(async () => response);
+    const service = createAiService(invokeCommand as unknown as TauriInvoke);
+    const request = service.buildDraftPreviewRequests(draft).sendAiChatRequest;
+
+    await expect(service.sendAiChat(request)).resolves.toEqual(response);
+    expect(invokeCommand).toHaveBeenCalledWith('send_ai_chat', {
+      request,
+    });
+  });
+
+  it('rejects empty workspace ownership before invoking Tauri', async () => {
+    const invokeCommand = jest.fn(async () => undefined);
+    const service = createAiService(invokeCommand as unknown as TauriInvoke);
+
+    await expect(
+      service.prepareContextSnapshot({
+        ownership: {
+          workspaceId: '   ',
+        },
+        mode: 'ask',
+        context: {
+          rawAttachments: [],
+          retrievedContextRefs: [],
+        },
+      }),
+    ).rejects.toEqual({
+      code: 'invalid-ai-workspace',
+      message: 'ownership.workspaceId must be a non-empty string.',
+    });
+    expect(invokeCommand).not.toHaveBeenCalled();
   });
 });

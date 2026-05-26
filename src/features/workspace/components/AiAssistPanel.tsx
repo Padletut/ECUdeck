@@ -1,18 +1,72 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   useWorkspaceAiAssist,
   useWorkspaceScope,
 } from '../../../app/providers/WorkspaceScopeProvider';
-import { aiService } from '../../../services/tauri';
+import { aiService } from '../../../services/tauri/aiService';
+import type {
+  AiCommandError,
+  PrepareContextSnapshotResponse,
+  SendAiChatResponse,
+} from '../../../shared/types/aiContext';
+
+interface NativePreviewState {
+  snapshotResponse: PrepareContextSnapshotResponse;
+  chatResponse: SendAiChatResponse;
+}
 
 export default function AiAssistPanel() {
   const { ownership } = useWorkspaceScope();
   const { presets, selectedPresetId, selectedPreset, draft, selectPreset } = useWorkspaceAiAssist();
+  const [nativePreview, setNativePreview] = useState<NativePreviewState | null>(null);
+  const [previewError, setPreviewError] = useState<string | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const requestPreview = useMemo(
     () => (draft ? aiService.buildDraftPreviewRequests(draft) : null),
     [draft],
   );
+  const hasNativeBridge = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+
+  useEffect(() => {
+    setNativePreview(null);
+    setPreviewError(null);
+    setPreviewLoading(false);
+  }, [
+    selectedPresetId,
+    draft?.ownership.workspaceId,
+    draft?.ownership.projectId,
+    draft?.ownership.sessionId,
+  ]);
+
+  const handleRunNativePreview = async () => {
+    if (!requestPreview) {
+      return;
+    }
+
+    setPreviewLoading(true);
+    setPreviewError(null);
+
+    try {
+      const snapshotResponse = await aiService.prepareContextSnapshot(
+        requestPreview.prepareContextSnapshotRequest,
+      );
+      const chatResponse = await aiService.sendAiChat({
+        ...requestPreview.sendAiChatRequest,
+        contextSnapshotId: snapshotResponse.snapshot.snapshotId,
+      });
+
+      setNativePreview({
+        snapshotResponse,
+        chatResponse,
+      });
+    } catch (error) {
+      setNativePreview(null);
+      setPreviewError(getErrorMessage(error));
+    } finally {
+      setPreviewLoading(false);
+    }
+  };
 
   return (
     <div className="overflow-hidden rounded-lg border border-gridlines-grey bg-steel-grey">
@@ -105,18 +159,59 @@ export default function AiAssistPanel() {
             ) : null}
 
             {requestPreview ? (
-              <div className="mt-5 grid gap-4 xl:grid-cols-2">
-                <RequestPreviewCard
-                  title="Context Snapshot Request"
-                  detail={`${requestPreview.prepareContextSnapshotRequest.context.retrievedContextRefs.length} refs · ${requestPreview.prepareContextSnapshotRequest.context.rawAttachments.length} attachments`}
-                  value={requestPreview.prepareContextSnapshotRequest}
-                />
-                <RequestPreviewCard
-                  title="Chat Request"
-                  detail={`${requestPreview.sendAiChatRequest.providerId} · ${requestPreview.sendAiChatRequest.mode}`}
-                  value={requestPreview.sendAiChatRequest}
-                />
-              </div>
+              <>
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void handleRunNativePreview();
+                    }}
+                    disabled={!hasNativeBridge || previewLoading}
+                    className="rounded-lg border border-electric-blue px-4 py-2 text-sm font-semibold text-electric-blue transition hover:bg-electric-blue/10 disabled:cursor-not-allowed disabled:border-gridlines-grey disabled:text-muted-text"
+                  >
+                    {previewLoading ? 'Running native preview...' : 'Run native preview'}
+                  </button>
+                  <p className="text-sm text-alloy-silver">
+                    {hasNativeBridge
+                      ? 'Uses the Tauri command bridge and normalized preview responses.'
+                      : 'Native preview is available when the dashboard runs inside the Tauri shell.'}
+                  </p>
+                </div>
+
+                {previewError ? (
+                  <div className="mt-4 rounded-lg border border-warning-amber/40 bg-warning-amber/10 px-4 py-3 text-sm text-warning-amber">
+                    {previewError}
+                  </div>
+                ) : null}
+
+                <div className="mt-5 grid gap-4 xl:grid-cols-2">
+                  <RequestPreviewCard
+                    title="Context Snapshot Request"
+                    detail={`${requestPreview.prepareContextSnapshotRequest.context.retrievedContextRefs.length} refs · ${requestPreview.prepareContextSnapshotRequest.context.rawAttachments.length} attachments`}
+                    value={requestPreview.prepareContextSnapshotRequest}
+                  />
+                  <RequestPreviewCard
+                    title="Chat Request"
+                    detail={`${requestPreview.sendAiChatRequest.providerId} · ${requestPreview.sendAiChatRequest.mode}`}
+                    value={requestPreview.sendAiChatRequest}
+                  />
+                </div>
+
+                {nativePreview ? (
+                  <div className="mt-5 grid gap-4 xl:grid-cols-2">
+                    <RequestPreviewCard
+                      title="Context Snapshot Response"
+                      detail={nativePreview.snapshotResponse.snapshot.summaryText}
+                      value={nativePreview.snapshotResponse}
+                    />
+                    <RequestPreviewCard
+                      title="Chat Response"
+                      detail={nativePreview.chatResponse.summaryText}
+                      value={nativePreview.chatResponse}
+                    />
+                  </div>
+                ) : null}
+              </>
             ) : null}
           </div>
         ) : (
@@ -177,4 +272,25 @@ function formatFileSize(sizeInBytes: number): string {
   }
 
   return `${sizeInBytes} B`;
+}
+
+function getErrorMessage(error: unknown): string {
+  if (isAiCommandError(error)) {
+    return error.message;
+  }
+
+  if (error instanceof Error && error.message.trim()) {
+    return error.message;
+  }
+
+  return 'Native preview failed.';
+}
+
+function isAiCommandError(error: unknown): error is AiCommandError {
+  if (!error || typeof error !== 'object') {
+    return false;
+  }
+
+  const candidate = error as Record<string, unknown>;
+  return typeof candidate.code === 'string' && typeof candidate.message === 'string';
 }

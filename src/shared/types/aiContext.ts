@@ -113,9 +113,22 @@ export interface SendAiChatRequest {
   contextSnapshotId?: string;
 }
 
+export type AiResponseKind = 'explanation' | 'plan' | 'proposal';
+
 export interface ProposalContextReference {
   proposalId: string;
   contextSnapshotId?: string;
+}
+
+export interface SendAiChatResponse {
+  responseKind: AiResponseKind;
+  summaryText: string;
+  proposal?: ProposalContextReference;
+}
+
+export interface AiCommandError {
+  code: string;
+  message: string;
 }
 
 export interface ContextSnapshotEvent {

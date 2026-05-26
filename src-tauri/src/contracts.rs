@@ -51,6 +51,14 @@ pub enum ContextEventType {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum AiResponseKind {
+    Explanation,
+    Plan,
+    Proposal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct ContextSourceRef {
     pub source_id: String,
@@ -167,6 +175,14 @@ pub struct SendAiChatRequest {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
+pub struct SendAiChatResponse {
+    pub response_kind: AiResponseKind,
+    pub summary_text: String,
+    pub proposal: Option<ProposalContextReference>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
 pub struct ProposalContextReference {
     pub proposal_id: String,
     pub context_snapshot_id: Option<String>,
@@ -180,4 +196,11 @@ pub struct ContextSnapshotEvent {
     pub ownership: AiRequestOwnership,
     pub occurred_at: String,
     pub error_message: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct AiCommandError {
+    pub code: String,
+    pub message: String,
 }
