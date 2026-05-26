@@ -175,8 +175,42 @@ describe('createAiAssistStore', () => {
     ]);
   });
 
+  it('restores preset and provider config from a historical preview', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    store.selectPreset({
+      ownership,
+      selectedPresetId: 'map-region-summary',
+    });
+    store.updateProviderConfig({
+      ownership,
+      providerConfig: {
+        providerId: 'preview-provider',
+        modelId: 'draft-preview',
+      },
+    });
+    store.recordNativePreview({
+      ownership,
+      preview,
+    });
+
+    expect(
+      store.restorePreviewContext({
+        ownership,
+        preview,
+      }),
+    ).toEqual({
+      ownership,
+      selectedPresetId: 'first-pass-review',
+      providerConfig,
+      lastNativePreview: preview,
+      previewHistory: [preview],
+    });
+  });
+
   function buildPreview(index: number): PersistedAiAssistNativePreview {
     return {
+      presetId: 'first-pass-review',
       draftKey: `first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::${index}`,
       providerConfig,
       recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,

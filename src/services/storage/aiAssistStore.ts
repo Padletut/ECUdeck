@@ -31,11 +31,17 @@ interface UpdateProviderConfigInput {
   providerConfig: AiAssistProviderConfig;
 }
 
+interface RestorePreviewContextInput {
+  ownership: PluginReferenceOwnership;
+  preview: PersistedAiAssistNativePreview;
+}
+
 export interface AiAssistStore {
   loadState(ownership: PluginReferenceOwnership): PersistedAiAssistState;
   selectPreset(input: SelectPresetInput): PersistedAiAssistState;
   recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState;
   updateProviderConfig(input: UpdateProviderConfigInput): PersistedAiAssistState;
+  restorePreviewContext(input: RestorePreviewContextInput): PersistedAiAssistState;
 }
 
 export function createAiAssistStore(storage: StorageLike | null | undefined): AiAssistStore {
@@ -76,6 +82,19 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
         ...currentState,
         ownership: input.ownership,
         providerConfig: normalizeProviderConfig(input.providerConfig),
+      };
+
+      persistState(storage, nextState);
+      return nextState;
+    },
+
+    restorePreviewContext(input: RestorePreviewContextInput): PersistedAiAssistState {
+      const currentState = loadPersistedState(storage, input.ownership);
+      const nextState: PersistedAiAssistState = {
+        ...currentState,
+        ownership: input.ownership,
+        selectedPresetId: input.preview.presetId,
+        providerConfig: normalizeProviderConfig(input.preview.providerConfig),
       };
 
       persistState(storage, nextState);
@@ -172,6 +191,7 @@ function isPersistedAiAssistNativePreview(value: unknown): value is PersistedAiA
 
   const candidate = value as Record<string, unknown>;
   return (
+    (candidate.presetId == null || isPresetId(candidate.presetId)) &&
     typeof candidate.draftKey === 'string' &&
     (candidate.providerConfig == null || isAiAssistProviderConfig(candidate.providerConfig)) &&
     (candidate.recordedAt == null || typeof candidate.recordedAt === 'string') &&
@@ -272,7 +292,16 @@ function normalizePersistedPreview(value: unknown): PersistedAiAssistNativePrevi
     return undefined;
   }
 
-  return normalizeNativePreview(value);
+  const presetId = resolvePreviewPresetId(value);
+
+  if (!presetId) {
+    return undefined;
+  }
+
+  return normalizeNativePreview({
+    ...(value as PersistedAiAssistNativePreview),
+    presetId,
+  });
 }
 
 function normalizePreviewHistory(
@@ -321,6 +350,23 @@ function normalizeProviderConfig(
     providerId,
     modelId,
   };
+}
+
+function resolvePreviewPresetId(value: unknown): AiAssistPresetId | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const candidate = value as Record<string, unknown>;
+
+  if (isPresetId(candidate.presetId)) {
+    return candidate.presetId;
+  }
+
+  const draftKey = typeof candidate.draftKey === 'string' ? candidate.draftKey : '';
+  const [maybePresetId] = draftKey.split('::');
+
+  return isPresetId(maybePresetId) ? maybePresetId : undefined;
 }
 
 function getBrowserStorage(): StorageLike | null {

@@ -24,10 +24,12 @@ export default function AiAssistPanel() {
     previewHistory,
     selectPreset,
     updateProviderConfig,
+    restorePreviewContext,
     recordNativePreview,
   } = useWorkspaceAiAssist();
   const [previewError, setPreviewError] = useState<string | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
+  const [selectedHistorySnapshotId, setSelectedHistorySnapshotId] = useState<string | null>(null);
   const [providerCatalogError, setProviderCatalogError] = useState<string | null>(null);
   const [providerCatalogLoading, setProviderCatalogLoading] = useState(false);
   const [availableProviders, setAvailableProviders] = useState<AiProviderSummary[]>(
@@ -53,6 +55,16 @@ export default function AiAssistPanel() {
     [availableProviders, previewCatalogFallback, providerConfig.providerId],
   );
   const recentPreviewHistory = useMemo(() => previewHistory.slice(0, 5), [previewHistory]);
+  const selectedHistoryPreview = useMemo(
+    () =>
+      selectedHistorySnapshotId
+        ? (previewHistory.find(
+            (entry) => entry.snapshotResponse.snapshot.snapshotId === selectedHistorySnapshotId,
+          ) ?? null)
+        : null,
+    [previewHistory, selectedHistorySnapshotId],
+  );
+  const activePreviewEntry = selectedHistoryPreview ?? nativePreview;
   const previewResetKey = useMemo(() => {
     if (!draft) {
       return 'no-draft';
@@ -81,6 +93,20 @@ export default function AiAssistPanel() {
     setPreviewError(null);
     setPreviewLoading(false);
   }, [previewResetKey]);
+
+  useEffect(() => {
+    if (!selectedHistorySnapshotId) {
+      return;
+    }
+
+    const hasMatchingHistoryEntry = previewHistory.some(
+      (entry) => entry.snapshotResponse.snapshot.snapshotId === selectedHistorySnapshotId,
+    );
+
+    if (!hasMatchingHistoryEntry) {
+      setSelectedHistorySnapshotId(null);
+    }
+  }, [previewHistory, selectedHistorySnapshotId]);
 
   useEffect(() => {
     if (!hasNativeBridge) {
@@ -165,6 +191,7 @@ export default function AiAssistPanel() {
       });
 
       recordNativePreview(snapshotResponse, chatResponse);
+      setSelectedHistorySnapshotId(null);
     } catch (error) {
       setPreviewError(getErrorMessage(error));
     } finally {
@@ -181,6 +208,17 @@ export default function AiAssistPanel() {
 
   const handleModelChange = (modelId: string) => {
     updateProviderConfig(providerConfig.providerId, modelId);
+  };
+
+  const handleSelectHistoryPreview = (snapshotId: string) => {
+    setSelectedHistorySnapshotId((currentSelection) =>
+      currentSelection === snapshotId ? null : snapshotId,
+    );
+  };
+
+  const handleRestoreHistoryContext = (previewEntry: (typeof recentPreviewHistory)[number]) => {
+    restorePreviewContext(previewEntry);
+    setSelectedHistorySnapshotId(previewEntry.snapshotResponse.snapshot.snapshotId);
   };
 
   return (
@@ -413,17 +451,24 @@ export default function AiAssistPanel() {
                   />
                 </div>
 
-                {nativePreview ? (
+                {activePreviewEntry ? (
                   <div className="mt-5 grid gap-4 xl:grid-cols-2">
+                    {selectedHistoryPreview ? (
+                      <div className="xl:col-span-2 rounded-lg border border-warning-amber/40 bg-warning-amber/10 px-4 py-3 text-sm text-warning-amber">
+                        Showing a historical preview entry from{' '}
+                        {formatRecordedAt(selectedHistoryPreview.recordedAt)}. Run a new preview to
+                        return to the current draft response cards.
+                      </div>
+                    ) : null}
                     <RequestPreviewCard
                       title="Context Snapshot Response"
-                      detail={nativePreview.snapshotResponse.snapshot.summaryText}
-                      value={nativePreview.snapshotResponse}
+                      detail={activePreviewEntry.snapshotResponse.snapshot.summaryText}
+                      value={activePreviewEntry.snapshotResponse}
                     />
                     <RequestPreviewCard
                       title="Chat Response"
-                      detail={nativePreview.chatResponse.summaryText}
-                      value={nativePreview.chatResponse}
+                      detail={activePreviewEntry.chatResponse.summaryText}
+                      value={activePreviewEntry.chatResponse}
                     />
                   </div>
                 ) : null}
@@ -448,7 +493,12 @@ export default function AiAssistPanel() {
                       {recentPreviewHistory.map((previewEntry) => (
                         <li
                           key={previewEntry.snapshotResponse.snapshot.snapshotId}
-                          className="rounded-lg border border-gridlines-grey bg-carbon-black/50 p-4"
+                          className={`rounded-lg border bg-carbon-black/50 p-4 ${
+                            selectedHistorySnapshotId ===
+                            previewEntry.snapshotResponse.snapshot.snapshotId
+                              ? 'border-electric-blue'
+                              : 'border-gridlines-grey'
+                          }`}
                         >
                           <div className="flex flex-wrap items-start justify-between gap-3">
                             <div>
@@ -459,12 +509,44 @@ export default function AiAssistPanel() {
                                 )}
                               </p>
                               <p className="mt-1 text-sm text-alloy-silver">
+                                {resolvePresetTitle(previewEntry.presetId, presets)}
+                              </p>
+                              <p className="mt-1 text-sm text-alloy-silver">
                                 {formatRecordedAt(previewEntry.recordedAt)}
                               </p>
                             </div>
                             <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver">
                               {previewEntry.providerConfig.modelId ?? 'provider-default'}
                             </span>
+                          </div>
+
+                          <div className="mt-3 flex flex-wrap gap-3">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleSelectHistoryPreview(
+                                  previewEntry.snapshotResponse.snapshot.snapshotId,
+                                )
+                              }
+                              className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                                selectedHistorySnapshotId ===
+                                previewEntry.snapshotResponse.snapshot.snapshotId
+                                  ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
+                                  : 'border-gridlines-grey text-alloy-silver hover:border-electric-blue hover:text-electric-blue'
+                              }`}
+                            >
+                              {selectedHistorySnapshotId ===
+                              previewEntry.snapshotResponse.snapshot.snapshotId
+                                ? 'Hide Details'
+                                : 'Inspect'}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleRestoreHistoryContext(previewEntry)}
+                              className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
+                            >
+                              Restore Context
+                            </button>
                           </div>
 
                           <p className="mt-3 text-sm leading-6 text-alloy-silver">
@@ -597,6 +679,13 @@ function resolveProviderDisplayName(providerId: string, providers: AiProviderSum
   return (
     providers.find((provider) => provider.providerId === providerId)?.displayName ?? providerId
   );
+}
+
+function resolvePresetTitle(
+  presetId: string,
+  presets: ReadonlyArray<{ id: string; title: string }>,
+): string {
+  return presets.find((preset) => preset.id === presetId)?.title ?? presetId;
 }
 
 function formatRecordedAt(recordedAt: string): string {

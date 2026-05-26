@@ -41,6 +41,7 @@ export interface AiAssistDraft {
 }
 
 export interface PersistedAiAssistNativePreview {
+  presetId: AiAssistPresetId;
   draftKey: string;
   providerConfig: AiAssistProviderConfig;
   recordedAt: string;
