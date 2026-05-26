@@ -75,6 +75,10 @@ Responsibilities:
 
 ## Core Engine
 
+Detailed Rust core architecture is described in:
+
+[`rust-core-architecture.md`](./rust-core-architecture.md)
+
 ```text
 Rust
 ```
@@ -137,6 +141,10 @@ Responsibilities:
 Detailed frontend architecture is described in:
 
 [`frontend-level-architecture.md`](./frontend-level-architecture.md)
+
+Detailed Tauri command bridge architecture is described in:
+
+[`tauri-command-bridge-architecture.md`](./tauri-command-bridge-architecture.md)
 
 ```text
 ┌────────────────────────────┐
@@ -214,6 +222,10 @@ Patch Export
 
 # Workspace / Project Layer
 
+Detailed workspace/project/session architecture is described in:
+
+[`workspace-project-session-architecture.md`](./workspace-project-session-architecture.md)
+
 ECUDeck should evolve around an explicit engineering workspace model, not just a single-file workflow.
 
 ```text
@@ -245,6 +257,10 @@ single file tool
 ---
 
 # Job System / Background Tasks
+
+Detailed job system architecture is described in:
+
+[`job-system-architecture.md`](./job-system-architecture.md)
 
 ECUDeck will likely need a dedicated job system as analysis features become more advanced and more time-consuming.
 
@@ -442,6 +458,10 @@ Examples
 
 # Plugin Architecture
 
+Detailed plugin system architecture is described in:
+
+[`plugin-system-architecture.md`](./plugin-system-architecture.md)
+
 Each ECU plugin should implement clear contracts.
 
 ECUDeck should include a user-friendly plugin editor so users can create, inspect, and refine ECU plugins without needing to work directly in raw source files for every step.
@@ -480,6 +500,10 @@ trait ECUPlugin {
 
 # AI/LLM Interaction Modes
 
+Detailed AI chat/review architecture is described in:
+
+[`ai-chat-review-architecture.md`](./ai-chat-review-architecture.md)
+
 The AI/LLM assistant should support multiple working modes inside the chat and plugin editor:
 
 - Ask
@@ -500,6 +524,10 @@ The system should treat model access as a pluggable provider layer so local and 
 ---
 
 # Review Workflow
+
+Detailed AI chat/review architecture is described in:
+
+[`ai-chat-review-architecture.md`](./ai-chat-review-architecture.md)
 
 The chat should support a review mode where proposed changes can be inspected before they are applied.
 

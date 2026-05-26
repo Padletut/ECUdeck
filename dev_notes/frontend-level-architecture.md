@@ -181,6 +181,8 @@ Responsibilities:
 
 - conversational interaction
 - context selection
+- context snapshot inspection
+- context compression visibility
 - mode switching
 - proposal rendering
 - inline citations/explanations
@@ -200,6 +202,11 @@ The chat layer should be context-aware and able to work against:
 - active map
 - active plugin
 - active analysis session
+- compressed context snapshots when full raw context is too large
+
+When long-running chat or review sessions exceed practical provider limits, the frontend should make context compression visible.
+
+The operator should be able to see whether the active request is using raw attached context or a compressed snapshot, and whether that snapshot is fresh, stale, or lossy.
 
 ---
 
@@ -341,6 +348,22 @@ Session state should be durable enough to restore meaningful operator context.
 
 ---
 
+## AI Chat State
+
+Examples:
+
+- active chat mode
+- selected provider/model
+- active conversation thread
+- pending raw context attachments
+- current context snapshot reference
+- compression freshness/lossiness indicators
+- streaming request lifecycle
+
+AI chat state should keep raw attachments separate from prepared context snapshots so the UI can show what will actually be sent to the provider.
+
+---
+
 ## Job State
 
 Examples:
@@ -422,6 +445,25 @@ without fragmenting the UI into provider-specific screens.
 
 ---
 
+# Context Compression UX
+
+The frontend should treat context compression as an inspectable part of the chat workflow, not as hidden prompt plumbing.
+
+It should be able to display:
+
+- raw context selected by the user
+- retrieved project/session artifacts
+- the active compressed context snapshot prepared for provider submission
+- freshness or invalidation state
+- whether compression was lossy
+- which session, proposal, or review flow the snapshot belongs to
+
+For high-impact requests, especially Agent and Review mode, the operator should be able to refresh or replace stale compressed context before continuing.
+
+This keeps long-running chat sessions usable without silently drifting away from the visible engineering state.
+
+---
+
 # Reviewable AI Workflow
 
 The frontend should treat AI output as proposals, not immediate truth.
@@ -430,6 +472,8 @@ Recommended flow:
 
 ```text
 User Request
+    ->
+Context Snapshot Preparation
     ->
 AI Analysis / Proposal
     ->
@@ -448,6 +492,7 @@ Review objects should support:
 - file-level changes
 - field-level changes
 - plugin contract changes
+- context snapshot references when compression shaped the request
 - batch accept/reject actions
 
 This is especially important in:
