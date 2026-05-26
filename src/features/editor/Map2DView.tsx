@@ -1,4 +1,4 @@
-// app/editor/Map2DView.tsx
+// src/features/editor/Map2DView.tsx
 
 interface ECUMap {
   id: string;

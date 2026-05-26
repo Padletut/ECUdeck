@@ -1,4 +1,4 @@
-// app/editor/MapEditorTabs.tsx
+// src/features/editor/MapEditorTabs.tsx
 import { useState } from 'react';
 import HexViewer from './HexViewer';
 import Map2DView from './Map2DView';
@@ -79,7 +79,11 @@ export default function MapEditorTabs({ mapData, selectedMap }: MapEditorTabsPro
       <div className="mt-4">
         {activeTab === 'HEX' && (
           <HexViewer
-            data={mapData.raw instanceof Uint8Array ? mapData.raw : new Uint8Array(mapData.raw)}
+            data={
+              currentMapData.raw instanceof Uint8Array
+                ? currentMapData.raw
+                : new Uint8Array(currentMapData.raw)
+            }
             onDataChange={handleDataChange}
           />
         )}

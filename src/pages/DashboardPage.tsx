@@ -1,6 +1,5 @@
-'use client';
-import MapEditorTabs from './editor/MapEditorTabs';
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import MapEditorTabs from '../features/editor/MapEditorTabs';
 
 interface ECUMap {
   id: string;
@@ -32,7 +31,7 @@ interface ParsedECUData {
   };
 }
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const [showMapEditor, setShowMapEditor] = useState(false);
   const [mapData, setMapData] = useState<{
     raw: Uint8Array;

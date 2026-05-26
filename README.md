@@ -2,51 +2,51 @@
 
 **Built by Tuners. For Tuners. No BS.**
 
-ECUdeck is a free, open-source tuning platform focused on modern UX, AI-assisted workflows, and full control over ECU remapping. Built by enthusiasts, for enthusiasts — because powerful tools shouldn't cost a fortune.
+ECUdeck is moving to a desktop-first architecture built around Vite, React, Rust, Tauri, and MkDocs. The goal is a faster, more maintainable engineering workspace for firmware analysis, remapping, plugin authoring, and reviewable AI-assisted workflows.
 
 ---
 
-## 🚀 Features
+## Architecture Direction
 
-- 🧠 AI-assisted map editing and guidance
-- 📊 2D & 3D map visualizations
-- 🔁 Version diff and compare tools
-- 🔌 Plugin system for supporting more ECUs
-- 🌐 Community-focused and open to contributions
-- 🧰 Fullstack architecture with scalable API and database backend
+- Desktop UI powered by React + Vite
+- Native shell and future command bridge powered by Tauri + Rust
+- Documentation generated with MkDocs
+- Existing frontend editor components preserved and migrated away from Next.js
+- Legacy Python experiments retained for reference during the Rust migration
 
 ---
 
-## 💡 Philosophy
+## Repository Layout
 
-Freedom to tune.  
-Freedom to learn.  
-Freedom from overpriced, closed tools.
+- `src/`: Vite + React application source
+- `src-tauri/`: Tauri desktop shell scaffold
+- `docs/` + `mkdocs.yml`: project documentation
+- `core/`: planned Rust engine area for parsing, graphing, checksums, and jobs
+- `legacy/python_backend/`: old Python-based experiments kept temporarily during migration
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Frontend:** [Next.js 15.3.3](https://nextjs.org/) (App Router), [Tailwind CSS 4](https://tailwindcss.com/)
-- **Backend:** Next.js API Routes, [Prisma ORM](https://www.prisma.io/) with PostgreSQL
-- **AI & Analysis Layer:** Python microservices (planned)
+- **Frontend:** [React](https://react.dev/), [Vite](https://vite.dev/), [Tailwind CSS 4](https://tailwindcss.com/)
+- **Desktop Shell:** [Tauri](https://tauri.app/) with Rust
+- **Documentation:** [MkDocs](https://www.mkdocs.org/)
+- **Data / Experiments:** Prisma and legacy Python artifacts are being phased out or relocated
 - **Testing:** Jest, Playwright, Testing Library
 - **Tooling:** ESLint, Prettier, Husky, lint-staged
-- **CI/CD:** GitHub Actions (preconfigured)
 
 ---
 
 ## 📂 Project Status
 
-This is an early-stage prototype under active development.  
-Follow the [project roadmap](./docs/roadmap.md) (coming soon) and join the build!
+This is an active migration from a web-only Next.js prototype to a Vite + Tauri desktop workspace. The current focus is stack cleanup, structure cleanup, and preserving the editor foundations while the Rust core grows in behind them.
 
 ---
 
 ## 🤝 Contribute
 
 We welcome tuners, devs, reverse engineers and UI/UX folks!  
-Check out [`CONTRIBUTING.md`](./CONTRIBUTING.md) to get started.
+The architecture notes in [new structure plan.md](./new%20structure%20plan.md) and the docs site are the best place to follow the migration direction.
 
 ---
 

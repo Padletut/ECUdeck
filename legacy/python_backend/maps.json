@@ -14,10 +14,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4c008",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c000",
@@ -29,10 +26,7 @@
         {
           "name": "Map_Bank1_4C03A",
           "address": "0x4c03a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c02c",
@@ -44,10 +38,7 @@
         {
           "name": "Map_Bank1_4C052",
           "address": "0x4c052",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c044",
@@ -59,10 +50,7 @@
         {
           "name": "Map_Bank1_4C074",
           "address": "0x4c074",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c05c",
@@ -74,10 +62,7 @@
         {
           "name": "Idle RPM",
           "address": "0x4c09c",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x4c088",
@@ -89,10 +74,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4c0bc",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4c0ac",
@@ -104,10 +86,7 @@
         {
           "name": "Map_Bank1_4C102",
           "address": "0x4c102",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c0cc",
@@ -119,10 +98,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4c3ce",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4c3be",
@@ -134,10 +110,7 @@
         {
           "name": "Map_Bank1_4C406",
           "address": "0x4c406",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4c3d6",
@@ -149,10 +122,7 @@
         {
           "name": "Map_Bank1_4C4FE",
           "address": "0x4c4fe",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4c4ce",
@@ -164,10 +134,7 @@
         {
           "name": "Map_Bank1_4C5E0",
           "address": "0x4c5e0",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4c5c6",
@@ -179,10 +146,7 @@
         {
           "name": "Driver wish",
           "address": "0x4c636",
-          "length": [
-            12,
-            16
-          ],
+          "length": [12, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x4c5f6",
@@ -194,10 +158,7 @@
         {
           "name": "Expected fuel temperature",
           "address": "0x4c8fe",
-          "length": [
-            16,
-            8
-          ],
+          "length": [16, 8],
           "type": "3D",
           "unit": "\u00b0C",
           "description": "3D map at 0x4c8c6",
@@ -209,10 +170,7 @@
         {
           "name": "Map_Bank1_4CB38",
           "address": "0x4cb38",
-          "length": [
-            8,
-            9
-          ],
+          "length": [8, 9],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4cb0e",
@@ -224,10 +182,7 @@
         {
           "name": "Map_Bank1_4CC1E",
           "address": "0x4cc1e",
-          "length": [
-            9,
-            10
-          ],
+          "length": [9, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4cbf0",
@@ -239,10 +194,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4ccda",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4ccd2",
@@ -254,10 +206,7 @@
         {
           "name": "Map_Bank1_4CCFC",
           "address": "0x4ccfc",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4ccf2",
@@ -269,10 +218,7 @@
         {
           "name": "EGR temperature map",
           "address": "0x4cd2a",
-          "length": [
-            10,
-            6
-          ],
+          "length": [10, 6],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x4cd02",
@@ -284,10 +230,7 @@
         {
           "name": "Torque limiter",
           "address": "0x4cf82",
-          "length": [
-            3,
-            21
-          ],
+          "length": [3, 21],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x4cf4a",
@@ -299,10 +242,7 @@
         {
           "name": "Injector duration selector",
           "address": "0x4d03c",
-          "length": [
-            1,
-            12
-          ],
+          "length": [1, 12],
           "type": "2D",
           "unit": "index",
           "description": "2D map at 0x4d020",
@@ -314,10 +254,7 @@
         {
           "name": "Map_Bank1_4D064",
           "address": "0x4d064",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4d054",
@@ -329,10 +266,7 @@
         {
           "name": "Map_Bank1_4D0C2",
           "address": "0x4d0c2",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4d070",
@@ -344,10 +278,7 @@
         {
           "name": "Map_Bank1_4D0BC",
           "address": "0x4d0bc",
-          "length": [
-            13,
-            3
-          ],
+          "length": [13, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4d094",
@@ -359,10 +290,7 @@
         {
           "name": "Map_Bank1_4D5BE",
           "address": "0x4d5be",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4d5a2",
@@ -374,10 +302,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4d5f8",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4d5f0",
@@ -389,10 +314,7 @@
         {
           "name": "Injection duration",
           "address": "0x4d638",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x4d5fc",
@@ -404,10 +326,7 @@
         {
           "name": "Injection duration",
           "address": "0x4d7b4",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x4d778",
@@ -419,10 +338,7 @@
         {
           "name": "Map_Bank1_4D96A",
           "address": "0x4d96a",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4d95a",
@@ -434,10 +350,7 @@
         {
           "name": "Map_Bank1_4D986",
           "address": "0x4d986",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4d976",
@@ -449,10 +362,7 @@
         {
           "name": "Map_Bank1_4D9A4",
           "address": "0x4d9a4",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4d992",
@@ -464,10 +374,7 @@
         {
           "name": "Map_Bank1_4D9CE",
           "address": "0x4d9ce",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4d9b2",
@@ -479,10 +386,7 @@
         {
           "name": "Map_Bank1_4DAC6",
           "address": "0x4dac6",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4daaa",
@@ -494,10 +398,7 @@
         {
           "name": "Map_Bank1_4DBB6",
           "address": "0x4dbb6",
-          "length": [
-            3,
-            3
-          ],
+          "length": [3, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4dba2",
@@ -509,10 +410,7 @@
         {
           "name": "Map_Bank1_4DC52",
           "address": "0x4dc52",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4dc42",
@@ -524,10 +422,7 @@
         {
           "name": "Map_Bank1_4DC8E",
           "address": "0x4dc8e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4dc5e",
@@ -539,10 +434,7 @@
         {
           "name": "Map_Bank1_4DD78",
           "address": "0x4dd78",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4dd56",
@@ -554,10 +446,7 @@
         {
           "name": "Map_Bank1_4DDEA",
           "address": "0x4ddea",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4ddc8",
@@ -569,10 +458,7 @@
         {
           "name": "Idle RPM",
           "address": "0x4de4e",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x4de3a",
@@ -584,10 +470,7 @@
         {
           "name": "Idle RPM",
           "address": "0x4de72",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x4de5e",
@@ -599,10 +482,7 @@
         {
           "name": "Idle RPM",
           "address": "0x4de96",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x4de82",
@@ -614,10 +494,7 @@
         {
           "name": "Idle RPM",
           "address": "0x4deba",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x4dea6",
@@ -629,10 +506,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4ded6",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4deca",
@@ -644,10 +518,7 @@
         {
           "name": "Map_Bank1_4DEEC",
           "address": "0x4deec",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4dede",
@@ -659,10 +530,7 @@
         {
           "name": "Map_Bank1_4DF04",
           "address": "0x4df04",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4def6",
@@ -674,10 +542,7 @@
         {
           "name": "Map_Bank1_4DF1C",
           "address": "0x4df1c",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4df0e",
@@ -689,10 +554,7 @@
         {
           "name": "Map_Bank1_4DF34",
           "address": "0x4df34",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4df26",
@@ -704,10 +566,7 @@
         {
           "name": "Map_Bank1_4DF5A",
           "address": "0x4df5a",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4df3e",
@@ -719,10 +578,7 @@
         {
           "name": "Map_Bank1_4DFBC",
           "address": "0x4dfbc",
-          "length": [
-            12,
-            8
-          ],
+          "length": [12, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4df8c",
@@ -734,10 +590,7 @@
         {
           "name": "Map_Bank1_4E08C",
           "address": "0x4e08c",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e07c",
@@ -749,10 +602,7 @@
         {
           "name": "Map_Bank1_4E0AA",
           "address": "0x4e0aa",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e098",
@@ -764,10 +614,7 @@
         {
           "name": "Map_Bank1_4E0E8",
           "address": "0x4e0e8",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4e0b8",
@@ -779,10 +626,7 @@
         {
           "name": "Map_Bank1_4E1E0",
           "address": "0x4e1e0",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4e1b0",
@@ -794,10 +638,7 @@
         {
           "name": "Map_Bank1_4E2CE",
           "address": "0x4e2ce",
-          "length": [
-            10,
-            5
-          ],
+          "length": [10, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4e2a8",
@@ -809,10 +650,7 @@
         {
           "name": "Map_Bank1_4E34A",
           "address": "0x4e34a",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e332",
@@ -824,10 +662,7 @@
         {
           "name": "Map_Bank1_4E372",
           "address": "0x4e372",
-          "length": [
-            3,
-            3
-          ],
+          "length": [3, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x4e35e",
@@ -839,10 +674,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e45e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e456",
@@ -854,10 +686,7 @@
         {
           "name": "Map_Bank1_4E472",
           "address": "0x4e472",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e462",
@@ -869,10 +698,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e4d2",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e4ca",
@@ -884,10 +710,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e4de",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e4d6",
@@ -899,10 +722,7 @@
         {
           "name": "Map_Bank1_4E4F2",
           "address": "0x4e4f2",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e4e2",
@@ -914,10 +734,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e506",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e4fe",
@@ -929,10 +746,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e512",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e50a",
@@ -944,10 +758,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e51e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e516",
@@ -959,10 +770,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e52e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e522",
@@ -974,10 +782,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e556",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e54e",
@@ -989,10 +794,7 @@
         {
           "name": "MAP linearization",
           "address": "0x4e562",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x4e55a",
@@ -1004,10 +806,7 @@
         {
           "name": "Map_Bank1_50578",
           "address": "0x50578",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x50560",
@@ -1019,10 +818,7 @@
         {
           "name": "Map_Bank1_5059E",
           "address": "0x5059e",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x50584",
@@ -1034,10 +830,7 @@
         {
           "name": "Map_Bank1_505B2",
           "address": "0x505b2",
-          "length": [
-            1,
-            9
-          ],
+          "length": [1, 9],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5059c",
@@ -1049,10 +842,7 @@
         {
           "name": "Map_Bank1_505CC",
           "address": "0x505cc",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x505b4",
@@ -1064,10 +854,7 @@
         {
           "name": "Map_Bank1_5065E",
           "address": "0x5065e",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x50644",
@@ -1079,10 +866,7 @@
         {
           "name": "Map_Bank1_506C6",
           "address": "0x506c6",
-          "length": [
-            1,
-            9
-          ],
+          "length": [1, 9],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x506b0",
@@ -1094,10 +878,7 @@
         {
           "name": "Map_Bank1_50848",
           "address": "0x50848",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x50830",
@@ -1109,10 +890,7 @@
         {
           "name": "Map_Bank1_51C76",
           "address": "0x51c76",
-          "length": [
-            8,
-            11
-          ],
+          "length": [8, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x51c48",
@@ -1124,10 +902,7 @@
         {
           "name": "Injection duration",
           "address": "0x51faa",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x51f6e",
@@ -1139,10 +914,7 @@
         {
           "name": "Map_Bank1_5211E",
           "address": "0x5211e",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x52110",
@@ -1154,10 +926,7 @@
         {
           "name": "Map_Bank1_5264C",
           "address": "0x5264c",
-          "length": [
-            1,
-            30
-          ],
+          "length": [1, 30],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5260c",
@@ -1169,10 +938,7 @@
         {
           "name": "Map_Bank1_53FA0",
           "address": "0x53fa0",
-          "length": [
-            1,
-            32
-          ],
+          "length": [1, 32],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x53f5c",
@@ -1184,10 +950,7 @@
         {
           "name": "Map_Bank1_542E0",
           "address": "0x542e0",
-          "length": [
-            1,
-            15
-          ],
+          "length": [1, 15],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x542be",
@@ -1199,10 +962,7 @@
         {
           "name": "Map_Bank1_542E2",
           "address": "0x542e2",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x542ca",
@@ -1214,10 +974,7 @@
         {
           "name": "Map_Bank1_5430E",
           "address": "0x5430e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x542f6",
@@ -1229,10 +986,7 @@
         {
           "name": "Map_Bank1_54376",
           "address": "0x54376",
-          "length": [
-            10,
-            8
-          ],
+          "length": [10, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5434a",
@@ -1244,10 +998,7 @@
         {
           "name": "Map_Bank1_5442E",
           "address": "0x5442e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x54416",
@@ -1259,10 +1010,7 @@
         {
           "name": "Map_Bank1_54454",
           "address": "0x54454",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x54442",
@@ -1274,10 +1022,7 @@
         {
           "name": "Map_Bank1_54492",
           "address": "0x54492",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x54462",
@@ -1289,10 +1034,7 @@
         {
           "name": "Driver wish",
           "address": "0x545a0",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x5455a",
@@ -1304,10 +1046,7 @@
         {
           "name": "Driver wish",
           "address": "0x54826",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x547e0",
@@ -1319,10 +1058,7 @@
         {
           "name": "Driver wish",
           "address": "0x54aac",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x54a66",
@@ -1334,10 +1070,7 @@
         {
           "name": "Driver wish",
           "address": "0x54d32",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x54cec",
@@ -1349,10 +1082,7 @@
         {
           "name": "Map_Bank1_54FA2",
           "address": "0x54fa2",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x54f72",
@@ -1364,10 +1094,7 @@
         {
           "name": "MAF linearization",
           "address": "0x550d4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x550ac",
@@ -1379,10 +1106,7 @@
         {
           "name": "Map_Bank1_5517E",
           "address": "0x5517e",
-          "length": [
-            9,
-            8
-          ],
+          "length": [9, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x55154",
@@ -1394,10 +1118,7 @@
         {
           "name": "Map_Bank1_5521E",
           "address": "0x5521e",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5520e",
@@ -1409,10 +1130,7 @@
         {
           "name": "Map_Bank1_5523A",
           "address": "0x5523a",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5522a",
@@ -1424,10 +1142,7 @@
         {
           "name": "Map_Bank1_55314",
           "address": "0x55314",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x552fc",
@@ -1439,10 +1154,7 @@
         {
           "name": "Map_Bank1_55340",
           "address": "0x55340",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55328",
@@ -1454,10 +1166,7 @@
         {
           "name": "MAP linearization",
           "address": "0x55360",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55354",
@@ -1469,10 +1178,7 @@
         {
           "name": "Map_Bank1_553FC",
           "address": "0x553fc",
-          "length": [
-            6,
-            4
-          ],
+          "length": [6, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x553e0",
@@ -1484,10 +1190,7 @@
         {
           "name": "Map_Bank1_5545E",
           "address": "0x5545e",
-          "length": [
-            10,
-            11
-          ],
+          "length": [10, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5542c",
@@ -1499,10 +1202,7 @@
         {
           "name": "MAF linearization",
           "address": "0x55562",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x5553a",
@@ -1514,10 +1214,7 @@
         {
           "name": "Map_Bank1_55624",
           "address": "0x55624",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x555e2",
@@ -1529,10 +1226,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5583a",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5582a",
@@ -1544,10 +1238,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5584e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55842",
@@ -1559,10 +1250,7 @@
         {
           "name": "Map_Bank1_55876",
           "address": "0x55876",
-          "length": [
-            4,
-            8
-          ],
+          "length": [4, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x55856",
@@ -1574,10 +1262,7 @@
         {
           "name": "Idle RPM",
           "address": "0x55912",
-          "length": [
-            2,
-            4
-          ],
+          "length": [2, 4],
           "type": "3D",
           "unit": "rpm",
           "description": "3D map at 0x558fe",
@@ -1589,10 +1274,7 @@
         {
           "name": "Map_Bank1_55940",
           "address": "0x55940",
-          "length": [
-            5,
-            6
-          ],
+          "length": [5, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x55922",
@@ -1604,10 +1286,7 @@
         {
           "name": "MAP linearization",
           "address": "0x559fe",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x559ee",
@@ -1619,10 +1298,7 @@
         {
           "name": "Map_Bank1_55A14",
           "address": "0x55a14",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55a06",
@@ -1634,10 +1310,7 @@
         {
           "name": "MAP linearization",
           "address": "0x55a26",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55a1e",
@@ -1649,10 +1322,7 @@
         {
           "name": "Map_Bank1_55A6C",
           "address": "0x55a6c",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x55a2a",
@@ -1664,10 +1334,7 @@
         {
           "name": "Map_Bank1_55C4E",
           "address": "0x55c4e",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x55c0c",
@@ -1679,10 +1346,7 @@
         {
           "name": "Map_Bank1_55DFC",
           "address": "0x55dfc",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55dee",
@@ -1694,10 +1358,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x55e32",
-          "length": [
-            1,
-            20
-          ],
+          "length": [1, 20],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55e06",
@@ -1709,10 +1370,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x55e86",
-          "length": [
-            1,
-            20
-          ],
+          "length": [1, 20],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55e5a",
@@ -1724,10 +1382,7 @@
         {
           "name": "Map_Bank1_55EC6",
           "address": "0x55ec6",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55eae",
@@ -1739,10 +1394,7 @@
         {
           "name": "Map_Bank1_55F12",
           "address": "0x55f12",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x55f02",
@@ -1754,10 +1406,7 @@
         {
           "name": "Idle RPM",
           "address": "0x55f32",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x55f1e",
@@ -1769,10 +1418,7 @@
         {
           "name": "Idle RPM",
           "address": "0x55f56",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x55f42",
@@ -1784,10 +1430,7 @@
         {
           "name": "Idle RPM",
           "address": "0x55f7a",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x55f66",
@@ -1799,10 +1442,7 @@
         {
           "name": "Idle RPM",
           "address": "0x55f9a",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "rpm",
           "description": "3D map at 0x55f8a",
@@ -1814,10 +1454,7 @@
         {
           "name": "Map_Bank1_56050",
           "address": "0x56050",
-          "length": [
-            1,
-            13
-          ],
+          "length": [1, 13],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56032",
@@ -1829,10 +1466,7 @@
         {
           "name": "Map_Bank1_560CE",
           "address": "0x560ce",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x560b6",
@@ -1844,10 +1478,7 @@
         {
           "name": "Map_Bank1_560FA",
           "address": "0x560fa",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x560e2",
@@ -1859,10 +1490,7 @@
         {
           "name": "Map_Bank1_5613E",
           "address": "0x5613e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5610e",
@@ -1874,10 +1502,7 @@
         {
           "name": "Map_Bank1_562FE",
           "address": "0x562fe",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x562f0",
@@ -1889,10 +1514,7 @@
         {
           "name": "MAP linearization",
           "address": "0x56318",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56308",
@@ -1904,10 +1526,7 @@
         {
           "name": "Map_Bank1_56338",
           "address": "0x56338",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56320",
@@ -1919,10 +1538,7 @@
         {
           "name": "Map_Bank1_56424",
           "address": "0x56424",
-          "length": [
-            10,
-            4
-          ],
+          "length": [10, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56400",
@@ -1934,10 +1550,7 @@
         {
           "name": "MAP linearization",
           "address": "0x56484",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56474",
@@ -1949,10 +1562,7 @@
         {
           "name": "Idle RPM",
           "address": "0x564a0",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x5648c",
@@ -1964,10 +1574,7 @@
         {
           "name": "MAP linearization",
           "address": "0x56550",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56540",
@@ -1979,10 +1586,7 @@
         {
           "name": "Map_Bank1_56630",
           "address": "0x56630",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5660e",
@@ -1994,10 +1598,7 @@
         {
           "name": "MAP linearization",
           "address": "0x566ea",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x566da",
@@ -2009,10 +1610,7 @@
         {
           "name": "Map_Bank1_56716",
           "address": "0x56716",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x566fe",
@@ -2024,10 +1622,7 @@
         {
           "name": "MAP linearization",
           "address": "0x56866",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56856",
@@ -2039,10 +1634,7 @@
         {
           "name": "Map_Bank1_56892",
           "address": "0x56892",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5687a",
@@ -2054,10 +1646,7 @@
         {
           "name": "MAF linearization",
           "address": "0x569fa",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x569d2",
@@ -2069,10 +1658,7 @@
         {
           "name": "MAF linearization",
           "address": "0x56aa2",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x56a7a",
@@ -2084,10 +1670,7 @@
         {
           "name": "Map_Bank1_56B46",
           "address": "0x56b46",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56b22",
@@ -2099,10 +1682,7 @@
         {
           "name": "Map_Bank1_56B76",
           "address": "0x56b76",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56b66",
@@ -2114,10 +1694,7 @@
         {
           "name": "Map_Bank1_56BCE",
           "address": "0x56bce",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56baa",
@@ -2129,10 +1706,7 @@
         {
           "name": "Map_Bank1_56C12",
           "address": "0x56c12",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56bee",
@@ -2144,10 +1718,7 @@
         {
           "name": "Map_Bank1_56C56",
           "address": "0x56c56",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56c32",
@@ -2159,10 +1730,7 @@
         {
           "name": "MAP linearization",
           "address": "0x56c7e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56c76",
@@ -2174,10 +1742,7 @@
         {
           "name": "Injection duration",
           "address": "0x56cbe",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x56c82",
@@ -2189,10 +1754,7 @@
         {
           "name": "Map_Bank1_56E28",
           "address": "0x56e28",
-          "length": [
-            9,
-            8
-          ],
+          "length": [9, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56dfe",
@@ -2204,10 +1766,7 @@
         {
           "name": "Map_Bank1_56EDE",
           "address": "0x56ede",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56ecc",
@@ -2219,10 +1778,7 @@
         {
           "name": "Map_Bank1_56F10",
           "address": "0x56f10",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56eec",
@@ -2234,10 +1790,7 @@
         {
           "name": "Map_Bank1_56F48",
           "address": "0x56f48",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56f30",
@@ -2249,10 +1802,7 @@
         {
           "name": "Map_Bank1_56F74",
           "address": "0x56f74",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x56f5c",
@@ -2264,10 +1814,7 @@
         {
           "name": "Map_Bank1_56FCA",
           "address": "0x56fca",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x56f88",
@@ -2279,10 +1826,7 @@
         {
           "name": "Map_Bank1_5717C",
           "address": "0x5717c",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5716a",
@@ -2294,10 +1838,7 @@
         {
           "name": "Map_Bank1_571A2",
           "address": "0x571a2",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5718a",
@@ -2309,10 +1850,7 @@
         {
           "name": "Map_Bank1_571D0",
           "address": "0x571d0",
-          "length": [
-            6,
-            3
-          ],
+          "length": [6, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x571b6",
@@ -2324,10 +1862,7 @@
         {
           "name": "Map_Bank1_572B4",
           "address": "0x572b4",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x57284",
@@ -2339,10 +1874,7 @@
         {
           "name": "Map_Bank1_57394",
           "address": "0x57394",
-          "length": [
-            4,
-            4
-          ],
+          "length": [4, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5737c",
@@ -2354,10 +1886,7 @@
         {
           "name": "Map_Bank1_57448",
           "address": "0x57448",
-          "length": [
-            7,
-            7
-          ],
+          "length": [7, 7],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x57424",
@@ -2369,10 +1898,7 @@
         {
           "name": "MAF linearization",
           "address": "0x574f4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x574cc",
@@ -2384,10 +1910,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5757c",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57574",
@@ -2399,10 +1922,7 @@
         {
           "name": "Map_Bank1_575AA",
           "address": "0x575aa",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57598",
@@ -2414,10 +1934,7 @@
         {
           "name": "Map_Bank1_575CE",
           "address": "0x575ce",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x575c0",
@@ -2429,10 +1946,7 @@
         {
           "name": "Map_Bank1_575E8",
           "address": "0x575e8",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x575d8",
@@ -2444,10 +1958,7 @@
         {
           "name": "MAF linearization",
           "address": "0x5761c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x575f4",
@@ -2459,10 +1970,7 @@
         {
           "name": "MAF linearization",
           "address": "0x576c4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x5769c",
@@ -2474,10 +1982,7 @@
         {
           "name": "MAF linearization",
           "address": "0x5776c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57744",
@@ -2489,10 +1994,7 @@
         {
           "name": "Map_Bank1_577FA",
           "address": "0x577fa",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x577ec",
@@ -2504,10 +2006,7 @@
         {
           "name": "Map_Bank1_57812",
           "address": "0x57812",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57804",
@@ -2519,10 +2018,7 @@
         {
           "name": "Map_Bank1_5782A",
           "address": "0x5782a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5781c",
@@ -2534,10 +2030,7 @@
         {
           "name": "MAF linearization",
           "address": "0x5785c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57834",
@@ -2549,10 +2042,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57904",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x578dc",
@@ -2564,10 +2054,7 @@
         {
           "name": "MAF linearization",
           "address": "0x579ac",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57984",
@@ -2579,10 +2066,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57a54",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57a2c",
@@ -2594,10 +2078,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57afc",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57ad4",
@@ -2609,10 +2090,7 @@
         {
           "name": "Map_Bank1_57C04",
           "address": "0x57c04",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x57be8",
@@ -2624,10 +2102,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57c5e",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57c36",
@@ -2639,10 +2114,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57d06",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57cde",
@@ -2654,10 +2126,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57dae",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57d86",
@@ -2669,10 +2138,7 @@
         {
           "name": "Idle RPM",
           "address": "0x57e42",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x57e2e",
@@ -2684,10 +2150,7 @@
         {
           "name": "Idle RPM",
           "address": "0x57e66",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x57e52",
@@ -2699,10 +2162,7 @@
         {
           "name": "Map_Bank1_57E86",
           "address": "0x57e86",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57e76",
@@ -2714,10 +2174,7 @@
         {
           "name": "MAP linearization",
           "address": "0x57e9a",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57e92",
@@ -2729,10 +2186,7 @@
         {
           "name": "Map_Bank1_57EAE",
           "address": "0x57eae",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x57e9e",
@@ -2744,10 +2198,7 @@
         {
           "name": "Map_Bank1_57EDA",
           "address": "0x57eda",
-          "length": [
-            6,
-            6
-          ],
+          "length": [6, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x57eba",
@@ -2759,10 +2210,7 @@
         {
           "name": "MAF linearization",
           "address": "0x57f4a",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x57f22",
@@ -2774,10 +2222,7 @@
         {
           "name": "Idle RPM",
           "address": "0x57fde",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x57fca",
@@ -2789,10 +2234,7 @@
         {
           "name": "Idle RPM",
           "address": "0x57ffa",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x57fee",
@@ -2804,10 +2246,7 @@
         {
           "name": "Map_Bank1_5800C",
           "address": "0x5800c",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x58002",
@@ -2819,10 +2258,7 @@
         {
           "name": "Idle RPM",
           "address": "0x5801e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x58012",
@@ -2834,10 +2270,7 @@
         {
           "name": "Map_Bank1_5803C",
           "address": "0x5803c",
-          "length": [
-            2,
-            5
-          ],
+          "length": [2, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x58026",
@@ -2849,10 +2282,7 @@
         {
           "name": "Map_Bank1_5809C",
           "address": "0x5809c",
-          "length": [
-            6,
-            6
-          ],
+          "length": [6, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5807c",
@@ -2864,10 +2294,7 @@
         {
           "name": "Idle RPM",
           "address": "0x580f0",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x580e4",
@@ -2879,10 +2306,7 @@
         {
           "name": "Idle RPM",
           "address": "0x58104",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x580f8",
@@ -2894,10 +2318,7 @@
         {
           "name": "Map_Bank1_58116",
           "address": "0x58116",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5810c",
@@ -2909,10 +2330,7 @@
         {
           "name": "Map_Bank1_58134",
           "address": "0x58134",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5811c",
@@ -2924,10 +2342,7 @@
         {
           "name": "Map_Bank1_58180",
           "address": "0x58180",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x58170",
@@ -2939,10 +2354,7 @@
         {
           "name": "Map_Bank1_581D4",
           "address": "0x581d4",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x581c4",
@@ -2954,10 +2366,7 @@
         {
           "name": "Map_Bank1_58230",
           "address": "0x58230",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x58218",
@@ -2969,10 +2378,7 @@
         {
           "name": "Map_Bank1_5826C",
           "address": "0x5826c",
-          "length": [
-            11,
-            5
-          ],
+          "length": [11, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x58244",
@@ -2984,10 +2390,7 @@
         {
           "name": "MAF linearization",
           "address": "0x58302",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x582da",
@@ -2999,10 +2402,7 @@
         {
           "name": "Map_Bank1_583A2",
           "address": "0x583a2",
-          "length": [
-            5,
-            7
-          ],
+          "length": [5, 7],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x58382",
@@ -3014,10 +2414,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x58444",
-          "length": [
-            5,
-            4
-          ],
+          "length": [5, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5842a",
@@ -3029,10 +2426,7 @@
         {
           "name": "Map_Bank1_5847A",
           "address": "0x5847a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5846c",
@@ -3044,10 +2438,7 @@
         {
           "name": "Map_Bank1_5849C",
           "address": "0x5849c",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x58484",
@@ -3059,10 +2450,7 @@
         {
           "name": "Map_Bank1_584C8",
           "address": "0x584c8",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x584b0",
@@ -3074,10 +2462,7 @@
         {
           "name": "Map_Bank1_58560",
           "address": "0x58560",
-          "length": [
-            16,
-            14
-          ],
+          "length": [16, 14],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x58504",
@@ -3089,10 +2474,7 @@
         {
           "name": "Map_Bank1_58570",
           "address": "0x58570",
-          "length": [
-            14,
-            10
-          ],
+          "length": [14, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x58528",
@@ -3104,10 +2486,7 @@
         {
           "name": "Map_Bank1_58E3E",
           "address": "0x58e3e",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x58e30",
@@ -3119,10 +2498,7 @@
         {
           "name": "Map_Bank1_59FE0",
           "address": "0x59fe0",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x59fc8",
@@ -3134,10 +2510,7 @@
         {
           "name": "Map_Bank1_5AA84",
           "address": "0x5aa84",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5aa74",
@@ -3149,10 +2522,7 @@
         {
           "name": "Idle RPM",
           "address": "0x5b19c",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x5b190",
@@ -3164,10 +2534,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5b390",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b384",
@@ -3179,10 +2546,7 @@
         {
           "name": "Map_Bank1_5B3D2",
           "address": "0x5b3d2",
-          "length": [
-            14,
-            11
-          ],
+          "length": [14, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5b398",
@@ -3194,10 +2558,7 @@
         {
           "name": "MAF linearization",
           "address": "0x5b52e",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x5b506",
@@ -3209,10 +2570,7 @@
         {
           "name": "MAF linearization",
           "address": "0x5b5d6",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x5b5ae",
@@ -3224,10 +2582,7 @@
         {
           "name": "Map_Bank1_5B66E",
           "address": "0x5b66e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b656",
@@ -3239,10 +2594,7 @@
         {
           "name": "Map_Bank1_5B69A",
           "address": "0x5b69a",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b682",
@@ -3254,10 +2606,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5b6b6",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b6ae",
@@ -3269,10 +2618,7 @@
         {
           "name": "MAP linearization",
           "address": "0x5b6c2",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b6ba",
@@ -3284,10 +2630,7 @@
         {
           "name": "Map_Bank1_5B730",
           "address": "0x5b730",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b722",
@@ -3299,10 +2642,7 @@
         {
           "name": "Map_Bank1_5B748",
           "address": "0x5b748",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b73a",
@@ -3314,10 +2654,7 @@
         {
           "name": "Map_Bank1_5B77A",
           "address": "0x5b77a",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b752",
@@ -3329,10 +2666,7 @@
         {
           "name": "Map_Bank1_5B7E2",
           "address": "0x5b7e2",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b7ba",
@@ -3344,10 +2678,7 @@
         {
           "name": "Map_Bank1_5B84A",
           "address": "0x5b84a",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b822",
@@ -3359,10 +2690,7 @@
         {
           "name": "Map_Bank1_5B8B2",
           "address": "0x5b8b2",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b88a",
@@ -3374,10 +2702,7 @@
         {
           "name": "Map_Bank1_5B90C",
           "address": "0x5b90c",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b8d6",
@@ -3389,10 +2714,7 @@
         {
           "name": "Map_Bank1_5B956",
           "address": "0x5b956",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b93e",
@@ -3404,10 +2726,7 @@
         {
           "name": "Map_Bank1_5B9A0",
           "address": "0x5b9a0",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b96a",
@@ -3419,10 +2738,7 @@
         {
           "name": "Map_Bank1_5B9E2",
           "address": "0x5b9e2",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b9d2",
@@ -3434,10 +2750,7 @@
         {
           "name": "Map_Bank1_5BA24",
           "address": "0x5ba24",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x5b9ee",
@@ -3449,10 +2762,7 @@
         {
           "name": "Map_Bank1_5BA86",
           "address": "0x5ba86",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5ba56",
@@ -3464,10 +2774,7 @@
         {
           "name": "Map_Bank1_5BB7E",
           "address": "0x5bb7e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x5bb4e",
@@ -3489,10 +2796,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6c008",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c000",
@@ -3504,10 +2808,7 @@
         {
           "name": "Map_Bank2_6C03A",
           "address": "0x6c03a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c02c",
@@ -3519,10 +2820,7 @@
         {
           "name": "Map_Bank2_6C052",
           "address": "0x6c052",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c044",
@@ -3534,10 +2832,7 @@
         {
           "name": "Map_Bank2_6C074",
           "address": "0x6c074",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c05c",
@@ -3549,10 +2844,7 @@
         {
           "name": "Idle RPM",
           "address": "0x6c09c",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x6c088",
@@ -3564,10 +2856,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6c0bc",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6c0ac",
@@ -3579,10 +2868,7 @@
         {
           "name": "Map_Bank2_6C102",
           "address": "0x6c102",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c0cc",
@@ -3594,10 +2880,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6c3ce",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6c3be",
@@ -3609,10 +2892,7 @@
         {
           "name": "Map_Bank2_6C406",
           "address": "0x6c406",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6c3d6",
@@ -3624,10 +2904,7 @@
         {
           "name": "Map_Bank2_6C4FE",
           "address": "0x6c4fe",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6c4ce",
@@ -3639,10 +2916,7 @@
         {
           "name": "Map_Bank2_6C5E0",
           "address": "0x6c5e0",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6c5c6",
@@ -3654,10 +2928,7 @@
         {
           "name": "Driver wish",
           "address": "0x6c636",
-          "length": [
-            12,
-            16
-          ],
+          "length": [12, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x6c5f6",
@@ -3669,10 +2940,7 @@
         {
           "name": "Expected fuel temperature",
           "address": "0x6c8fe",
-          "length": [
-            16,
-            8
-          ],
+          "length": [16, 8],
           "type": "3D",
           "unit": "\u00b0C",
           "description": "3D map at 0x6c8c6",
@@ -3684,10 +2952,7 @@
         {
           "name": "Map_Bank2_6CB38",
           "address": "0x6cb38",
-          "length": [
-            8,
-            9
-          ],
+          "length": [8, 9],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6cb0e",
@@ -3699,10 +2964,7 @@
         {
           "name": "Map_Bank2_6CC1E",
           "address": "0x6cc1e",
-          "length": [
-            9,
-            10
-          ],
+          "length": [9, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6cbf0",
@@ -3714,10 +2976,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6ccda",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6ccd2",
@@ -3729,10 +2988,7 @@
         {
           "name": "Map_Bank2_6CCFC",
           "address": "0x6ccfc",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6ccf2",
@@ -3744,10 +3000,7 @@
         {
           "name": "EGR temperature map",
           "address": "0x6cd2a",
-          "length": [
-            10,
-            6
-          ],
+          "length": [10, 6],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x6cd02",
@@ -3759,10 +3012,7 @@
         {
           "name": "Torque limiter",
           "address": "0x6cf82",
-          "length": [
-            3,
-            21
-          ],
+          "length": [3, 21],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x6cf4a",
@@ -3774,10 +3024,7 @@
         {
           "name": "Injector duration selector",
           "address": "0x6d03c",
-          "length": [
-            1,
-            12
-          ],
+          "length": [1, 12],
           "type": "2D",
           "unit": "index",
           "description": "2D map at 0x6d020",
@@ -3789,10 +3036,7 @@
         {
           "name": "Map_Bank2_6D064",
           "address": "0x6d064",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6d054",
@@ -3804,10 +3048,7 @@
         {
           "name": "Map_Bank2_6D0C2",
           "address": "0x6d0c2",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6d070",
@@ -3819,10 +3060,7 @@
         {
           "name": "Map_Bank2_6D0BC",
           "address": "0x6d0bc",
-          "length": [
-            13,
-            3
-          ],
+          "length": [13, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6d094",
@@ -3834,10 +3072,7 @@
         {
           "name": "Map_Bank2_6D5BE",
           "address": "0x6d5be",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6d5a2",
@@ -3849,10 +3084,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6d5f8",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6d5f0",
@@ -3864,10 +3096,7 @@
         {
           "name": "Injection duration",
           "address": "0x6d638",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x6d5fc",
@@ -3879,10 +3108,7 @@
         {
           "name": "Injection duration",
           "address": "0x6d7b4",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x6d778",
@@ -3894,10 +3120,7 @@
         {
           "name": "Map_Bank2_6D96A",
           "address": "0x6d96a",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6d95a",
@@ -3909,10 +3132,7 @@
         {
           "name": "Map_Bank2_6D986",
           "address": "0x6d986",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6d976",
@@ -3924,10 +3144,7 @@
         {
           "name": "Map_Bank2_6D9A4",
           "address": "0x6d9a4",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6d992",
@@ -3939,10 +3156,7 @@
         {
           "name": "Map_Bank2_6D9CE",
           "address": "0x6d9ce",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6d9b2",
@@ -3954,10 +3168,7 @@
         {
           "name": "Map_Bank2_6DAC6",
           "address": "0x6dac6",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6daaa",
@@ -3969,10 +3180,7 @@
         {
           "name": "Map_Bank2_6DBB6",
           "address": "0x6dbb6",
-          "length": [
-            3,
-            3
-          ],
+          "length": [3, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6dba2",
@@ -3984,10 +3192,7 @@
         {
           "name": "Map_Bank2_6DC52",
           "address": "0x6dc52",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6dc42",
@@ -3999,10 +3204,7 @@
         {
           "name": "Map_Bank2_6DC8E",
           "address": "0x6dc8e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6dc5e",
@@ -4014,10 +3216,7 @@
         {
           "name": "Map_Bank2_6DD78",
           "address": "0x6dd78",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6dd56",
@@ -4029,10 +3228,7 @@
         {
           "name": "Map_Bank2_6DDEA",
           "address": "0x6ddea",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6ddc8",
@@ -4044,10 +3240,7 @@
         {
           "name": "Idle RPM",
           "address": "0x6de4e",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x6de3a",
@@ -4059,10 +3252,7 @@
         {
           "name": "Idle RPM",
           "address": "0x6de72",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x6de5e",
@@ -4074,10 +3264,7 @@
         {
           "name": "Idle RPM",
           "address": "0x6de96",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x6de82",
@@ -4089,10 +3276,7 @@
         {
           "name": "Idle RPM",
           "address": "0x6deba",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x6dea6",
@@ -4104,10 +3288,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6ded6",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6deca",
@@ -4119,10 +3300,7 @@
         {
           "name": "Map_Bank2_6DEEC",
           "address": "0x6deec",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6dede",
@@ -4134,10 +3312,7 @@
         {
           "name": "Map_Bank2_6DF04",
           "address": "0x6df04",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6def6",
@@ -4149,10 +3324,7 @@
         {
           "name": "Map_Bank2_6DF1C",
           "address": "0x6df1c",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6df0e",
@@ -4164,10 +3336,7 @@
         {
           "name": "Map_Bank2_6DF34",
           "address": "0x6df34",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6df26",
@@ -4179,10 +3348,7 @@
         {
           "name": "Map_Bank2_6DF5A",
           "address": "0x6df5a",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6df3e",
@@ -4194,10 +3360,7 @@
         {
           "name": "Map_Bank2_6DFBC",
           "address": "0x6dfbc",
-          "length": [
-            12,
-            8
-          ],
+          "length": [12, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6df8c",
@@ -4209,10 +3372,7 @@
         {
           "name": "Map_Bank2_6E08C",
           "address": "0x6e08c",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e07c",
@@ -4224,10 +3384,7 @@
         {
           "name": "Map_Bank2_6E0AA",
           "address": "0x6e0aa",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e098",
@@ -4239,10 +3396,7 @@
         {
           "name": "Map_Bank2_6E0E8",
           "address": "0x6e0e8",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6e0b8",
@@ -4254,10 +3408,7 @@
         {
           "name": "Map_Bank2_6E1E0",
           "address": "0x6e1e0",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6e1b0",
@@ -4269,10 +3420,7 @@
         {
           "name": "Map_Bank2_6E2CE",
           "address": "0x6e2ce",
-          "length": [
-            10,
-            5
-          ],
+          "length": [10, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6e2a8",
@@ -4284,10 +3432,7 @@
         {
           "name": "Map_Bank2_6E34A",
           "address": "0x6e34a",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e332",
@@ -4299,10 +3444,7 @@
         {
           "name": "Map_Bank2_6E372",
           "address": "0x6e372",
-          "length": [
-            3,
-            3
-          ],
+          "length": [3, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x6e35e",
@@ -4314,10 +3456,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e45e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e456",
@@ -4329,10 +3468,7 @@
         {
           "name": "Map_Bank2_6E472",
           "address": "0x6e472",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e462",
@@ -4344,10 +3480,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e4d2",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e4ca",
@@ -4359,10 +3492,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e4de",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e4d6",
@@ -4374,10 +3504,7 @@
         {
           "name": "Map_Bank2_6E4F2",
           "address": "0x6e4f2",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e4e2",
@@ -4389,10 +3516,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e506",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e4fe",
@@ -4404,10 +3528,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e512",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e50a",
@@ -4419,10 +3540,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e51e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e516",
@@ -4434,10 +3552,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e52e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e522",
@@ -4449,10 +3564,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e556",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e54e",
@@ -4464,10 +3576,7 @@
         {
           "name": "MAP linearization",
           "address": "0x6e562",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x6e55a",
@@ -4479,10 +3588,7 @@
         {
           "name": "Map_Bank2_70578",
           "address": "0x70578",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x70560",
@@ -4494,10 +3600,7 @@
         {
           "name": "Map_Bank2_7059E",
           "address": "0x7059e",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x70584",
@@ -4509,10 +3612,7 @@
         {
           "name": "Map_Bank2_705B2",
           "address": "0x705b2",
-          "length": [
-            1,
-            9
-          ],
+          "length": [1, 9],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7059c",
@@ -4524,10 +3624,7 @@
         {
           "name": "Map_Bank2_705CC",
           "address": "0x705cc",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x705b4",
@@ -4539,10 +3636,7 @@
         {
           "name": "Map_Bank2_7065E",
           "address": "0x7065e",
-          "length": [
-            1,
-            11
-          ],
+          "length": [1, 11],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x70644",
@@ -4554,10 +3648,7 @@
         {
           "name": "Map_Bank2_706C6",
           "address": "0x706c6",
-          "length": [
-            1,
-            9
-          ],
+          "length": [1, 9],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x706b0",
@@ -4569,10 +3660,7 @@
         {
           "name": "Map_Bank2_70848",
           "address": "0x70848",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x70830",
@@ -4584,10 +3672,7 @@
         {
           "name": "Map_Bank2_71C76",
           "address": "0x71c76",
-          "length": [
-            8,
-            11
-          ],
+          "length": [8, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x71c48",
@@ -4599,10 +3684,7 @@
         {
           "name": "Injection duration",
           "address": "0x71faa",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x71f6e",
@@ -4614,10 +3696,7 @@
         {
           "name": "Map_Bank2_7211E",
           "address": "0x7211e",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x72110",
@@ -4629,10 +3708,7 @@
         {
           "name": "Map_Bank2_7264C",
           "address": "0x7264c",
-          "length": [
-            1,
-            30
-          ],
+          "length": [1, 30],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7260c",
@@ -4644,10 +3720,7 @@
         {
           "name": "Map_Bank2_73FA0",
           "address": "0x73fa0",
-          "length": [
-            1,
-            32
-          ],
+          "length": [1, 32],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x73f5c",
@@ -4659,10 +3732,7 @@
         {
           "name": "Map_Bank2_742E0",
           "address": "0x742e0",
-          "length": [
-            1,
-            15
-          ],
+          "length": [1, 15],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x742be",
@@ -4674,10 +3744,7 @@
         {
           "name": "Map_Bank2_742E2",
           "address": "0x742e2",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x742ca",
@@ -4689,10 +3756,7 @@
         {
           "name": "Map_Bank2_7430E",
           "address": "0x7430e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x742f6",
@@ -4704,10 +3768,7 @@
         {
           "name": "Map_Bank2_74376",
           "address": "0x74376",
-          "length": [
-            10,
-            8
-          ],
+          "length": [10, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7434a",
@@ -4719,10 +3780,7 @@
         {
           "name": "Map_Bank2_7442E",
           "address": "0x7442e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x74416",
@@ -4734,10 +3792,7 @@
         {
           "name": "Map_Bank2_74454",
           "address": "0x74454",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x74442",
@@ -4749,10 +3804,7 @@
         {
           "name": "Map_Bank2_74492",
           "address": "0x74492",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x74462",
@@ -4764,10 +3816,7 @@
         {
           "name": "Driver wish",
           "address": "0x745a0",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x7455a",
@@ -4779,10 +3828,7 @@
         {
           "name": "Driver wish",
           "address": "0x74826",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x747e0",
@@ -4794,10 +3840,7 @@
         {
           "name": "Driver wish",
           "address": "0x74aac",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x74a66",
@@ -4809,10 +3852,7 @@
         {
           "name": "Driver wish",
           "address": "0x74d32",
-          "length": [
-            15,
-            16
-          ],
+          "length": [15, 16],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x74cec",
@@ -4824,10 +3864,7 @@
         {
           "name": "Map_Bank2_74FA2",
           "address": "0x74fa2",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x74f72",
@@ -4839,10 +3876,7 @@
         {
           "name": "MAF linearization",
           "address": "0x750d4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x750ac",
@@ -4854,10 +3888,7 @@
         {
           "name": "Map_Bank2_7517E",
           "address": "0x7517e",
-          "length": [
-            9,
-            8
-          ],
+          "length": [9, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x75154",
@@ -4869,10 +3900,7 @@
         {
           "name": "Map_Bank2_7521E",
           "address": "0x7521e",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7520e",
@@ -4884,10 +3912,7 @@
         {
           "name": "Map_Bank2_7523A",
           "address": "0x7523a",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7522a",
@@ -4899,10 +3924,7 @@
         {
           "name": "Map_Bank2_75314",
           "address": "0x75314",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x752fc",
@@ -4914,10 +3936,7 @@
         {
           "name": "Map_Bank2_75340",
           "address": "0x75340",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75328",
@@ -4929,10 +3948,7 @@
         {
           "name": "MAP linearization",
           "address": "0x75360",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75354",
@@ -4944,10 +3960,7 @@
         {
           "name": "Map_Bank2_753FC",
           "address": "0x753fc",
-          "length": [
-            6,
-            4
-          ],
+          "length": [6, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x753e0",
@@ -4959,10 +3972,7 @@
         {
           "name": "Map_Bank2_7545E",
           "address": "0x7545e",
-          "length": [
-            10,
-            11
-          ],
+          "length": [10, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7542c",
@@ -4974,10 +3984,7 @@
         {
           "name": "MAF linearization",
           "address": "0x75562",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x7553a",
@@ -4989,10 +3996,7 @@
         {
           "name": "Map_Bank2_75624",
           "address": "0x75624",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x755e2",
@@ -5004,10 +4008,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7583a",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7582a",
@@ -5019,10 +4020,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7584e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75842",
@@ -5034,10 +4032,7 @@
         {
           "name": "Map_Bank2_75876",
           "address": "0x75876",
-          "length": [
-            4,
-            8
-          ],
+          "length": [4, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x75856",
@@ -5049,10 +4044,7 @@
         {
           "name": "Idle RPM",
           "address": "0x75912",
-          "length": [
-            2,
-            4
-          ],
+          "length": [2, 4],
           "type": "3D",
           "unit": "rpm",
           "description": "3D map at 0x758fe",
@@ -5064,10 +4056,7 @@
         {
           "name": "Map_Bank2_75940",
           "address": "0x75940",
-          "length": [
-            5,
-            6
-          ],
+          "length": [5, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x75922",
@@ -5079,10 +4068,7 @@
         {
           "name": "MAP linearization",
           "address": "0x759fe",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x759ee",
@@ -5094,10 +4080,7 @@
         {
           "name": "Map_Bank2_75A14",
           "address": "0x75a14",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75a06",
@@ -5109,10 +4092,7 @@
         {
           "name": "MAP linearization",
           "address": "0x75a26",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75a1e",
@@ -5124,10 +4104,7 @@
         {
           "name": "Map_Bank2_75A6C",
           "address": "0x75a6c",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x75a2a",
@@ -5139,10 +4116,7 @@
         {
           "name": "Map_Bank2_75C4E",
           "address": "0x75c4e",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x75c0c",
@@ -5154,10 +4128,7 @@
         {
           "name": "Map_Bank2_75DFC",
           "address": "0x75dfc",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75dee",
@@ -5169,10 +4140,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x75e32",
-          "length": [
-            1,
-            20
-          ],
+          "length": [1, 20],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75e06",
@@ -5184,10 +4152,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x75e86",
-          "length": [
-            1,
-            20
-          ],
+          "length": [1, 20],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75e5a",
@@ -5199,10 +4164,7 @@
         {
           "name": "Map_Bank2_75EC6",
           "address": "0x75ec6",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75eae",
@@ -5214,10 +4176,7 @@
         {
           "name": "Map_Bank2_75F12",
           "address": "0x75f12",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x75f02",
@@ -5229,10 +4188,7 @@
         {
           "name": "Idle RPM",
           "address": "0x75f32",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x75f1e",
@@ -5244,10 +4200,7 @@
         {
           "name": "Idle RPM",
           "address": "0x75f56",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x75f42",
@@ -5259,10 +4212,7 @@
         {
           "name": "Idle RPM",
           "address": "0x75f7a",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x75f66",
@@ -5274,10 +4224,7 @@
         {
           "name": "Idle RPM",
           "address": "0x75f9a",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "rpm",
           "description": "3D map at 0x75f8a",
@@ -5289,10 +4236,7 @@
         {
           "name": "Map_Bank2_76050",
           "address": "0x76050",
-          "length": [
-            1,
-            13
-          ],
+          "length": [1, 13],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76032",
@@ -5304,10 +4248,7 @@
         {
           "name": "Map_Bank2_760CE",
           "address": "0x760ce",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x760b6",
@@ -5319,10 +4260,7 @@
         {
           "name": "Map_Bank2_760FA",
           "address": "0x760fa",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x760e2",
@@ -5334,10 +4272,7 @@
         {
           "name": "Map_Bank2_7613E",
           "address": "0x7613e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7610e",
@@ -5349,10 +4284,7 @@
         {
           "name": "Map_Bank2_762FE",
           "address": "0x762fe",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x762f0",
@@ -5364,10 +4296,7 @@
         {
           "name": "MAP linearization",
           "address": "0x76318",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76308",
@@ -5379,10 +4308,7 @@
         {
           "name": "Map_Bank2_76338",
           "address": "0x76338",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76320",
@@ -5394,10 +4320,7 @@
         {
           "name": "Map_Bank2_76424",
           "address": "0x76424",
-          "length": [
-            10,
-            4
-          ],
+          "length": [10, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76400",
@@ -5409,10 +4332,7 @@
         {
           "name": "MAP linearization",
           "address": "0x76484",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76474",
@@ -5424,10 +4344,7 @@
         {
           "name": "Idle RPM",
           "address": "0x764a0",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x7648c",
@@ -5439,10 +4356,7 @@
         {
           "name": "MAP linearization",
           "address": "0x76550",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76540",
@@ -5454,10 +4368,7 @@
         {
           "name": "Map_Bank2_76630",
           "address": "0x76630",
-          "length": [
-            8,
-            5
-          ],
+          "length": [8, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7660e",
@@ -5469,10 +4380,7 @@
         {
           "name": "MAP linearization",
           "address": "0x766ea",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x766da",
@@ -5484,10 +4392,7 @@
         {
           "name": "Map_Bank2_76716",
           "address": "0x76716",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x766fe",
@@ -5499,10 +4404,7 @@
         {
           "name": "MAP linearization",
           "address": "0x76866",
-          "length": [
-            2,
-            2
-          ],
+          "length": [2, 2],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76856",
@@ -5514,10 +4416,7 @@
         {
           "name": "Map_Bank2_76892",
           "address": "0x76892",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7687a",
@@ -5529,10 +4428,7 @@
         {
           "name": "MAF linearization",
           "address": "0x769fa",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x769d2",
@@ -5544,10 +4440,7 @@
         {
           "name": "MAF linearization",
           "address": "0x76aa2",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x76a7a",
@@ -5559,10 +4452,7 @@
         {
           "name": "Map_Bank2_76B46",
           "address": "0x76b46",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76b22",
@@ -5574,10 +4464,7 @@
         {
           "name": "Map_Bank2_76B76",
           "address": "0x76b76",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76b66",
@@ -5589,10 +4476,7 @@
         {
           "name": "Map_Bank2_76BCE",
           "address": "0x76bce",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76baa",
@@ -5604,10 +4488,7 @@
         {
           "name": "Map_Bank2_76C12",
           "address": "0x76c12",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76bee",
@@ -5619,10 +4500,7 @@
         {
           "name": "Map_Bank2_76C56",
           "address": "0x76c56",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76c32",
@@ -5634,10 +4512,7 @@
         {
           "name": "MAP linearization",
           "address": "0x76c7e",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76c76",
@@ -5649,10 +4524,7 @@
         {
           "name": "Injection duration",
           "address": "0x76cbe",
-          "length": [
-            16,
-            10
-          ],
+          "length": [16, 10],
           "type": "3D",
           "unit": "degrees",
           "description": "3D map at 0x76c82",
@@ -5664,10 +4536,7 @@
         {
           "name": "Map_Bank2_76E28",
           "address": "0x76e28",
-          "length": [
-            9,
-            8
-          ],
+          "length": [9, 8],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76dfe",
@@ -5679,10 +4548,7 @@
         {
           "name": "Map_Bank2_76EDE",
           "address": "0x76ede",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76ecc",
@@ -5694,10 +4560,7 @@
         {
           "name": "Map_Bank2_76F10",
           "address": "0x76f10",
-          "length": [
-            1,
-            16
-          ],
+          "length": [1, 16],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76eec",
@@ -5709,10 +4572,7 @@
         {
           "name": "Map_Bank2_76F48",
           "address": "0x76f48",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76f30",
@@ -5724,10 +4584,7 @@
         {
           "name": "Map_Bank2_76F74",
           "address": "0x76f74",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x76f5c",
@@ -5739,10 +4596,7 @@
         {
           "name": "Map_Bank2_76FCA",
           "address": "0x76fca",
-          "length": [
-            16,
-            13
-          ],
+          "length": [16, 13],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x76f88",
@@ -5754,10 +4608,7 @@
         {
           "name": "Map_Bank2_7717C",
           "address": "0x7717c",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7716a",
@@ -5769,10 +4620,7 @@
         {
           "name": "Map_Bank2_771A2",
           "address": "0x771a2",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7718a",
@@ -5784,10 +4632,7 @@
         {
           "name": "Map_Bank2_771D0",
           "address": "0x771d0",
-          "length": [
-            6,
-            3
-          ],
+          "length": [6, 3],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x771b6",
@@ -5799,10 +4644,7 @@
         {
           "name": "Map_Bank2_772B4",
           "address": "0x772b4",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x77284",
@@ -5814,10 +4656,7 @@
         {
           "name": "Map_Bank2_77394",
           "address": "0x77394",
-          "length": [
-            4,
-            4
-          ],
+          "length": [4, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7737c",
@@ -5829,10 +4668,7 @@
         {
           "name": "Map_Bank2_77448",
           "address": "0x77448",
-          "length": [
-            7,
-            7
-          ],
+          "length": [7, 7],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x77424",
@@ -5844,10 +4680,7 @@
         {
           "name": "MAF linearization",
           "address": "0x774f4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x774cc",
@@ -5859,10 +4692,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7757c",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77574",
@@ -5874,10 +4704,7 @@
         {
           "name": "Map_Bank2_775AA",
           "address": "0x775aa",
-          "length": [
-            1,
-            7
-          ],
+          "length": [1, 7],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77598",
@@ -5889,10 +4716,7 @@
         {
           "name": "Map_Bank2_775CE",
           "address": "0x775ce",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x775c0",
@@ -5904,10 +4728,7 @@
         {
           "name": "Map_Bank2_775E8",
           "address": "0x775e8",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x775d8",
@@ -5919,10 +4740,7 @@
         {
           "name": "MAF linearization",
           "address": "0x7761c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x775f4",
@@ -5934,10 +4752,7 @@
         {
           "name": "MAF linearization",
           "address": "0x776c4",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x7769c",
@@ -5949,10 +4764,7 @@
         {
           "name": "MAF linearization",
           "address": "0x7776c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77744",
@@ -5964,10 +4776,7 @@
         {
           "name": "Map_Bank2_777FA",
           "address": "0x777fa",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x777ec",
@@ -5979,10 +4788,7 @@
         {
           "name": "Map_Bank2_77812",
           "address": "0x77812",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77804",
@@ -5994,10 +4800,7 @@
         {
           "name": "Map_Bank2_7782A",
           "address": "0x7782a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7781c",
@@ -6009,10 +4812,7 @@
         {
           "name": "MAF linearization",
           "address": "0x7785c",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77834",
@@ -6024,10 +4824,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77904",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x778dc",
@@ -6039,10 +4836,7 @@
         {
           "name": "MAF linearization",
           "address": "0x779ac",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77984",
@@ -6054,10 +4848,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77a54",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77a2c",
@@ -6069,10 +4860,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77afc",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77ad4",
@@ -6084,10 +4872,7 @@
         {
           "name": "Map_Bank2_77C04",
           "address": "0x77c04",
-          "length": [
-            5,
-            5
-          ],
+          "length": [5, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x77be8",
@@ -6099,10 +4884,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77c5e",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77c36",
@@ -6114,10 +4896,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77d06",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77cde",
@@ -6129,10 +4908,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77dae",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77d86",
@@ -6144,10 +4920,7 @@
         {
           "name": "Idle RPM",
           "address": "0x77e42",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x77e2e",
@@ -6159,10 +4932,7 @@
         {
           "name": "Idle RPM",
           "address": "0x77e66",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x77e52",
@@ -6174,10 +4944,7 @@
         {
           "name": "Map_Bank2_77E86",
           "address": "0x77e86",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77e76",
@@ -6189,10 +4956,7 @@
         {
           "name": "MAP linearization",
           "address": "0x77e9a",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77e92",
@@ -6204,10 +4968,7 @@
         {
           "name": "Map_Bank2_77EAE",
           "address": "0x77eae",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x77e9e",
@@ -6219,10 +4980,7 @@
         {
           "name": "Map_Bank2_77EDA",
           "address": "0x77eda",
-          "length": [
-            6,
-            6
-          ],
+          "length": [6, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x77eba",
@@ -6234,10 +4992,7 @@
         {
           "name": "MAF linearization",
           "address": "0x77f4a",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x77f22",
@@ -6249,10 +5004,7 @@
         {
           "name": "Idle RPM",
           "address": "0x77fde",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x77fca",
@@ -6264,10 +5016,7 @@
         {
           "name": "Idle RPM",
           "address": "0x77ffa",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x77fee",
@@ -6279,10 +5028,7 @@
         {
           "name": "Map_Bank2_7800C",
           "address": "0x7800c",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x78002",
@@ -6294,10 +5040,7 @@
         {
           "name": "Idle RPM",
           "address": "0x7801e",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x78012",
@@ -6309,10 +5052,7 @@
         {
           "name": "Map_Bank2_7803C",
           "address": "0x7803c",
-          "length": [
-            2,
-            5
-          ],
+          "length": [2, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x78026",
@@ -6324,10 +5064,7 @@
         {
           "name": "Map_Bank2_7809C",
           "address": "0x7809c",
-          "length": [
-            6,
-            6
-          ],
+          "length": [6, 6],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7807c",
@@ -6339,10 +5076,7 @@
         {
           "name": "Idle RPM",
           "address": "0x780f0",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x780e4",
@@ -6354,10 +5088,7 @@
         {
           "name": "Idle RPM",
           "address": "0x78104",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x780f8",
@@ -6369,10 +5100,7 @@
         {
           "name": "Map_Bank2_78116",
           "address": "0x78116",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7810c",
@@ -6384,10 +5112,7 @@
         {
           "name": "Map_Bank2_78134",
           "address": "0x78134",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7811c",
@@ -6399,10 +5124,7 @@
         {
           "name": "Map_Bank2_78180",
           "address": "0x78180",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x78170",
@@ -6414,10 +5136,7 @@
         {
           "name": "Map_Bank2_781D4",
           "address": "0x781d4",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x781c4",
@@ -6429,10 +5148,7 @@
         {
           "name": "Map_Bank2_78230",
           "address": "0x78230",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x78218",
@@ -6444,10 +5160,7 @@
         {
           "name": "Map_Bank2_7826C",
           "address": "0x7826c",
-          "length": [
-            11,
-            5
-          ],
+          "length": [11, 5],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x78244",
@@ -6459,10 +5172,7 @@
         {
           "name": "MAF linearization",
           "address": "0x78302",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x782da",
@@ -6474,10 +5184,7 @@
         {
           "name": "Map_Bank2_783A2",
           "address": "0x783a2",
-          "length": [
-            5,
-            7
-          ],
+          "length": [5, 7],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x78382",
@@ -6489,10 +5196,7 @@
         {
           "name": "Pre-glow map",
           "address": "0x78444",
-          "length": [
-            5,
-            4
-          ],
+          "length": [5, 4],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7842a",
@@ -6504,10 +5208,7 @@
         {
           "name": "Map_Bank2_7847A",
           "address": "0x7847a",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7846c",
@@ -6519,10 +5220,7 @@
         {
           "name": "Map_Bank2_7849C",
           "address": "0x7849c",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x78484",
@@ -6534,10 +5232,7 @@
         {
           "name": "Map_Bank2_784C8",
           "address": "0x784c8",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x784b0",
@@ -6549,10 +5244,7 @@
         {
           "name": "Map_Bank2_78560",
           "address": "0x78560",
-          "length": [
-            16,
-            14
-          ],
+          "length": [16, 14],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x78504",
@@ -6564,10 +5256,7 @@
         {
           "name": "Map_Bank2_78570",
           "address": "0x78570",
-          "length": [
-            14,
-            10
-          ],
+          "length": [14, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x78528",
@@ -6579,10 +5268,7 @@
         {
           "name": "Map_Bank2_78E3E",
           "address": "0x78e3e",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x78e30",
@@ -6594,10 +5280,7 @@
         {
           "name": "Map_Bank2_79FE0",
           "address": "0x79fe0",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x79fc8",
@@ -6609,10 +5292,7 @@
         {
           "name": "Map_Bank2_7AA84",
           "address": "0x7aa84",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7aa74",
@@ -6624,10 +5304,7 @@
         {
           "name": "Idle RPM",
           "address": "0x7b19c",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x7b190",
@@ -6639,10 +5316,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7b390",
-          "length": [
-            1,
-            4
-          ],
+          "length": [1, 4],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b384",
@@ -6654,10 +5328,7 @@
         {
           "name": "Map_Bank2_7B3D2",
           "address": "0x7b3d2",
-          "length": [
-            14,
-            11
-          ],
+          "length": [14, 11],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7b398",
@@ -6669,10 +5340,7 @@
         {
           "name": "MAF linearization",
           "address": "0x7b52e",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x7b506",
@@ -6684,10 +5352,7 @@
         {
           "name": "MAF linearization",
           "address": "0x7b5d6",
-          "length": [
-            8,
-            8
-          ],
+          "length": [8, 8],
           "type": "3D",
           "unit": "mg/stroke",
           "description": "3D map at 0x7b5ae",
@@ -6699,10 +5364,7 @@
         {
           "name": "Map_Bank2_7B66E",
           "address": "0x7b66e",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b656",
@@ -6714,10 +5376,7 @@
         {
           "name": "Map_Bank2_7B69A",
           "address": "0x7b69a",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b682",
@@ -6729,10 +5388,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7b6b6",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b6ae",
@@ -6744,10 +5400,7 @@
         {
           "name": "MAP linearization",
           "address": "0x7b6c2",
-          "length": [
-            1,
-            2
-          ],
+          "length": [1, 2],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b6ba",
@@ -6759,10 +5412,7 @@
         {
           "name": "Map_Bank2_7B730",
           "address": "0x7b730",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b722",
@@ -6774,10 +5424,7 @@
         {
           "name": "Map_Bank2_7B748",
           "address": "0x7b748",
-          "length": [
-            1,
-            5
-          ],
+          "length": [1, 5],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b73a",
@@ -6789,10 +5436,7 @@
         {
           "name": "Map_Bank2_7B77A",
           "address": "0x7b77a",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b752",
@@ -6804,10 +5448,7 @@
         {
           "name": "Map_Bank2_7B7E2",
           "address": "0x7b7e2",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b7ba",
@@ -6819,10 +5460,7 @@
         {
           "name": "Map_Bank2_7B84A",
           "address": "0x7b84a",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b822",
@@ -6834,10 +5472,7 @@
         {
           "name": "Map_Bank2_7B8B2",
           "address": "0x7b8b2",
-          "length": [
-            1,
-            18
-          ],
+          "length": [1, 18],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b88a",
@@ -6849,10 +5484,7 @@
         {
           "name": "Map_Bank2_7B90C",
           "address": "0x7b90c",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b8d6",
@@ -6864,10 +5496,7 @@
         {
           "name": "Map_Bank2_7B956",
           "address": "0x7b956",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b93e",
@@ -6879,10 +5508,7 @@
         {
           "name": "Map_Bank2_7B9A0",
           "address": "0x7b9a0",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b96a",
@@ -6894,10 +5520,7 @@
         {
           "name": "Map_Bank2_7B9E2",
           "address": "0x7b9e2",
-          "length": [
-            1,
-            6
-          ],
+          "length": [1, 6],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b9d2",
@@ -6909,10 +5532,7 @@
         {
           "name": "Map_Bank2_7BA24",
           "address": "0x7ba24",
-          "length": [
-            1,
-            25
-          ],
+          "length": [1, 25],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7b9ee",
@@ -6924,10 +5544,7 @@
         {
           "name": "Map_Bank2_7BA86",
           "address": "0x7ba86",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7ba56",
@@ -6939,10 +5556,7 @@
         {
           "name": "Map_Bank2_7BB7E",
           "address": "0x7bb7e",
-          "length": [
-            10,
-            10
-          ],
+          "length": [10, 10],
           "type": "3D",
           "unit": "mbar",
           "description": "3D map at 0x7bb4e",
@@ -6954,10 +5568,7 @@
         {
           "name": "Map_Unknown_7C7A6",
           "address": "0x7c7a6",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7c79c",
@@ -6969,10 +5580,7 @@
         {
           "name": "Map_Unknown_7C9EC",
           "address": "0x7c9ec",
-          "length": [
-            1,
-            3
-          ],
+          "length": [1, 3],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7c9e2",
@@ -6984,10 +5592,7 @@
         {
           "name": "Map_Unknown_7CEC2",
           "address": "0x7cec2",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7ceaa",
@@ -6999,10 +5604,7 @@
         {
           "name": "Map_Unknown_7CEEC",
           "address": "0x7ceec",
-          "length": [
-            1,
-            10
-          ],
+          "length": [1, 10],
           "type": "2D",
           "unit": "mbar",
           "description": "2D map at 0x7ced4",
@@ -7014,10 +5616,7 @@
         {
           "name": "Idle RPM",
           "address": "0x7cfb4",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x7cfa0",
@@ -7029,10 +5628,7 @@
         {
           "name": "Idle RPM",
           "address": "0x7cfd8",
-          "length": [
-            1,
-            8
-          ],
+          "length": [1, 8],
           "type": "2D",
           "unit": "rpm",
           "description": "2D map at 0x7cfc4",

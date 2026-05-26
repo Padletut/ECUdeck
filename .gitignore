@@ -13,9 +13,11 @@
 # testing
 /coverage
 
-# next.js
+# build output
 /.next/
-/out/
+/dist/
+/site/
+/src-tauri/target/
 
 # production
 /build
@@ -42,10 +44,10 @@ next-env.d.ts
 
 /src/generated/prisma
 
-/python_backend/*.txt
-/python_backend/*.bin
-/python_backend/*.Bin
-/python_backend/*.org
-/python_backend/*.ori
-/python_backend/*.csv
-/python_backend/modules/*
+/legacy/python_backend/*.txt
+/legacy/python_backend/*.bin
+/legacy/python_backend/*.Bin
+/legacy/python_backend/*.org
+/legacy/python_backend/*.ori
+/legacy/python_backend/*.csv
+/legacy/python_backend/modules/*

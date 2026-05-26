@@ -8,23 +8,23 @@
 
 ECUDeck should be a modern, modular, and semantic ECU platform built for:
 
-* firmware analysis
-* map discovery
-* ECU plugin systems
-* user-friendly plugin editing
-* risk analysis
-* AI-assisted remapping
-* AI-assisted ECU plugin authoring
-* deterministic parsing
-* native desktop performance
+- firmware analysis
+- map discovery
+- ECU plugin systems
+- user-friendly plugin editing
+- risk analysis
+- AI-assisted remapping
+- AI-assisted ECU plugin authoring
+- deterministic parsing
+- native desktop performance
 
 The goal is to combine:
 
-* native Rust performance
-* modern React UI
-* AI/LLM assistance
-* semantic ECU understanding
-* open-source contributor friendliness
+- native Rust performance
+- modern React UI
+- AI/LLM assistance
+- semantic ECU understanding
+- open-source contributor friendliness
 
 ---
 
@@ -41,19 +41,19 @@ shadcn/ui
 
 Responsibilities:
 
-* GUI
-* hex viewer
-* graph visualization
-* map editing
-* plugin editor
-* workspace/project navigation
-* analysis session management
-* project workflows
-* AI interaction panels
-* chat workflows
-* change review panels
-* diagnostics
-* live dependency visualization
+- GUI
+- hex viewer
+- graph visualization
+- map editing
+- plugin editor
+- workspace/project navigation
+- analysis session management
+- project workflows
+- AI interaction panels
+- chat workflows
+- change review panels
+- diagnostics
+- live dependency visualization
 
 ---
 
@@ -65,11 +65,11 @@ Tauri
 
 Responsibilities:
 
-* native desktop integration
-* filesystem access
-* secure Rust command bridge
-* cross-platform builds
-* local project/workspace management
+- native desktop integration
+- filesystem access
+- secure Rust command bridge
+- cross-platform builds
+- local project/workspace management
 
 ---
 
@@ -81,37 +81,35 @@ Rust
 
 Responsibilities:
 
-* BIN parsing
-* checksum handling
-* binary indexing
-* map scanning
-* dependency graph building
-* semantic analysis
-* consistency validation
-* chunk streaming
-* background task orchestration
-* performance-critical systems
+- BIN parsing
+- checksum handling
+- binary indexing
+- map scanning
+- dependency graph building
+- semantic analysis
+- consistency validation
+- chunk streaming
+- background task orchestration
+- performance-critical systems
 
 ---
 
-## AI Services
+## Model Integration
 
 ```text
-Python
+Rust
+Provider APIs
 ```
 
 Responsibilities:
 
-* ML pipelines
-* GNN experimentation
-* semantic relationship inference
-* LLM-assisted reasoning
-* calibration analysis
-* AI-assisted diagnostics
-* AI-assisted plugin generation
-* local model integration via llama-server
-* local model integration via Ollama
-* external model API integration
+- local model integration via llama-server
+- local model integration via Ollama
+- external model API integration
+- LLM-assisted reasoning
+- AI-assisted diagnostics
+- AI-assisted plugin generation
+- reviewable AI workflows
 
 ---
 
@@ -124,13 +122,13 @@ Material for MkDocs
 
 Responsibilities:
 
-* architecture documentation
-* subsystem READMEs
-* plugin contracts
-* contributor documentation
-* flow diagrams
-* API references
-* safety/disclaimer policies
+- architecture documentation
+- subsystem READMEs
+- plugin contracts
+- contributor documentation
+- flow diagrams
+- API references
+- safety/disclaimer policies
 
 ---
 
@@ -171,13 +169,12 @@ Responsibilities:
 └────────────┬───────────────┘
              ▼
 ┌────────────────────────────┐
-│ Python AI Services         │
+│ Model Provider Layer       │
 │                            │
-│ - ML                       │
-│ - GNN                      │
-│ - LLM Assistant            │
-│ - Consistency Analysis     │
-│ - Model Connectors         │
+│ - llama-server             │
+│ - Ollama                   │
+│ - External APIs            │
+│ - Reviewable AI Actions    │
 └────────────────────────────┘
 ```
 
@@ -249,18 +246,18 @@ ECUDeck will likely need a dedicated job system as analysis features become more
 
 Core capabilities should include:
 
-* job queue
-* task runtime
-* background analysis
-* cancelable tasks
-* progress reporting
+- job queue
+- task runtime
+- background analysis
+- cancelable tasks
+- progress reporting
 
 This becomes especially important for:
 
-* AI analysis
-* graph generation
-* firmware indexing
-* large-scale scans
+- AI analysis
+- graph generation
+- firmware indexing
+- large-scale scans
 
 Long-running work should not block the UI, and the user should always be able to see what is running, what completed, what failed, and what can be canceled or retried.
 
@@ -282,13 +279,13 @@ AI-assisted calibration analysis platform
 
 AI is used for:
 
-* consistency checking
-* dependency analysis
-* map relationship reasoning
-* calibration diagnostics
-* risk awareness
-* semantic explanations
-* plugin authoring assistance
+- consistency checking
+- dependency analysis
+- map relationship reasoning
+- calibration diagnostics
+- risk awareness
+- semantic explanations
+- plugin authoring assistance
 
 Not as a:
 
@@ -365,20 +362,11 @@ Rail pressure request exceeds expected injector duration window.
 ```text
 ecudeck/
 │
-├── apps/
-│   ├── desktop/
-│   └── docs/
-│
-├── frontend/
-│   ├── components/
-│   ├── chat/
+├── src/
 │   ├── features/
+│   ├── layout/
 │   ├── pages/
-│   ├── plugin-editor/
-│   ├── workspace/
-│   ├── graph/
-│   ├── hexview/
-│   └── shared/
+│   └── styles/
 │
 ├── core/
 │   ├── parser/
@@ -395,14 +383,6 @@ ecudeck/
 │   ├── export/
 │   └── utils/
 │
-├── ai/
-│   ├── ml/
-│   ├── gnn/
-│   ├── llm/
-│   ├── providers/
-│   ├── pipelines/
-│   └── datasets/
-│
 ├── plugins/
 │   ├── edc15/
 │   ├── edc16/
@@ -414,12 +394,20 @@ ecudeck/
 │   ├── test_vectors/
 │   └── checksum_cases/
 │
-├── scripts/
+├── legacy/
+│   └── python_backend/
 │
 ├── docs/
 │
+├── src-tauri/
+│   ├── src/
+│   ├── Cargo.toml
+│   └── tauri.conf.json
+│
 └── mkdocs.yml
 ```
+
+During migration, legacy Python parsing code may remain available for reference, but it should not define the long-term architecture.
 
 ---
 
@@ -460,9 +448,9 @@ Plugin contracts should be versioned from the beginning so the ecosystem can evo
 
 Examples:
 
-* Plugin API v1
-* Plugin Schema v2
-* Compatibility layers
+- Plugin API v1
+- Plugin Schema v2
+- Compatibility layers
 
 The goal is to avoid:
 
@@ -490,18 +478,18 @@ trait ECUPlugin {
 
 The AI/LLM assistant should support multiple working modes inside the chat and plugin editor:
 
-* Ask
-* Plan
-* Agent
-* Review
+- Ask
+- Plan
+- Agent
+- Review
 
 These modes should support different levels of autonomy, from answering questions to proposing changes, performing guided actions, and reviewing generated or modified plugin logic.
 
 Model access should support:
 
-* local models via llama-server
-* local models via Ollama
-* external model APIs
+- local models via llama-server
+- local models via Ollama
+- external model APIs
 
 The system should treat model access as a pluggable provider layer so local and remote backends can be swapped without changing the user experience.
 
@@ -513,10 +501,10 @@ The chat should support a review mode where proposed changes can be inspected be
 
 The user should be able to:
 
-* accept changes
-* reject changes
-* accept all
-* reject all
+- accept changes
+- reject changes
+- accept all
+- reject all
 
 Review should be explicit, reversible where possible, and designed to keep the human operator as the final authority over plugin and project modifications.
 
@@ -550,11 +538,11 @@ for maximum performance.
 
 ECUDeck should be:
 
-* contributor friendly
-* modular
-* deterministic
-* well documented
-* architecture-driven
+- contributor friendly
+- modular
+- deterministic
+- well documented
+- architecture-driven
 
 The goal is to avoid:
 
@@ -570,16 +558,16 @@ ECUDeck should have clear safety boundaries.
 
 The AI systems should:
 
-* assist
-* explain
-* warn
-* analyze
+- assist
+- explain
+- warn
+- analyze
 
 Not:
 
-* blindly generate tuning
-* override safety constraints
-* act as an authoritative source
+- blindly generate tuning
+- override safety constraints
+- act as an authoritative source
 
 ---
 
@@ -587,15 +575,15 @@ Not:
 
 ## Planned Advanced Systems
 
-* semantic ECU graph engine
-* map relationship explorer
-* GNN-assisted dependency inference
-* turbo efficiency modeling
-* sensor constraint analysis
-* automatic limiter relationship detection
-* calibration diff engine
-* live consistency validation
-* AI calibration copilot
+- semantic ECU graph engine
+- map relationship explorer
+- GNN-assisted dependency inference
+- turbo efficiency modeling
+- sensor constraint analysis
+- automatic limiter relationship detection
+- calibration diff engine
+- live consistency validation
+- AI calibration copilot
 
 ---
 

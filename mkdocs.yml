@@ -1,0 +1,6 @@
+site_name: ECUDeck
+site_description: ECU firmware analysis and remapping workspace
+theme:
+  name: mkdocs
+nav:
+  - Home: index.md
