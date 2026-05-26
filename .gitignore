@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+/python_backend/*.txt
+/python_backend/*.bin
+/python_backend/*.Bin
+/python_backend/*.org
+/python_backend/*.ori
+/python_backend/*.csv
+/python_backend/modules/*

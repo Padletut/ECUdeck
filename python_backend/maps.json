@@ -1,0 +1,7047 @@
+{
+  "map_pack_name": "EDC15P Auto-detected Maps",
+  "base_address": "0x4c000",
+  "total_maps": 468,
+  "code_blocks": [
+    {
+      "id": 1,
+      "start_address": "0x4c000",
+      "end_address": "0x60000",
+      "length": "0x14000",
+      "type": "manual",
+      "map_count": 231,
+      "maps": [
+        {
+          "name": "MAP linearization",
+          "address": "0x4c008",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c000",
+          "x_axis_offset": "0x4c004",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4C03A",
+          "address": "0x4c03a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c02c",
+          "x_axis_offset": "0x4c030",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4C052",
+          "address": "0x4c052",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c044",
+          "x_axis_offset": "0x4c048",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4C074",
+          "address": "0x4c074",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c05c",
+          "x_axis_offset": "0x4c060",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x4c09c",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x4c088",
+          "x_axis_offset": "0x4c08c",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4c0bc",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4c0ac",
+          "x_axis_offset": "0x4c0b0",
+          "y_axis_offset": "0x4c0b8",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_4C102",
+          "address": "0x4c102",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c0cc",
+          "x_axis_offset": "0x4c0d0",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4c3ce",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4c3be",
+          "x_axis_offset": "0x4c3c2",
+          "y_axis_offset": "0x4c3ca",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_4C406",
+          "address": "0x4c406",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4c3d6",
+          "x_axis_offset": "0x4c3da",
+          "y_axis_offset": "0x4c3f2",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4C4FE",
+          "address": "0x4c4fe",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4c4ce",
+          "x_axis_offset": "0x4c4d2",
+          "y_axis_offset": "0x4c4ea",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4C5E0",
+          "address": "0x4c5e0",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4c5c6",
+          "x_axis_offset": "0x4c5ca",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x4c636",
+          "length": [
+            12,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x4c5f6",
+          "x_axis_offset": "0x4c5fa",
+          "y_axis_offset": "0x4c616",
+          "x_len": 16,
+          "y_len": 12
+        },
+        {
+          "name": "Expected fuel temperature",
+          "address": "0x4c8fe",
+          "length": [
+            16,
+            8
+          ],
+          "type": "3D",
+          "unit": "\u00b0C",
+          "description": "3D map at 0x4c8c6",
+          "x_axis_offset": "0x4c8ca",
+          "y_axis_offset": "0x4c8ee",
+          "x_len": 8,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_4CB38",
+          "address": "0x4cb38",
+          "length": [
+            8,
+            9
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4cb0e",
+          "x_axis_offset": "0x4cb12",
+          "y_axis_offset": "0x4cb26",
+          "x_len": 9,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_4CC1E",
+          "address": "0x4cc1e",
+          "length": [
+            9,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4cbf0",
+          "x_axis_offset": "0x4cbf4",
+          "y_axis_offset": "0x4cc0a",
+          "x_len": 10,
+          "y_len": 9
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4ccda",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4ccd2",
+          "x_axis_offset": "0x4ccd6",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4CCFC",
+          "address": "0x4ccfc",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4ccf2",
+          "x_axis_offset": "0x4ccf6",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "EGR temperature map",
+          "address": "0x4cd2a",
+          "length": [
+            10,
+            6
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x4cd02",
+          "x_axis_offset": "0x4cd06",
+          "y_axis_offset": "0x4cd1e",
+          "x_len": 6,
+          "y_len": 10
+        },
+        {
+          "name": "Torque limiter",
+          "address": "0x4cf82",
+          "length": [
+            3,
+            21
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x4cf4a",
+          "x_axis_offset": "0x4cf4e",
+          "y_axis_offset": "0x4cf58",
+          "x_len": 21,
+          "y_len": 3
+        },
+        {
+          "name": "Injector duration selector",
+          "address": "0x4d03c",
+          "length": [
+            1,
+            12
+          ],
+          "type": "2D",
+          "unit": "index",
+          "description": "2D map at 0x4d020",
+          "x_axis_offset": "0x4d024",
+          "y_axis_offset": "0x000000",
+          "x_len": 12,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4D064",
+          "address": "0x4d064",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4d054",
+          "x_axis_offset": "0x4d058",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4D0C2",
+          "address": "0x4d0c2",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4d070",
+          "x_axis_offset": "0x4d074",
+          "y_axis_offset": "0x4d098",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_4D0BC",
+          "address": "0x4d0bc",
+          "length": [
+            13,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4d094",
+          "x_axis_offset": "0x4d098",
+          "y_axis_offset": "0x4d0b6",
+          "x_len": 3,
+          "y_len": 13
+        },
+        {
+          "name": "Map_Bank1_4D5BE",
+          "address": "0x4d5be",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4d5a2",
+          "x_axis_offset": "0x4d5a6",
+          "y_axis_offset": "0x4d5b4",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4d5f8",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4d5f0",
+          "x_axis_offset": "0x4d5f4",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x4d638",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x4d5fc",
+          "x_axis_offset": "0x4d600",
+          "y_axis_offset": "0x4d624",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x4d7b4",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x4d778",
+          "x_axis_offset": "0x4d77c",
+          "y_axis_offset": "0x4d7a0",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_4D96A",
+          "address": "0x4d96a",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4d95a",
+          "x_axis_offset": "0x4d95e",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4D986",
+          "address": "0x4d986",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4d976",
+          "x_axis_offset": "0x4d97a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4D9A4",
+          "address": "0x4d9a4",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4d992",
+          "x_axis_offset": "0x4d996",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4D9CE",
+          "address": "0x4d9ce",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4d9b2",
+          "x_axis_offset": "0x4d9b6",
+          "y_axis_offset": "0x4d9c4",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank1_4DAC6",
+          "address": "0x4dac6",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4daaa",
+          "x_axis_offset": "0x4daae",
+          "y_axis_offset": "0x4dabc",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank1_4DBB6",
+          "address": "0x4dbb6",
+          "length": [
+            3,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4dba2",
+          "x_axis_offset": "0x4dba6",
+          "y_axis_offset": "0x4dbb0",
+          "x_len": 3,
+          "y_len": 3
+        },
+        {
+          "name": "Map_Bank1_4DC52",
+          "address": "0x4dc52",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4dc42",
+          "x_axis_offset": "0x4dc46",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DC8E",
+          "address": "0x4dc8e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4dc5e",
+          "x_axis_offset": "0x4dc62",
+          "y_axis_offset": "0x4dc7a",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4DD78",
+          "address": "0x4dd78",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4dd56",
+          "x_axis_offset": "0x4dd5a",
+          "y_axis_offset": "0x4dd6e",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_4DDEA",
+          "address": "0x4ddea",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4ddc8",
+          "x_axis_offset": "0x4ddcc",
+          "y_axis_offset": "0x4dde0",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x4de4e",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x4de3a",
+          "x_axis_offset": "0x4de3e",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x4de72",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x4de5e",
+          "x_axis_offset": "0x4de62",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x4de96",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x4de82",
+          "x_axis_offset": "0x4de86",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x4deba",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x4dea6",
+          "x_axis_offset": "0x4deaa",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4ded6",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4deca",
+          "x_axis_offset": "0x4dece",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DEEC",
+          "address": "0x4deec",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4dede",
+          "x_axis_offset": "0x4dee2",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DF04",
+          "address": "0x4df04",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4def6",
+          "x_axis_offset": "0x4defa",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DF1C",
+          "address": "0x4df1c",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4df0e",
+          "x_axis_offset": "0x4df12",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DF34",
+          "address": "0x4df34",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4df26",
+          "x_axis_offset": "0x4df2a",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4DF5A",
+          "address": "0x4df5a",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4df3e",
+          "x_axis_offset": "0x4df42",
+          "y_axis_offset": "0x4df50",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank1_4DFBC",
+          "address": "0x4dfbc",
+          "length": [
+            12,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4df8c",
+          "x_axis_offset": "0x4df90",
+          "y_axis_offset": "0x4dfac",
+          "x_len": 8,
+          "y_len": 12
+        },
+        {
+          "name": "Map_Bank1_4E08C",
+          "address": "0x4e08c",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e07c",
+          "x_axis_offset": "0x4e080",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4E0AA",
+          "address": "0x4e0aa",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e098",
+          "x_axis_offset": "0x4e09c",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4E0E8",
+          "address": "0x4e0e8",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4e0b8",
+          "x_axis_offset": "0x4e0bc",
+          "y_axis_offset": "0x4e0d4",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4E1E0",
+          "address": "0x4e1e0",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4e1b0",
+          "x_axis_offset": "0x4e1b4",
+          "y_axis_offset": "0x4e1cc",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4E2CE",
+          "address": "0x4e2ce",
+          "length": [
+            10,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4e2a8",
+          "x_axis_offset": "0x4e2ac",
+          "y_axis_offset": "0x4e2c4",
+          "x_len": 5,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_4E34A",
+          "address": "0x4e34a",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e332",
+          "x_axis_offset": "0x4e336",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4E372",
+          "address": "0x4e372",
+          "length": [
+            3,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x4e35e",
+          "x_axis_offset": "0x4e362",
+          "y_axis_offset": "0x4e36c",
+          "x_len": 3,
+          "y_len": 3
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e45e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e456",
+          "x_axis_offset": "0x4e45a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4E472",
+          "address": "0x4e472",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e462",
+          "x_axis_offset": "0x4e466",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e4d2",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e4ca",
+          "x_axis_offset": "0x4e4ce",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e4de",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e4d6",
+          "x_axis_offset": "0x4e4da",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_4E4F2",
+          "address": "0x4e4f2",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e4e2",
+          "x_axis_offset": "0x4e4e6",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e506",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e4fe",
+          "x_axis_offset": "0x4e502",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e512",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e50a",
+          "x_axis_offset": "0x4e50e",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e51e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e516",
+          "x_axis_offset": "0x4e51a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e52e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e522",
+          "x_axis_offset": "0x4e526",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e556",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e54e",
+          "x_axis_offset": "0x4e552",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x4e562",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x4e55a",
+          "x_axis_offset": "0x4e55e",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_50578",
+          "address": "0x50578",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x50560",
+          "x_axis_offset": "0x50564",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5059E",
+          "address": "0x5059e",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x50584",
+          "x_axis_offset": "0x50588",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_505B2",
+          "address": "0x505b2",
+          "length": [
+            1,
+            9
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5059c",
+          "x_axis_offset": "0x505a0",
+          "y_axis_offset": "0x000000",
+          "x_len": 9,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_505CC",
+          "address": "0x505cc",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x505b4",
+          "x_axis_offset": "0x505b8",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5065E",
+          "address": "0x5065e",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x50644",
+          "x_axis_offset": "0x50648",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_506C6",
+          "address": "0x506c6",
+          "length": [
+            1,
+            9
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x506b0",
+          "x_axis_offset": "0x506b4",
+          "y_axis_offset": "0x000000",
+          "x_len": 9,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_50848",
+          "address": "0x50848",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x50830",
+          "x_axis_offset": "0x50834",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_51C76",
+          "address": "0x51c76",
+          "length": [
+            8,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x51c48",
+          "x_axis_offset": "0x51c4c",
+          "y_axis_offset": "0x51c60",
+          "x_len": 11,
+          "y_len": 8
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x51faa",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x51f6e",
+          "x_axis_offset": "0x51f72",
+          "y_axis_offset": "0x51f96",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_5211E",
+          "address": "0x5211e",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x52110",
+          "x_axis_offset": "0x52114",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5264C",
+          "address": "0x5264c",
+          "length": [
+            1,
+            30
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5260c",
+          "x_axis_offset": "0x52610",
+          "y_axis_offset": "0x000000",
+          "x_len": 30,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_53FA0",
+          "address": "0x53fa0",
+          "length": [
+            1,
+            32
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x53f5c",
+          "x_axis_offset": "0x53f60",
+          "y_axis_offset": "0x000000",
+          "x_len": 32,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_542E0",
+          "address": "0x542e0",
+          "length": [
+            1,
+            15
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x542be",
+          "x_axis_offset": "0x542c2",
+          "y_axis_offset": "0x000000",
+          "x_len": 15,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_542E2",
+          "address": "0x542e2",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x542ca",
+          "x_axis_offset": "0x542ce",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5430E",
+          "address": "0x5430e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x542f6",
+          "x_axis_offset": "0x542fa",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_54376",
+          "address": "0x54376",
+          "length": [
+            10,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5434a",
+          "x_axis_offset": "0x5434e",
+          "y_axis_offset": "0x54366",
+          "x_len": 8,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_5442E",
+          "address": "0x5442e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x54416",
+          "x_axis_offset": "0x5441a",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_54454",
+          "address": "0x54454",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x54442",
+          "x_axis_offset": "0x54446",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_54492",
+          "address": "0x54492",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x54462",
+          "x_axis_offset": "0x54466",
+          "y_axis_offset": "0x5447e",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x545a0",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x5455a",
+          "x_axis_offset": "0x5455e",
+          "y_axis_offset": "0x54580",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x54826",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x547e0",
+          "x_axis_offset": "0x547e4",
+          "y_axis_offset": "0x54806",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x54aac",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x54a66",
+          "x_axis_offset": "0x54a6a",
+          "y_axis_offset": "0x54a8c",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x54d32",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x54cec",
+          "x_axis_offset": "0x54cf0",
+          "y_axis_offset": "0x54d12",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Map_Bank1_54FA2",
+          "address": "0x54fa2",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x54f72",
+          "x_axis_offset": "0x54f76",
+          "y_axis_offset": "0x54f8e",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x550d4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x550ac",
+          "x_axis_offset": "0x550b0",
+          "y_axis_offset": "0x550c4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_5517E",
+          "address": "0x5517e",
+          "length": [
+            9,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x55154",
+          "x_axis_offset": "0x55158",
+          "y_axis_offset": "0x5516e",
+          "x_len": 8,
+          "y_len": 9
+        },
+        {
+          "name": "Map_Bank1_5521E",
+          "address": "0x5521e",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5520e",
+          "x_axis_offset": "0x55212",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5523A",
+          "address": "0x5523a",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5522a",
+          "x_axis_offset": "0x5522e",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55314",
+          "address": "0x55314",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x552fc",
+          "x_axis_offset": "0x55300",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55340",
+          "address": "0x55340",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55328",
+          "x_axis_offset": "0x5532c",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x55360",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55354",
+          "x_axis_offset": "0x55358",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_553FC",
+          "address": "0x553fc",
+          "length": [
+            6,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x553e0",
+          "x_axis_offset": "0x553e4",
+          "y_axis_offset": "0x553f4",
+          "x_len": 4,
+          "y_len": 6
+        },
+        {
+          "name": "Map_Bank1_5545E",
+          "address": "0x5545e",
+          "length": [
+            10,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5542c",
+          "x_axis_offset": "0x55430",
+          "y_axis_offset": "0x55448",
+          "x_len": 11,
+          "y_len": 10
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x55562",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x5553a",
+          "x_axis_offset": "0x5553e",
+          "y_axis_offset": "0x55552",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_55624",
+          "address": "0x55624",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x555e2",
+          "x_axis_offset": "0x555e6",
+          "y_axis_offset": "0x5560a",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5583a",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5582a",
+          "x_axis_offset": "0x5582e",
+          "y_axis_offset": "0x55836",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5584e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55842",
+          "x_axis_offset": "0x55846",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55876",
+          "address": "0x55876",
+          "length": [
+            4,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x55856",
+          "x_axis_offset": "0x5585a",
+          "y_axis_offset": "0x55866",
+          "x_len": 8,
+          "y_len": 4
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x55912",
+          "length": [
+            2,
+            4
+          ],
+          "type": "3D",
+          "unit": "rpm",
+          "description": "3D map at 0x558fe",
+          "x_axis_offset": "0x55902",
+          "y_axis_offset": "0x5590a",
+          "x_len": 4,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_55940",
+          "address": "0x55940",
+          "length": [
+            5,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x55922",
+          "x_axis_offset": "0x55926",
+          "y_axis_offset": "0x55934",
+          "x_len": 6,
+          "y_len": 5
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x559fe",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x559ee",
+          "x_axis_offset": "0x559f2",
+          "y_axis_offset": "0x559fa",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_55A14",
+          "address": "0x55a14",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55a06",
+          "x_axis_offset": "0x55a0a",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x55a26",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55a1e",
+          "x_axis_offset": "0x55a22",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55A6C",
+          "address": "0x55a6c",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x55a2a",
+          "x_axis_offset": "0x55a2e",
+          "y_axis_offset": "0x55a52",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_55C4E",
+          "address": "0x55c4e",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x55c0c",
+          "x_axis_offset": "0x55c10",
+          "y_axis_offset": "0x55c34",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_55DFC",
+          "address": "0x55dfc",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55dee",
+          "x_axis_offset": "0x55df2",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x55e32",
+          "length": [
+            1,
+            20
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55e06",
+          "x_axis_offset": "0x55e0a",
+          "y_axis_offset": "0x000000",
+          "x_len": 20,
+          "y_len": 1
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x55e86",
+          "length": [
+            1,
+            20
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55e5a",
+          "x_axis_offset": "0x55e5e",
+          "y_axis_offset": "0x000000",
+          "x_len": 20,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55EC6",
+          "address": "0x55ec6",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55eae",
+          "x_axis_offset": "0x55eb2",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_55F12",
+          "address": "0x55f12",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x55f02",
+          "x_axis_offset": "0x55f06",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x55f32",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x55f1e",
+          "x_axis_offset": "0x55f22",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x55f56",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x55f42",
+          "x_axis_offset": "0x55f46",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x55f7a",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x55f66",
+          "x_axis_offset": "0x55f6a",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x55f9a",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "rpm",
+          "description": "3D map at 0x55f8a",
+          "x_axis_offset": "0x55f8e",
+          "y_axis_offset": "0x55f96",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_56050",
+          "address": "0x56050",
+          "length": [
+            1,
+            13
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56032",
+          "x_axis_offset": "0x56036",
+          "y_axis_offset": "0x000000",
+          "x_len": 13,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_560CE",
+          "address": "0x560ce",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x560b6",
+          "x_axis_offset": "0x560ba",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_560FA",
+          "address": "0x560fa",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x560e2",
+          "x_axis_offset": "0x560e6",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5613E",
+          "address": "0x5613e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5610e",
+          "x_axis_offset": "0x56112",
+          "y_axis_offset": "0x5612a",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_562FE",
+          "address": "0x562fe",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x562f0",
+          "x_axis_offset": "0x562f4",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x56318",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56308",
+          "x_axis_offset": "0x5630c",
+          "y_axis_offset": "0x56314",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_56338",
+          "address": "0x56338",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56320",
+          "x_axis_offset": "0x56324",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56424",
+          "address": "0x56424",
+          "length": [
+            10,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56400",
+          "x_axis_offset": "0x56404",
+          "y_axis_offset": "0x5641c",
+          "x_len": 4,
+          "y_len": 10
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x56484",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56474",
+          "x_axis_offset": "0x56478",
+          "y_axis_offset": "0x56480",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x564a0",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x5648c",
+          "x_axis_offset": "0x56490",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x56550",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56540",
+          "x_axis_offset": "0x56544",
+          "y_axis_offset": "0x5654c",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_56630",
+          "address": "0x56630",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5660e",
+          "x_axis_offset": "0x56612",
+          "y_axis_offset": "0x56626",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x566ea",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x566da",
+          "x_axis_offset": "0x566de",
+          "y_axis_offset": "0x566e6",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_56716",
+          "address": "0x56716",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x566fe",
+          "x_axis_offset": "0x56702",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x56866",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56856",
+          "x_axis_offset": "0x5685a",
+          "y_axis_offset": "0x56862",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_56892",
+          "address": "0x56892",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5687a",
+          "x_axis_offset": "0x5687e",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x569fa",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x569d2",
+          "x_axis_offset": "0x569d6",
+          "y_axis_offset": "0x569ea",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x56aa2",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x56a7a",
+          "x_axis_offset": "0x56a7e",
+          "y_axis_offset": "0x56a92",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_56B46",
+          "address": "0x56b46",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56b22",
+          "x_axis_offset": "0x56b26",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56B76",
+          "address": "0x56b76",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56b66",
+          "x_axis_offset": "0x56b6a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56BCE",
+          "address": "0x56bce",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56baa",
+          "x_axis_offset": "0x56bae",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56C12",
+          "address": "0x56c12",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56bee",
+          "x_axis_offset": "0x56bf2",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56C56",
+          "address": "0x56c56",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56c32",
+          "x_axis_offset": "0x56c36",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x56c7e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56c76",
+          "x_axis_offset": "0x56c7a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x56cbe",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x56c82",
+          "x_axis_offset": "0x56c86",
+          "y_axis_offset": "0x56caa",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_56E28",
+          "address": "0x56e28",
+          "length": [
+            9,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56dfe",
+          "x_axis_offset": "0x56e02",
+          "y_axis_offset": "0x56e18",
+          "x_len": 8,
+          "y_len": 9
+        },
+        {
+          "name": "Map_Bank1_56EDE",
+          "address": "0x56ede",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56ecc",
+          "x_axis_offset": "0x56ed0",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56F10",
+          "address": "0x56f10",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56eec",
+          "x_axis_offset": "0x56ef0",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56F48",
+          "address": "0x56f48",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56f30",
+          "x_axis_offset": "0x56f34",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56F74",
+          "address": "0x56f74",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x56f5c",
+          "x_axis_offset": "0x56f60",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_56FCA",
+          "address": "0x56fca",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x56f88",
+          "x_axis_offset": "0x56f8c",
+          "y_axis_offset": "0x56fb0",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_5717C",
+          "address": "0x5717c",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5716a",
+          "x_axis_offset": "0x5716e",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_571A2",
+          "address": "0x571a2",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5718a",
+          "x_axis_offset": "0x5718e",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_571D0",
+          "address": "0x571d0",
+          "length": [
+            6,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x571b6",
+          "x_axis_offset": "0x571ba",
+          "y_axis_offset": "0x571ca",
+          "x_len": 3,
+          "y_len": 6
+        },
+        {
+          "name": "Map_Bank1_572B4",
+          "address": "0x572b4",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x57284",
+          "x_axis_offset": "0x57288",
+          "y_axis_offset": "0x572a0",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_57394",
+          "address": "0x57394",
+          "length": [
+            4,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5737c",
+          "x_axis_offset": "0x57380",
+          "y_axis_offset": "0x5738c",
+          "x_len": 4,
+          "y_len": 4
+        },
+        {
+          "name": "Map_Bank1_57448",
+          "address": "0x57448",
+          "length": [
+            7,
+            7
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x57424",
+          "x_axis_offset": "0x57428",
+          "y_axis_offset": "0x5743a",
+          "x_len": 7,
+          "y_len": 7
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x574f4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x574cc",
+          "x_axis_offset": "0x574d0",
+          "y_axis_offset": "0x574e4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5757c",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57574",
+          "x_axis_offset": "0x57578",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_575AA",
+          "address": "0x575aa",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57598",
+          "x_axis_offset": "0x5759c",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_575CE",
+          "address": "0x575ce",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x575c0",
+          "x_axis_offset": "0x575c4",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_575E8",
+          "address": "0x575e8",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x575d8",
+          "x_axis_offset": "0x575dc",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x5761c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x575f4",
+          "x_axis_offset": "0x575f8",
+          "y_axis_offset": "0x5760c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x576c4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x5769c",
+          "x_axis_offset": "0x576a0",
+          "y_axis_offset": "0x576b4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x5776c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57744",
+          "x_axis_offset": "0x57748",
+          "y_axis_offset": "0x5775c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_577FA",
+          "address": "0x577fa",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x577ec",
+          "x_axis_offset": "0x577f0",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_57812",
+          "address": "0x57812",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57804",
+          "x_axis_offset": "0x57808",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5782A",
+          "address": "0x5782a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5781c",
+          "x_axis_offset": "0x57820",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x5785c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57834",
+          "x_axis_offset": "0x57838",
+          "y_axis_offset": "0x5784c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57904",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x578dc",
+          "x_axis_offset": "0x578e0",
+          "y_axis_offset": "0x578f4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x579ac",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57984",
+          "x_axis_offset": "0x57988",
+          "y_axis_offset": "0x5799c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57a54",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57a2c",
+          "x_axis_offset": "0x57a30",
+          "y_axis_offset": "0x57a44",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57afc",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57ad4",
+          "x_axis_offset": "0x57ad8",
+          "y_axis_offset": "0x57aec",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_57C04",
+          "address": "0x57c04",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x57be8",
+          "x_axis_offset": "0x57bec",
+          "y_axis_offset": "0x57bfa",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57c5e",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57c36",
+          "x_axis_offset": "0x57c3a",
+          "y_axis_offset": "0x57c4e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57d06",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57cde",
+          "x_axis_offset": "0x57ce2",
+          "y_axis_offset": "0x57cf6",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57dae",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57d86",
+          "x_axis_offset": "0x57d8a",
+          "y_axis_offset": "0x57d9e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x57e42",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x57e2e",
+          "x_axis_offset": "0x57e32",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x57e66",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x57e52",
+          "x_axis_offset": "0x57e56",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_57E86",
+          "address": "0x57e86",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57e76",
+          "x_axis_offset": "0x57e7a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x57e9a",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57e92",
+          "x_axis_offset": "0x57e96",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_57EAE",
+          "address": "0x57eae",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x57e9e",
+          "x_axis_offset": "0x57ea2",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_57EDA",
+          "address": "0x57eda",
+          "length": [
+            6,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x57eba",
+          "x_axis_offset": "0x57ebe",
+          "y_axis_offset": "0x57ece",
+          "x_len": 6,
+          "y_len": 6
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x57f4a",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x57f22",
+          "x_axis_offset": "0x57f26",
+          "y_axis_offset": "0x57f3a",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x57fde",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x57fca",
+          "x_axis_offset": "0x57fce",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x57ffa",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x57fee",
+          "x_axis_offset": "0x57ff2",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5800C",
+          "address": "0x5800c",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x58002",
+          "x_axis_offset": "0x58006",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x5801e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x58012",
+          "x_axis_offset": "0x58016",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5803C",
+          "address": "0x5803c",
+          "length": [
+            2,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x58026",
+          "x_axis_offset": "0x5802a",
+          "y_axis_offset": "0x58032",
+          "x_len": 5,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank1_5809C",
+          "address": "0x5809c",
+          "length": [
+            6,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5807c",
+          "x_axis_offset": "0x58080",
+          "y_axis_offset": "0x58090",
+          "x_len": 6,
+          "y_len": 6
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x580f0",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x580e4",
+          "x_axis_offset": "0x580e8",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x58104",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x580f8",
+          "x_axis_offset": "0x580fc",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_58116",
+          "address": "0x58116",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5810c",
+          "x_axis_offset": "0x58110",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_58134",
+          "address": "0x58134",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5811c",
+          "x_axis_offset": "0x58120",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_58180",
+          "address": "0x58180",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x58170",
+          "x_axis_offset": "0x58174",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_581D4",
+          "address": "0x581d4",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x581c4",
+          "x_axis_offset": "0x581c8",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_58230",
+          "address": "0x58230",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x58218",
+          "x_axis_offset": "0x5821c",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5826C",
+          "address": "0x5826c",
+          "length": [
+            11,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x58244",
+          "x_axis_offset": "0x58248",
+          "y_axis_offset": "0x58262",
+          "x_len": 5,
+          "y_len": 11
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x58302",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x582da",
+          "x_axis_offset": "0x582de",
+          "y_axis_offset": "0x582f2",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_583A2",
+          "address": "0x583a2",
+          "length": [
+            5,
+            7
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x58382",
+          "x_axis_offset": "0x58386",
+          "y_axis_offset": "0x58394",
+          "x_len": 7,
+          "y_len": 5
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x58444",
+          "length": [
+            5,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5842a",
+          "x_axis_offset": "0x5842e",
+          "y_axis_offset": "0x5843c",
+          "x_len": 4,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank1_5847A",
+          "address": "0x5847a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5846c",
+          "x_axis_offset": "0x58470",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5849C",
+          "address": "0x5849c",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x58484",
+          "x_axis_offset": "0x58488",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_584C8",
+          "address": "0x584c8",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x584b0",
+          "x_axis_offset": "0x584b4",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_58560",
+          "address": "0x58560",
+          "length": [
+            16,
+            14
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x58504",
+          "x_axis_offset": "0x58508",
+          "y_axis_offset": "0x5852c",
+          "x_len": 14,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank1_58570",
+          "address": "0x58570",
+          "length": [
+            14,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x58528",
+          "x_axis_offset": "0x5852c",
+          "y_axis_offset": "0x5854c",
+          "x_len": 10,
+          "y_len": 14
+        },
+        {
+          "name": "Map_Bank1_58E3E",
+          "address": "0x58e3e",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x58e30",
+          "x_axis_offset": "0x58e34",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_59FE0",
+          "address": "0x59fe0",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x59fc8",
+          "x_axis_offset": "0x59fcc",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5AA84",
+          "address": "0x5aa84",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5aa74",
+          "x_axis_offset": "0x5aa78",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x5b19c",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x5b190",
+          "x_axis_offset": "0x5b194",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5b390",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b384",
+          "x_axis_offset": "0x5b388",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B3D2",
+          "address": "0x5b3d2",
+          "length": [
+            14,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5b398",
+          "x_axis_offset": "0x5b39c",
+          "y_axis_offset": "0x5b3bc",
+          "x_len": 11,
+          "y_len": 14
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x5b52e",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x5b506",
+          "x_axis_offset": "0x5b50a",
+          "y_axis_offset": "0x5b51e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x5b5d6",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x5b5ae",
+          "x_axis_offset": "0x5b5b2",
+          "y_axis_offset": "0x5b5c6",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank1_5B66E",
+          "address": "0x5b66e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b656",
+          "x_axis_offset": "0x5b65a",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B69A",
+          "address": "0x5b69a",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b682",
+          "x_axis_offset": "0x5b686",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5b6b6",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b6ae",
+          "x_axis_offset": "0x5b6b2",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x5b6c2",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b6ba",
+          "x_axis_offset": "0x5b6be",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B730",
+          "address": "0x5b730",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b722",
+          "x_axis_offset": "0x5b726",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B748",
+          "address": "0x5b748",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b73a",
+          "x_axis_offset": "0x5b73e",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B77A",
+          "address": "0x5b77a",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b752",
+          "x_axis_offset": "0x5b756",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B7E2",
+          "address": "0x5b7e2",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b7ba",
+          "x_axis_offset": "0x5b7be",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B84A",
+          "address": "0x5b84a",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b822",
+          "x_axis_offset": "0x5b826",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B8B2",
+          "address": "0x5b8b2",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b88a",
+          "x_axis_offset": "0x5b88e",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B90C",
+          "address": "0x5b90c",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b8d6",
+          "x_axis_offset": "0x5b8da",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B956",
+          "address": "0x5b956",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b93e",
+          "x_axis_offset": "0x5b942",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B9A0",
+          "address": "0x5b9a0",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b96a",
+          "x_axis_offset": "0x5b96e",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5B9E2",
+          "address": "0x5b9e2",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b9d2",
+          "x_axis_offset": "0x5b9d6",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5BA24",
+          "address": "0x5ba24",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x5b9ee",
+          "x_axis_offset": "0x5b9f2",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank1_5BA86",
+          "address": "0x5ba86",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5ba56",
+          "x_axis_offset": "0x5ba5a",
+          "y_axis_offset": "0x5ba72",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank1_5BB7E",
+          "address": "0x5bb7e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x5bb4e",
+          "x_axis_offset": "0x5bb52",
+          "y_axis_offset": "0x5bb6a",
+          "x_len": 10,
+          "y_len": 10
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start_address": "0x6c000",
+      "end_address": "0x80000",
+      "length": "0x14000",
+      "type": "copy",
+      "map_count": 237,
+      "maps": [
+        {
+          "name": "MAP linearization",
+          "address": "0x6c008",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c000",
+          "x_axis_offset": "0x6c004",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6C03A",
+          "address": "0x6c03a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c02c",
+          "x_axis_offset": "0x6c030",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6C052",
+          "address": "0x6c052",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c044",
+          "x_axis_offset": "0x6c048",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6C074",
+          "address": "0x6c074",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c05c",
+          "x_axis_offset": "0x6c060",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x6c09c",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x6c088",
+          "x_axis_offset": "0x6c08c",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6c0bc",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6c0ac",
+          "x_axis_offset": "0x6c0b0",
+          "y_axis_offset": "0x6c0b8",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_6C102",
+          "address": "0x6c102",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c0cc",
+          "x_axis_offset": "0x6c0d0",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6c3ce",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6c3be",
+          "x_axis_offset": "0x6c3c2",
+          "y_axis_offset": "0x6c3ca",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_6C406",
+          "address": "0x6c406",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6c3d6",
+          "x_axis_offset": "0x6c3da",
+          "y_axis_offset": "0x6c3f2",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6C4FE",
+          "address": "0x6c4fe",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6c4ce",
+          "x_axis_offset": "0x6c4d2",
+          "y_axis_offset": "0x6c4ea",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6C5E0",
+          "address": "0x6c5e0",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6c5c6",
+          "x_axis_offset": "0x6c5ca",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x6c636",
+          "length": [
+            12,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x6c5f6",
+          "x_axis_offset": "0x6c5fa",
+          "y_axis_offset": "0x6c616",
+          "x_len": 16,
+          "y_len": 12
+        },
+        {
+          "name": "Expected fuel temperature",
+          "address": "0x6c8fe",
+          "length": [
+            16,
+            8
+          ],
+          "type": "3D",
+          "unit": "\u00b0C",
+          "description": "3D map at 0x6c8c6",
+          "x_axis_offset": "0x6c8ca",
+          "y_axis_offset": "0x6c8ee",
+          "x_len": 8,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_6CB38",
+          "address": "0x6cb38",
+          "length": [
+            8,
+            9
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6cb0e",
+          "x_axis_offset": "0x6cb12",
+          "y_axis_offset": "0x6cb26",
+          "x_len": 9,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_6CC1E",
+          "address": "0x6cc1e",
+          "length": [
+            9,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6cbf0",
+          "x_axis_offset": "0x6cbf4",
+          "y_axis_offset": "0x6cc0a",
+          "x_len": 10,
+          "y_len": 9
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6ccda",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6ccd2",
+          "x_axis_offset": "0x6ccd6",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6CCFC",
+          "address": "0x6ccfc",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6ccf2",
+          "x_axis_offset": "0x6ccf6",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "EGR temperature map",
+          "address": "0x6cd2a",
+          "length": [
+            10,
+            6
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x6cd02",
+          "x_axis_offset": "0x6cd06",
+          "y_axis_offset": "0x6cd1e",
+          "x_len": 6,
+          "y_len": 10
+        },
+        {
+          "name": "Torque limiter",
+          "address": "0x6cf82",
+          "length": [
+            3,
+            21
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x6cf4a",
+          "x_axis_offset": "0x6cf4e",
+          "y_axis_offset": "0x6cf58",
+          "x_len": 21,
+          "y_len": 3
+        },
+        {
+          "name": "Injector duration selector",
+          "address": "0x6d03c",
+          "length": [
+            1,
+            12
+          ],
+          "type": "2D",
+          "unit": "index",
+          "description": "2D map at 0x6d020",
+          "x_axis_offset": "0x6d024",
+          "y_axis_offset": "0x000000",
+          "x_len": 12,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6D064",
+          "address": "0x6d064",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6d054",
+          "x_axis_offset": "0x6d058",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6D0C2",
+          "address": "0x6d0c2",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6d070",
+          "x_axis_offset": "0x6d074",
+          "y_axis_offset": "0x6d098",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_6D0BC",
+          "address": "0x6d0bc",
+          "length": [
+            13,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6d094",
+          "x_axis_offset": "0x6d098",
+          "y_axis_offset": "0x6d0b6",
+          "x_len": 3,
+          "y_len": 13
+        },
+        {
+          "name": "Map_Bank2_6D5BE",
+          "address": "0x6d5be",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6d5a2",
+          "x_axis_offset": "0x6d5a6",
+          "y_axis_offset": "0x6d5b4",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6d5f8",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6d5f0",
+          "x_axis_offset": "0x6d5f4",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x6d638",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x6d5fc",
+          "x_axis_offset": "0x6d600",
+          "y_axis_offset": "0x6d624",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x6d7b4",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x6d778",
+          "x_axis_offset": "0x6d77c",
+          "y_axis_offset": "0x6d7a0",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_6D96A",
+          "address": "0x6d96a",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6d95a",
+          "x_axis_offset": "0x6d95e",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6D986",
+          "address": "0x6d986",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6d976",
+          "x_axis_offset": "0x6d97a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6D9A4",
+          "address": "0x6d9a4",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6d992",
+          "x_axis_offset": "0x6d996",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6D9CE",
+          "address": "0x6d9ce",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6d9b2",
+          "x_axis_offset": "0x6d9b6",
+          "y_axis_offset": "0x6d9c4",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank2_6DAC6",
+          "address": "0x6dac6",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6daaa",
+          "x_axis_offset": "0x6daae",
+          "y_axis_offset": "0x6dabc",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank2_6DBB6",
+          "address": "0x6dbb6",
+          "length": [
+            3,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6dba2",
+          "x_axis_offset": "0x6dba6",
+          "y_axis_offset": "0x6dbb0",
+          "x_len": 3,
+          "y_len": 3
+        },
+        {
+          "name": "Map_Bank2_6DC52",
+          "address": "0x6dc52",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6dc42",
+          "x_axis_offset": "0x6dc46",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DC8E",
+          "address": "0x6dc8e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6dc5e",
+          "x_axis_offset": "0x6dc62",
+          "y_axis_offset": "0x6dc7a",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6DD78",
+          "address": "0x6dd78",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6dd56",
+          "x_axis_offset": "0x6dd5a",
+          "y_axis_offset": "0x6dd6e",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_6DDEA",
+          "address": "0x6ddea",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6ddc8",
+          "x_axis_offset": "0x6ddcc",
+          "y_axis_offset": "0x6dde0",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x6de4e",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x6de3a",
+          "x_axis_offset": "0x6de3e",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x6de72",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x6de5e",
+          "x_axis_offset": "0x6de62",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x6de96",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x6de82",
+          "x_axis_offset": "0x6de86",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x6deba",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x6dea6",
+          "x_axis_offset": "0x6deaa",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6ded6",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6deca",
+          "x_axis_offset": "0x6dece",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DEEC",
+          "address": "0x6deec",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6dede",
+          "x_axis_offset": "0x6dee2",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DF04",
+          "address": "0x6df04",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6def6",
+          "x_axis_offset": "0x6defa",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DF1C",
+          "address": "0x6df1c",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6df0e",
+          "x_axis_offset": "0x6df12",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DF34",
+          "address": "0x6df34",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6df26",
+          "x_axis_offset": "0x6df2a",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6DF5A",
+          "address": "0x6df5a",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6df3e",
+          "x_axis_offset": "0x6df42",
+          "y_axis_offset": "0x6df50",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank2_6DFBC",
+          "address": "0x6dfbc",
+          "length": [
+            12,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6df8c",
+          "x_axis_offset": "0x6df90",
+          "y_axis_offset": "0x6dfac",
+          "x_len": 8,
+          "y_len": 12
+        },
+        {
+          "name": "Map_Bank2_6E08C",
+          "address": "0x6e08c",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e07c",
+          "x_axis_offset": "0x6e080",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6E0AA",
+          "address": "0x6e0aa",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e098",
+          "x_axis_offset": "0x6e09c",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6E0E8",
+          "address": "0x6e0e8",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6e0b8",
+          "x_axis_offset": "0x6e0bc",
+          "y_axis_offset": "0x6e0d4",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6E1E0",
+          "address": "0x6e1e0",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6e1b0",
+          "x_axis_offset": "0x6e1b4",
+          "y_axis_offset": "0x6e1cc",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6E2CE",
+          "address": "0x6e2ce",
+          "length": [
+            10,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6e2a8",
+          "x_axis_offset": "0x6e2ac",
+          "y_axis_offset": "0x6e2c4",
+          "x_len": 5,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_6E34A",
+          "address": "0x6e34a",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e332",
+          "x_axis_offset": "0x6e336",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6E372",
+          "address": "0x6e372",
+          "length": [
+            3,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x6e35e",
+          "x_axis_offset": "0x6e362",
+          "y_axis_offset": "0x6e36c",
+          "x_len": 3,
+          "y_len": 3
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e45e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e456",
+          "x_axis_offset": "0x6e45a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6E472",
+          "address": "0x6e472",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e462",
+          "x_axis_offset": "0x6e466",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e4d2",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e4ca",
+          "x_axis_offset": "0x6e4ce",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e4de",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e4d6",
+          "x_axis_offset": "0x6e4da",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_6E4F2",
+          "address": "0x6e4f2",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e4e2",
+          "x_axis_offset": "0x6e4e6",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e506",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e4fe",
+          "x_axis_offset": "0x6e502",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e512",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e50a",
+          "x_axis_offset": "0x6e50e",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e51e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e516",
+          "x_axis_offset": "0x6e51a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e52e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e522",
+          "x_axis_offset": "0x6e526",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e556",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e54e",
+          "x_axis_offset": "0x6e552",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x6e562",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x6e55a",
+          "x_axis_offset": "0x6e55e",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_70578",
+          "address": "0x70578",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x70560",
+          "x_axis_offset": "0x70564",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7059E",
+          "address": "0x7059e",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x70584",
+          "x_axis_offset": "0x70588",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_705B2",
+          "address": "0x705b2",
+          "length": [
+            1,
+            9
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7059c",
+          "x_axis_offset": "0x705a0",
+          "y_axis_offset": "0x000000",
+          "x_len": 9,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_705CC",
+          "address": "0x705cc",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x705b4",
+          "x_axis_offset": "0x705b8",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7065E",
+          "address": "0x7065e",
+          "length": [
+            1,
+            11
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x70644",
+          "x_axis_offset": "0x70648",
+          "y_axis_offset": "0x000000",
+          "x_len": 11,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_706C6",
+          "address": "0x706c6",
+          "length": [
+            1,
+            9
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x706b0",
+          "x_axis_offset": "0x706b4",
+          "y_axis_offset": "0x000000",
+          "x_len": 9,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_70848",
+          "address": "0x70848",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x70830",
+          "x_axis_offset": "0x70834",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_71C76",
+          "address": "0x71c76",
+          "length": [
+            8,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x71c48",
+          "x_axis_offset": "0x71c4c",
+          "y_axis_offset": "0x71c60",
+          "x_len": 11,
+          "y_len": 8
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x71faa",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x71f6e",
+          "x_axis_offset": "0x71f72",
+          "y_axis_offset": "0x71f96",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_7211E",
+          "address": "0x7211e",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x72110",
+          "x_axis_offset": "0x72114",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7264C",
+          "address": "0x7264c",
+          "length": [
+            1,
+            30
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7260c",
+          "x_axis_offset": "0x72610",
+          "y_axis_offset": "0x000000",
+          "x_len": 30,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_73FA0",
+          "address": "0x73fa0",
+          "length": [
+            1,
+            32
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x73f5c",
+          "x_axis_offset": "0x73f60",
+          "y_axis_offset": "0x000000",
+          "x_len": 32,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_742E0",
+          "address": "0x742e0",
+          "length": [
+            1,
+            15
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x742be",
+          "x_axis_offset": "0x742c2",
+          "y_axis_offset": "0x000000",
+          "x_len": 15,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_742E2",
+          "address": "0x742e2",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x742ca",
+          "x_axis_offset": "0x742ce",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7430E",
+          "address": "0x7430e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x742f6",
+          "x_axis_offset": "0x742fa",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_74376",
+          "address": "0x74376",
+          "length": [
+            10,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7434a",
+          "x_axis_offset": "0x7434e",
+          "y_axis_offset": "0x74366",
+          "x_len": 8,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_7442E",
+          "address": "0x7442e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x74416",
+          "x_axis_offset": "0x7441a",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_74454",
+          "address": "0x74454",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x74442",
+          "x_axis_offset": "0x74446",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_74492",
+          "address": "0x74492",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x74462",
+          "x_axis_offset": "0x74466",
+          "y_axis_offset": "0x7447e",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x745a0",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x7455a",
+          "x_axis_offset": "0x7455e",
+          "y_axis_offset": "0x74580",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x74826",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x747e0",
+          "x_axis_offset": "0x747e4",
+          "y_axis_offset": "0x74806",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x74aac",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x74a66",
+          "x_axis_offset": "0x74a6a",
+          "y_axis_offset": "0x74a8c",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Driver wish",
+          "address": "0x74d32",
+          "length": [
+            15,
+            16
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x74cec",
+          "x_axis_offset": "0x74cf0",
+          "y_axis_offset": "0x74d12",
+          "x_len": 16,
+          "y_len": 15
+        },
+        {
+          "name": "Map_Bank2_74FA2",
+          "address": "0x74fa2",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x74f72",
+          "x_axis_offset": "0x74f76",
+          "y_axis_offset": "0x74f8e",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x750d4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x750ac",
+          "x_axis_offset": "0x750b0",
+          "y_axis_offset": "0x750c4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_7517E",
+          "address": "0x7517e",
+          "length": [
+            9,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x75154",
+          "x_axis_offset": "0x75158",
+          "y_axis_offset": "0x7516e",
+          "x_len": 8,
+          "y_len": 9
+        },
+        {
+          "name": "Map_Bank2_7521E",
+          "address": "0x7521e",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7520e",
+          "x_axis_offset": "0x75212",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7523A",
+          "address": "0x7523a",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7522a",
+          "x_axis_offset": "0x7522e",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75314",
+          "address": "0x75314",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x752fc",
+          "x_axis_offset": "0x75300",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75340",
+          "address": "0x75340",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75328",
+          "x_axis_offset": "0x7532c",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x75360",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75354",
+          "x_axis_offset": "0x75358",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_753FC",
+          "address": "0x753fc",
+          "length": [
+            6,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x753e0",
+          "x_axis_offset": "0x753e4",
+          "y_axis_offset": "0x753f4",
+          "x_len": 4,
+          "y_len": 6
+        },
+        {
+          "name": "Map_Bank2_7545E",
+          "address": "0x7545e",
+          "length": [
+            10,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7542c",
+          "x_axis_offset": "0x75430",
+          "y_axis_offset": "0x75448",
+          "x_len": 11,
+          "y_len": 10
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x75562",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x7553a",
+          "x_axis_offset": "0x7553e",
+          "y_axis_offset": "0x75552",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_75624",
+          "address": "0x75624",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x755e2",
+          "x_axis_offset": "0x755e6",
+          "y_axis_offset": "0x7560a",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7583a",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7582a",
+          "x_axis_offset": "0x7582e",
+          "y_axis_offset": "0x75836",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7584e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75842",
+          "x_axis_offset": "0x75846",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75876",
+          "address": "0x75876",
+          "length": [
+            4,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x75856",
+          "x_axis_offset": "0x7585a",
+          "y_axis_offset": "0x75866",
+          "x_len": 8,
+          "y_len": 4
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x75912",
+          "length": [
+            2,
+            4
+          ],
+          "type": "3D",
+          "unit": "rpm",
+          "description": "3D map at 0x758fe",
+          "x_axis_offset": "0x75902",
+          "y_axis_offset": "0x7590a",
+          "x_len": 4,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_75940",
+          "address": "0x75940",
+          "length": [
+            5,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x75922",
+          "x_axis_offset": "0x75926",
+          "y_axis_offset": "0x75934",
+          "x_len": 6,
+          "y_len": 5
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x759fe",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x759ee",
+          "x_axis_offset": "0x759f2",
+          "y_axis_offset": "0x759fa",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_75A14",
+          "address": "0x75a14",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75a06",
+          "x_axis_offset": "0x75a0a",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x75a26",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75a1e",
+          "x_axis_offset": "0x75a22",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75A6C",
+          "address": "0x75a6c",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x75a2a",
+          "x_axis_offset": "0x75a2e",
+          "y_axis_offset": "0x75a52",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_75C4E",
+          "address": "0x75c4e",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x75c0c",
+          "x_axis_offset": "0x75c10",
+          "y_axis_offset": "0x75c34",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_75DFC",
+          "address": "0x75dfc",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75dee",
+          "x_axis_offset": "0x75df2",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x75e32",
+          "length": [
+            1,
+            20
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75e06",
+          "x_axis_offset": "0x75e0a",
+          "y_axis_offset": "0x000000",
+          "x_len": 20,
+          "y_len": 1
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x75e86",
+          "length": [
+            1,
+            20
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75e5a",
+          "x_axis_offset": "0x75e5e",
+          "y_axis_offset": "0x000000",
+          "x_len": 20,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75EC6",
+          "address": "0x75ec6",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75eae",
+          "x_axis_offset": "0x75eb2",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_75F12",
+          "address": "0x75f12",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x75f02",
+          "x_axis_offset": "0x75f06",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x75f32",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x75f1e",
+          "x_axis_offset": "0x75f22",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x75f56",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x75f42",
+          "x_axis_offset": "0x75f46",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x75f7a",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x75f66",
+          "x_axis_offset": "0x75f6a",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x75f9a",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "rpm",
+          "description": "3D map at 0x75f8a",
+          "x_axis_offset": "0x75f8e",
+          "y_axis_offset": "0x75f96",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_76050",
+          "address": "0x76050",
+          "length": [
+            1,
+            13
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76032",
+          "x_axis_offset": "0x76036",
+          "y_axis_offset": "0x000000",
+          "x_len": 13,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_760CE",
+          "address": "0x760ce",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x760b6",
+          "x_axis_offset": "0x760ba",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_760FA",
+          "address": "0x760fa",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x760e2",
+          "x_axis_offset": "0x760e6",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7613E",
+          "address": "0x7613e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7610e",
+          "x_axis_offset": "0x76112",
+          "y_axis_offset": "0x7612a",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_762FE",
+          "address": "0x762fe",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x762f0",
+          "x_axis_offset": "0x762f4",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x76318",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76308",
+          "x_axis_offset": "0x7630c",
+          "y_axis_offset": "0x76314",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_76338",
+          "address": "0x76338",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76320",
+          "x_axis_offset": "0x76324",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76424",
+          "address": "0x76424",
+          "length": [
+            10,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76400",
+          "x_axis_offset": "0x76404",
+          "y_axis_offset": "0x7641c",
+          "x_len": 4,
+          "y_len": 10
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x76484",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76474",
+          "x_axis_offset": "0x76478",
+          "y_axis_offset": "0x76480",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x764a0",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x7648c",
+          "x_axis_offset": "0x76490",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x76550",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76540",
+          "x_axis_offset": "0x76544",
+          "y_axis_offset": "0x7654c",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_76630",
+          "address": "0x76630",
+          "length": [
+            8,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7660e",
+          "x_axis_offset": "0x76612",
+          "y_axis_offset": "0x76626",
+          "x_len": 5,
+          "y_len": 8
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x766ea",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x766da",
+          "x_axis_offset": "0x766de",
+          "y_axis_offset": "0x766e6",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_76716",
+          "address": "0x76716",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x766fe",
+          "x_axis_offset": "0x76702",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x76866",
+          "length": [
+            2,
+            2
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76856",
+          "x_axis_offset": "0x7685a",
+          "y_axis_offset": "0x76862",
+          "x_len": 2,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_76892",
+          "address": "0x76892",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7687a",
+          "x_axis_offset": "0x7687e",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x769fa",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x769d2",
+          "x_axis_offset": "0x769d6",
+          "y_axis_offset": "0x769ea",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x76aa2",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x76a7a",
+          "x_axis_offset": "0x76a7e",
+          "y_axis_offset": "0x76a92",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_76B46",
+          "address": "0x76b46",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76b22",
+          "x_axis_offset": "0x76b26",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76B76",
+          "address": "0x76b76",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76b66",
+          "x_axis_offset": "0x76b6a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76BCE",
+          "address": "0x76bce",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76baa",
+          "x_axis_offset": "0x76bae",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76C12",
+          "address": "0x76c12",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76bee",
+          "x_axis_offset": "0x76bf2",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76C56",
+          "address": "0x76c56",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76c32",
+          "x_axis_offset": "0x76c36",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x76c7e",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76c76",
+          "x_axis_offset": "0x76c7a",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Injection duration",
+          "address": "0x76cbe",
+          "length": [
+            16,
+            10
+          ],
+          "type": "3D",
+          "unit": "degrees",
+          "description": "3D map at 0x76c82",
+          "x_axis_offset": "0x76c86",
+          "y_axis_offset": "0x76caa",
+          "x_len": 10,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_76E28",
+          "address": "0x76e28",
+          "length": [
+            9,
+            8
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76dfe",
+          "x_axis_offset": "0x76e02",
+          "y_axis_offset": "0x76e18",
+          "x_len": 8,
+          "y_len": 9
+        },
+        {
+          "name": "Map_Bank2_76EDE",
+          "address": "0x76ede",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76ecc",
+          "x_axis_offset": "0x76ed0",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76F10",
+          "address": "0x76f10",
+          "length": [
+            1,
+            16
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76eec",
+          "x_axis_offset": "0x76ef0",
+          "y_axis_offset": "0x000000",
+          "x_len": 16,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76F48",
+          "address": "0x76f48",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76f30",
+          "x_axis_offset": "0x76f34",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76F74",
+          "address": "0x76f74",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x76f5c",
+          "x_axis_offset": "0x76f60",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_76FCA",
+          "address": "0x76fca",
+          "length": [
+            16,
+            13
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x76f88",
+          "x_axis_offset": "0x76f8c",
+          "y_axis_offset": "0x76fb0",
+          "x_len": 13,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_7717C",
+          "address": "0x7717c",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7716a",
+          "x_axis_offset": "0x7716e",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_771A2",
+          "address": "0x771a2",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7718a",
+          "x_axis_offset": "0x7718e",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_771D0",
+          "address": "0x771d0",
+          "length": [
+            6,
+            3
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x771b6",
+          "x_axis_offset": "0x771ba",
+          "y_axis_offset": "0x771ca",
+          "x_len": 3,
+          "y_len": 6
+        },
+        {
+          "name": "Map_Bank2_772B4",
+          "address": "0x772b4",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x77284",
+          "x_axis_offset": "0x77288",
+          "y_axis_offset": "0x772a0",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_77394",
+          "address": "0x77394",
+          "length": [
+            4,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7737c",
+          "x_axis_offset": "0x77380",
+          "y_axis_offset": "0x7738c",
+          "x_len": 4,
+          "y_len": 4
+        },
+        {
+          "name": "Map_Bank2_77448",
+          "address": "0x77448",
+          "length": [
+            7,
+            7
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x77424",
+          "x_axis_offset": "0x77428",
+          "y_axis_offset": "0x7743a",
+          "x_len": 7,
+          "y_len": 7
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x774f4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x774cc",
+          "x_axis_offset": "0x774d0",
+          "y_axis_offset": "0x774e4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7757c",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77574",
+          "x_axis_offset": "0x77578",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_775AA",
+          "address": "0x775aa",
+          "length": [
+            1,
+            7
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77598",
+          "x_axis_offset": "0x7759c",
+          "y_axis_offset": "0x000000",
+          "x_len": 7,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_775CE",
+          "address": "0x775ce",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x775c0",
+          "x_axis_offset": "0x775c4",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_775E8",
+          "address": "0x775e8",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x775d8",
+          "x_axis_offset": "0x775dc",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x7761c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x775f4",
+          "x_axis_offset": "0x775f8",
+          "y_axis_offset": "0x7760c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x776c4",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x7769c",
+          "x_axis_offset": "0x776a0",
+          "y_axis_offset": "0x776b4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x7776c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77744",
+          "x_axis_offset": "0x77748",
+          "y_axis_offset": "0x7775c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_777FA",
+          "address": "0x777fa",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x777ec",
+          "x_axis_offset": "0x777f0",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_77812",
+          "address": "0x77812",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77804",
+          "x_axis_offset": "0x77808",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7782A",
+          "address": "0x7782a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7781c",
+          "x_axis_offset": "0x77820",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x7785c",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77834",
+          "x_axis_offset": "0x77838",
+          "y_axis_offset": "0x7784c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77904",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x778dc",
+          "x_axis_offset": "0x778e0",
+          "y_axis_offset": "0x778f4",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x779ac",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77984",
+          "x_axis_offset": "0x77988",
+          "y_axis_offset": "0x7799c",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77a54",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77a2c",
+          "x_axis_offset": "0x77a30",
+          "y_axis_offset": "0x77a44",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77afc",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77ad4",
+          "x_axis_offset": "0x77ad8",
+          "y_axis_offset": "0x77aec",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_77C04",
+          "address": "0x77c04",
+          "length": [
+            5,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x77be8",
+          "x_axis_offset": "0x77bec",
+          "y_axis_offset": "0x77bfa",
+          "x_len": 5,
+          "y_len": 5
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77c5e",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77c36",
+          "x_axis_offset": "0x77c3a",
+          "y_axis_offset": "0x77c4e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77d06",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77cde",
+          "x_axis_offset": "0x77ce2",
+          "y_axis_offset": "0x77cf6",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77dae",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77d86",
+          "x_axis_offset": "0x77d8a",
+          "y_axis_offset": "0x77d9e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x77e42",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x77e2e",
+          "x_axis_offset": "0x77e32",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x77e66",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x77e52",
+          "x_axis_offset": "0x77e56",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_77E86",
+          "address": "0x77e86",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77e76",
+          "x_axis_offset": "0x77e7a",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x77e9a",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77e92",
+          "x_axis_offset": "0x77e96",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_77EAE",
+          "address": "0x77eae",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x77e9e",
+          "x_axis_offset": "0x77ea2",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_77EDA",
+          "address": "0x77eda",
+          "length": [
+            6,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x77eba",
+          "x_axis_offset": "0x77ebe",
+          "y_axis_offset": "0x77ece",
+          "x_len": 6,
+          "y_len": 6
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x77f4a",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x77f22",
+          "x_axis_offset": "0x77f26",
+          "y_axis_offset": "0x77f3a",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x77fde",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x77fca",
+          "x_axis_offset": "0x77fce",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x77ffa",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x77fee",
+          "x_axis_offset": "0x77ff2",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7800C",
+          "address": "0x7800c",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x78002",
+          "x_axis_offset": "0x78006",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x7801e",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x78012",
+          "x_axis_offset": "0x78016",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7803C",
+          "address": "0x7803c",
+          "length": [
+            2,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x78026",
+          "x_axis_offset": "0x7802a",
+          "y_axis_offset": "0x78032",
+          "x_len": 5,
+          "y_len": 2
+        },
+        {
+          "name": "Map_Bank2_7809C",
+          "address": "0x7809c",
+          "length": [
+            6,
+            6
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7807c",
+          "x_axis_offset": "0x78080",
+          "y_axis_offset": "0x78090",
+          "x_len": 6,
+          "y_len": 6
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x780f0",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x780e4",
+          "x_axis_offset": "0x780e8",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x78104",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x780f8",
+          "x_axis_offset": "0x780fc",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_78116",
+          "address": "0x78116",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7810c",
+          "x_axis_offset": "0x78110",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_78134",
+          "address": "0x78134",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7811c",
+          "x_axis_offset": "0x78120",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_78180",
+          "address": "0x78180",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x78170",
+          "x_axis_offset": "0x78174",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_781D4",
+          "address": "0x781d4",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x781c4",
+          "x_axis_offset": "0x781c8",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_78230",
+          "address": "0x78230",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x78218",
+          "x_axis_offset": "0x7821c",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7826C",
+          "address": "0x7826c",
+          "length": [
+            11,
+            5
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x78244",
+          "x_axis_offset": "0x78248",
+          "y_axis_offset": "0x78262",
+          "x_len": 5,
+          "y_len": 11
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x78302",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x782da",
+          "x_axis_offset": "0x782de",
+          "y_axis_offset": "0x782f2",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_783A2",
+          "address": "0x783a2",
+          "length": [
+            5,
+            7
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x78382",
+          "x_axis_offset": "0x78386",
+          "y_axis_offset": "0x78394",
+          "x_len": 7,
+          "y_len": 5
+        },
+        {
+          "name": "Pre-glow map",
+          "address": "0x78444",
+          "length": [
+            5,
+            4
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7842a",
+          "x_axis_offset": "0x7842e",
+          "y_axis_offset": "0x7843c",
+          "x_len": 4,
+          "y_len": 5
+        },
+        {
+          "name": "Map_Bank2_7847A",
+          "address": "0x7847a",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7846c",
+          "x_axis_offset": "0x78470",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7849C",
+          "address": "0x7849c",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x78484",
+          "x_axis_offset": "0x78488",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_784C8",
+          "address": "0x784c8",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x784b0",
+          "x_axis_offset": "0x784b4",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_78560",
+          "address": "0x78560",
+          "length": [
+            16,
+            14
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x78504",
+          "x_axis_offset": "0x78508",
+          "y_axis_offset": "0x7852c",
+          "x_len": 14,
+          "y_len": 16
+        },
+        {
+          "name": "Map_Bank2_78570",
+          "address": "0x78570",
+          "length": [
+            14,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x78528",
+          "x_axis_offset": "0x7852c",
+          "y_axis_offset": "0x7854c",
+          "x_len": 10,
+          "y_len": 14
+        },
+        {
+          "name": "Map_Bank2_78E3E",
+          "address": "0x78e3e",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x78e30",
+          "x_axis_offset": "0x78e34",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_79FE0",
+          "address": "0x79fe0",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x79fc8",
+          "x_axis_offset": "0x79fcc",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7AA84",
+          "address": "0x7aa84",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7aa74",
+          "x_axis_offset": "0x7aa78",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x7b19c",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x7b190",
+          "x_axis_offset": "0x7b194",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7b390",
+          "length": [
+            1,
+            4
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b384",
+          "x_axis_offset": "0x7b388",
+          "y_axis_offset": "0x000000",
+          "x_len": 4,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B3D2",
+          "address": "0x7b3d2",
+          "length": [
+            14,
+            11
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7b398",
+          "x_axis_offset": "0x7b39c",
+          "y_axis_offset": "0x7b3bc",
+          "x_len": 11,
+          "y_len": 14
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x7b52e",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x7b506",
+          "x_axis_offset": "0x7b50a",
+          "y_axis_offset": "0x7b51e",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "MAF linearization",
+          "address": "0x7b5d6",
+          "length": [
+            8,
+            8
+          ],
+          "type": "3D",
+          "unit": "mg/stroke",
+          "description": "3D map at 0x7b5ae",
+          "x_axis_offset": "0x7b5b2",
+          "y_axis_offset": "0x7b5c6",
+          "x_len": 8,
+          "y_len": 8
+        },
+        {
+          "name": "Map_Bank2_7B66E",
+          "address": "0x7b66e",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b656",
+          "x_axis_offset": "0x7b65a",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B69A",
+          "address": "0x7b69a",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b682",
+          "x_axis_offset": "0x7b686",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7b6b6",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b6ae",
+          "x_axis_offset": "0x7b6b2",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "MAP linearization",
+          "address": "0x7b6c2",
+          "length": [
+            1,
+            2
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b6ba",
+          "x_axis_offset": "0x7b6be",
+          "y_axis_offset": "0x000000",
+          "x_len": 2,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B730",
+          "address": "0x7b730",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b722",
+          "x_axis_offset": "0x7b726",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B748",
+          "address": "0x7b748",
+          "length": [
+            1,
+            5
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b73a",
+          "x_axis_offset": "0x7b73e",
+          "y_axis_offset": "0x000000",
+          "x_len": 5,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B77A",
+          "address": "0x7b77a",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b752",
+          "x_axis_offset": "0x7b756",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B7E2",
+          "address": "0x7b7e2",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b7ba",
+          "x_axis_offset": "0x7b7be",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B84A",
+          "address": "0x7b84a",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b822",
+          "x_axis_offset": "0x7b826",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B8B2",
+          "address": "0x7b8b2",
+          "length": [
+            1,
+            18
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b88a",
+          "x_axis_offset": "0x7b88e",
+          "y_axis_offset": "0x000000",
+          "x_len": 18,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B90C",
+          "address": "0x7b90c",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b8d6",
+          "x_axis_offset": "0x7b8da",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B956",
+          "address": "0x7b956",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b93e",
+          "x_axis_offset": "0x7b942",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B9A0",
+          "address": "0x7b9a0",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b96a",
+          "x_axis_offset": "0x7b96e",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7B9E2",
+          "address": "0x7b9e2",
+          "length": [
+            1,
+            6
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b9d2",
+          "x_axis_offset": "0x7b9d6",
+          "y_axis_offset": "0x000000",
+          "x_len": 6,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7BA24",
+          "address": "0x7ba24",
+          "length": [
+            1,
+            25
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7b9ee",
+          "x_axis_offset": "0x7b9f2",
+          "y_axis_offset": "0x000000",
+          "x_len": 25,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Bank2_7BA86",
+          "address": "0x7ba86",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7ba56",
+          "x_axis_offset": "0x7ba5a",
+          "y_axis_offset": "0x7ba72",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Bank2_7BB7E",
+          "address": "0x7bb7e",
+          "length": [
+            10,
+            10
+          ],
+          "type": "3D",
+          "unit": "mbar",
+          "description": "3D map at 0x7bb4e",
+          "x_axis_offset": "0x7bb52",
+          "y_axis_offset": "0x7bb6a",
+          "x_len": 10,
+          "y_len": 10
+        },
+        {
+          "name": "Map_Unknown_7C7A6",
+          "address": "0x7c7a6",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7c79c",
+          "x_axis_offset": "0x7c7a0",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Unknown_7C9EC",
+          "address": "0x7c9ec",
+          "length": [
+            1,
+            3
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7c9e2",
+          "x_axis_offset": "0x7c9e6",
+          "y_axis_offset": "0x000000",
+          "x_len": 3,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Unknown_7CEC2",
+          "address": "0x7cec2",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7ceaa",
+          "x_axis_offset": "0x7ceae",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Map_Unknown_7CEEC",
+          "address": "0x7ceec",
+          "length": [
+            1,
+            10
+          ],
+          "type": "2D",
+          "unit": "mbar",
+          "description": "2D map at 0x7ced4",
+          "x_axis_offset": "0x7ced8",
+          "y_axis_offset": "0x000000",
+          "x_len": 10,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x7cfb4",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x7cfa0",
+          "x_axis_offset": "0x7cfa4",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        },
+        {
+          "name": "Idle RPM",
+          "address": "0x7cfd8",
+          "length": [
+            1,
+            8
+          ],
+          "type": "2D",
+          "unit": "rpm",
+          "description": "2D map at 0x7cfc4",
+          "x_axis_offset": "0x7cfc8",
+          "y_axis_offset": "0x000000",
+          "x_len": 8,
+          "y_len": 1
+        }
+      ]
+    }
+  ]
+}
