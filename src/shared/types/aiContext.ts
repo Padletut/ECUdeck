@@ -15,6 +15,7 @@ export type ContextSourceKind =
 export type CompressionStrategy = 'none' | 'summary' | 'hierarchical-summary' | 'budgeted-pack';
 
 export type SnapshotStatus = 'fresh' | 'stale' | 'invalidated';
+export type ReviewDecisionStatus = 'pending' | 'accepted' | 'rejected';
 
 export type ContextEventType =
   | 'context-snapshot-created'
@@ -63,6 +64,8 @@ export interface CompressedContextSnapshot {
   safetyWarnings: string[];
   acceptedDecisionRefs: string[];
   rejectedDecisionRefs: string[];
+  reviewStatus: ReviewDecisionStatus;
+  reviewedAt?: string;
   metadata: CompressionMetadata;
 }
 
@@ -146,11 +149,15 @@ export type AiResponseKind = 'explanation' | 'plan' | 'proposal';
 export interface ProposalContextReference {
   proposalId: string;
   contextSnapshotId?: string;
+  reviewStatus: ReviewDecisionStatus;
+  reviewedAt?: string;
 }
 
 export interface SendAiChatResponse {
   responseKind: AiResponseKind;
   summaryText: string;
+  reviewStatus: ReviewDecisionStatus;
+  reviewedAt?: string;
   proposal?: ProposalContextReference;
 }
 

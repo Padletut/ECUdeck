@@ -4,7 +4,7 @@ use crate::contracts::{
     CompressedContextSnapshot, CompressionMetadata, CompressionStrategy,
     ListAiProvidersResponse, PrepareContextSnapshotRequest,
     PrepareContextSnapshotResponse, ProposalContextReference, SendAiChatRequest,
-    SendAiChatResponse, SnapshotStatus,
+    ReviewDecisionStatus, SendAiChatResponse, SnapshotStatus,
 };
 
 #[tauri::command]
@@ -81,6 +81,8 @@ pub fn prepare_context_snapshot(
             safety_warnings,
             accepted_decision_refs: Vec::new(),
             rejected_decision_refs: Vec::new(),
+            review_status: ReviewDecisionStatus::Pending,
+            reviewed_at: None,
             metadata: CompressionMetadata {
                 strategy: compression_strategy,
                 status: SnapshotStatus::Fresh,
@@ -127,10 +129,14 @@ pub fn send_ai_chat(request: SendAiChatRequest) -> Result<SendAiChatResponse, Ai
             request.context.raw_attachments.len(),
             snapshot_segment,
         ),
+        review_status: ReviewDecisionStatus::Pending,
+        reviewed_at: None,
         proposal: if should_create_proposal {
             Some(ProposalContextReference {
                 proposal_id: build_proposal_id(&request),
                 context_snapshot_id: request.context_snapshot_id.clone(),
+                review_status: ReviewDecisionStatus::Pending,
+                reviewed_at: None,
             })
         } else {
             None

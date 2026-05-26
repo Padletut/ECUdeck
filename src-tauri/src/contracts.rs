@@ -43,6 +43,14 @@ pub enum SnapshotStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
+pub enum ReviewDecisionStatus {
+    Pending,
+    Accepted,
+    Rejected,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
 pub enum ContextEventType {
     ContextSnapshotCreated,
     ContextSnapshotRefreshed,
@@ -128,6 +136,8 @@ pub struct CompressedContextSnapshot {
     pub safety_warnings: Vec<String>,
     pub accepted_decision_refs: Vec<String>,
     pub rejected_decision_refs: Vec<String>,
+    pub review_status: ReviewDecisionStatus,
+    pub reviewed_at: Option<String>,
     pub metadata: CompressionMetadata,
 }
 
@@ -221,6 +231,8 @@ pub struct ListAiProvidersResponse {
 pub struct SendAiChatResponse {
     pub response_kind: AiResponseKind,
     pub summary_text: String,
+    pub review_status: ReviewDecisionStatus,
+    pub reviewed_at: Option<String>,
     pub proposal: Option<ProposalContextReference>,
 }
 
@@ -229,6 +241,8 @@ pub struct SendAiChatResponse {
 pub struct ProposalContextReference {
     pub proposal_id: String,
     pub context_snapshot_id: Option<String>,
+    pub review_status: ReviewDecisionStatus,
+    pub reviewed_at: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]

@@ -9,6 +9,7 @@ import type { AiProviderSummary } from '../../../shared/types/aiContext';
 import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type PersistedAiAssistNativePreview,
 } from '../../../shared/types/aiAssist';
 import type { AiAssistReviewStatus } from '../../../shared/types/aiAssist';
 import type { AiCommandError } from '../../../shared/types/aiContext';
@@ -469,14 +470,28 @@ export default function AiAssistPanel() {
                         return to the current draft response cards.
                       </div>
                     ) : null}
+                    <div className="xl:col-span-2 rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span
+                          className={reviewStatusClassName(
+                            activePreviewEntry.chatResponse.reviewStatus,
+                          )}
+                        >
+                          {formatReviewStatus(activePreviewEntry.chatResponse.reviewStatus)}
+                        </span>
+                        <p className="text-sm text-alloy-silver">
+                          {describeActivePreviewReview(activePreviewEntry)}
+                        </p>
+                      </div>
+                    </div>
                     <RequestPreviewCard
                       title="Context Snapshot Response"
-                      detail={activePreviewEntry.snapshotResponse.snapshot.summaryText}
+                      detail={`${activePreviewEntry.snapshotResponse.snapshot.summaryText} · ${formatReviewStatus(activePreviewEntry.snapshotResponse.snapshot.reviewStatus)}`}
                       value={activePreviewEntry.snapshotResponse}
                     />
                     <RequestPreviewCard
                       title="Chat Response"
-                      detail={activePreviewEntry.chatResponse.summaryText}
+                      detail={`${activePreviewEntry.chatResponse.summaryText} · ${formatReviewStatus(activePreviewEntry.chatResponse.reviewStatus)}`}
                       value={activePreviewEntry.chatResponse}
                     />
                   </div>
@@ -748,6 +763,17 @@ function resolvePresetTitle(
   presets: ReadonlyArray<{ id: string; title: string }>,
 ): string {
   return presets.find((preset) => preset.id === presetId)?.title ?? presetId;
+}
+
+function describeActivePreviewReview(previewEntry: PersistedAiAssistNativePreview): string {
+  const snapshotStatus = formatReviewStatus(previewEntry.snapshotResponse.snapshot.reviewStatus);
+  const chatStatus = formatReviewStatus(previewEntry.chatResponse.reviewStatus);
+  const acceptedCount = previewEntry.snapshotResponse.snapshot.acceptedDecisionRefs.length;
+  const rejectedCount = previewEntry.snapshotResponse.snapshot.rejectedDecisionRefs.length;
+  const reviewedAt =
+    previewEntry.chatResponse.reviewedAt ?? previewEntry.snapshotResponse.snapshot.reviewedAt;
+
+  return `${snapshotStatus} snapshot / ${chatStatus} chat · ${acceptedCount} accepted refs · ${rejectedCount} rejected refs${reviewedAt ? ` · updated ${formatRecordedAt(reviewedAt)}` : ''}`;
 }
 
 function reviewStatusClassName(status: AiAssistReviewStatus): string {

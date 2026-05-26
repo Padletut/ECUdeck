@@ -150,6 +150,7 @@ describe('createAiService', () => {
         safetyWarnings: [],
         acceptedDecisionRefs: [],
         rejectedDecisionRefs: [],
+        reviewStatus: 'pending',
         metadata: {
           strategy: 'summary',
           status: 'fresh',
@@ -197,6 +198,7 @@ describe('createAiService', () => {
     const response: SendAiChatResponse = {
       responseKind: 'plan',
       summaryText: 'Preview only',
+      reviewStatus: 'pending',
     };
     const invokeCommand = jest.fn(async () => response);
     const service = createAiService(invokeCommand as unknown as TauriInvoke);

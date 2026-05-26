@@ -134,10 +134,10 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
       );
       const lastNativePreview =
         currentState.lastNativePreview?.snapshotResponse.snapshot.snapshotId === input.snapshotId
-          ? {
+          ? applyReviewDecisionToPreviewContracts({
               ...currentState.lastNativePreview,
               reviewDecision,
-            }
+            })
           : currentState.lastNativePreview;
       const nextState: PersistedAiAssistState = {
         ...currentState,
@@ -283,8 +283,16 @@ function isPrepareContextSnapshotResponse(value: unknown): boolean {
   return (
     typeof snapshot.snapshotId === 'string' &&
     typeof snapshot.summaryText === 'string' &&
+    (snapshot.acceptedDecisionRefs == null || isStringArray(snapshot.acceptedDecisionRefs)) &&
+    (snapshot.rejectedDecisionRefs == null || isStringArray(snapshot.rejectedDecisionRefs)) &&
+    (snapshot.reviewStatus == null || isAiAssistReviewStatus(snapshot.reviewStatus)) &&
+    (snapshot.reviewedAt == null || typeof snapshot.reviewedAt === 'string') &&
     isCompressionMetadata(snapshot.metadata)
   );
+}
+
+function isStringArray(value: unknown): boolean {
+  return Array.isArray(value) && value.every((entry) => typeof entry === 'string');
 }
 
 function isCompressionMetadata(value: unknown): boolean {
@@ -310,6 +318,8 @@ function isSendAiChatResponse(value: unknown): boolean {
   return (
     isResponseKind(candidate.responseKind) &&
     typeof candidate.summaryText === 'string' &&
+    (candidate.reviewStatus == null || isAiAssistReviewStatus(candidate.reviewStatus)) &&
+    (candidate.reviewedAt == null || typeof candidate.reviewedAt === 'string') &&
     isProposalContextReference(candidate.proposal)
   );
 }
@@ -330,7 +340,9 @@ function isProposalContextReference(value: unknown): boolean {
   const candidate = value as Record<string, unknown>;
   return (
     typeof candidate.proposalId === 'string' &&
-    (candidate.contextSnapshotId == null || typeof candidate.contextSnapshotId === 'string')
+    (candidate.contextSnapshotId == null || typeof candidate.contextSnapshotId === 'string') &&
+    (candidate.reviewStatus == null || isAiAssistReviewStatus(candidate.reviewStatus)) &&
+    (candidate.reviewedAt == null || typeof candidate.reviewedAt === 'string')
   );
 }
 
@@ -343,17 +355,18 @@ function normalizeNativePreview(
   };
   const recordedAt =
     preview.recordedAt?.trim() || preview.snapshotResponse.snapshot.metadata.createdAt;
+  const reviewDecision = normalizeReviewDecision(preview.reviewDecision, recordedAt);
 
-  return {
+  return applyReviewDecisionToPreviewContracts({
     ...preview,
     providerConfig,
     recordedAt,
-    reviewDecision: normalizeReviewDecision(preview.reviewDecision, recordedAt),
+    reviewDecision,
     chatResponse: {
       ...preview.chatResponse,
       proposal: preview.chatResponse.proposal ?? undefined,
     },
-  };
+  });
 }
 
 function normalizePersistedPreview(value: unknown): PersistedAiAssistNativePreview | undefined {
@@ -416,12 +429,48 @@ function updatePreviewHistoryReviewStatus(
 
   return previewHistory.map((preview) =>
     preview.snapshotResponse.snapshot.snapshotId === snapshotId
-      ? {
+      ? applyReviewDecisionToPreviewContracts({
           ...preview,
           reviewDecision,
-        }
+        })
       : preview,
   );
+}
+
+function applyReviewDecisionToPreviewContracts(
+  preview: PersistedAiAssistNativePreview,
+): PersistedAiAssistNativePreview {
+  const proposalId = preview.chatResponse.proposal?.proposalId;
+  const acceptedDecisionRefs =
+    preview.reviewDecision.status === 'accepted' && proposalId ? [proposalId] : [];
+  const rejectedDecisionRefs =
+    preview.reviewDecision.status === 'rejected' && proposalId ? [proposalId] : [];
+
+  return {
+    ...preview,
+    snapshotResponse: {
+      ...preview.snapshotResponse,
+      snapshot: {
+        ...preview.snapshotResponse.snapshot,
+        acceptedDecisionRefs,
+        rejectedDecisionRefs,
+        reviewStatus: preview.reviewDecision.status,
+        reviewedAt: preview.reviewDecision.decidedAt,
+      },
+    },
+    chatResponse: {
+      ...preview.chatResponse,
+      reviewStatus: preview.reviewDecision.status,
+      reviewedAt: preview.reviewDecision.decidedAt,
+      proposal: preview.chatResponse.proposal
+        ? {
+            ...preview.chatResponse.proposal,
+            reviewStatus: preview.reviewDecision.status,
+            reviewedAt: preview.reviewDecision.decidedAt,
+          }
+        : undefined,
+    },
+  };
 }
 
 function normalizeProviderConfig(

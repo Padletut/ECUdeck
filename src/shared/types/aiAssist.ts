@@ -3,6 +3,7 @@ import type {
   AiRequestOwnership,
   ContextSourceKind,
   PrepareContextSnapshotResponse,
+  ReviewDecisionStatus,
   SendAiChatResponse,
 } from './aiContext';
 import type { PersistedFirmwareSummary } from './ecu';
@@ -12,7 +13,7 @@ export const DEFAULT_AI_ASSIST_PROVIDER_ID = 'preview-provider';
 export const DEFAULT_AI_ASSIST_MODEL_ID = 'draft-preview';
 
 export type AiAssistPresetId = 'map-region-summary' | 'bosch-pattern-compare' | 'first-pass-review';
-export type AiAssistReviewStatus = 'pending' | 'accepted' | 'rejected';
+export type AiAssistReviewStatus = ReviewDecisionStatus;
 
 export interface AiAssistPreset {
   id: AiAssistPresetId;

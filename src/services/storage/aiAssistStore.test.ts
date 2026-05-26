@@ -234,6 +234,8 @@ describe('createAiAssistStore', () => {
   it('defaults older persisted previews to pending review status', () => {
     const storage = new MemoryStorage();
     const store = createAiAssistStore(storage);
+    const snapshotId = preview.snapshotResponse.snapshot.snapshotId;
+    const proposalId = preview.chatResponse.proposal?.proposalId;
 
     storage.setItem(
       'ecudeck.ai-assist.v1::local-workspace::dashboard-plugin-validation::dashboard-session',
@@ -244,8 +246,32 @@ describe('createAiAssistStore', () => {
           draftKey: preview.draftKey,
           providerConfig,
           recordedAt: preview.recordedAt,
-          snapshotResponse: preview.snapshotResponse,
-          chatResponse: preview.chatResponse,
+          snapshotResponse: {
+            snapshot: {
+              snapshotId,
+              workspaceId: ownership.workspaceId,
+              projectId: ownership.projectId,
+              sessionId: ownership.sessionId,
+              mode: 'plan',
+              sourceRefs: [],
+              summaryText: preview.snapshotResponse.snapshot.summaryText,
+              unresolvedAssumptions: [],
+              safetyWarnings: [],
+              acceptedDecisionRefs: [],
+              rejectedDecisionRefs: [],
+              metadata: preview.snapshotResponse.snapshot.metadata,
+            },
+          },
+          chatResponse: {
+            responseKind: 'plan',
+            summaryText: preview.chatResponse.summaryText,
+            proposal: proposalId
+              ? {
+                  proposalId,
+                  contextSnapshotId: snapshotId,
+                }
+              : undefined,
+          },
         },
       }),
     );
@@ -262,6 +288,9 @@ describe('createAiAssistStore', () => {
     reviewStatus: AiAssistReviewStatus = 'pending',
     decidedAt?: string,
   ): PersistedAiAssistNativePreview {
+    const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
+    const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
+
     return {
       presetId: 'first-pass-review',
       draftKey: `first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::${index}`,
@@ -278,7 +307,7 @@ describe('createAiAssistStore', () => {
             },
       snapshotResponse: {
         snapshot: {
-          snapshotId: `preview::snapshot::plan::local-workspace::4::${index}`,
+          snapshotId,
           workspaceId: ownership.workspaceId,
           projectId: ownership.projectId,
           sessionId: ownership.sessionId,
@@ -287,8 +316,13 @@ describe('createAiAssistStore', () => {
           summaryText: `preview snapshot ${index}`,
           unresolvedAssumptions: [],
           safetyWarnings: [],
-          acceptedDecisionRefs: [],
-          rejectedDecisionRefs: [],
+          acceptedDecisionRefs: reviewStatus === 'accepted' ? [proposalId] : [],
+          rejectedDecisionRefs: reviewStatus === 'rejected' ? [proposalId] : [],
+          reviewStatus,
+          reviewedAt:
+            reviewStatus === 'pending'
+              ? undefined
+              : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
           metadata: {
             strategy: 'summary',
             status: 'fresh',
@@ -300,9 +334,19 @@ describe('createAiAssistStore', () => {
       chatResponse: {
         responseKind: 'plan',
         summaryText: `preview chat ${index}`,
+        reviewStatus,
+        reviewedAt:
+          reviewStatus === 'pending'
+            ? undefined
+            : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
         proposal: {
-          proposalId: `preview::proposal::plan::local-workspace::ollama::${index}`,
-          contextSnapshotId: `preview::snapshot::plan::local-workspace::4::${index}`,
+          proposalId,
+          contextSnapshotId: snapshotId,
+          reviewStatus,
+          reviewedAt:
+            reviewStatus === 'pending'
+              ? undefined
+              : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
         },
       },
     };
