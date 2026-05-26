@@ -1,1 +1,2 @@
-This is a placeholder - the actual binary content from /home/padletut/ecudeck/python_backend/arl.bin should be copied here
+This is a placeholder fixture entry for ARL firmware sample data.
+If a real sample is added later, it should live in fixtures/sample_bins/.

@@ -11,17 +11,12 @@
     "prepare": "husky",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init",
-    "prisma:studio": "prisma studio",
-    "prisma:reset": "prisma migrate reset --force",
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",
     "tauri": "tauri"
   },
   "dependencies": {
-    "@prisma/client": "^6.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.3"
@@ -47,7 +42,6 @@
     "jest-environment-jsdom": "^30.0.0-beta.3",
     "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
-    "prisma": "^6.9.0",
     "tailwindcss": "^4",
     "ts-jest": "^29.3.4",
     "typescript": "^5",

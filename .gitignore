@@ -14,7 +14,6 @@
 /coverage
 
 # build output
-/.next/
 /dist/
 /site/
 /src-tauri/target/
@@ -40,9 +39,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
-
-/src/generated/prisma
 
 /legacy/python_backend/*.txt
 /legacy/python_backend/*.bin

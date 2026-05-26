@@ -31,7 +31,7 @@ ECUdeck is moving to a desktop-first architecture built around Vite, React, Rust
 - **Frontend:** [React](https://react.dev/), [Vite](https://vite.dev/), [Tailwind CSS 4](https://tailwindcss.com/)
 - **Desktop Shell:** [Tauri](https://tauri.app/) with Rust
 - **Documentation:** [MkDocs](https://www.mkdocs.org/)
-- **Data / Experiments:** Prisma and legacy Python artifacts are being phased out or relocated
+- **Data / Experiments:** Legacy Python artifacts are retained only as migration reference
 - **Testing:** Jest, Playwright, Testing Library
 - **Tooling:** ESLint, Prettier, Husky, lint-staged
 
