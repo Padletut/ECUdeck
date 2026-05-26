@@ -13,12 +13,14 @@ export default function PluginValidationPanel() {
     discovery,
     report,
     errorMessage,
+    isPickingDirectory,
     isDiscovering,
     isValidating,
     canDiscover,
     canValidate,
     setPluginDirectoryPath,
     setManifestPath,
+    pickPluginDirectory,
     discoverManifests,
     selectManifestReport,
     validateManifest,
@@ -74,6 +76,16 @@ export default function PluginValidationPanel() {
             </div>
 
             <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  void pickPluginDirectory();
+                }}
+                disabled={isPickingDirectory || isDiscovering}
+                className="rounded-lg border border-gridlines-grey px-5 py-3 font-semibold text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isPickingDirectory ? 'Opening Picker...' : 'Choose Folder'}
+              </button>
               <button
                 type="submit"
                 disabled={!canDiscover}

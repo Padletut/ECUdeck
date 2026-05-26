@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { pluginService } from '../../../services/tauri';
+import { dialogService, pluginService } from '../../../services/tauri';
 import type {
   PluginCommandError,
   PluginManifestDiscoveryResult,
@@ -13,13 +13,15 @@ interface PluginManifestValidationState {
   discovery: PluginManifestDiscoveryResult | null;
   report: PluginValidationReport | null;
   errorMessage: string | null;
+  isPickingDirectory: boolean;
   isDiscovering: boolean;
   isValidating: boolean;
   canDiscover: boolean;
   canValidate: boolean;
   setPluginDirectoryPath: (value: string) => void;
   setManifestPath: (value: string) => void;
-  discoverManifests: () => Promise<void>;
+  pickPluginDirectory: () => Promise<void>;
+  discoverManifests: (nextDirectoryPath?: string) => Promise<void>;
   selectManifestReport: (nextReport: PluginValidationReport) => void;
   validateManifest: () => Promise<void>;
 }
@@ -32,23 +34,46 @@ export function usePluginManifestValidation(
   const [discovery, setDiscovery] = useState<PluginManifestDiscoveryResult | null>(null);
   const [report, setReport] = useState<PluginValidationReport | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isPickingDirectory, setIsPickingDirectory] = useState(false);
   const [isDiscovering, setIsDiscovering] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
 
-  const discoverManifests = async () => {
-    const normalizedDirectoryPath = pluginDirectoryPath.trim();
+  const discoverManifests = async (nextDirectoryPath?: string) => {
+    const normalizedDirectoryPath = (nextDirectoryPath ?? pluginDirectoryPath).trim();
 
     setIsDiscovering(true);
     setErrorMessage(null);
 
     try {
       const nextDiscovery = await pluginService.discoverPluginManifests(normalizedDirectoryPath);
+      setPluginDirectoryPath(normalizedDirectoryPath);
       setDiscovery(nextDiscovery);
     } catch (error) {
       setDiscovery(null);
       setErrorMessage(getErrorMessage(error));
     } finally {
       setIsDiscovering(false);
+    }
+  };
+
+  const pickPluginDirectory = async () => {
+    setIsPickingDirectory(true);
+    setErrorMessage(null);
+
+    try {
+      const selectedDirectoryPath = await dialogService.pickDirectory(
+        pluginDirectoryPath || undefined,
+      );
+
+      if (!selectedDirectoryPath) {
+        return;
+      }
+
+      await discoverManifests(selectedDirectoryPath);
+    } catch (error) {
+      setErrorMessage(getErrorMessage(error));
+    } finally {
+      setIsPickingDirectory(false);
     }
   };
 
@@ -81,12 +106,14 @@ export function usePluginManifestValidation(
     discovery,
     report,
     errorMessage,
+    isPickingDirectory,
     isDiscovering,
     isValidating,
-    canDiscover: pluginDirectoryPath.trim().length > 0 && !isDiscovering,
+    canDiscover: pluginDirectoryPath.trim().length > 0 && !isDiscovering && !isPickingDirectory,
     canValidate: manifestPath.trim().length > 0 && !isValidating,
     setPluginDirectoryPath,
     setManifestPath,
+    pickPluginDirectory,
     discoverManifests,
     selectManifestReport,
     validateManifest,
