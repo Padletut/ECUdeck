@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import type {
   AiAssistProviderConfig,
+  AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
 } from '../../shared/types/aiAssist';
 import type { PluginReferenceOwnership } from '../../shared/types/plugins';
@@ -208,12 +209,73 @@ describe('createAiAssistStore', () => {
     });
   });
 
-  function buildPreview(index: number): PersistedAiAssistNativePreview {
+  it('updates the review status for the matching preview entry', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    store.recordNativePreview({
+      ownership,
+      preview,
+    });
+
+    expect(
+      store.updatePreviewReviewStatus({
+        ownership,
+        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+        reviewStatus: 'accepted',
+        decidedAt: '2026-05-26T11:00:00.000Z',
+      }),
+    ).toEqual({
+      ownership,
+      lastNativePreview: buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z'),
+      previewHistory: [buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z')],
+    });
+  });
+
+  it('defaults older persisted previews to pending review status', () => {
+    const storage = new MemoryStorage();
+    const store = createAiAssistStore(storage);
+
+    storage.setItem(
+      'ecudeck.ai-assist.v1::local-workspace::dashboard-plugin-validation::dashboard-session',
+      JSON.stringify({
+        ownership,
+        lastNativePreview: {
+          presetId: 'first-pass-review',
+          draftKey: preview.draftKey,
+          providerConfig,
+          recordedAt: preview.recordedAt,
+          snapshotResponse: preview.snapshotResponse,
+          chatResponse: preview.chatResponse,
+        },
+      }),
+    );
+
+    expect(store.loadState(ownership)).toEqual({
+      ownership,
+      lastNativePreview: preview,
+      previewHistory: [preview],
+    });
+  });
+
+  function buildPreview(
+    index: number,
+    reviewStatus: AiAssistReviewStatus = 'pending',
+    decidedAt?: string,
+  ): PersistedAiAssistNativePreview {
     return {
       presetId: 'first-pass-review',
       draftKey: `first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::${index}`,
       providerConfig,
       recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
+      reviewDecision:
+        reviewStatus === 'pending'
+          ? {
+              status: 'pending',
+            }
+          : {
+              status: reviewStatus,
+              decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
+            },
       snapshotResponse: {
         snapshot: {
           snapshotId: `preview::snapshot::plan::local-workspace::4::${index}`,

@@ -2,6 +2,8 @@ import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
   type AiAssistProviderConfig,
+  type AiAssistReviewDecision,
+  type AiAssistReviewStatus,
   type AiAssistPresetId,
   type PersistedAiAssistNativePreview,
   type PersistedAiAssistState,
@@ -36,12 +38,27 @@ interface RestorePreviewContextInput {
   preview: PersistedAiAssistNativePreview;
 }
 
+interface UpdatePreviewReviewStatusInput {
+  ownership: PluginReferenceOwnership;
+  snapshotId: string;
+  reviewStatus: AiAssistReviewStatus;
+  decidedAt?: string;
+}
+
+type PersistedAiAssistNativePreviewInput = Omit<
+  PersistedAiAssistNativePreview,
+  'reviewDecision'
+> & {
+  reviewDecision?: AiAssistReviewDecision;
+};
+
 export interface AiAssistStore {
   loadState(ownership: PluginReferenceOwnership): PersistedAiAssistState;
   selectPreset(input: SelectPresetInput): PersistedAiAssistState;
   recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState;
   updateProviderConfig(input: UpdateProviderConfigInput): PersistedAiAssistState;
   restorePreviewContext(input: RestorePreviewContextInput): PersistedAiAssistState;
+  updatePreviewReviewStatus(input: UpdatePreviewReviewStatusInput): PersistedAiAssistState;
 }
 
 export function createAiAssistStore(storage: StorageLike | null | undefined): AiAssistStore {
@@ -95,6 +112,38 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
         ownership: input.ownership,
         selectedPresetId: input.preview.presetId,
         providerConfig: normalizeProviderConfig(input.preview.providerConfig),
+      };
+
+      persistState(storage, nextState);
+      return nextState;
+    },
+
+    updatePreviewReviewStatus(input: UpdatePreviewReviewStatusInput): PersistedAiAssistState {
+      const currentState = loadPersistedState(storage, input.ownership);
+      const reviewDecision = normalizeReviewDecision(
+        {
+          status: input.reviewStatus,
+          decidedAt: input.decidedAt,
+        },
+        undefined,
+      );
+      const previewHistory = updatePreviewHistoryReviewStatus(
+        currentState.previewHistory ?? [],
+        input.snapshotId,
+        reviewDecision,
+      );
+      const lastNativePreview =
+        currentState.lastNativePreview?.snapshotResponse.snapshot.snapshotId === input.snapshotId
+          ? {
+              ...currentState.lastNativePreview,
+              reviewDecision,
+            }
+          : currentState.lastNativePreview;
+      const nextState: PersistedAiAssistState = {
+        ...currentState,
+        ownership: input.ownership,
+        lastNativePreview,
+        previewHistory,
       };
 
       persistState(storage, nextState);
@@ -184,7 +233,25 @@ function isAiAssistProviderConfig(value: unknown): value is AiAssistProviderConf
   );
 }
 
-function isPersistedAiAssistNativePreview(value: unknown): value is PersistedAiAssistNativePreview {
+function isAiAssistReviewStatus(value: unknown): value is AiAssistReviewStatus {
+  return value === 'pending' || value === 'accepted' || value === 'rejected';
+}
+
+function isAiAssistReviewDecision(value: unknown): value is AiAssistReviewDecision {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    isAiAssistReviewStatus(candidate.status) &&
+    (candidate.decidedAt == null || typeof candidate.decidedAt === 'string')
+  );
+}
+
+function isPersistedAiAssistNativePreview(
+  value: unknown,
+): value is PersistedAiAssistNativePreviewInput {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -195,6 +262,7 @@ function isPersistedAiAssistNativePreview(value: unknown): value is PersistedAiA
     typeof candidate.draftKey === 'string' &&
     (candidate.providerConfig == null || isAiAssistProviderConfig(candidate.providerConfig)) &&
     (candidate.recordedAt == null || typeof candidate.recordedAt === 'string') &&
+    (candidate.reviewDecision == null || isAiAssistReviewDecision(candidate.reviewDecision)) &&
     isPrepareContextSnapshotResponse(candidate.snapshotResponse) &&
     isSendAiChatResponse(candidate.chatResponse)
   );
@@ -267,7 +335,7 @@ function isProposalContextReference(value: unknown): boolean {
 }
 
 function normalizeNativePreview(
-  preview: PersistedAiAssistNativePreview,
+  preview: PersistedAiAssistNativePreviewInput,
 ): PersistedAiAssistNativePreview {
   const providerConfig = normalizeProviderConfig(preview.providerConfig) ?? {
     providerId: DEFAULT_AI_ASSIST_PROVIDER_ID,
@@ -280,6 +348,7 @@ function normalizeNativePreview(
     ...preview,
     providerConfig,
     recordedAt,
+    reviewDecision: normalizeReviewDecision(preview.reviewDecision, recordedAt),
     chatResponse: {
       ...preview.chatResponse,
       proposal: preview.chatResponse.proposal ?? undefined,
@@ -299,7 +368,7 @@ function normalizePersistedPreview(value: unknown): PersistedAiAssistNativePrevi
   }
 
   return normalizeNativePreview({
-    ...(value as PersistedAiAssistNativePreview),
+    ...(value as PersistedAiAssistNativePreviewInput),
     presetId,
   });
 }
@@ -336,6 +405,25 @@ function mergePreviewHistory(
   ].slice(0, MAX_PREVIEW_HISTORY);
 }
 
+function updatePreviewHistoryReviewStatus(
+  previewHistory: PersistedAiAssistNativePreview[],
+  snapshotId: string,
+  reviewDecision: AiAssistReviewDecision,
+): PersistedAiAssistNativePreview[] | undefined {
+  if (previewHistory.length === 0) {
+    return undefined;
+  }
+
+  return previewHistory.map((preview) =>
+    preview.snapshotResponse.snapshot.snapshotId === snapshotId
+      ? {
+          ...preview,
+          reviewDecision,
+        }
+      : preview,
+  );
+}
+
 function normalizeProviderConfig(
   providerConfig: AiAssistProviderConfig,
 ): AiAssistProviderConfig | undefined {
@@ -367,6 +455,28 @@ function resolvePreviewPresetId(value: unknown): AiAssistPresetId | undefined {
   const [maybePresetId] = draftKey.split('::');
 
   return isPresetId(maybePresetId) ? maybePresetId : undefined;
+}
+
+function normalizeReviewDecision(
+  reviewDecision: AiAssistReviewDecision | undefined,
+  recordedAt: string | undefined,
+): AiAssistReviewDecision {
+  if (!reviewDecision || !isAiAssistReviewStatus(reviewDecision.status)) {
+    return {
+      status: 'pending',
+    };
+  }
+
+  if (reviewDecision.status === 'pending') {
+    return {
+      status: 'pending',
+    };
+  }
+
+  return {
+    status: reviewDecision.status,
+    decidedAt: reviewDecision.decidedAt?.trim() || recordedAt,
+  };
 }
 
 function getBrowserStorage(): StorageLike | null {

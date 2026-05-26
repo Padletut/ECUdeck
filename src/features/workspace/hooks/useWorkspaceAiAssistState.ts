@@ -10,6 +10,7 @@ import type {
   AiAssistDraft,
   AiAssistPreset,
   AiAssistPresetId,
+  AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
   PersistedAiAssistState,
 } from '../../../shared/types/aiAssist';
@@ -55,6 +56,10 @@ interface WorkspaceAiAssistState {
   selectPreset: (presetId: AiAssistPresetId) => void;
   updateProviderConfig: (providerId: string, modelId?: string) => void;
   restorePreviewContext: (preview: PersistedAiAssistNativePreview) => void;
+  updatePreviewReviewStatus: (
+    preview: PersistedAiAssistNativePreview,
+    reviewStatus: AiAssistReviewStatus,
+  ) => void;
   recordNativePreview: (
     snapshotResponse: PrepareContextSnapshotResponse,
     chatResponse: SendAiChatResponse,
@@ -168,6 +173,17 @@ export function useWorkspaceAiAssistState(
       });
       setPersistedState(nextState);
     },
+    updatePreviewReviewStatus: (
+      preview: PersistedAiAssistNativePreview,
+      reviewStatus: AiAssistReviewStatus,
+    ) => {
+      const nextState = aiAssistStore.updatePreviewReviewStatus({
+        ownership,
+        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+        reviewStatus,
+      });
+      setPersistedState(nextState);
+    },
     recordNativePreview: (
       snapshotResponse: PrepareContextSnapshotResponse,
       chatResponse: SendAiChatResponse,
@@ -183,6 +199,9 @@ export function useWorkspaceAiAssistState(
           draftKey: currentDraftKey,
           providerConfig,
           recordedAt: new Date().toISOString(),
+          reviewDecision: {
+            status: 'pending',
+          },
           snapshotResponse,
           chatResponse,
         },

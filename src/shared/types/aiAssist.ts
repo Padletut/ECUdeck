@@ -12,6 +12,7 @@ export const DEFAULT_AI_ASSIST_PROVIDER_ID = 'preview-provider';
 export const DEFAULT_AI_ASSIST_MODEL_ID = 'draft-preview';
 
 export type AiAssistPresetId = 'map-region-summary' | 'bosch-pattern-compare' | 'first-pass-review';
+export type AiAssistReviewStatus = 'pending' | 'accepted' | 'rejected';
 
 export interface AiAssistPreset {
   id: AiAssistPresetId;
@@ -23,6 +24,11 @@ export interface AiAssistPreset {
 export interface AiAssistProviderConfig {
   providerId: string;
   modelId?: string;
+}
+
+export interface AiAssistReviewDecision {
+  status: AiAssistReviewStatus;
+  decidedAt?: string;
 }
 
 export interface PersistedAiAssistState {
@@ -45,6 +51,7 @@ export interface PersistedAiAssistNativePreview {
   draftKey: string;
   providerConfig: AiAssistProviderConfig;
   recordedAt: string;
+  reviewDecision: AiAssistReviewDecision;
   snapshotResponse: PrepareContextSnapshotResponse;
   chatResponse: SendAiChatResponse;
 }

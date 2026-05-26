@@ -10,6 +10,7 @@ import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
 } from '../../../shared/types/aiAssist';
+import type { AiAssistReviewStatus } from '../../../shared/types/aiAssist';
 import type { AiCommandError } from '../../../shared/types/aiContext';
 
 export default function AiAssistPanel() {
@@ -25,6 +26,7 @@ export default function AiAssistPanel() {
     selectPreset,
     updateProviderConfig,
     restorePreviewContext,
+    updatePreviewReviewStatus,
     recordNativePreview,
   } = useWorkspaceAiAssist();
   const [previewError, setPreviewError] = useState<string | null>(null);
@@ -219,6 +221,13 @@ export default function AiAssistPanel() {
   const handleRestoreHistoryContext = (previewEntry: (typeof recentPreviewHistory)[number]) => {
     restorePreviewContext(previewEntry);
     setSelectedHistorySnapshotId(previewEntry.snapshotResponse.snapshot.snapshotId);
+  };
+
+  const handleUpdateHistoryReviewStatus = (
+    previewEntry: (typeof recentPreviewHistory)[number],
+    reviewStatus: AiAssistReviewStatus,
+  ) => {
+    updatePreviewReviewStatus(previewEntry, reviewStatus);
   };
 
   return (
@@ -481,7 +490,8 @@ export default function AiAssistPanel() {
                           Recent Preview Activity
                         </p>
                         <p className="mt-2 text-sm text-alloy-silver">
-                          Latest scope-scoped snapshot/chat previews retained for auditability.
+                          Latest scope-scoped snapshot/chat previews retained for auditability and
+                          review gating.
                         </p>
                       </div>
                       <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver">
@@ -514,10 +524,25 @@ export default function AiAssistPanel() {
                               <p className="mt-1 text-sm text-alloy-silver">
                                 {formatRecordedAt(previewEntry.recordedAt)}
                               </p>
+                              {previewEntry.reviewDecision.decidedAt ? (
+                                <p className="mt-1 text-sm text-muted-text">
+                                  Decision updated{' '}
+                                  {formatRecordedAt(previewEntry.reviewDecision.decidedAt)}
+                                </p>
+                              ) : null}
                             </div>
-                            <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver">
-                              {previewEntry.providerConfig.modelId ?? 'provider-default'}
-                            </span>
+                            <div className="flex flex-col items-end gap-2">
+                              <span
+                                className={reviewStatusClassName(
+                                  previewEntry.reviewDecision.status,
+                                )}
+                              >
+                                {formatReviewStatus(previewEntry.reviewDecision.status)}
+                              </span>
+                              <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver">
+                                {previewEntry.providerConfig.modelId ?? 'provider-default'}
+                              </span>
+                            </div>
                           </div>
 
                           <div className="mt-3 flex flex-wrap gap-3">
@@ -547,6 +572,43 @@ export default function AiAssistPanel() {
                             >
                               Restore Context
                             </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleUpdateHistoryReviewStatus(previewEntry, 'accepted')
+                              }
+                              className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                                previewEntry.reviewDecision.status === 'accepted'
+                                  ? 'border-dyno-green bg-dyno-green/10 text-dyno-green'
+                                  : 'border-gridlines-grey text-alloy-silver hover:border-dyno-green hover:text-dyno-green'
+                              }`}
+                            >
+                              Accept
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleUpdateHistoryReviewStatus(previewEntry, 'rejected')
+                              }
+                              className={`rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                                previewEntry.reviewDecision.status === 'rejected'
+                                  ? 'border-warning-amber bg-warning-amber/10 text-warning-amber'
+                                  : 'border-gridlines-grey text-alloy-silver hover:border-warning-amber hover:text-warning-amber'
+                              }`}
+                            >
+                              Reject
+                            </button>
+                            {previewEntry.reviewDecision.status !== 'pending' ? (
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleUpdateHistoryReviewStatus(previewEntry, 'pending')
+                                }
+                                className="rounded-lg border border-gridlines-grey px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
+                              >
+                                Reset
+                              </button>
+                            ) : null}
                           </div>
 
                           <p className="mt-3 text-sm leading-6 text-alloy-silver">
@@ -686,6 +748,30 @@ function resolvePresetTitle(
   presets: ReadonlyArray<{ id: string; title: string }>,
 ): string {
   return presets.find((preset) => preset.id === presetId)?.title ?? presetId;
+}
+
+function reviewStatusClassName(status: AiAssistReviewStatus): string {
+  switch (status) {
+    case 'accepted':
+      return 'rounded-full border border-dyno-green/50 bg-dyno-green/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-dyno-green';
+    case 'rejected':
+      return 'rounded-full border border-warning-amber/50 bg-warning-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-warning-amber';
+    case 'pending':
+    default:
+      return 'rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver';
+  }
+}
+
+function formatReviewStatus(status: AiAssistReviewStatus): string {
+  switch (status) {
+    case 'accepted':
+      return 'Accepted';
+    case 'rejected':
+      return 'Rejected';
+    case 'pending':
+    default:
+      return 'Pending';
+  }
 }
 
 function formatRecordedAt(recordedAt: string): string {
