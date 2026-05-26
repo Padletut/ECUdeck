@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 
 import type {
+  AiAssistMode,
   AiAssistProviderConfig,
-  PersistedAiAssistProposalReview,
   AiAssistReviewStatus,
   PersistedAiAssistNativePreview,
 } from '../../shared/types/aiAssist';
@@ -22,6 +22,7 @@ class MemoryStorage implements StorageLike {
 }
 
 describe('createAiAssistStore', () => {
+  const surface = 'map-editor' as const;
   const ownership: PluginReferenceOwnership = {
     workspaceId: 'local-workspace',
     projectId: 'dashboard-plugin-validation',
@@ -39,340 +40,274 @@ describe('createAiAssistStore', () => {
     modelId: 'llama3.1:8b',
   };
 
-  const preview = buildPreview(1);
-
   it('returns an empty state when nothing has been persisted', () => {
     const store = createAiAssistStore(new MemoryStorage());
 
     expect(store.loadState(ownership)).toEqual({
       ownership,
+      surface,
     });
   });
 
-  it('persists the selected AI preset per ownership scope', () => {
+  it('persists the selected mode per ownership scope', () => {
     const store = createAiAssistStore(new MemoryStorage());
 
-    const nextState = store.selectPreset({
+    const nextState = store.updateMode({
       ownership,
-      selectedPresetId: 'first-pass-review',
+      surface,
+      mode: 'plan',
     });
 
     expect(nextState).toEqual({
       ownership,
-      selectedPresetId: 'first-pass-review',
+      surface,
+      selectedMode: 'plan',
     });
     expect(store.loadState(ownership)).toEqual(nextState);
   });
 
-  it('isolates selected presets across scopes', () => {
+  it('persists the draft prompt per ownership scope', () => {
     const store = createAiAssistStore(new MemoryStorage());
 
-    store.selectPreset({
+    const nextState = store.updateDraftPrompt({
       ownership,
-      selectedPresetId: 'map-region-summary',
-    });
-    store.selectPreset({
-      ownership: otherOwnership,
-      selectedPresetId: 'bosch-pattern-compare',
+      surface,
+      draftPrompt: 'Explain the selected boost target region.',
     });
 
-    expect(store.loadState(ownership).selectedPresetId).toBe('map-region-summary');
-    expect(store.loadState(otherOwnership).selectedPresetId).toBe('bosch-pattern-compare');
+    expect(nextState).toEqual({
+      ownership,
+      surface,
+      draftPrompt: 'Explain the selected boost target region.',
+    });
+    expect(store.loadState(ownership)).toEqual(nextState);
   });
 
-  it('persists the last native preview per ownership scope', () => {
+  it('isolates composer state across scopes', () => {
     const store = createAiAssistStore(new MemoryStorage());
+
+    store.updateMode({
+      ownership,
+      surface,
+      mode: 'agent',
+    });
+    store.updateDraftPrompt({
+      ownership,
+      surface,
+      draftPrompt: 'Agent request for the first project.',
+    });
+    store.updateMode({
+      ownership: otherOwnership,
+      surface,
+      mode: 'ask',
+    });
+    store.updateDraftPrompt({
+      ownership: otherOwnership,
+      surface,
+      draftPrompt: 'Ask request for the comparison project.',
+    });
+
+    expect(store.loadState(ownership).selectedMode).toBe('agent');
+    expect(store.loadState(ownership).draftPrompt).toBe('Agent request for the first project.');
+    expect(store.loadState(otherOwnership).selectedMode).toBe('ask');
+    expect(store.loadState(otherOwnership).draftPrompt).toBe(
+      'Ask request for the comparison project.',
+    );
+  });
+
+  it('records a native preview and derives a review log entry', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+    const preview = buildPreview(1);
 
     const nextState = store.recordNativePreview({
       ownership,
+      surface,
       preview,
     });
 
     expect(nextState).toEqual({
       ownership,
+      surface,
       lastNativePreview: preview,
       previewHistory: [preview],
-      proposalReviews: [buildProposalReview(1)],
-    });
-    expect(store.loadState(ownership)).toEqual(nextState);
-  });
-
-  it('preserves the last native preview when selecting a preset', () => {
-    const store = createAiAssistStore(new MemoryStorage());
-
-    store.recordNativePreview({
-      ownership,
-      preview,
-    });
-
-    expect(
-      store.selectPreset({
-        ownership,
-        selectedPresetId: 'first-pass-review',
-      }),
-    ).toEqual({
-      ownership,
-      selectedPresetId: 'first-pass-review',
-      lastNativePreview: preview,
-      previewHistory: [preview],
-      proposalReviews: [buildProposalReview(1)],
+      proposalReviews: [
+        {
+          proposalId: 'preview::proposal::plan::local-workspace::ollama::1',
+          snapshotId: 'preview::snapshot::plan::local-workspace::4::1',
+          mode: 'plan',
+          promptText: 'Plan the safest first-pass review for this firmware.',
+          providerConfig,
+          summaryText: 'Preview summary 1',
+          reviewDecision: {
+            status: 'pending',
+            decisionType: 'needs-follow-up',
+          },
+          recordedAt: '2026-05-27T10:01:00.000Z',
+        },
+      ],
     });
   });
 
-  it('persists the provider configuration per ownership scope', () => {
+  it('restores mode, prompt, and provider config from a preview', () => {
     const store = createAiAssistStore(new MemoryStorage());
+    const preview = buildPreview(2, 'agent', 'Prepare a stronger proposal for this plugin.');
 
-    const nextState = store.updateProviderConfig({
+    store.updateMode({
       ownership,
-      providerConfig,
+      surface,
+      mode: 'ask',
     });
-
-    expect(nextState).toEqual({
+    store.updateDraftPrompt({
       ownership,
-      providerConfig,
-    });
-    expect(store.loadState(ownership)).toEqual(nextState);
-  });
-
-  it('preserves provider configuration when recording a native preview', () => {
-    const store = createAiAssistStore(new MemoryStorage());
-
-    store.updateProviderConfig({
-      ownership,
-      providerConfig,
-    });
-
-    expect(
-      store.recordNativePreview({
-        ownership,
-        preview,
-      }),
-    ).toEqual({
-      ownership,
-      providerConfig,
-      lastNativePreview: preview,
-      previewHistory: [preview],
-      proposalReviews: [buildProposalReview(1)],
-    });
-  });
-
-  it('keeps a bounded newest-first preview history per ownership scope', () => {
-    const store = createAiAssistStore(new MemoryStorage());
-
-    for (let index = 1; index <= 7; index += 1) {
-      store.recordNativePreview({
-        ownership,
-        preview: buildPreview(index),
-      });
-    }
-
-    expect(
-      store
-        .loadState(ownership)
-        .previewHistory?.map((entry) => entry.snapshotResponse.snapshot.snapshotId),
-    ).toEqual([
-      'preview::snapshot::plan::local-workspace::4::7',
-      'preview::snapshot::plan::local-workspace::4::6',
-      'preview::snapshot::plan::local-workspace::4::5',
-      'preview::snapshot::plan::local-workspace::4::4',
-      'preview::snapshot::plan::local-workspace::4::3',
-      'preview::snapshot::plan::local-workspace::4::2',
-    ]);
-  });
-
-  it('restores preset and provider config from a historical preview', () => {
-    const store = createAiAssistStore(new MemoryStorage());
-
-    store.selectPreset({
-      ownership,
-      selectedPresetId: 'map-region-summary',
-    });
-    store.updateProviderConfig({
-      ownership,
-      providerConfig: {
-        providerId: 'preview-provider',
-        modelId: 'draft-preview',
-      },
+      surface,
+      draftPrompt: 'Old prompt',
     });
     store.recordNativePreview({
       ownership,
+      surface,
       preview,
     });
 
     expect(
       store.restorePreviewContext({
         ownership,
+        surface,
         preview,
       }),
     ).toEqual({
       ownership,
-      selectedPresetId: 'first-pass-review',
-      providerConfig,
+      surface,
+      selectedMode: 'agent',
+      draftPrompt: 'Prepare a stronger proposal for this plugin.',
       lastNativePreview: preview,
       previewHistory: [preview],
-      proposalReviews: [buildProposalReview(1)],
+      proposalReviews: [
+        {
+          proposalId: 'preview::proposal::plan::local-workspace::ollama::2',
+          snapshotId: 'preview::snapshot::plan::local-workspace::4::2',
+          mode: 'agent',
+          promptText: 'Prepare a stronger proposal for this plugin.',
+          providerConfig,
+          summaryText: 'Preview summary 2',
+          reviewDecision: {
+            status: 'pending',
+            decisionType: 'needs-follow-up',
+          },
+          recordedAt: '2026-05-27T10:02:00.000Z',
+        },
+      ],
+      providerConfig,
     });
   });
 
   it('updates the review status for the matching preview entry', () => {
     const store = createAiAssistStore(new MemoryStorage());
+    const preview = buildPreview(1);
 
     store.recordNativePreview({
       ownership,
+      surface,
       preview,
     });
 
-    expect(
-      store.updatePreviewReviewStatus({
-        ownership,
-        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
-        reviewStatus: 'accepted',
-        decidedAt: '2026-05-26T11:00:00.000Z',
-      }),
-    ).toEqual({
+    const nextState = store.updatePreviewReviewStatus({
       ownership,
-      lastNativePreview: buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z'),
-      previewHistory: [buildPreview(1, 'accepted', '2026-05-26T11:00:00.000Z')],
-      proposalReviews: [buildProposalReview(1, 'accepted', '2026-05-26T11:00:00.000Z')],
+      surface,
+      snapshotId: preview.snapshotResponse.snapshot.snapshotId,
+      reviewStatus: 'accepted',
+      decidedAt: '2026-05-27T11:00:00.000Z',
     });
+
+    expect(nextState.lastNativePreview?.reviewDecision.status).toBe('accepted');
+    expect(nextState.previewHistory?.[0]?.reviewDecision.status).toBe('accepted');
+    expect(nextState.proposalReviews?.[0]?.reviewDecision.status).toBe('accepted');
+    expect(nextState.lastNativePreview?.chatResponse.reviewStatus).toBe('accepted');
   });
 
-  it('persists review decision metadata with the proposal review log', () => {
-    const store = createAiAssistStore(new MemoryStorage());
-
-    store.recordNativePreview({
-      ownership,
-      preview,
-    });
-
-    expect(
-      store.updatePreviewReviewStatus({
-        ownership,
-        snapshotId: preview.snapshotResponse.snapshot.snapshotId,
-        reviewStatus: 'accepted',
-        reviewDetails: {
-          decisionType: 'approve',
-          reviewerId: 'qa.alice',
-          comment: 'Deterministic follow-up checks passed.',
-        },
-        decidedAt: '2026-05-26T11:15:00.000Z',
-      }),
-    ).toEqual({
-      ownership,
-      lastNativePreview: buildPreview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
-        decisionType: 'approve',
-        reviewerId: 'qa.alice',
-        comment: 'Deterministic follow-up checks passed.',
-      }),
-      previewHistory: [
-        buildPreview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
-          decisionType: 'approve',
-          reviewerId: 'qa.alice',
-          comment: 'Deterministic follow-up checks passed.',
-        }),
-      ],
-      proposalReviews: [
-        buildProposalReview(1, 'accepted', '2026-05-26T11:15:00.000Z', {
-          decisionType: 'approve',
-          reviewerId: 'qa.alice',
-          comment: 'Deterministic follow-up checks passed.',
-        }),
-      ],
-    });
-  });
-
-  it('defaults older persisted previews to pending review status', () => {
+  it('migrates older preset-based preview payloads into mode-and-prompt previews', () => {
     const storage = new MemoryStorage();
     const store = createAiAssistStore(storage);
-    const snapshotId = preview.snapshotResponse.snapshot.snapshotId;
-    const proposalId = preview.chatResponse.proposal?.proposalId;
 
     storage.setItem(
-      'ecudeck.ai-assist.v1::local-workspace::dashboard-plugin-validation::dashboard-session',
+      'ecudeck.ai-assist.v1::map-editor::local-workspace::dashboard-plugin-validation::dashboard-session',
       JSON.stringify({
         ownership,
+        surface,
         lastNativePreview: {
           presetId: 'first-pass-review',
-          draftKey: preview.draftKey,
+          draftKey:
+            'first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::1',
           providerConfig,
-          recordedAt: preview.recordedAt,
-          snapshotResponse: {
-            snapshot: {
-              snapshotId,
-              workspaceId: ownership.workspaceId,
-              projectId: ownership.projectId,
-              sessionId: ownership.sessionId,
-              mode: 'plan',
-              sourceRefs: [],
-              summaryText: preview.snapshotResponse.snapshot.summaryText,
-              unresolvedAssumptions: [],
-              safetyWarnings: [],
-              acceptedDecisionRefs: [],
-              rejectedDecisionRefs: [],
-              metadata: preview.snapshotResponse.snapshot.metadata,
-            },
-          },
-          chatResponse: {
-            responseKind: 'plan',
-            summaryText: preview.chatResponse.summaryText,
-            proposal: proposalId
-              ? {
-                  proposalId,
-                  contextSnapshotId: snapshotId,
-                }
-              : undefined,
-          },
+          recordedAt: '2026-05-27T10:01:00.000Z',
+          snapshotResponse: buildPreview(1).snapshotResponse,
+          chatResponse: buildPreview(1).chatResponse,
         },
       }),
     );
 
     expect(store.loadState(ownership)).toEqual({
       ownership,
-      lastNativePreview: preview,
-      previewHistory: [preview],
-      proposalReviews: [buildProposalReview(1)],
+      surface,
+      lastNativePreview: {
+        ...buildPreview(1),
+        draftKey:
+          'first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::1',
+        prompt:
+          'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
+      },
+      previewHistory: [
+        {
+          ...buildPreview(1),
+          draftKey:
+            'first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::1',
+          prompt:
+            'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
+        },
+      ],
+      proposalReviews: [
+        {
+          proposalId: 'preview::proposal::plan::local-workspace::ollama::1',
+          snapshotId: 'preview::snapshot::plan::local-workspace::4::1',
+          mode: 'plan',
+          promptText:
+            'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
+          providerConfig,
+          summaryText: 'Preview summary 1',
+          reviewDecision: {
+            status: 'pending',
+            decisionType: 'needs-follow-up',
+          },
+          recordedAt: '2026-05-27T10:01:00.000Z',
+        },
+      ],
     });
   });
 
   function buildPreview(
     index: number,
+    mode: AiAssistMode = 'plan',
+    prompt = 'Plan the safest first-pass review for this firmware.',
     reviewStatus: AiAssistReviewStatus = 'pending',
-    decidedAt?: string,
-    overrides?: {
-      decisionType?: 'approve' | 'reject' | 'needs-follow-up' | 'note';
-      reviewerId?: string;
-      comment?: string;
-    },
   ): PersistedAiAssistNativePreview {
     const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
     const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
-    const decisionType =
-      overrides?.decisionType ??
-      (reviewStatus === 'accepted'
-        ? 'approve'
-        : reviewStatus === 'rejected'
-          ? 'reject'
-          : 'needs-follow-up');
 
     return {
-      presetId: 'first-pass-review',
-      draftKey: `first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::${index}`,
+      mode,
+      prompt,
+      draftKey: `${surface}::${mode}::${prompt}::${index}`,
       providerConfig,
-      recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
+      recordedAt: `2026-05-27T10:0${Math.min(index, 9)}:00.000Z`,
       reviewDecision:
         reviewStatus === 'pending'
           ? {
               status: 'pending',
-              decisionType,
-              reviewerId: overrides?.reviewerId,
-              comment: overrides?.comment,
+              decisionType: 'needs-follow-up',
             }
           : {
               status: reviewStatus,
-              decisionType,
-              reviewerId: overrides?.reviewerId,
-              comment: overrides?.comment,
-              decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
+              decisionType: reviewStatus === 'accepted' ? 'approve' : 'reject',
+              decidedAt: `2026-05-27T11:0${Math.min(index, 9)}:00.000Z`,
             },
       snapshotResponse: {
         snapshot: {
@@ -380,89 +315,38 @@ describe('createAiAssistStore', () => {
           workspaceId: ownership.workspaceId,
           projectId: ownership.projectId,
           sessionId: ownership.sessionId,
-          mode: 'plan',
+          mode,
           sourceRefs: [],
-          summaryText: `preview snapshot ${index}`,
+          summaryText: `Snapshot summary ${index}`,
           unresolvedAssumptions: [],
           safetyWarnings: [],
           acceptedDecisionRefs: reviewStatus === 'accepted' ? [proposalId] : [],
           rejectedDecisionRefs: reviewStatus === 'rejected' ? [proposalId] : [],
           reviewStatus,
           reviewedAt:
-            reviewStatus === 'pending'
-              ? undefined
-              : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
+            reviewStatus === 'pending' ? undefined : `2026-05-27T11:0${Math.min(index, 9)}:00.000Z`,
           metadata: {
             strategy: 'summary',
             status: 'fresh',
             lossy: false,
-            createdAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
+            createdAt: `2026-05-27T10:0${Math.min(index, 9)}:00.000Z`,
           },
         },
       },
       chatResponse: {
-        responseKind: 'plan',
-        summaryText: `preview chat ${index}`,
+        responseKind: mode === 'ask' ? 'explanation' : mode === 'plan' ? 'plan' : 'proposal',
+        summaryText: `Preview summary ${index}`,
         reviewStatus,
         reviewedAt:
-          reviewStatus === 'pending'
-            ? undefined
-            : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
+          reviewStatus === 'pending' ? undefined : `2026-05-27T11:0${Math.min(index, 9)}:00.000Z`,
         proposal: {
           proposalId,
           contextSnapshotId: snapshotId,
           reviewStatus,
           reviewedAt:
-            reviewStatus === 'pending'
-              ? undefined
-              : (decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`),
+            reviewStatus === 'pending' ? undefined : `2026-05-27T11:0${Math.min(index, 9)}:00.000Z`,
         },
       },
-    };
-  }
-
-  function buildProposalReview(
-    index: number,
-    reviewStatus: AiAssistReviewStatus = 'pending',
-    decidedAt?: string,
-    overrides?: {
-      decisionType?: 'approve' | 'reject' | 'needs-follow-up' | 'note';
-      reviewerId?: string;
-      comment?: string;
-    },
-  ): PersistedAiAssistProposalReview {
-    const snapshotId = `preview::snapshot::plan::local-workspace::4::${index}`;
-    const proposalId = `preview::proposal::plan::local-workspace::ollama::${index}`;
-    const decisionType =
-      overrides?.decisionType ??
-      (reviewStatus === 'accepted'
-        ? 'approve'
-        : reviewStatus === 'rejected'
-          ? 'reject'
-          : 'needs-follow-up');
-
-    return {
-      proposalId,
-      snapshotId,
-      presetId: 'first-pass-review',
-      providerConfig,
-      summaryText: `preview chat ${index}`,
-      reviewDecision:
-        reviewStatus === 'pending'
-          ? {
-              status: 'pending',
-              decisionType,
-              reviewerId: overrides?.reviewerId,
-              comment: overrides?.comment,
-            }
-          : {
-              status: reviewStatus,
-              decisionType,
-              reviewerId: overrides?.reviewerId,
-              comment: overrides?.comment,
-              decidedAt: decidedAt ?? `2026-05-26T11:0${Math.min(index, 9)}:00.000Z`,
-            },
-      recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
     };
   }
 });

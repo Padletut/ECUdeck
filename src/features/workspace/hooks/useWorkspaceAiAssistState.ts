@@ -4,59 +4,35 @@ import { aiAssistStore } from '../../../services/storage/aiAssistStore';
 import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type AiAssistMode,
+  type AiAssistProviderConfig,
+  type AiAssistDraft,
+  type AiAssistReviewDecisionDetails,
+  type AiAssistReviewStatus,
+  type AiAssistSurface,
+  type PersistedAiAssistNativePreview,
+  type PersistedAiAssistProposalReview,
+  type PersistedAiAssistState,
 } from '../../../shared/types/aiAssist';
 import type {
-  AiAssistProviderConfig,
-  AiAssistDraft,
-  AiAssistPreset,
-  AiAssistPresetId,
-  PersistedAiAssistProposalReview,
-  AiAssistReviewDecisionDetails,
-  AiAssistReviewStatus,
-  PersistedAiAssistNativePreview,
-  PersistedAiAssistState,
-} from '../../../shared/types/aiAssist';
-import type {
+  ContextSourceKind,
   PrepareContextSnapshotResponse,
   SendAiChatResponse,
 } from '../../../shared/types/aiContext';
 import type { PersistedFirmwareSummary } from '../../../shared/types/ecu';
 import type { PluginReferenceOwnership } from '../../../shared/types/plugins';
 
-const aiAssistPresets: AiAssistPreset[] = [
-  {
-    id: 'map-region-summary',
-    title: 'Summarize likely map regions',
-    prompt:
-      'Summarize likely map regions in the current firmware scope and explain which areas deserve deterministic follow-up first.',
-    mode: 'ask',
-  },
-  {
-    id: 'bosch-pattern-compare',
-    title: 'Compare this file against common Bosch patterns',
-    prompt:
-      'Compare the current firmware context against common Bosch patterns and highlight the strongest matches plus any mismatches that matter.',
-    mode: 'ask',
-  },
-  {
-    id: 'first-pass-review',
-    title: 'Generate a first-pass review plan',
-    prompt:
-      'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
-    mode: 'plan',
-  },
-];
-
-interface WorkspaceAiAssistState {
-  presets: AiAssistPreset[];
-  selectedPresetId: AiAssistPresetId | null;
-  selectedPreset: AiAssistPreset | null;
+interface AiAssistState {
+  surface: AiAssistSurface;
+  mode: AiAssistMode;
+  draftPrompt: string;
   draft: AiAssistDraft | null;
   providerConfig: AiAssistProviderConfig;
   nativePreview: PersistedAiAssistNativePreview | null;
   previewHistory: PersistedAiAssistNativePreview[];
   proposalReviews: PersistedAiAssistProposalReview[];
-  selectPreset: (presetId: AiAssistPresetId) => void;
+  updateMode: (mode: AiAssistMode) => void;
+  updateDraftPrompt: (draftPrompt: string) => void;
   updateProviderConfig: (providerId: string, modelId?: string) => void;
   restorePreviewContext: (preview: PersistedAiAssistNativePreview) => void;
   updatePreviewReviewStatus: (
@@ -70,52 +46,70 @@ interface WorkspaceAiAssistState {
   ) => void;
 }
 
-export function useWorkspaceAiAssistState(
+export function useAiAssistState(
   ownership: PluginReferenceOwnership,
   lastLoadedFirmware: PersistedFirmwareSummary | null,
-): WorkspaceAiAssistState {
+  surface: AiAssistSurface,
+): AiAssistState {
   const [persistedState, setPersistedState] = useState<PersistedAiAssistState>(() =>
-    aiAssistStore.loadState(ownership),
+    aiAssistStore.loadState({ ownership, surface }),
   );
-
-  const selectedPresetId = persistedState.selectedPresetId ?? null;
 
   useEffect(() => {
-    setPersistedState(aiAssistStore.loadState(ownership));
-  }, [ownership.workspaceId, ownership.projectId, ownership.sessionId]);
+    setPersistedState(aiAssistStore.loadState({ ownership, surface }));
+  }, [ownership.workspaceId, ownership.projectId, ownership.sessionId, surface]);
 
-  const selectedPreset = useMemo(
-    () => aiAssistPresets.find((preset) => preset.id === selectedPresetId) ?? null,
-    [selectedPresetId],
-  );
+  const mode = persistedState.selectedMode ?? 'ask';
+  const draftPrompt = persistedState.draftPrompt ?? '';
 
   const draft = useMemo<AiAssistDraft | null>(() => {
-    if (!selectedPreset) {
+    const normalizedPrompt = draftPrompt.trim();
+
+    if (!normalizedPrompt) {
       return null;
     }
 
+    const contextKinds: ContextSourceKind[] = ['workspace-metadata'];
+
+    if (ownership.projectId) {
+      contextKinds.push('project-metadata');
+    }
+
+    if (ownership.sessionId) {
+      contextKinds.push('session-metadata');
+    }
+
+    if (lastLoadedFirmware) {
+      contextKinds.push('firmware-summary');
+    }
+
+    if (surface === 'map-editor') {
+      contextKinds.push('map-selection');
+    } else {
+      contextKinds.push('plugin-reference', 'plugin-validation');
+    }
+
     return {
-      preset: selectedPreset,
+      surface,
+      mode,
+      prompt: normalizedPrompt,
       ownership: {
         workspaceId: ownership.workspaceId,
         projectId: ownership.projectId,
         sessionId: ownership.sessionId,
         firmwareIds: lastLoadedFirmware ? [buildFirmwareId(lastLoadedFirmware)] : undefined,
       },
-      contextKinds: [
-        'workspace-metadata',
-        ...(ownership.projectId ? (['project-metadata'] as const) : []),
-        ...(ownership.sessionId ? (['session-metadata'] as const) : []),
-        ...(lastLoadedFirmware ? (['firmware-summary'] as const) : []),
-      ],
+      contextKinds,
       firmwareSummary: lastLoadedFirmware ?? undefined,
     };
   }, [
-    selectedPreset,
-    ownership.workspaceId,
+    draftPrompt,
+    lastLoadedFirmware,
+    mode,
     ownership.projectId,
     ownership.sessionId,
-    lastLoadedFirmware,
+    ownership.workspaceId,
+    surface,
   ]);
 
   const providerConfig = useMemo(
@@ -144,30 +138,41 @@ export function useWorkspaceAiAssistState(
       (persistedState.lastNativePreview ? [persistedState.lastNativePreview] : []),
     [persistedState.previewHistory, persistedState.lastNativePreview],
   );
+
   const proposalReviews = useMemo(
     () => persistedState.proposalReviews ?? [],
     [persistedState.proposalReviews],
   );
 
   return {
-    presets: aiAssistPresets,
-    selectedPresetId,
-    selectedPreset,
+    surface,
+    mode,
+    draftPrompt,
     draft,
     providerConfig,
     nativePreview,
     previewHistory,
     proposalReviews,
-    selectPreset: (presetId: AiAssistPresetId) => {
-      const nextState = aiAssistStore.selectPreset({
+    updateMode: (nextMode: AiAssistMode) => {
+      const nextState = aiAssistStore.updateMode({
         ownership,
-        selectedPresetId: presetId,
+        surface,
+        mode: nextMode,
+      });
+      setPersistedState(nextState);
+    },
+    updateDraftPrompt: (nextDraftPrompt: string) => {
+      const nextState = aiAssistStore.updateDraftPrompt({
+        ownership,
+        surface,
+        draftPrompt: nextDraftPrompt,
       });
       setPersistedState(nextState);
     },
     updateProviderConfig: (providerId: string, modelId?: string) => {
       const nextState = aiAssistStore.updateProviderConfig({
         ownership,
+        surface,
         providerConfig: {
           providerId,
           modelId,
@@ -178,6 +183,7 @@ export function useWorkspaceAiAssistState(
     restorePreviewContext: (preview: PersistedAiAssistNativePreview) => {
       const nextState = aiAssistStore.restorePreviewContext({
         ownership,
+        surface,
         preview,
       });
       setPersistedState(nextState);
@@ -189,6 +195,7 @@ export function useWorkspaceAiAssistState(
     ) => {
       const nextState = aiAssistStore.updatePreviewReviewStatus({
         ownership,
+        surface,
         snapshotId,
         reviewStatus,
         reviewDetails,
@@ -205,8 +212,10 @@ export function useWorkspaceAiAssistState(
 
       const nextState = aiAssistStore.recordNativePreview({
         ownership,
+        surface,
         preview: {
-          presetId: draft.preset.id,
+          mode: draft.mode,
+          prompt: draft.prompt,
           draftKey: currentDraftKey,
           providerConfig,
           recordedAt: new Date().toISOString(),
@@ -229,12 +238,14 @@ function buildFirmwareId(summary: PersistedFirmwareSummary): string {
 
 function buildDraftKey(draft: AiAssistDraft, providerConfig: AiAssistProviderConfig): string {
   return [
-    draft.preset.id,
+    draft.surface,
+    draft.mode,
     draft.ownership.workspaceId,
     draft.ownership.projectId ?? '_',
     draft.ownership.sessionId ?? '_',
     draft.ownership.firmwareIds?.join('|') ?? '_',
     draft.contextKinds.join('|'),
+    draft.prompt,
     providerConfig.providerId,
     providerConfig.modelId ?? '_',
   ].join('::');

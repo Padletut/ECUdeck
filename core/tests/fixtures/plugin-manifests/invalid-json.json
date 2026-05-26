@@ -1,0 +1,9 @@
+{
+  "pluginId": "broken-plugin",
+  "pluginName": "Broken Plugin",
+  "pluginVersion": "1.0.0",
+  "apiVersion": "v1",
+  "schemaVersion": "v1",
+  "runtimeCompatibilityVersion": "v1",
+  "supportedTargetFamilies": ["EDC16U31"],
+  "capabilities": ["detect"]

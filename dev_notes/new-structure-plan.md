@@ -49,7 +49,7 @@ Responsibilities:
 - workspace/project navigation
 - analysis session management
 - project workflows
-- AI interaction panels
+- editor copilot panels
 - chat workflows
 - change review panels
 - diagnostics
@@ -504,7 +504,7 @@ Detailed AI chat/review architecture is described in:
 
 [`ai-chat-review-architecture.md`](./ai-chat-review-architecture.md)
 
-The AI/LLM assistant should support multiple working modes inside the chat and plugin editor:
+The AI/LLM assistant should support multiple working modes inside copilot surfaces for the plugin editor and hex/map editor:
 
 - Ask
 - Plan

@@ -151,3 +151,15 @@ h2.text-section-title {
 .nav-container {
   letter-spacing: 0.3em;
 }
+
+/* Dark native form controls for the ECUDeck surface */
+.ecu-select {
+  color-scheme: dark;
+  background-color: var(--color-carbon-black);
+  color: var(--color-soft-white);
+}
+
+.ecu-select option {
+  background-color: var(--color-carbon-black);
+  color: var(--color-soft-white);
+}

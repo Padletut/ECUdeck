@@ -17,13 +17,10 @@ import {
 
 describe('createAiService', () => {
   const draft: AiAssistDraft = {
-    preset: {
-      id: 'first-pass-review',
-      title: 'Generate a first-pass review plan',
-      prompt:
-        'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
-      mode: 'plan',
-    },
+    surface: 'map-editor',
+    mode: 'plan',
+    prompt:
+      'Generate a first-pass review plan for this firmware scope, including the safest deterministic checks to run before deeper analysis.',
     ownership: {
       workspaceId: 'local-workspace',
       projectId: 'dashboard-plugin-validation',

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface HexViewerProps {
   data: Uint8Array;
@@ -15,20 +15,38 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
   const [scrollTop, setScrollTop] = useState(0);
   const [viewMode, setViewMode] = useState<'hex' | 'binary'>('hex');
   const [bitWidth, setBitWidth] = useState<8 | 16 | 32>(8);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const ROWS_PER_SCREEN = 20;
-  const ROW_HEIGHT = 24;
-  const BYTES_PER_ROW = 16;
+  const ROW_HEIGHT = 28;
+  const HEX_BYTES_PER_ROW = 16;
+  const BINARY_BYTES_PER_ROW = 8;
 
-  const totalRows = Math.ceil(editableData.length / BYTES_PER_ROW);
+  useEffect(() => {
+    setEditableData(new Uint8Array(data));
+    setEditingCell(null);
+    setEditingValue('');
+    setSelectedCell(null);
+  }, [data]);
+
+  const bytesPerRow = viewMode === 'hex' ? HEX_BYTES_PER_ROW : BINARY_BYTES_PER_ROW;
+  const totalRows = Math.ceil(editableData.length / bytesPerRow);
   const startRow = Math.floor(scrollTop / ROW_HEIGHT);
   const endRow = Math.min(startRow + ROWS_PER_SCREEN + 5, totalRows);
+  const isBinaryView = viewMode === 'binary';
+  const bytesPerCell = viewMode === 'hex' ? 1 : bitWidth / 8;
+  const cellsPerRow = Math.ceil(bytesPerRow / bytesPerCell);
+  const cellWidthInCh = viewMode === 'hex' ? 2 : bitWidth;
+  const cellGapInCh = viewMode === 'hex' ? 1 : 1;
+  const hexColumnWidthInCh =
+    cellsPerRow * cellWidthInCh + Math.max(0, cellsPerRow - 1) * cellGapInCh;
+  const asciiColumnWidthInCh = Math.max(bytesPerRow, 8);
 
   const visibleLines: Array<{ offset: number; hex: string[]; ascii: string[]; rowIndex: number }> =
     [];
   for (let rowIdx = startRow; rowIdx < endRow; rowIdx++) {
-    const offset = rowIdx * BYTES_PER_ROW;
-    const chunk = editableData.slice(offset, offset + BYTES_PER_ROW);
+    const offset = rowIdx * bytesPerRow;
+    const chunk = editableData.slice(offset, offset + bytesPerRow);
     if (chunk.length > 0) {
       let hex: string[] = [];
 
@@ -75,7 +93,7 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
         return;
       }
 
-      const absoluteByteIndex = row * BYTES_PER_ROW + byte;
+      const absoluteByteIndex = row * bytesPerRow + byte;
       const updatedData = new Uint8Array(editableData);
       updatedData[absoluteByteIndex] = parseInt(value, 16);
 
@@ -84,7 +102,7 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
       setEditingCell(null);
       setEditingValue('');
     },
-    [editableData, onDataChange],
+    [bytesPerRow, editableData, onDataChange],
   );
 
   const handleBinaryEdit = useCallback(
@@ -93,7 +111,7 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
         return;
       }
 
-      const absoluteByteIndex = row * BYTES_PER_ROW + chunkIndex * (value.length / 8);
+      const absoluteByteIndex = row * bytesPerRow + chunkIndex * (value.length / 8);
       const updatedData = new Uint8Array(editableData);
 
       if (value.length === 8) {
@@ -115,7 +133,7 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
       setEditingCell(null);
       setEditingValue('');
     },
-    [editableData, onDataChange],
+    [bytesPerRow, editableData, onDataChange],
   );
 
   const handleCellClick = (row: number, byte: number, currentValue: string) => {
@@ -128,13 +146,12 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
     const address = parseInt(addressInput, 16);
     if (!Number.isNaN(address) && address >= 0 && address < editableData.length) {
       setCurrentAddress(address);
-      const targetRow = Math.floor(address / BYTES_PER_ROW);
+      const targetRow = Math.floor(address / bytesPerRow);
       const newScrollTop = targetRow * ROW_HEIGHT;
       setScrollTop(newScrollTop);
 
-      const scrollContainer = document.querySelector('.overflow-auto') as HTMLElement | null;
-      if (scrollContainer) {
-        scrollContainer.scrollTop = newScrollTop;
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = newScrollTop;
       }
     }
   };
@@ -209,7 +226,11 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
         </div>
       </div>
 
-      <div className="overflow-auto h-[600px]" onScroll={handleScroll}>
+      <div
+        ref={scrollContainerRef}
+        className="h-[600px] overflow-x-hidden overflow-y-auto"
+        onScroll={handleScroll}
+      >
         <div style={{ height: totalHeight, position: 'relative' }}>
           <div
             style={{
@@ -222,17 +243,35 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
             {visibleLines.map(({ offset, hex, ascii, rowIndex }) => (
               <div
                 key={offset}
-                className="grid grid-cols-[120px_1fr_160px] gap-4 items-center px-4 py-1 font-mono text-sm border-b border-gridlines-grey/50"
-                style={{ height: ROW_HEIGHT }}
+                className={`grid items-center gap-3 border-b border-gridlines-grey/50 px-4 font-mono ${
+                  isBinaryView ? 'text-[12px]' : 'text-[12px]'
+                }`}
+                style={{
+                  gridTemplateColumns: isBinaryView
+                    ? `10ch minmax(${hexColumnWidthInCh}ch, 1fr) ${asciiColumnWidthInCh}ch`
+                    : '10ch minmax(0,1fr) 14ch',
+                  height: ROW_HEIGHT,
+                }}
               >
-                <span className="text-electric-blue">0x{offset.toString(16).padStart(8, '0')}</span>
+                <span className="whitespace-nowrap text-electric-blue">
+                  0x{offset.toString(16).padStart(8, '0')}
+                </span>
 
-                <div className="flex flex-wrap gap-1">
+                <div
+                  className="grid min-w-0 items-center whitespace-nowrap"
+                  style={{
+                    columnGap: isBinaryView ? '0.5rem' : '0.35rem',
+                    gridTemplateColumns: isBinaryView
+                      ? `repeat(${hex.length}, minmax(${cellWidthInCh}ch, 1fr))`
+                      : `repeat(${hex.length}, minmax(0, 1fr))`,
+                  }}
+                >
                   {hex.map((value, byteIndex) => {
                     const isEditing =
                       editingCell?.line === rowIndex && editingCell?.byte === byteIndex;
                     const isSelected =
                       selectedCell?.line === rowIndex && selectedCell?.byte === byteIndex;
+                    const cellWidth = '100%';
 
                     return isEditing ? (
                       <input
@@ -254,18 +293,20 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
                             }
                           }
                         }}
-                        className="w-20 bg-carbon-black border border-electric-blue rounded px-1 text-soft-white"
+                        className="h-6 min-w-0 rounded border border-electric-blue bg-carbon-black px-0.5 text-center leading-none text-soft-white outline-none"
+                        style={{ width: cellWidth }}
                       />
                     ) : (
                       <button
                         key={`${offset}-${byteIndex}`}
                         type="button"
                         onClick={() => handleCellClick(rowIndex, byteIndex, value)}
-                        className={`rounded px-1 text-left transition ${
+                        className={`flex h-6 min-w-0 items-center justify-center rounded leading-none transition ${
                           isSelected
                             ? 'bg-electric-blue/20 text-electric-blue'
                             : 'hover:bg-carbon-black'
                         }`}
+                        style={{ width: cellWidth }}
                       >
                         {value}
                       </button>
@@ -273,7 +314,7 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
                   })}
                 </div>
 
-                <span className="text-alloy-silver tracking-widest">{ascii.join('')}</span>
+                <span className="whitespace-pre text-alloy-silver">{ascii.join('')}</span>
               </div>
             ))}
           </div>

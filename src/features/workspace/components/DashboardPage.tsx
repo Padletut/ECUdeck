@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { useWorkspaceFirmware } from '../../../app/providers/WorkspaceScopeProvider';
-import AiAssistPanel from './AiAssistPanel';
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
+import PluginCopilotPanel from '../../plugins/components/PluginCopilotPanel';
 import PluginValidationPanel from '../../plugins/components/PluginValidationPanel';
 import PluginValidationScopePanel from './PluginValidationScopePanel';
 
@@ -209,8 +209,8 @@ export default function DashboardPage() {
         </ul>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        <div className="bg-steel-grey rounded-lg border border-gridlines-grey overflow-hidden">
+      <section className="mb-12">
+        <div className="max-w-4xl overflow-hidden rounded-lg border border-gridlines-grey bg-steel-grey">
           <div className="px-6 py-4 border-b border-gridlines-grey flex items-center justify-between">
             <h2 className="text-section-title font-bold">File Manager</h2>
             <span className="text-alloy-silver text-sm">Upload ECU binary</span>
@@ -270,13 +270,14 @@ export default function DashboardPage() {
             ) : null}
           </div>
         </div>
-
-        <AiAssistPanel />
       </section>
 
-      <section className="mb-12">
+      <section className="mb-12 space-y-6">
         <PluginValidationScopePanel />
-        <PluginValidationPanel />
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_26rem]">
+          <PluginValidationPanel />
+          <PluginCopilotPanel />
+        </div>
       </section>
     </>
   );

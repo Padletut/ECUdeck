@@ -153,10 +153,13 @@ Responsibilities:
 - compare/diff tools
 - selection-aware editing panels
 - patch preview
+- embedded AI copilot surfaces
 
 This layer should remain highly responsive and viewport-driven.
 
 The frontend should only render visible data ranges and should rely on chunked data delivery from Rust.
+
+AI assistance in this area should be selection-aware and docked to the editing workflow, not pulled out into a detached dashboard interaction.
 
 ---
 
@@ -172,6 +175,8 @@ Responsibilities:
 - AI-assisted plugin authoring mode
 
 The plugin editor should support both structured editing and raw-source inspection, but the primary UX should favor guided, user-friendly authoring.
+
+AI assistance here should behave like a copilot bound to the active plugin document and validation state.
 
 ---
 
@@ -207,6 +212,10 @@ The chat layer should be context-aware and able to work against:
 When long-running chat or review sessions exceed practical provider limits, the frontend should make context compression visible.
 
 The operator should be able to see whether the active request is using raw attached context or a compressed snapshot, and whether that snapshot is fresh, stale, or lossy.
+
+The primary UI for this layer should live inside plugin-editor and hex/map-editor workflows.
+
+Dashboard or workspace-overview surfaces may expose provider configuration, recent activity, and review status, but should not be the main place where firmware or plugin AI work happens.
 
 ---
 

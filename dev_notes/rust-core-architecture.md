@@ -34,6 +34,7 @@ The Rust core should be responsible for:
 - consistency validation
 - risk-oriented analysis support
 - chunked binary access
+- structured editor-context artifacts for AI-assisted workflows
 - plugin execution/runtime behavior
 - background task execution
 
@@ -325,6 +326,38 @@ The core should support:
 - derived region access for maps and related structures
 
 The frontend should depend on this for viewport-based rendering and should not try to own binary traversal logic itself.
+
+---
+
+# AI Context Support Boundary
+
+The Rust core should support AI-assisted editor workflows by producing deterministic context artifacts for copilot surfaces.
+
+The main target surfaces are:
+
+- plugin editor
+- hex editor
+- map editor
+
+The core should be able to provide or derive artifacts such as:
+
+- selected binary range summaries
+- viewport-aware map context
+- map candidate metadata snapshots
+- plugin manifest and validation snapshots
+- graph and risk summaries
+- structured inputs that can later be compressed for provider submission
+
+This allows the AI layer to stay grounded in real engineering context without turning the Rust core into a chat UX system.
+
+The Rust core should NOT own:
+
+- home page AI experiences
+- provider-specific prompt orchestration
+- chat mode UX
+- accept/reject UI behavior
+
+Its role is to provide deterministic, explainable context building blocks for the command bridge and frontend copilot surfaces.
 
 ---
 

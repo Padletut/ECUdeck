@@ -171,7 +171,7 @@ export function createAiService(invokeCommand?: TauriInvoke): AiService {
     }: BuildPrepareContextSnapshotRequestInput): PrepareContextSnapshotRequest {
       return {
         ownership: draft.ownership,
-        mode: draft.preset.mode,
+        mode: draft.mode,
         context: this.buildContextEnvelope(draft),
         compression,
       };
@@ -185,7 +185,7 @@ export function createAiService(invokeCommand?: TauriInvoke): AiService {
     }: BuildSendAiChatRequestInput): SendAiChatRequest {
       const normalizedProviderId = providerId.trim();
       const normalizedModelId = modelId?.trim() || undefined;
-      const normalizedPrompt = draft.preset.prompt.trim();
+      const normalizedPrompt = draft.prompt.trim();
 
       if (!normalizedProviderId) {
         throw new Error('providerId must be a non-empty string.');
@@ -198,7 +198,7 @@ export function createAiService(invokeCommand?: TauriInvoke): AiService {
       return {
         providerId: normalizedProviderId,
         modelId: normalizedModelId,
-        mode: draft.preset.mode,
+        mode: draft.mode,
         prompt: normalizedPrompt,
         ownership: draft.ownership,
         context: this.buildContextEnvelope(draft),
@@ -318,6 +318,36 @@ function buildContextRefsForKind(
 
     case 'firmware-summary':
       return firmwareRef ? [firmwareRef] : [];
+
+    case 'map-selection':
+      return [
+        {
+          sourceId: `map-selection::${draft.ownership.sessionId ?? draft.ownership.projectId ?? draft.ownership.workspaceId}`,
+          kind,
+          version: draft.firmwareSummary?.loadedAt,
+          fingerprint: firmwareRef?.fingerprint,
+        },
+      ];
+
+    case 'plugin-reference':
+      return [
+        {
+          sourceId: `plugin-reference::${draft.ownership.projectId ?? draft.ownership.workspaceId}`,
+          kind,
+          version: draft.ownership.sessionId,
+          fingerprint: draft.ownership.pluginReferenceIds?.join('|'),
+        },
+      ];
+
+    case 'plugin-validation':
+      return [
+        {
+          sourceId: `plugin-validation::${draft.surface}::${draft.ownership.sessionId ?? draft.ownership.projectId ?? draft.ownership.workspaceId}`,
+          kind,
+          version: draft.firmwareSummary?.loadedAt,
+          fingerprint: firmwareRef?.fingerprint,
+        },
+      ];
 
     default:
       return [];

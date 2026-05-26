@@ -82,6 +82,31 @@ This architecture keeps AI interaction connected to the rest of the ECUDeck plat
 
 ---
 
+# Primary Interaction Surfaces
+
+AI assistance should be embedded primarily where the user is already doing engineering work.
+
+Primary surfaces should be:
+
+- plugin editor copilot
+- hex editor copilot
+- map editor copilot
+
+These should feel like contextual sidecars, docked panels, or editor-adjacent assistants.
+
+They should NOT be treated as a generic home page chatbot or dashboard-first workflow.
+
+A workspace or dashboard surface may still expose:
+
+- provider status
+- recent review history
+- model configuration
+- pending jobs
+
+But the main AI working experience should stay attached to editor context, selections, and active engineering tasks.
+
+---
+
 # Supported Chat Modes
 
 The AI system should support multiple explicit working modes.
@@ -184,7 +209,10 @@ An AI request should be able to attach explicit context such as:
 - project id
 - session id
 - firmware ids
+- active editor surface
 - selected map or viewport context
+- selected hex region or binary range
+- active plugin document or manifest scope
 - active plugin reference set
 - compressed session/context summaries when full raw context is too large
 - current chat mode
@@ -215,6 +243,7 @@ Compression should be able to operate on inputs such as:
 - prior conversation turns
 - workspace/project/session metadata
 - firmware analysis summaries
+- active editor selections or viewport summaries
 - proposal/review history
 - plugin validation and compatibility findings
 
@@ -497,6 +526,16 @@ Important plugin-editor chat capabilities:
 - explain validation failures
 - create reviewable plugin change proposals
 
+The intended UX is a copilot-style assistant that stays attached to the active plugin editing surface.
+
+It should understand:
+
+- the current plugin document
+- the active schema section
+- validation output
+- compatibility warnings
+- recent accepted or rejected plugin proposals
+
 The plugin editor should not implement its own disconnected AI system with different behavior than the main chat/review architecture.
 
 ---
@@ -512,6 +551,15 @@ The AI chat layer should also support firmware-facing analysis workflows such as
 - preparing reviewable recommendations
 
 These workflows should consume active session and firmware context rather than free-form detached prompts only.
+
+The intended UX is a copilot-style assistant attached to:
+
+- the active hex editor selection
+- the active map view
+- the active compare/diff context
+- the active analysis session
+
+This keeps AI suggestions grounded in what the operator is actually inspecting, instead of pushing firmware analysis into a detached landing-page workflow.
 
 ---
 
