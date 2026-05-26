@@ -1,16 +1,8 @@
-import type { PluginReferenceOwnership } from '../../../shared/types/plugins';
+import { useWorkspaceScope } from '../../../app/providers/WorkspaceScopeProvider';
 
-export default function PluginValidationScopePanel({
-  draftOwnership,
-  canApplyScope,
-  setDraftField,
-  applyScope,
-}: Readonly<{
-  draftOwnership: PluginReferenceOwnership;
-  canApplyScope: boolean;
-  setDraftField: (field: keyof PluginReferenceOwnership, value: string) => void;
-  applyScope: () => void;
-}>) {
+export default function PluginValidationScopePanel() {
+  const { draftOwnership, canApplyScope, setDraftField, applyScope } = useWorkspaceScope();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     applyScope();

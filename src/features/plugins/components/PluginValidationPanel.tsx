@@ -2,17 +2,14 @@ import type {
   PersistedPluginReference,
   PluginManifestDiscoveryResult,
   PluginCompatibilityStatus,
-  PluginReferenceOwnership,
   PluginValidationFinding,
   PluginValidationReport,
 } from '../../../shared/types/plugins';
+import { useWorkspaceScope } from '../../../app/providers/WorkspaceScopeProvider';
 import { usePluginManifestValidation } from '../hooks/usePluginManifestValidation';
 
-export default function PluginValidationPanel({
-  ownership,
-}: Readonly<{
-  ownership: PluginReferenceOwnership;
-}>) {
+export default function PluginValidationPanel() {
+  const { ownership } = useWorkspaceScope();
   const {
     pluginDirectoryPath,
     manifestPath,

@@ -1,26 +1,23 @@
 import { useRef, useState } from 'react';
 
+import { useWorkspaceFirmware } from '../../../app/providers/WorkspaceScopeProvider';
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
 import PluginValidationPanel from '../../plugins/components/PluginValidationPanel';
 import PluginValidationScopePanel from './PluginValidationScopePanel';
-import type { LoadedFirmwareData } from '../../../shared/types/ecu';
-import type { PluginReferenceOwnership } from '../../../shared/types/plugins';
-import { usePluginValidationScope } from '../hooks/usePluginValidationScope';
-
-const defaultPluginValidationOwnership: PluginReferenceOwnership = {
-  workspaceId: 'local-workspace',
-  projectId: 'dashboard-plugin-validation',
-  sessionId: 'dashboard-session',
-};
 
 export default function DashboardPage() {
-  const { ownership, draftOwnership, canApplyScope, setDraftField, applyScope } =
-    usePluginValidationScope(defaultPluginValidationOwnership);
-  const [showMapEditor, setShowMapEditor] = useState(false);
-  const [mapData, setMapData] = useState<LoadedFirmwareData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [loadingMessage, setLoadingMessage] = useState('');
+  const {
+    showMapEditor,
+    mapData,
+    lastLoadedFirmware,
+    loading,
+    loadingProgress,
+    loadingMessage,
+    hasLoadedFirmware,
+    loadFirmwareFile,
+    openMapEditor,
+    closeMapEditor,
+  } = useWorkspaceFirmware();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
@@ -30,53 +27,23 @@ export default function DashboardPage() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setLoading(true);
-      setLoadingProgress(0);
-      setLoadingMessage('Reading file...');
-
       try {
-        setLoadingProgress(25);
-        const arrayBuffer = await file.arrayBuffer();
-
-        setLoadingMessage('Processing binary data...');
-        setLoadingProgress(50);
-
-        await new Promise((resolve) => setTimeout(resolve, 200));
-
-        const uint8Array = new Uint8Array(arrayBuffer);
-
-        setLoadingMessage('Analyzing ECU firmware...');
-        setLoadingProgress(75);
-
-        await new Promise((resolve) => setTimeout(resolve, 300));
-
-        const uploadedData: LoadedFirmwareData = {
-          raw: uint8Array,
-          size: uint8Array.length,
-          checksum: `file-${Date.now()}`,
-        };
-
-        setLoadingProgress(100);
-        setLoadingMessage('Complete!');
-
-        await new Promise((resolve) => setTimeout(resolve, 200));
-
-        setMapData(uploadedData);
-        setShowMapEditor(true);
+        await loadFirmwareFile(file);
       } catch (error) {
         console.error('Error reading file:', error);
-        setLoadingMessage('Error loading file');
-      } finally {
-        setLoading(false);
-        setLoadingProgress(0);
-        setLoadingMessage('');
       }
+
+      e.target.value = '';
     }
   };
 
   const handleBrowseClick = async () => {
-    if (mapData) {
-      setShowMapEditor(true);
+    if (hasLoadedFirmware) {
+      openMapEditor();
+    } else if (lastLoadedFirmware) {
+      alert(
+        `Last loaded firmware metadata is available for ${lastLoadedFirmware.fileName}, but the binary is not currently loaded in memory. Re-upload the file to reopen the editor.`,
+      );
     } else {
       alert('Please upload a binary file first using the Upload button.');
     }
@@ -133,7 +100,7 @@ export default function DashboardPage() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-page-headline font-bold">Map Editor</h1>
           <button
-            onClick={() => setShowMapEditor(false)}
+            onClick={closeMapEditor}
             className="bg-carbon-black text-electric-blue px-4 py-2 rounded-lg font-bold border border-electric-blue hover:bg-electric-blue hover:text-carbon-black transition"
           >
             Back to Dashboard
@@ -277,6 +244,29 @@ export default function DashboardPage() {
                 Import Metadata
               </button>
             </div>
+
+            {lastLoadedFirmware ? (
+              <div className="rounded-lg border border-gridlines-grey bg-carbon-black/60 px-4 py-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.18em] text-muted-text">
+                      Last Loaded Firmware
+                    </p>
+                    <h3 className="mt-2 font-semibold text-soft-white">
+                      {lastLoadedFirmware.fileName}
+                    </h3>
+                    <p className="mt-1 text-sm text-alloy-silver">
+                      {formatFileSize(lastLoadedFirmware.size)}
+                      {lastLoadedFirmware.checksum ? ` · ${lastLoadedFirmware.checksum}` : ''}
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver">
+                    {hasLoadedFirmware ? 'in memory' : 'summary only'}
+                  </span>
+                </div>
+                <p className="mt-3 text-xs text-muted-text">{lastLoadedFirmware.loadedAt}</p>
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -303,14 +293,21 @@ export default function DashboardPage() {
       </section>
 
       <section className="mb-12">
-        <PluginValidationScopePanel
-          draftOwnership={draftOwnership}
-          canApplyScope={canApplyScope}
-          setDraftField={setDraftField}
-          applyScope={applyScope}
-        />
-        <PluginValidationPanel ownership={ownership} />
+        <PluginValidationScopePanel />
+        <PluginValidationPanel />
       </section>
     </>
   );
+}
+
+function formatFileSize(sizeInBytes: number): string {
+  if (sizeInBytes >= 1024 * 1024) {
+    return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  if (sizeInBytes >= 1024) {
+    return `${(sizeInBytes / 1024).toFixed(1)} KB`;
+  }
+
+  return `${sizeInBytes} B`;
 }

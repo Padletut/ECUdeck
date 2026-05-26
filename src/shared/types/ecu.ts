@@ -47,3 +47,10 @@ export interface LoadedFirmwareData {
   checksum?: string;
   parsed?: ParsedEcuData;
 }
+
+export interface PersistedFirmwareSummary {
+  fileName: string;
+  size: number;
+  checksum?: string;
+  loadedAt: string;
+}
