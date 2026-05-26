@@ -51,6 +51,7 @@ interface WorkspaceAiAssistState {
   draft: AiAssistDraft | null;
   providerConfig: AiAssistProviderConfig;
   nativePreview: PersistedAiAssistNativePreview | null;
+  previewHistory: PersistedAiAssistNativePreview[];
   selectPreset: (presetId: AiAssistPresetId) => void;
   updateProviderConfig: (providerId: string, modelId?: string) => void;
   recordNativePreview: (
@@ -127,6 +128,13 @@ export function useWorkspaceAiAssistState(
       : null;
   }, [currentDraftKey, persistedState.lastNativePreview]);
 
+  const previewHistory = useMemo(
+    () =>
+      persistedState.previewHistory ??
+      (persistedState.lastNativePreview ? [persistedState.lastNativePreview] : []),
+    [persistedState.previewHistory, persistedState.lastNativePreview],
+  );
+
   return {
     presets: aiAssistPresets,
     selectedPresetId,
@@ -134,6 +142,7 @@ export function useWorkspaceAiAssistState(
     draft,
     providerConfig,
     nativePreview,
+    previewHistory,
     selectPreset: (presetId: AiAssistPresetId) => {
       const nextState = aiAssistStore.selectPreset({
         ownership,
@@ -163,6 +172,8 @@ export function useWorkspaceAiAssistState(
         ownership,
         preview: {
           draftKey: currentDraftKey,
+          providerConfig,
+          recordedAt: new Date().toISOString(),
           snapshotResponse,
           chatResponse,
         },

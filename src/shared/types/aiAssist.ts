@@ -30,6 +30,7 @@ export interface PersistedAiAssistState {
   selectedPresetId?: AiAssistPresetId;
   providerConfig?: AiAssistProviderConfig;
   lastNativePreview?: PersistedAiAssistNativePreview;
+  previewHistory?: PersistedAiAssistNativePreview[];
 }
 
 export interface AiAssistDraft {
@@ -41,6 +42,8 @@ export interface AiAssistDraft {
 
 export interface PersistedAiAssistNativePreview {
   draftKey: string;
+  providerConfig: AiAssistProviderConfig;
+  recordedAt: string;
   snapshotResponse: PrepareContextSnapshotResponse;
   chatResponse: SendAiChatResponse;
 }

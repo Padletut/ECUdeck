@@ -32,40 +32,12 @@ describe('createAiAssistStore', () => {
     sessionId: 'comparison-session',
   };
 
-  const preview: PersistedAiAssistNativePreview = {
-    draftKey:
-      'first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123',
-    snapshotResponse: {
-      snapshot: {
-        snapshotId: 'preview::snapshot::plan::local-workspace::4::1',
-        workspaceId: ownership.workspaceId,
-        projectId: ownership.projectId,
-        sessionId: ownership.sessionId,
-        mode: 'plan',
-        sourceRefs: [],
-        summaryText: 'preview snapshot',
-        unresolvedAssumptions: [],
-        safetyWarnings: [],
-        acceptedDecisionRefs: [],
-        rejectedDecisionRefs: [],
-        metadata: {
-          strategy: 'summary',
-          status: 'fresh',
-          lossy: false,
-          createdAt: 'preview-generated',
-        },
-      },
-    },
-    chatResponse: {
-      responseKind: 'plan',
-      summaryText: 'preview chat',
-    },
-  };
-
   const providerConfig: AiAssistProviderConfig = {
     providerId: 'ollama',
     modelId: 'llama3.1:8b',
   };
+
+  const preview = buildPreview(1);
 
   it('returns an empty state when nothing has been persisted', () => {
     const store = createAiAssistStore(new MemoryStorage());
@@ -117,6 +89,7 @@ describe('createAiAssistStore', () => {
     expect(nextState).toEqual({
       ownership,
       lastNativePreview: preview,
+      previewHistory: [preview],
     });
     expect(store.loadState(ownership)).toEqual(nextState);
   });
@@ -138,6 +111,7 @@ describe('createAiAssistStore', () => {
       ownership,
       selectedPresetId: 'first-pass-review',
       lastNativePreview: preview,
+      previewHistory: [preview],
     });
   });
 
@@ -173,6 +147,68 @@ describe('createAiAssistStore', () => {
       ownership,
       providerConfig,
       lastNativePreview: preview,
+      previewHistory: [preview],
     });
   });
+
+  it('keeps a bounded newest-first preview history per ownership scope', () => {
+    const store = createAiAssistStore(new MemoryStorage());
+
+    for (let index = 1; index <= 7; index += 1) {
+      store.recordNativePreview({
+        ownership,
+        preview: buildPreview(index),
+      });
+    }
+
+    expect(
+      store
+        .loadState(ownership)
+        .previewHistory?.map((entry) => entry.snapshotResponse.snapshot.snapshotId),
+    ).toEqual([
+      'preview::snapshot::plan::local-workspace::4::7',
+      'preview::snapshot::plan::local-workspace::4::6',
+      'preview::snapshot::plan::local-workspace::4::5',
+      'preview::snapshot::plan::local-workspace::4::4',
+      'preview::snapshot::plan::local-workspace::4::3',
+      'preview::snapshot::plan::local-workspace::4::2',
+    ]);
+  });
+
+  function buildPreview(index: number): PersistedAiAssistNativePreview {
+    return {
+      draftKey: `first-pass-review::local-workspace::dashboard-plugin-validation::dashboard-session::firmware::sample.bin::ABC123::${index}`,
+      providerConfig,
+      recordedAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
+      snapshotResponse: {
+        snapshot: {
+          snapshotId: `preview::snapshot::plan::local-workspace::4::${index}`,
+          workspaceId: ownership.workspaceId,
+          projectId: ownership.projectId,
+          sessionId: ownership.sessionId,
+          mode: 'plan',
+          sourceRefs: [],
+          summaryText: `preview snapshot ${index}`,
+          unresolvedAssumptions: [],
+          safetyWarnings: [],
+          acceptedDecisionRefs: [],
+          rejectedDecisionRefs: [],
+          metadata: {
+            strategy: 'summary',
+            status: 'fresh',
+            lossy: false,
+            createdAt: `2026-05-26T10:0${Math.min(index, 9)}:00.000Z`,
+          },
+        },
+      },
+      chatResponse: {
+        responseKind: 'plan',
+        summaryText: `preview chat ${index}`,
+        proposal: {
+          proposalId: `preview::proposal::plan::local-workspace::ollama::${index}`,
+          contextSnapshotId: `preview::snapshot::plan::local-workspace::4::${index}`,
+        },
+      },
+    };
+  }
 });

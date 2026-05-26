@@ -1,12 +1,15 @@
-import type {
-  AiAssistProviderConfig,
-  AiAssistPresetId,
-  PersistedAiAssistNativePreview,
-  PersistedAiAssistState,
+import {
+  DEFAULT_AI_ASSIST_MODEL_ID,
+  DEFAULT_AI_ASSIST_PROVIDER_ID,
+  type AiAssistProviderConfig,
+  type AiAssistPresetId,
+  type PersistedAiAssistNativePreview,
+  type PersistedAiAssistState,
 } from '../../shared/types/aiAssist';
 import type { PluginReferenceOwnership } from '../../shared/types/plugins';
 
 const STORAGE_PREFIX = 'ecudeck.ai-assist.v1';
+const MAX_PREVIEW_HISTORY = 6;
 
 export interface StorageLike {
   getItem(key: string): string | null;
@@ -55,10 +58,12 @@ export function createAiAssistStore(storage: StorageLike | null | undefined): Ai
 
     recordNativePreview(input: RecordNativePreviewInput): PersistedAiAssistState {
       const currentState = loadPersistedState(storage, input.ownership);
+      const normalizedPreview = normalizeNativePreview(input.preview);
       const nextState: PersistedAiAssistState = {
         ...currentState,
         ownership: input.ownership,
-        lastNativePreview: input.preview,
+        lastNativePreview: normalizedPreview,
+        previewHistory: mergePreviewHistory(currentState.previewHistory ?? [], normalizedPreview),
       };
 
       persistState(storage, nextState);
@@ -97,6 +102,8 @@ function loadPersistedState(
 
   try {
     const parsed = JSON.parse(raw) as Partial<PersistedAiAssistState>;
+    const lastNativePreview = normalizePersistedPreview(parsed.lastNativePreview);
+    const previewHistory = normalizePreviewHistory(parsed.previewHistory, lastNativePreview);
 
     return {
       ownership,
@@ -104,9 +111,8 @@ function loadPersistedState(
       providerConfig: isAiAssistProviderConfig(parsed.providerConfig)
         ? normalizeProviderConfig(parsed.providerConfig)
         : undefined,
-      lastNativePreview: isPersistedAiAssistNativePreview(parsed.lastNativePreview)
-        ? normalizeNativePreview(parsed.lastNativePreview)
-        : undefined,
+      lastNativePreview,
+      previewHistory,
     };
   } catch {
     return emptyState(ownership);
@@ -167,6 +173,8 @@ function isPersistedAiAssistNativePreview(value: unknown): value is PersistedAiA
   const candidate = value as Record<string, unknown>;
   return (
     typeof candidate.draftKey === 'string' &&
+    (candidate.providerConfig == null || isAiAssistProviderConfig(candidate.providerConfig)) &&
+    (candidate.recordedAt == null || typeof candidate.recordedAt === 'string') &&
     isPrepareContextSnapshotResponse(candidate.snapshotResponse) &&
     isSendAiChatResponse(candidate.chatResponse)
   );
@@ -241,13 +249,62 @@ function isProposalContextReference(value: unknown): boolean {
 function normalizeNativePreview(
   preview: PersistedAiAssistNativePreview,
 ): PersistedAiAssistNativePreview {
+  const providerConfig = normalizeProviderConfig(preview.providerConfig) ?? {
+    providerId: DEFAULT_AI_ASSIST_PROVIDER_ID,
+    modelId: DEFAULT_AI_ASSIST_MODEL_ID,
+  };
+  const recordedAt =
+    preview.recordedAt?.trim() || preview.snapshotResponse.snapshot.metadata.createdAt;
+
   return {
     ...preview,
+    providerConfig,
+    recordedAt,
     chatResponse: {
       ...preview.chatResponse,
       proposal: preview.chatResponse.proposal ?? undefined,
     },
   };
+}
+
+function normalizePersistedPreview(value: unknown): PersistedAiAssistNativePreview | undefined {
+  if (!isPersistedAiAssistNativePreview(value)) {
+    return undefined;
+  }
+
+  return normalizeNativePreview(value);
+}
+
+function normalizePreviewHistory(
+  value: unknown,
+  lastNativePreview?: PersistedAiAssistNativePreview,
+): PersistedAiAssistNativePreview[] | undefined {
+  const normalizedHistory = Array.isArray(value)
+    ? value
+        .map((entry) => normalizePersistedPreview(entry))
+        .filter((entry): entry is PersistedAiAssistNativePreview => Boolean(entry))
+    : [];
+
+  if (lastNativePreview) {
+    const mergedHistory = mergePreviewHistory(normalizedHistory, lastNativePreview);
+    return mergedHistory.length > 0 ? mergedHistory : undefined;
+  }
+
+  return normalizedHistory.length > 0 ? normalizedHistory.slice(0, MAX_PREVIEW_HISTORY) : undefined;
+}
+
+function mergePreviewHistory(
+  previewHistory: PersistedAiAssistNativePreview[],
+  nextPreview: PersistedAiAssistNativePreview,
+): PersistedAiAssistNativePreview[] {
+  return [
+    nextPreview,
+    ...previewHistory.filter(
+      (preview) =>
+        preview.snapshotResponse.snapshot.snapshotId !==
+        nextPreview.snapshotResponse.snapshot.snapshotId,
+    ),
+  ].slice(0, MAX_PREVIEW_HISTORY);
 }
 
 function normalizeProviderConfig(

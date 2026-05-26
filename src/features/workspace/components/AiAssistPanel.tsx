@@ -21,6 +21,7 @@ export default function AiAssistPanel() {
     draft,
     providerConfig,
     nativePreview,
+    previewHistory,
     selectPreset,
     updateProviderConfig,
     recordNativePreview,
@@ -51,6 +52,7 @@ export default function AiAssistPanel() {
       previewCatalogFallback,
     [availableProviders, previewCatalogFallback, providerConfig.providerId],
   );
+  const recentPreviewHistory = useMemo(() => previewHistory.slice(0, 5), [previewHistory]);
   const previewResetKey = useMemo(() => {
     if (!draft) {
       return 'no-draft';
@@ -425,6 +427,67 @@ export default function AiAssistPanel() {
                     />
                   </div>
                 ) : null}
+
+                {recentPreviewHistory.length > 0 ? (
+                  <div className="mt-5 rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.2em] text-muted-text">
+                          Recent Preview Activity
+                        </p>
+                        <p className="mt-2 text-sm text-alloy-silver">
+                          Latest scope-scoped snapshot/chat previews retained for auditability.
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver">
+                        {recentPreviewHistory.length} items
+                      </span>
+                    </div>
+
+                    <ul className="mt-4 space-y-3">
+                      {recentPreviewHistory.map((previewEntry) => (
+                        <li
+                          key={previewEntry.snapshotResponse.snapshot.snapshotId}
+                          className="rounded-lg border border-gridlines-grey bg-carbon-black/50 p-4"
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <p className="font-semibold text-soft-white">
+                                {resolveProviderDisplayName(
+                                  previewEntry.providerConfig.providerId,
+                                  availableProviders,
+                                )}
+                              </p>
+                              <p className="mt-1 text-sm text-alloy-silver">
+                                {formatRecordedAt(previewEntry.recordedAt)}
+                              </p>
+                            </div>
+                            <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver">
+                              {previewEntry.providerConfig.modelId ?? 'provider-default'}
+                            </span>
+                          </div>
+
+                          <p className="mt-3 text-sm leading-6 text-alloy-silver">
+                            {previewEntry.chatResponse.summaryText}
+                          </p>
+
+                          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                            <HistoryField
+                              label="Snapshot"
+                              value={previewEntry.snapshotResponse.snapshot.snapshotId}
+                            />
+                            <HistoryField
+                              label="Proposal"
+                              value={
+                                previewEntry.chatResponse.proposal?.proposalId ?? 'No proposal'
+                              }
+                            />
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </>
             ) : null}
           </div>
@@ -476,6 +539,15 @@ function RequestPreviewCard({
   );
 }
 
+function HistoryField({ label, value }: Readonly<{ label: string; value: string }>) {
+  return (
+    <div className="rounded-lg border border-gridlines-grey bg-steel-grey-alt/20 px-3 py-3">
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-text">{label}</p>
+      <p className="mt-2 break-all font-mono text-xs text-alloy-silver">{value}</p>
+    </div>
+  );
+}
+
 function formatFileSize(sizeInBytes: number): string {
   if (sizeInBytes >= 1024 * 1024) {
     return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
@@ -519,4 +591,20 @@ function providerStatusClassName(status: AiProviderSummary['connectionStatus']):
     default:
       return 'rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver';
   }
+}
+
+function resolveProviderDisplayName(providerId: string, providers: AiProviderSummary[]): string {
+  return (
+    providers.find((provider) => provider.providerId === providerId)?.displayName ?? providerId
+  );
+}
+
+function formatRecordedAt(recordedAt: string): string {
+  const parsedDate = new Date(recordedAt);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return recordedAt;
+  }
+
+  return parsedDate.toLocaleString();
 }
