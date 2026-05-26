@@ -47,3 +47,6 @@ yarn-error.log*
 /legacy/python_backend/*.ori
 /legacy/python_backend/*.csv
 /legacy/python_backend/modules/*
+
+# Rust
+/core/target/

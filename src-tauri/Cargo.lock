@@ -683,9 +683,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0881ea181b1df73ff77ffaaf9c7544ecc11e82fba9b5f27b262a3c73a332555"
 
 [[package]]
+name = "ecudeck_core"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "ecudeck_desktop"
 version = "0.1.0"
 dependencies = [
+ "ecudeck_core",
  "serde",
  "serde_json",
  "tauri",
