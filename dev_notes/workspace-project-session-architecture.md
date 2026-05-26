@@ -244,6 +244,7 @@ Examples:
 - saved analysis sessions
 - plugin references
 - review outcomes
+- context snapshot records that shaped accepted or rejected review flows
 
 ---
 
@@ -273,6 +274,7 @@ Examples:
 - hover state
 - in-progress unsaved selection state
 - partial chat streaming output before commit
+- temporary context snapshots for abandoned or still-draft AI requests
 
 ---
 
@@ -331,6 +333,10 @@ An analysis session may be:
 
 Branching becomes useful when the user wants to explore different interpretations without mutating the original session trail.
 
+Context snapshots created during a session should follow the same ownership boundary.
+
+If a session is branched, inherited snapshots may remain for audit history, but they should be treated as stale until refreshed against the branched context.
+
 ---
 
 # Job Ownership
@@ -381,7 +387,34 @@ An AI request should be able to state:
 - plugin scope
 - review mode
 
+If compression was used, the request should also be able to state:
+
+- which context snapshot was used
+- which source artifacts were summarized into it
+- whether the snapshot is still fresh for the active session state
+
 Without this, AI assistance quickly becomes detached from the actual engineering state of the project.
+
+---
+
+# Context Snapshot Ownership
+
+Context snapshots should attach to explicit workspace/project/session ownership instead of living as anonymous provider-side cache state.
+
+Each persisted or review-relevant snapshot should know:
+
+- which workspace owns it
+- which project owns it
+- which session produced or refreshed it
+- which proposal or review flow consumed it when relevant
+- whether it is transient, persisted for audit, or invalidated
+
+Recommended rules:
+
+- transient snapshots may be discarded when a request is canceled or abandoned
+- snapshots that shaped accepted or rejected review decisions should persist with session audit history
+- resuming a session may reuse only snapshots whose source fingerprints still match current state
+- switching project or session ownership should invalidate snapshots tied to the previous scope
 
 ---
 
@@ -395,6 +428,7 @@ workspace/
         project-a/
             firmware/
             sessions/
+                context-snapshots/
             plugin-references/
             reviews/
             exports/
@@ -453,6 +487,7 @@ Should include:
 - creation/update timestamps
 - purpose or label
 - status
+- persisted context snapshot references when audit or review replay requires them
 
 ---
 
@@ -497,6 +532,7 @@ These rules should remain stable even as implementation evolves:
 - active tool surfaces should consume shared project/session context
 - plugin usage should be traceable
 - review actions should attach to durable project/session ownership
+- context snapshots should attach to durable project/session ownership when they shaped reviewable AI output
 - long-running jobs should have explicit ownership
 
 ---
