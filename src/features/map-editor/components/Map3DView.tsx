@@ -1,21 +1,9 @@
-// src/features/editor/Map3DView.tsx
 import { ResponsiveContainer, Surface, ZAxis, XAxis, YAxis, Tooltip, Scatter } from 'recharts';
 
-interface ECUMap {
-  id: string;
-  name: string;
-  address: number;
-  data: number[][];
-  dimensions: { rows: number; cols: number };
-  units?: string;
-  scaling?: { offset: number; factor: number };
-  xAxis?: number[];
-  yAxis?: number[];
-  values?: number[][];
-}
+import type { EcuMap } from '../../../shared/types/ecu';
 
 interface Map3DViewProps {
-  map: ECUMap | null;
+  map: EcuMap | null;
 }
 
 export default function Map3DView({ map }: Map3DViewProps) {

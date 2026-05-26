@@ -1,5 +1,6 @@
-// src/features/editor/MapEditorTabs.tsx
 import { useState } from 'react';
+
+import type { EcuMap, LoadedFirmwareData } from '../../../shared/types/ecu';
 import HexViewer from './HexViewer';
 import Map2DView from './Map2DView';
 import Map3DView from './Map3DView';
@@ -7,43 +8,8 @@ import Map3DView from './Map3DView';
 const tabs = ['HEX', '2D', '3D'];
 
 interface MapEditorTabsProps {
-  mapData: {
-    raw: Uint8Array; // Most versatile for binary manipulation
-    size: number;
-    checksum?: string;
-    parsed?: ParsedECUData;
-  };
-  selectedMap: ECUMap | null;
-}
-
-interface ECUMap {
-  id: string;
-  name: string;
-  address: number;
-  data: number[][];
-  dimensions: { rows: number; cols: number };
-  units?: string;
-  scaling?: { offset: number; factor: number };
-}
-
-interface ECUTable {
-  id: string;
-  name: string;
-  address: number;
-  data: number[];
-  length: number;
-  units?: string;
-  scaling?: { offset: number; factor: number };
-}
-
-interface ParsedECUData {
-  maps: ECUMap[];
-  tables: ECUTable[];
-  metadata: {
-    version: string;
-    identifier: string;
-    timestamp?: Date;
-  };
+  mapData: LoadedFirmwareData;
+  selectedMap: EcuMap | null;
 }
 
 export default function MapEditorTabs({ mapData, selectedMap }: MapEditorTabsProps) {

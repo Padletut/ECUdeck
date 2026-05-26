@@ -1,44 +1,11 @@
 import { useRef, useState } from 'react';
-import MapEditorTabs from '../features/editor/MapEditorTabs';
 
-interface ECUMap {
-  id: string;
-  name: string;
-  address: number;
-  data: number[][];
-  dimensions: { rows: number; cols: number };
-  units?: string;
-  scaling?: { offset: number; factor: number };
-}
-
-interface ECUTable {
-  id: string;
-  name: string;
-  address: number;
-  data: number[];
-  length: number;
-  units?: string;
-  scaling?: { offset: number; factor: number };
-}
-
-interface ParsedECUData {
-  maps: ECUMap[];
-  tables: ECUTable[];
-  metadata: {
-    version: string;
-    identifier: string;
-    timestamp?: Date;
-  };
-}
+import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
+import type { LoadedFirmwareData } from '../../../shared/types/ecu';
 
 export default function DashboardPage() {
   const [showMapEditor, setShowMapEditor] = useState(false);
-  const [mapData, setMapData] = useState<{
-    raw: Uint8Array;
-    size: number;
-    checksum?: string;
-    parsed?: ParsedECUData;
-  } | null>(null);
+  const [mapData, setMapData] = useState<LoadedFirmwareData | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingMessage, setLoadingMessage] = useState('');
@@ -71,7 +38,7 @@ export default function DashboardPage() {
 
         await new Promise((resolve) => setTimeout(resolve, 300));
 
-        const uploadedData = {
+        const uploadedData: LoadedFirmwareData = {
           raw: uint8Array,
           size: uint8Array.length,
           checksum: `file-${Date.now()}`,
@@ -96,11 +63,9 @@ export default function DashboardPage() {
   };
 
   const handleBrowseClick = async () => {
-    // Only allow browsing if data is already loaded
     if (mapData) {
       setShowMapEditor(true);
     } else {
-      // Could show a message that no data is loaded
       alert('Please upload a binary file first using the Upload button.');
     }
   };
@@ -264,38 +229,66 @@ export default function DashboardPage() {
         </ul>
       </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".bin,.hex"
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-            disabled={loading}
-          />
-          <button
-            onClick={handleUploadClick}
-            disabled={loading}
-            className="bg-carbon-black text-dyno-green px-6 py-3 rounded-lg font-bold border border-dyno-green hover:bg-dyno-green hover:text-carbon-black transition w-full disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Upload
-          </button>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="bg-steel-grey rounded-lg border border-gridlines-grey overflow-hidden">
+          <div className="px-6 py-4 border-b border-gridlines-grey flex items-center justify-between">
+            <h2 className="text-section-title font-bold">File Manager</h2>
+            <span className="text-alloy-silver text-sm">Upload ECU binary</span>
+          </div>
+          <div className="p-6 space-y-6">
+            <div className="border border-dashed border-gridlines-grey rounded-lg p-8 text-center bg-carbon-black/40">
+              <p className="text-soft-white text-lg font-semibold mb-2">Drop binary file here</p>
+              <p className="text-alloy-silver text-sm mb-4">Supported formats: .bin, .ori, .hex</p>
+              <button
+                onClick={handleUploadClick}
+                className="bg-electric-blue text-carbon-black px-5 py-2 rounded-lg font-bold hover:opacity-90 transition"
+              >
+                Upload
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".bin,.ori,.hex"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button
+                onClick={handleBrowseClick}
+                className="rounded-lg border border-electric-blue px-5 py-3 text-electric-blue font-semibold hover:bg-electric-blue hover:text-carbon-black transition"
+              >
+                Browse Loaded File
+              </button>
+              <button className="rounded-lg border border-gridlines-grey px-5 py-3 text-alloy-silver font-semibold hover:border-electric-blue hover:text-electric-blue transition">
+                Import Metadata
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          onClick={handleBrowseClick}
-          disabled={loading || !mapData}
-          className="bg-carbon-black text-electric-blue px-6 py-3 rounded-lg font-bold border border-electric-blue hover:bg-electric-blue hover:text-carbon-black transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Browse
-        </button>
-        <button
-          disabled={loading}
-          className="bg-carbon-black text-electric-blue px-6 py-3 rounded-lg font-bold border border-electric-blue hover:bg-electric-blue hover:text-carbon-black transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          AI Assist
-        </button>
-      </div>
+
+        <div className="bg-steel-grey rounded-lg border border-gridlines-grey overflow-hidden">
+          <div className="px-6 py-4 border-b border-gridlines-grey flex items-center justify-between">
+            <h2 className="text-section-title font-bold">AI Assist</h2>
+            <span className="text-alloy-silver text-sm">Preview only</span>
+          </div>
+          <div className="p-6 space-y-4">
+            {[
+              'Summarize likely map regions',
+              'Compare this file against common Bosch patterns',
+              'Generate a first-pass review plan',
+            ].map((prompt) => (
+              <button
+                key={prompt}
+                className="w-full text-left rounded-lg border border-gridlines-grey px-4 py-3 text-soft-white hover:border-electric-blue hover:bg-carbon-black transition"
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

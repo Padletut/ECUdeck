@@ -1,20 +1,7 @@
-// src/features/editor/Map2DView.tsx
-
-interface ECUMap {
-  id: string;
-  name: string;
-  address: number;
-  data: number[][];
-  dimensions: { rows: number; cols: number };
-  units?: string;
-  scaling?: { offset: number; factor: number };
-  xAxis?: number[];
-  yAxis?: number[];
-  values?: number[][];
-}
+import type { EcuMap } from '../../../shared/types/ecu';
 
 interface Map2DViewProps {
-  map: ECUMap | null;
+  map: EcuMap | null;
 }
 
 export default function Map2DView({ map }: Map2DViewProps) {
