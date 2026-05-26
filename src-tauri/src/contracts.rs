@@ -59,6 +59,25 @@ pub enum AiResponseKind {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum AiProviderConnectionStatus {
+    Connected,
+    Degraded,
+    Disconnected,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum AiProviderCapability {
+    TextChat,
+    Streaming,
+    StructuredOutput,
+    ToolOrchestration,
+    LongContext,
+    LocalOnly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct ContextSourceRef {
     pub source_id: String,
@@ -171,6 +190,30 @@ pub struct SendAiChatRequest {
     pub ownership: AiRequestOwnership,
     pub context: AiRequestContextEnvelope,
     pub context_snapshot_id: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct AiProviderModelSummary {
+    pub model_id: String,
+    pub display_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct AiProviderSummary {
+    pub provider_id: String,
+    pub display_name: String,
+    pub connection_status: AiProviderConnectionStatus,
+    pub capability_ids: Vec<AiProviderCapability>,
+    pub default_model_id: Option<String>,
+    pub models: Vec<AiProviderModelSummary>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct ListAiProvidersResponse {
+    pub providers: Vec<AiProviderSummary>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]

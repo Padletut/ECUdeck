@@ -1,9 +1,18 @@
 use crate::contracts::{
-    AiCommandError, AiRequestMode, AiResponseKind, CompressedContextSnapshot,
-    CompressionMetadata, CompressionStrategy, PrepareContextSnapshotRequest,
+    AiCommandError, AiProviderCapability, AiProviderConnectionStatus,
+    AiProviderModelSummary, AiProviderSummary, AiRequestMode, AiResponseKind,
+    CompressedContextSnapshot, CompressionMetadata, CompressionStrategy,
+    ListAiProvidersResponse, PrepareContextSnapshotRequest,
     PrepareContextSnapshotResponse, ProposalContextReference, SendAiChatRequest,
     SendAiChatResponse, SnapshotStatus,
 };
+
+#[tauri::command]
+pub fn list_ai_providers() -> Result<ListAiProvidersResponse, AiCommandError> {
+    Ok(ListAiProvidersResponse {
+        providers: preview_provider_catalog(),
+    })
+}
 
 #[tauri::command]
 pub fn prepare_context_snapshot(
@@ -196,4 +205,84 @@ fn build_proposal_id(request: &SendAiChatRequest) -> String {
         request.ownership.workspace_id,
         request.provider_id.trim(),
     )
+}
+
+fn preview_provider_catalog() -> Vec<AiProviderSummary> {
+    vec![
+        AiProviderSummary {
+            provider_id: "preview-provider".to_string(),
+            display_name: "Preview Provider".to_string(),
+            connection_status: AiProviderConnectionStatus::Connected,
+            capability_ids: vec![
+                AiProviderCapability::TextChat,
+                AiProviderCapability::StructuredOutput,
+                AiProviderCapability::LocalOnly,
+            ],
+            default_model_id: Some("draft-preview".to_string()),
+            models: vec![AiProviderModelSummary {
+                model_id: "draft-preview".to_string(),
+                display_name: "Draft Preview".to_string(),
+            }],
+        },
+        AiProviderSummary {
+            provider_id: "ollama".to_string(),
+            display_name: "Ollama".to_string(),
+            connection_status: AiProviderConnectionStatus::Disconnected,
+            capability_ids: vec![
+                AiProviderCapability::TextChat,
+                AiProviderCapability::Streaming,
+                AiProviderCapability::StructuredOutput,
+                AiProviderCapability::LongContext,
+                AiProviderCapability::LocalOnly,
+            ],
+            default_model_id: Some("llama3.1:8b".to_string()),
+            models: vec![
+                AiProviderModelSummary {
+                    model_id: "llama3.1:8b".to_string(),
+                    display_name: "Llama 3.1 8B".to_string(),
+                },
+                AiProviderModelSummary {
+                    model_id: "qwen2.5-coder:7b".to_string(),
+                    display_name: "Qwen 2.5 Coder 7B".to_string(),
+                },
+            ],
+        },
+        AiProviderSummary {
+            provider_id: "llama-server".to_string(),
+            display_name: "Llama Server".to_string(),
+            connection_status: AiProviderConnectionStatus::Disconnected,
+            capability_ids: vec![
+                AiProviderCapability::TextChat,
+                AiProviderCapability::Streaming,
+                AiProviderCapability::LocalOnly,
+            ],
+            default_model_id: Some("local-instruct-8b".to_string()),
+            models: vec![AiProviderModelSummary {
+                model_id: "local-instruct-8b".to_string(),
+                display_name: "Local Instruct 8B".to_string(),
+            }],
+        },
+        AiProviderSummary {
+            provider_id: "openai-compatible".to_string(),
+            display_name: "OpenAI-Compatible".to_string(),
+            connection_status: AiProviderConnectionStatus::Disconnected,
+            capability_ids: vec![
+                AiProviderCapability::TextChat,
+                AiProviderCapability::Streaming,
+                AiProviderCapability::StructuredOutput,
+                AiProviderCapability::LongContext,
+            ],
+            default_model_id: Some("gpt-4.1-mini".to_string()),
+            models: vec![
+                AiProviderModelSummary {
+                    model_id: "gpt-4.1-mini".to_string(),
+                    display_name: "GPT-4.1 Mini".to_string(),
+                },
+                AiProviderModelSummary {
+                    model_id: "gpt-4.1".to_string(),
+                    display_name: "GPT-4.1".to_string(),
+                },
+            ],
+        },
+    ]
 }

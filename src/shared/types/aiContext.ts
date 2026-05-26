@@ -113,6 +113,34 @@ export interface SendAiChatRequest {
   contextSnapshotId?: string;
 }
 
+export type AiProviderConnectionStatus = 'connected' | 'degraded' | 'disconnected';
+
+export type AiProviderCapability =
+  | 'text-chat'
+  | 'streaming'
+  | 'structured-output'
+  | 'tool-orchestration'
+  | 'long-context'
+  | 'local-only';
+
+export interface AiProviderModelSummary {
+  modelId: string;
+  displayName: string;
+}
+
+export interface AiProviderSummary {
+  providerId: string;
+  displayName: string;
+  connectionStatus: AiProviderConnectionStatus;
+  capabilityIds: AiProviderCapability[];
+  defaultModelId?: string;
+  models: AiProviderModelSummary[];
+}
+
+export interface ListAiProvidersResponse {
+  providers: AiProviderSummary[];
+}
+
 export type AiResponseKind = 'explanation' | 'plan' | 'proposal';
 
 export interface ProposalContextReference {

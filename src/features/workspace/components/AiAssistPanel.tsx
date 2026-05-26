@@ -4,19 +4,13 @@ import {
   useWorkspaceAiAssist,
   useWorkspaceScope,
 } from '../../../app/providers/WorkspaceScopeProvider';
-import { aiService } from '../../../services/tauri/aiService';
+import { PREVIEW_AI_PROVIDER_CATALOG, aiService } from '../../../services/tauri/aiService';
+import type { AiProviderSummary } from '../../../shared/types/aiContext';
 import {
   DEFAULT_AI_ASSIST_MODEL_ID,
   DEFAULT_AI_ASSIST_PROVIDER_ID,
 } from '../../../shared/types/aiAssist';
 import type { AiCommandError } from '../../../shared/types/aiContext';
-
-const providerOptions = [
-  { value: DEFAULT_AI_ASSIST_PROVIDER_ID, label: 'Preview Provider' },
-  { value: 'ollama', label: 'Ollama' },
-  { value: 'llama-server', label: 'Llama Server' },
-  { value: 'openai-compatible', label: 'OpenAI-Compatible' },
-];
 
 export default function AiAssistPanel() {
   const { ownership } = useWorkspaceScope();
@@ -33,6 +27,12 @@ export default function AiAssistPanel() {
   } = useWorkspaceAiAssist();
   const [previewError, setPreviewError] = useState<string | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
+  const [providerCatalogError, setProviderCatalogError] = useState<string | null>(null);
+  const [providerCatalogLoading, setProviderCatalogLoading] = useState(false);
+  const [availableProviders, setAvailableProviders] = useState<AiProviderSummary[]>(
+    PREVIEW_AI_PROVIDER_CATALOG.providers,
+  );
+  const previewCatalogFallback = PREVIEW_AI_PROVIDER_CATALOG.providers[0] ?? null;
   const requestPreview = useMemo(
     () =>
       draft
@@ -45,6 +45,12 @@ export default function AiAssistPanel() {
     [draft, providerConfig.providerId, providerConfig.modelId],
   );
   const hasNativeBridge = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+  const selectedProvider = useMemo(
+    () =>
+      availableProviders.find((provider) => provider.providerId === providerConfig.providerId) ??
+      previewCatalogFallback,
+    [availableProviders, previewCatalogFallback, providerConfig.providerId],
+  );
   const previewResetKey = useMemo(() => {
     if (!draft) {
       return 'no-draft';
@@ -74,6 +80,71 @@ export default function AiAssistPanel() {
     setPreviewLoading(false);
   }, [previewResetKey]);
 
+  useEffect(() => {
+    if (!hasNativeBridge) {
+      setAvailableProviders(PREVIEW_AI_PROVIDER_CATALOG.providers);
+      setProviderCatalogError(null);
+      setProviderCatalogLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    setProviderCatalogLoading(true);
+
+    void aiService
+      .listProviders()
+      .then((response) => {
+        if (cancelled) {
+          return;
+        }
+
+        setAvailableProviders(
+          response.providers.length > 0
+            ? response.providers
+            : PREVIEW_AI_PROVIDER_CATALOG.providers,
+        );
+        setProviderCatalogError(null);
+      })
+      .catch((error) => {
+        if (cancelled) {
+          return;
+        }
+
+        setAvailableProviders(PREVIEW_AI_PROVIDER_CATALOG.providers);
+        setProviderCatalogError(getErrorMessage(error));
+      })
+      .finally(() => {
+        if (cancelled) {
+          return;
+        }
+
+        setProviderCatalogLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasNativeBridge]);
+
+  useEffect(() => {
+    if (!previewCatalogFallback) {
+      return;
+    }
+
+    const matchedProvider = availableProviders.find(
+      (provider) => provider.providerId === providerConfig.providerId,
+    );
+
+    if (matchedProvider) {
+      return;
+    }
+
+    updateProviderConfig(
+      previewCatalogFallback.providerId,
+      previewCatalogFallback.defaultModelId ?? DEFAULT_AI_ASSIST_MODEL_ID,
+    );
+  }, [availableProviders, previewCatalogFallback, providerConfig.providerId, updateProviderConfig]);
+
   const handleRunNativePreview = async () => {
     if (!requestPreview) {
       return;
@@ -100,12 +171,8 @@ export default function AiAssistPanel() {
   };
 
   const handleProviderChange = (providerId: string) => {
-    const nextModelId =
-      providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
-        ? (providerConfig.modelId ?? DEFAULT_AI_ASSIST_MODEL_ID)
-        : providerConfig.modelId === DEFAULT_AI_ASSIST_MODEL_ID
-          ? undefined
-          : providerConfig.modelId;
+    const nextProvider = availableProviders.find((provider) => provider.providerId === providerId);
+    const nextModelId = nextProvider?.defaultModelId;
 
     updateProviderConfig(providerId, nextModelId);
   };
@@ -189,15 +256,20 @@ export default function AiAssistPanel() {
                   onChange={(event) => handleProviderChange(event.target.value)}
                   className="w-full rounded-lg border border-gridlines-grey bg-carbon-black px-4 py-3 text-sm text-soft-white outline-none transition focus:border-electric-blue"
                 >
-                  {providerOptions.map((providerOption) => (
-                    <option key={providerOption.value} value={providerOption.value}>
-                      {providerOption.label}
+                  {availableProviders.map((providerOption) => (
+                    <option key={providerOption.providerId} value={providerOption.providerId}>
+                      {providerOption.displayName}
                     </option>
                   ))}
                 </select>
                 <p className="mt-2 text-sm text-muted-text">
-                  This provider id is written into the AI request and persisted per workspace scope.
+                  {providerCatalogLoading
+                    ? 'Refreshing provider catalog from the AI command bridge.'
+                    : 'This provider id is written into the AI request and persisted per workspace scope.'}
                 </p>
+                {providerCatalogError ? (
+                  <p className="mt-2 text-sm text-warning-amber">{providerCatalogError}</p>
+                ) : null}
               </div>
 
               <div>
@@ -212,20 +284,64 @@ export default function AiAssistPanel() {
                   value={providerConfig.modelId ?? ''}
                   onChange={(event) => handleModelChange(event.target.value)}
                   placeholder={
-                    providerConfig.providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
+                    selectedProvider?.defaultModelId ??
+                    (providerConfig.providerId === DEFAULT_AI_ASSIST_PROVIDER_ID
                       ? DEFAULT_AI_ASSIST_MODEL_ID
-                      : 'Optional provider-specific model'
+                      : 'Optional provider-specific model')
                   }
                   className="w-full rounded-lg border border-gridlines-grey bg-carbon-black px-4 py-3 font-mono text-sm text-soft-white outline-none transition focus:border-electric-blue"
                   spellCheck={false}
                   autoComplete="off"
                 />
                 <p className="mt-2 text-sm text-muted-text">
-                  Leave this empty for provider defaults. The preview provider keeps its draft model
-                  by default.
+                  Leave this empty for provider defaults. The command bridge now supplies provider
+                  status, capabilities, and model suggestions.
                 </p>
+                {selectedProvider?.models.length ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {selectedProvider.models.map((model) => {
+                      const isActive = model.modelId === providerConfig.modelId;
+
+                      return (
+                        <button
+                          key={model.modelId}
+                          type="button"
+                          onClick={() => handleModelChange(model.modelId)}
+                          className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+                            isActive
+                              ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
+                              : 'border-gridlines-grey text-alloy-silver hover:border-electric-blue hover:text-electric-blue'
+                          }`}
+                        >
+                          {model.displayName}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </div>
             </div>
+
+            {selectedProvider ? (
+              <div className="mt-5 rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className={providerStatusClassName(selectedProvider.connectionStatus)}>
+                    {selectedProvider.connectionStatus}
+                  </span>
+                  <p className="text-sm text-alloy-silver">{selectedProvider.displayName}</p>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {selectedProvider.capabilityIds.map((capabilityId) => (
+                    <span
+                      key={capabilityId}
+                      className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-alloy-silver"
+                    >
+                      {capabilityId}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             <div className="mt-5">
               <p className="text-xs uppercase tracking-[0.2em] text-muted-text">Context Sources</p>
@@ -391,4 +507,16 @@ function isAiCommandError(error: unknown): error is AiCommandError {
 
   const candidate = error as Record<string, unknown>;
   return typeof candidate.code === 'string' && typeof candidate.message === 'string';
+}
+
+function providerStatusClassName(status: AiProviderSummary['connectionStatus']): string {
+  switch (status) {
+    case 'connected':
+      return 'rounded-full border border-dyno-green/50 bg-dyno-green/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-dyno-green';
+    case 'degraded':
+      return 'rounded-full border border-warning-amber/50 bg-warning-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-warning-amber';
+    case 'disconnected':
+    default:
+      return 'rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver';
+  }
 }

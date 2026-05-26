@@ -7,10 +7,12 @@ import {
 } from '../../shared/types/aiAssist';
 import type {
   AiCommandError,
+  AiProviderSummary,
   AiRequestContextEnvelope,
   CompressionPolicy,
   ContextSourceKind,
   ContextSourceRef,
+  ListAiProvidersResponse,
   PrepareContextSnapshotRequest,
   PrepareContextSnapshotResponse,
   RawContextAttachment,
@@ -43,6 +45,71 @@ export interface AiAssistRequestPreview {
   sendAiChatRequest: SendAiChatRequest;
 }
 
+export const PREVIEW_AI_PROVIDER_CATALOG: ListAiProvidersResponse = {
+  providers: [
+    {
+      providerId: DEFAULT_AI_ASSIST_PROVIDER_ID,
+      displayName: 'Preview Provider',
+      connectionStatus: 'connected',
+      capabilityIds: ['text-chat', 'structured-output', 'local-only'],
+      defaultModelId: DEFAULT_AI_ASSIST_MODEL_ID,
+      models: [
+        {
+          modelId: DEFAULT_AI_ASSIST_MODEL_ID,
+          displayName: 'Draft Preview',
+        },
+      ],
+    },
+    {
+      providerId: 'ollama',
+      displayName: 'Ollama',
+      connectionStatus: 'disconnected',
+      capabilityIds: ['text-chat', 'streaming', 'structured-output', 'long-context', 'local-only'],
+      defaultModelId: 'llama3.1:8b',
+      models: [
+        {
+          modelId: 'llama3.1:8b',
+          displayName: 'Llama 3.1 8B',
+        },
+        {
+          modelId: 'qwen2.5-coder:7b',
+          displayName: 'Qwen 2.5 Coder 7B',
+        },
+      ],
+    },
+    {
+      providerId: 'llama-server',
+      displayName: 'Llama Server',
+      connectionStatus: 'disconnected',
+      capabilityIds: ['text-chat', 'streaming', 'local-only'],
+      defaultModelId: 'local-instruct-8b',
+      models: [
+        {
+          modelId: 'local-instruct-8b',
+          displayName: 'Local Instruct 8B',
+        },
+      ],
+    },
+    {
+      providerId: 'openai-compatible',
+      displayName: 'OpenAI-Compatible',
+      connectionStatus: 'disconnected',
+      capabilityIds: ['text-chat', 'streaming', 'structured-output', 'long-context'],
+      defaultModelId: 'gpt-4.1-mini',
+      models: [
+        {
+          modelId: 'gpt-4.1-mini',
+          displayName: 'GPT-4.1 Mini',
+        },
+        {
+          modelId: 'gpt-4.1',
+          displayName: 'GPT-4.1',
+        },
+      ],
+    },
+  ],
+};
+
 export interface BuildDraftPreviewRequestsInput {
   draft: AiAssistDraft;
   providerId?: string;
@@ -55,6 +122,7 @@ export type TauriInvoke = <Response>(
 ) => Promise<Response>;
 
 export interface AiService {
+  listProviders(): Promise<ListAiProvidersResponse>;
   buildContextEnvelope(draft: AiAssistDraft): AiRequestContextEnvelope;
   buildPrepareContextSnapshotRequest(
     input: BuildPrepareContextSnapshotRequestInput,
@@ -69,6 +137,18 @@ export interface AiService {
 
 export function createAiService(invokeCommand?: TauriInvoke): AiService {
   return {
+    async listProviders(): Promise<ListAiProvidersResponse> {
+      if (!invokeCommand) {
+        return cloneProviderCatalog(PREVIEW_AI_PROVIDER_CATALOG);
+      }
+
+      try {
+        return await invokeCommand<ListAiProvidersResponse>('list_ai_providers');
+      } catch (error) {
+        throw normalizeAiCommandError(error);
+      }
+    },
+
     buildContextEnvelope(draft: AiAssistDraft): AiRequestContextEnvelope {
       const firmwareRef = buildFirmwareSourceRef(draft);
       const retrievedContextRefs = dedupeSourceRefs(
@@ -335,4 +415,18 @@ function isAiCommandError(error: unknown): error is AiCommandError {
 
   const candidate = error as Record<string, unknown>;
   return typeof candidate.code === 'string' && typeof candidate.message === 'string';
+}
+
+function cloneProviderCatalog(catalog: ListAiProvidersResponse): ListAiProvidersResponse {
+  return {
+    providers: catalog.providers.map(cloneProviderSummary),
+  };
+}
+
+function cloneProviderSummary(provider: AiProviderSummary): AiProviderSummary {
+  return {
+    ...provider,
+    capabilityIds: [...provider.capabilityIds],
+    models: provider.models.map((model) => ({ ...model })),
+  };
 }

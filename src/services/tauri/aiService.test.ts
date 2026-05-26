@@ -2,6 +2,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 
 import type { AiAssistDraft } from '../../shared/types/aiAssist';
 import type {
+  ListAiProvidersResponse,
   PrepareContextSnapshotResponse,
   SendAiChatResponse,
 } from '../../shared/types/aiContext';
@@ -9,6 +10,7 @@ import {
   AI_ASSIST_PREVIEW_COMPRESSION_POLICY,
   AI_ASSIST_PREVIEW_MODEL_ID,
   AI_ASSIST_PREVIEW_PROVIDER_ID,
+  PREVIEW_AI_PROVIDER_CATALOG,
   createAiService,
   type TauriInvoke,
 } from './aiService';
@@ -91,6 +93,12 @@ describe('createAiService', () => {
     });
   });
 
+  it('returns the preview provider catalog when no Tauri bridge is available', async () => {
+    const service = createAiService();
+
+    await expect(service.listProviders()).resolves.toEqual(PREVIEW_AI_PROVIDER_CATALOG);
+  });
+
   it('builds preview requests with explicit preview provider defaults', () => {
     const service = createAiService();
     const preview = service.buildDraftPreviewRequests({ draft });
@@ -160,6 +168,31 @@ describe('createAiService', () => {
     });
   });
 
+  it('passes the provider catalog request to the Tauri bridge', async () => {
+    const response: ListAiProvidersResponse = {
+      providers: [
+        {
+          providerId: 'ollama',
+          displayName: 'Ollama',
+          connectionStatus: 'connected',
+          capabilityIds: ['text-chat', 'streaming', 'local-only'],
+          defaultModelId: 'llama3.1:8b',
+          models: [
+            {
+              modelId: 'llama3.1:8b',
+              displayName: 'Llama 3.1 8B',
+            },
+          ],
+        },
+      ],
+    };
+    const invokeCommand = jest.fn(async () => response);
+    const service = createAiService(invokeCommand as unknown as TauriInvoke);
+
+    await expect(service.listProviders()).resolves.toEqual(response);
+    expect(invokeCommand).toHaveBeenCalledWith('list_ai_providers');
+  });
+
   it('passes the chat request to the Tauri bridge', async () => {
     const response: SendAiChatResponse = {
       responseKind: 'plan',
@@ -195,5 +228,17 @@ describe('createAiService', () => {
       message: 'ownership.workspaceId must be a non-empty string.',
     });
     expect(invokeCommand).not.toHaveBeenCalled();
+  });
+
+  it('normalizes provider catalog bridge errors into an AI command error shape', async () => {
+    const invokeCommand = jest.fn(async () => {
+      throw new Error('provider catalog failed');
+    });
+    const service = createAiService(invokeCommand as unknown as TauriInvoke);
+
+    await expect(service.listProviders()).rejects.toEqual({
+      code: 'ai-command-failed',
+      message: 'provider catalog failed',
+    });
   });
 });
