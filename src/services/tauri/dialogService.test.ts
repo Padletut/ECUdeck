@@ -29,4 +29,32 @@ describe('createDialogService', () => {
 
     await expect(service.pickDirectory()).resolves.toBe('/tmp/plugins');
   });
+
+  it('returns the selected manifest file path', async () => {
+    const openDialog = jest.fn(async () => '/tmp/plugins/metadata.json');
+    const service = createDialogService(openDialog as unknown as OpenDialog);
+
+    await expect(service.pickManifestFile('/tmp/plugins')).resolves.toBe(
+      '/tmp/plugins/metadata.json',
+    );
+    expect(openDialog).toHaveBeenCalledWith({
+      defaultPath: '/tmp/plugins',
+      directory: false,
+      filters: [
+        {
+          name: 'Plugin manifests',
+          extensions: ['json'],
+        },
+      ],
+      multiple: false,
+      title: 'Select plugin manifest',
+    });
+  });
+
+  it('normalizes canceled manifest selections to null', async () => {
+    const openDialog = jest.fn(async () => null);
+    const service = createDialogService(openDialog as unknown as OpenDialog);
+
+    await expect(service.pickManifestFile()).resolves.toBeNull();
+  });
 });

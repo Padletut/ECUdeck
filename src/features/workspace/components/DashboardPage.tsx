@@ -2,9 +2,20 @@ import { useRef, useState } from 'react';
 
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
 import PluginValidationPanel from '../../plugins/components/PluginValidationPanel';
+import PluginValidationScopePanel from './PluginValidationScopePanel';
 import type { LoadedFirmwareData } from '../../../shared/types/ecu';
+import type { PluginReferenceOwnership } from '../../../shared/types/plugins';
+import { usePluginValidationScope } from '../hooks/usePluginValidationScope';
+
+const defaultPluginValidationOwnership: PluginReferenceOwnership = {
+  workspaceId: 'local-workspace',
+  projectId: 'dashboard-plugin-validation',
+  sessionId: 'dashboard-session',
+};
 
 export default function DashboardPage() {
+  const { ownership, draftOwnership, canApplyScope, setDraftField, applyScope } =
+    usePluginValidationScope(defaultPluginValidationOwnership);
   const [showMapEditor, setShowMapEditor] = useState(false);
   const [mapData, setMapData] = useState<LoadedFirmwareData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -292,7 +303,13 @@ export default function DashboardPage() {
       </section>
 
       <section className="mb-12">
-        <PluginValidationPanel />
+        <PluginValidationScopePanel
+          draftOwnership={draftOwnership}
+          canApplyScope={canApplyScope}
+          setDraftField={setDraftField}
+          applyScope={applyScope}
+        />
+        <PluginValidationPanel ownership={ownership} />
       </section>
     </>
   );

@@ -1,19 +1,28 @@
 import type {
+  PersistedPluginReference,
   PluginManifestDiscoveryResult,
   PluginCompatibilityStatus,
+  PluginReferenceOwnership,
   PluginValidationFinding,
   PluginValidationReport,
 } from '../../../shared/types/plugins';
 import { usePluginManifestValidation } from '../hooks/usePluginManifestValidation';
 
-export default function PluginValidationPanel() {
+export default function PluginValidationPanel({
+  ownership,
+}: Readonly<{
+  ownership: PluginReferenceOwnership;
+}>) {
   const {
     pluginDirectoryPath,
     manifestPath,
     discovery,
+    pluginReferences,
+    activePluginReferenceId,
     report,
     errorMessage,
     isPickingDirectory,
+    isPickingManifest,
     isDiscovering,
     isValidating,
     canDiscover,
@@ -21,10 +30,12 @@ export default function PluginValidationPanel() {
     setPluginDirectoryPath,
     setManifestPath,
     pickPluginDirectory,
+    pickManifestFile,
     discoverManifests,
+    selectPersistedReference,
     selectManifestReport,
     validateManifest,
-  } = usePluginManifestValidation();
+  } = usePluginManifestValidation(ownership);
 
   const handleDiscover = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -122,6 +133,16 @@ export default function PluginValidationPanel() {
 
             <div className="flex items-center gap-4">
               <button
+                type="button"
+                onClick={() => {
+                  void pickManifestFile();
+                }}
+                disabled={isPickingManifest || isValidating}
+                className="rounded-lg border border-gridlines-grey px-5 py-3 font-semibold text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isPickingManifest ? 'Opening Picker...' : 'Choose Manifest'}
+              </button>
+              <button
                 type="submit"
                 disabled={!canValidate}
                 className="rounded-lg bg-electric-blue px-5 py-3 font-semibold text-carbon-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
@@ -135,6 +156,12 @@ export default function PluginValidationPanel() {
             discovery={discovery}
             activeManifestPath={manifestPath}
             onSelectReport={selectManifestReport}
+          />
+
+          <PersistedPluginReferenceList
+            references={pluginReferences}
+            activeReferenceId={activePluginReferenceId}
+            onSelectReference={selectPersistedReference}
           />
         </div>
 
@@ -223,6 +250,89 @@ export default function PluginValidationPanel() {
         </div>
       </div>
     </section>
+  );
+}
+
+function PersistedPluginReferenceList({
+  references,
+  activeReferenceId,
+  onSelectReference,
+}: Readonly<{
+  references: PersistedPluginReference[];
+  activeReferenceId: string | null;
+  onSelectReference: (referenceId: string) => void;
+}>) {
+  if (references.length === 0) {
+    return (
+      <div className="rounded-lg border border-gridlines-grey bg-carbon-black/40 p-5">
+        <p className="text-sm uppercase tracking-[0.22em] text-muted-text">Saved References</p>
+        <p className="mt-3 text-sm leading-6 text-alloy-silver">
+          Validated and selected plugin references are persisted locally for this dashboard scope.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-lg border border-gridlines-grey bg-carbon-black/40 p-5">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-sm uppercase tracking-[0.22em] text-muted-text">Saved References</p>
+          <p className="mt-2 text-sm leading-6 text-alloy-silver">
+            Project-scoped local persistence for validated plugin references.
+          </p>
+        </div>
+        <span className="rounded-full border border-gridlines-grey px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-alloy-silver">
+          {references.length} saved
+        </span>
+      </div>
+
+      <ul className="mt-5 space-y-3">
+        {references.map((reference) => {
+          const isActive = reference.id === activeReferenceId;
+
+          return (
+            <li
+              key={reference.id}
+              className="rounded-lg border border-gridlines-grey bg-steel-grey-alt/50 p-4"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-soft-white">
+                    {reference.report.reference?.pluginName ??
+                      fileNameFromPath(reference.manifestPath)}
+                  </h3>
+                  <p className="mt-1 font-mono text-xs text-muted-text">
+                    {reference.manifestPath ?? 'No manifest path available'}
+                  </p>
+                </div>
+                <span className={statusBadgeClassName(reference.report.status)}>
+                  {reference.report.status}
+                </span>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm text-alloy-silver">{reference.captureMode}</p>
+                  <p className="mt-1 text-xs text-muted-text">{reference.capturedAt}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onSelectReference(reference.id)}
+                  className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+                    isActive
+                      ? 'border border-dyno-green bg-dyno-green/10 text-dyno-green'
+                      : 'border border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-carbon-black'
+                  }`}
+                >
+                  {isActive ? 'Active' : 'Load Saved'}
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

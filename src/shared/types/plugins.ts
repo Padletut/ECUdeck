@@ -1,3 +1,5 @@
+import type { AiRequestOwnership } from './aiContext';
+
 export type PluginCompatibilityStatus =
   | 'loadable'
   | 'valid'
@@ -28,6 +30,13 @@ export interface PluginReferenceMetadata extends PluginVersionFields {
   pluginName: string;
 }
 
+export type PluginReferenceOwnership = Pick<
+  AiRequestOwnership,
+  'workspaceId' | 'projectId' | 'sessionId'
+>;
+
+export type PluginReferenceCaptureMode = 'generated' | 'inferred' | 'manually-adjusted';
+
 export interface PluginManifest extends PluginVersionFields {
   pluginId: string;
   pluginName: string;
@@ -49,6 +58,27 @@ export interface PluginValidationReport {
   manifestPath?: string;
   reference?: PluginReferenceMetadata;
   findings: PluginValidationFinding[];
+}
+
+export interface PersistedPluginReference {
+  id: string;
+  manifestPath?: string;
+  directoryPath?: string;
+  captureMode: PluginReferenceCaptureMode;
+  capturedAt: string;
+  report: PluginValidationReport;
+}
+
+export interface PersistedPluginReferenceState {
+  ownership: PluginReferenceOwnership;
+  pluginDirectoryPath?: string;
+  manifestPath?: string;
+  activePluginReferenceId?: string;
+  pluginReferences: PersistedPluginReference[];
+}
+
+export interface PluginValidationScopeState {
+  ownership: PluginReferenceOwnership;
 }
 
 export interface PluginManifestDiscoveryResult {
