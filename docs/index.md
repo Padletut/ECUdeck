@@ -15,3 +15,4 @@ ECUDeck is being migrated to a desktop-first stack based on Vite, React, Rust, T
 - `src/` for the active frontend
 - `src-tauri/` for the desktop shell scaffold
 - `legacy/python_backend/` for old experimental parsing code kept during migration
+- `docs/developer-guide/` for contributor standards and workflows

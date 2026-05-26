@@ -4,3 +4,16 @@ theme:
   name: mkdocs
 nav:
   - Home: index.md
+  - Developer Guide:
+      - Overview: developer-guide/index.md
+      - Environment Setup: developer-guide/environment-setup.md
+      - Design Principles: developer-guide/design-principles.md
+      - Coding Standards: developer-guide/coding-standards.md
+      - Rust: developer-guide/rust.md
+      - Python: developer-guide/python.md
+      - Testing: developer-guide/testing.md
+      - Documentation: developer-guide/documentation.md
+      - Releases: developer-guide/releases.md
+      - Plugins: developer-guide/plugins.md
+      - Rust Performance: developer-guide/rust-performance.md
+      - FFI Memory Contract: developer-guide/ffi-memory-contract.md

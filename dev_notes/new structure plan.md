@@ -134,6 +134,10 @@ Responsibilities:
 
 # High-Level Architecture
 
+Detailed frontend architecture is described in:
+
+[`frontend-level-architecture.md`](./frontend-level-architecture.md)
+
 ```text
 ┌────────────────────────────┐
 │ React + Vite Frontend      │
