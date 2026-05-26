@@ -1,11 +1,18 @@
+import { useMemo } from 'react';
+
 import {
   useWorkspaceAiAssist,
   useWorkspaceScope,
 } from '../../../app/providers/WorkspaceScopeProvider';
+import { aiService } from '../../../services/tauri';
 
 export default function AiAssistPanel() {
   const { ownership } = useWorkspaceScope();
   const { presets, selectedPresetId, selectedPreset, draft, selectPreset } = useWorkspaceAiAssist();
+  const requestPreview = useMemo(
+    () => (draft ? aiService.buildDraftPreviewRequests(draft) : null),
+    [draft],
+  );
 
   return (
     <div className="overflow-hidden rounded-lg border border-gridlines-grey bg-steel-grey">
@@ -96,6 +103,21 @@ export default function AiAssistPanel() {
                 </p>
               </div>
             ) : null}
+
+            {requestPreview ? (
+              <div className="mt-5 grid gap-4 xl:grid-cols-2">
+                <RequestPreviewCard
+                  title="Context Snapshot Request"
+                  detail={`${requestPreview.prepareContextSnapshotRequest.context.retrievedContextRefs.length} refs · ${requestPreview.prepareContextSnapshotRequest.context.rawAttachments.length} attachments`}
+                  value={requestPreview.prepareContextSnapshotRequest}
+                />
+                <RequestPreviewCard
+                  title="Chat Request"
+                  detail={`${requestPreview.sendAiChatRequest.providerId} · ${requestPreview.sendAiChatRequest.mode}`}
+                  value={requestPreview.sendAiChatRequest}
+                />
+              </div>
+            ) : null}
           </div>
         ) : (
           <div className="rounded-lg border border-gridlines-grey bg-carbon-black/40 p-5">
@@ -117,6 +139,30 @@ function InfoField({ label, value }: Readonly<{ label: string; value: string }>)
     <div className="rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 px-4 py-3">
       <dt className="text-xs uppercase tracking-[0.2em] text-muted-text">{label}</dt>
       <dd className="mt-2 font-mono text-sm text-soft-white">{value}</dd>
+    </div>
+  );
+}
+
+function RequestPreviewCard({
+  title,
+  detail,
+  value,
+}: Readonly<{
+  title: string;
+  detail: string;
+  value: object;
+}>) {
+  return (
+    <div className="rounded-lg border border-gridlines-grey bg-steel-grey-alt/30 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-text">{title}</p>
+          <p className="mt-2 text-sm text-alloy-silver">{detail}</p>
+        </div>
+      </div>
+      <pre className="mt-4 max-h-80 overflow-auto rounded-lg border border-gridlines-grey bg-carbon-black/60 p-4 text-xs leading-6 text-alloy-silver">
+        {JSON.stringify(value, null, 2)}
+      </pre>
     </div>
   );
 }
