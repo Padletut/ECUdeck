@@ -522,6 +522,10 @@ Important plugin-editor chat capabilities:
 
 - explain required schema fields
 - propose plugin scaffolds
+- help detect likely data regions
+- help detect likely map candidates
+- help detect single values or scalar extraction opportunities
+- help reason about checksum rules or checksum-sensitive regions
 - suggest compatibility fixes
 - explain validation failures
 - create reviewable plugin change proposals

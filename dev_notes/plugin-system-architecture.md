@@ -361,6 +361,8 @@ This preserves both reuse and historical traceability.
 
 The plugin editor is a first-class consumer of the plugin system architecture.
 
+See also: [Plugin Editor Architecture](plugin-editor-architecture.md)
+
 The plugin editor should support:
 
 - manifest editing
@@ -369,6 +371,9 @@ The plugin editor should support:
 - version visibility
 - compatibility feedback
 - validation output
+- attached firmware/sample testing
+- detection workbenches for data regions, maps, single values, and checksum-related rules
+- embedded copilot chat and proposal review
 - raw-source inspection when needed
 
 The default UX should be guided and user-friendly, not “edit raw files or good luck.”
@@ -382,8 +387,14 @@ AI assistance should help the user:
 - scaffold plugin structure
 - explain required fields
 - propose capability wiring
+- help detect likely data regions
+- help detect map candidates
+- help detect single values
+- help reason about checksum-related rules
 - suggest validation fixes
 - explain compatibility issues
+
+Inside the Plugin Editor, the intended AI surface is a copilot chat bound to the active plugin document, validation state, and optionally attached firmware evidence.
 
 AI should not silently produce final authoritative plugin changes without review.
 

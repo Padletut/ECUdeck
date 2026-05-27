@@ -1,11 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+export interface HexViewerSelection {
+  offset: number;
+  endOffset: number;
+  byteLength: number;
+  displayValue: string;
+  viewMode: 'hex' | 'binary';
+  bitWidth: 8 | 16 | 32;
+}
+
 interface HexViewerProps {
   data: Uint8Array;
   onDataChange?: (newData: Uint8Array) => void;
+  onInsertSelection?: (selection: HexViewerSelection) => void;
 }
 
-export default function HexViewer({ data, onDataChange }: HexViewerProps) {
+export default function HexViewer({ data, onDataChange, onInsertSelection }: HexViewerProps) {
   const [editableData, setEditableData] = useState(new Uint8Array(data));
   const [editingCell, setEditingCell] = useState<{ line: number; byte: number } | null>(null);
   const [editingValue, setEditingValue] = useState('');
@@ -142,6 +152,28 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
     setSelectedCell({ line: row, byte });
   };
 
+  const emitInsertSelection = useCallback(
+    (row: number, byte: number, currentValue: string) => {
+      if (!onInsertSelection) {
+        return;
+      }
+
+      const offset = row * bytesPerRow + byte * bytesPerCell;
+      const byteLength = bytesPerCell;
+
+      onInsertSelection({
+        offset,
+        endOffset: Math.min(editableData.length - 1, offset + byteLength - 1),
+        byteLength,
+        displayValue: currentValue,
+        viewMode,
+        bitWidth,
+      });
+      setCurrentAddress(offset);
+    },
+    [bitWidth, bytesPerCell, bytesPerRow, editableData.length, onInsertSelection, viewMode],
+  );
+
   const handleAddressJump = () => {
     const address = parseInt(addressInput, 16);
     if (!Number.isNaN(address) && address >= 0 && address < editableData.length) {
@@ -230,6 +262,25 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
         ref={scrollContainerRef}
         className="h-[600px] overflow-x-hidden overflow-y-auto"
         onScroll={handleScroll}
+        onKeyDown={(event) => {
+          if (event.key !== 'Insert' || !selectedCell || editingCell || !onInsertSelection) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const selectionValue = buildCellDisplayValue(
+            editableData,
+            selectedCell.line,
+            selectedCell.byte,
+            bytesPerRow,
+            viewMode,
+            bitWidth,
+          );
+
+          emitInsertSelection(selectedCell.line, selectedCell.byte, selectionValue);
+        }}
+        tabIndex={0}
       >
         <div style={{ height: totalHeight, position: 'relative' }}>
           <div
@@ -291,6 +342,9 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
                             } else {
                               handleBinaryEdit(rowIndex, byteIndex, editingValue);
                             }
+                          } else if (e.key === 'Insert') {
+                            e.preventDefault();
+                            emitInsertSelection(rowIndex, byteIndex, editingValue);
                           }
                         }}
                         className="h-6 min-w-0 rounded border border-electric-blue bg-carbon-black px-0.5 text-center leading-none text-soft-white outline-none"
@@ -301,6 +355,14 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
                         key={`${offset}-${byteIndex}`}
                         type="button"
                         onClick={() => handleCellClick(rowIndex, byteIndex, value)}
+                        onKeyDown={(event) => {
+                          if (event.key !== 'Insert') {
+                            return;
+                          }
+
+                          event.preventDefault();
+                          emitInsertSelection(rowIndex, byteIndex, value);
+                        }}
                         className={`flex h-6 min-w-0 items-center justify-center rounded leading-none transition ${
                           isSelected
                             ? 'bg-electric-blue/20 text-electric-blue'
@@ -322,4 +384,36 @@ export default function HexViewer({ data, onDataChange }: HexViewerProps) {
       </div>
     </div>
   );
+}
+
+function buildCellDisplayValue(
+  data: Uint8Array,
+  row: number,
+  byte: number,
+  bytesPerRow: number,
+  viewMode: 'hex' | 'binary',
+  bitWidth: 8 | 16 | 32,
+): string {
+  const offset = row * bytesPerRow;
+
+  if (viewMode === 'hex') {
+    return data[offset + byte]?.toString(16).padStart(2, '0') ?? '00';
+  }
+
+  const bytesPerCell = bitWidth / 8;
+  const startIndex = offset + byte * bytesPerCell;
+  const chunk = data.slice(startIndex, startIndex + bytesPerCell);
+
+  if (bitWidth === 8) {
+    return chunk[0]?.toString(2).padStart(8, '0') ?? '00000000';
+  }
+
+  if (bitWidth === 16) {
+    const value = (chunk[0] ?? 0) | ((chunk[1] ?? 0) << 8);
+    return value.toString(2).padStart(16, '0');
+  }
+
+  const value =
+    (chunk[0] ?? 0) | ((chunk[1] ?? 0) << 8) | ((chunk[2] ?? 0) << 16) | ((chunk[3] ?? 0) << 24);
+  return (value >>> 0).toString(2).padStart(32, '0');
 }

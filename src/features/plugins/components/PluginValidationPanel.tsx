@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import type {
   PersistedPluginReference,
   PluginManifestDiscoveryResult,
@@ -8,7 +10,13 @@ import type {
 import { useWorkspaceScope } from '../../../app/providers/WorkspaceScopeProvider';
 import { usePluginManifestValidation } from '../hooks/usePluginManifestValidation';
 
-export default function PluginValidationPanel() {
+interface PluginValidationPanelProps {
+  onReportChange?: (report: PluginValidationReport | null) => void;
+}
+
+export default function PluginValidationPanel({
+  onReportChange,
+}: Readonly<PluginValidationPanelProps>) {
   const { ownership } = useWorkspaceScope();
   const {
     pluginDirectoryPath,
@@ -33,6 +41,10 @@ export default function PluginValidationPanel() {
     selectManifestReport,
     validateManifest,
   } = usePluginManifestValidation(ownership);
+
+  useEffect(() => {
+    onReportChange?.(report);
+  }, [onReportChange, report]);
 
   const handleDiscover = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -170,13 +170,15 @@ Responsibilities:
 - plugin metadata editing
 - schema-driven forms
 - contract/version visibility
+- firmware-backed detection workbenches
+- map, single-value, and checksum rule authoring
 - generated code previews
 - plugin validation output
 - AI-assisted plugin authoring mode
 
 The plugin editor should support both structured editing and raw-source inspection, but the primary UX should favor guided, user-friendly authoring.
 
-AI assistance here should behave like a copilot bound to the active plugin document and validation state.
+AI assistance here should behave like a copilot bound to the active plugin document, attached firmware evidence, and validation state.
 
 ---
 

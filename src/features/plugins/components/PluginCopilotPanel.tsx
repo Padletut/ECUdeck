@@ -5,9 +5,9 @@ export default function PluginCopilotPanel() {
     <AiAssistPanel
       surface="plugin-editor"
       title="Plugin Copilot"
-      description="Copilot for plugin authoring, validation, and contract work on the active project surface."
+      description="Copilot for plugin authoring with live firmware context, grouped found maps, ECU identity drafting, and runtime review kept close at hand."
       scopeBadge="Plugin"
-      composerPlaceholder="Explain this contract, help me fix the current validation issues, or plan the next safe authoring step."
+      composerPlaceholder="Help me detect maps from this firmware, find ECU family or part number clues, inspect checksum-sensitive regions, or turn the current Insert selection into a cleaner plugin rule."
     />
   );
 }
