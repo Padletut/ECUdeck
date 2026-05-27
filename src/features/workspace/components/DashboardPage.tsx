@@ -1,10 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { useWorkspaceFirmware } from '../../../app/providers/WorkspaceScopeProvider';
 import MapEditorTabs from '../../map-editor/components/MapEditorTabs';
-import PluginEditor from '../../plugins/components/PluginEditor';
 
-export default function DashboardPage() {
+interface DashboardPageProps {
+  onOpenPluginsPage: () => void;
+}
+
+export default function DashboardPage({ onOpenPluginsPage }: Readonly<DashboardPageProps>) {
   const {
     showMapEditor,
     mapData,
@@ -18,7 +21,6 @@ export default function DashboardPage() {
     closeMapEditor,
   } = useWorkspaceFirmware();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [showPluginEditor, setShowPluginEditor] = useState(false);
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
@@ -49,22 +51,6 @@ export default function DashboardPage() {
     if (lastLoadedFirmware) {
       alert(
         `Last loaded firmware metadata is available for ${lastLoadedFirmware.fileName}, but the binary is not currently loaded in memory. Re-upload the file to reopen the editor.`,
-      );
-      return;
-    }
-
-    alert('Please upload a binary file first using the Upload button.');
-  };
-
-  const handleOpenPluginEditor = () => {
-    if (hasLoadedFirmware && mapData) {
-      setShowPluginEditor(true);
-      return;
-    }
-
-    if (lastLoadedFirmware) {
-      alert(
-        `Last loaded firmware metadata is available for ${lastLoadedFirmware.fileName}, but the binary is not currently loaded in memory. Re-upload the file to open the Plugin Editor.`,
       );
       return;
     }
@@ -117,22 +103,6 @@ export default function DashboardPage() {
     );
   }
 
-  if (showPluginEditor && mapData) {
-    return (
-      <PluginEditor
-        mapData={mapData}
-        onBackToDashboard={() => {
-          setShowPluginEditor(false);
-          closeMapEditor();
-        }}
-        onReturnToMapEditor={() => {
-          setShowPluginEditor(false);
-          openMapEditor();
-        }}
-      />
-    );
-  }
-
   if (showMapEditor && mapData) {
     return (
       <div>
@@ -145,10 +115,10 @@ export default function DashboardPage() {
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => setShowPluginEditor(true)}
+              onClick={onOpenPluginsPage}
               className="rounded-lg border border-gridlines-grey px-4 py-2 font-bold text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
             >
-              Open Plugin Editor
+              Open Plugins
             </button>
             <button
               type="button"
@@ -195,10 +165,10 @@ export default function DashboardPage() {
               </button>
               <button
                 type="button"
-                onClick={handleOpenPluginEditor}
+                onClick={onOpenPluginsPage}
                 className="rounded-lg border border-gridlines-grey px-5 py-3 text-sm font-semibold text-alloy-silver transition hover:border-electric-blue hover:text-electric-blue"
               >
-                Open Plugin Editor
+                Open Plugins
               </button>
             </div>
 
@@ -261,11 +231,12 @@ export default function DashboardPage() {
 
           <WorkspaceCard
             eyebrow="Plugin Authoring"
-            title="Plugin Editor"
-            description="Open the dedicated plugin workspace to capture addresses with Insert, group the maps you find, preview candidate maps in 2D or 3D, and let Plugin Copilot help detect firmware structures."
-            actionLabel="Open Plugin Editor"
-            onAction={handleOpenPluginEditor}
+            title="Plugins"
+            description="Open the plugin list to launch the authoring workspace where grouped map discovery, ECU identity detection, and copilot-assisted plugin work happen against live firmware."
+            actionLabel="Open Plugins"
+            onAction={onOpenPluginsPage}
             highlights={[
+              'Plugin list and workspaces',
               'Insert-to-capture workflow',
               'Grouped map explorer',
               '2D and 3D candidate previews',
@@ -295,8 +266,9 @@ export default function DashboardPage() {
                 when you find map candidates.
               </li>
               <li>
-                3. Switch into Plugin Editor to group maps, draft ECU identity data, preview map
-                surfaces, and review copilot suggestions before turning them into plugin rules.
+                3. Open `Plugins`, launch the plugin editor, then group maps, draft ECU identity
+                data, preview map surfaces, and review copilot suggestions before turning them into
+                plugin rules.
               </li>
             </ol>
           </section>

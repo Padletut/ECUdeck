@@ -1,9 +1,15 @@
 import type { ReactNode } from 'react';
 
+export type AppShellPage = 'dashboard' | 'plugins';
+
 export default function AppShell({
   children,
+  activePage,
+  onNavigate,
 }: Readonly<{
   children: ReactNode;
+  activePage: AppShellPage;
+  onNavigate: (page: AppShellPage) => void;
 }>) {
   return (
     <div className="min-h-screen bg-carbon-black font-sans text-alloy-silver antialiased">
@@ -14,17 +20,25 @@ export default function AppShell({
           </div>
           <nav className="nav-container flex space-x-10 text-lg font-semibold text-alloy-silver">
             {[
-              { href: '#', label: 'Maps' },
-              { href: '#', label: 'ECUs' },
-              { href: '#', label: 'Tuning' },
+              { key: 'dashboard' as const, label: 'Dashboard' },
+              { key: 'plugins' as const, label: 'Plugins' },
             ].map((item) => (
-              <a key={item.label} href={item.href} className="nav-link">
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => onNavigate(item.key)}
+                className={`nav-link border-0 bg-transparent p-0 ${activePage === item.key ? 'nav-link-active text-electric-blue' : ''}`}
+              >
                 {item.label}
-              </a>
+              </button>
             ))}
           </nav>
-          <button className="rounded-lg border border-electric-blue px-4 py-2 text-base font-semibold text-electric-blue transition-colors hover:bg-electric-blue hover:text-soft-white">
-            Create <span>&gt;</span>
+          <button
+            type="button"
+            onClick={() => onNavigate('plugins')}
+            className="rounded-lg border border-electric-blue px-4 py-2 text-base font-semibold text-electric-blue transition-colors hover:bg-electric-blue hover:text-soft-white"
+          >
+            Open Plugins <span>&gt;</span>
           </button>
         </div>
       </header>

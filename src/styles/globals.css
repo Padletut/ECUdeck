@@ -148,6 +148,10 @@ h2.text-section-title {
   width: 100%;
 }
 
+.nav-link-active::after {
+  width: 100%;
+}
+
 .nav-container {
   letter-spacing: 0.3em;
 }

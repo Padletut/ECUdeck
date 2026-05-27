@@ -45,6 +45,16 @@ export interface PluginManifest extends PluginVersionFields {
   compatibility?: PluginCompatibilityConstraints;
 }
 
+export type PluginLibrarySource = 'built-in' | 'imported' | 'created';
+
+export interface PersistedPluginLibraryEntry {
+  id: string;
+  manifest: PluginManifest;
+  source: PluginLibrarySource;
+  fileName?: string;
+  updatedAt: string;
+}
+
 export interface PluginValidationFinding {
   level: PluginValidationLevel;
   severity: PluginFindingSeverity;

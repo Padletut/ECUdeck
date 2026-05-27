@@ -19,7 +19,9 @@ type PluginEditorView = 'hex' | '2d' | '3d';
 
 interface PluginEditorProps {
   mapData: LoadedFirmwareData;
-  onBackToDashboard: () => void;
+  activePluginName?: string;
+  backLabel: string;
+  onBack: () => void;
   onReturnToMapEditor: () => void;
 }
 
@@ -72,7 +74,9 @@ const DEFAULT_CAPTURED_MAP_DRAFT: CapturedMapDraft = {
 
 export default function PluginEditor({
   mapData,
-  onBackToDashboard,
+  activePluginName,
+  backLabel,
+  onBack,
   onReturnToMapEditor,
 }: Readonly<PluginEditorProps>) {
   const { ownership } = useWorkspaceScope();
@@ -342,6 +346,11 @@ export default function PluginEditor({
             Firmware-driven authoring workspace with map explorer, grouped findings, metadata
             drafting, runtime validation, and a docked plugin copilot.
           </p>
+          {activePluginName ? (
+            <span className="mt-4 inline-flex rounded-full border border-electric-blue/50 bg-electric-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-electric-blue">
+              Library Plugin: {activePluginName}
+            </span>
+          ) : null}
         </div>
 
         <div className="flex flex-wrap gap-3">
@@ -354,10 +363,10 @@ export default function PluginEditor({
           </button>
           <button
             type="button"
-            onClick={onBackToDashboard}
+            onClick={onBack}
             className="rounded-lg border border-electric-blue px-4 py-2 text-sm font-semibold text-electric-blue transition hover:bg-electric-blue hover:text-carbon-black"
           >
-            Back to Dashboard
+            {backLabel}
           </button>
         </div>
       </div>
